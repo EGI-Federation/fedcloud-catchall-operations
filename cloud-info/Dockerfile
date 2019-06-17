@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:2
 
 RUN git clone -b py3 https://github.com/enolfc/cloud-info-provider.git /tmp/cloud-info-provider && \
     pip install -r /tmp/cloud-info-provider/requirements.txt && \
@@ -10,6 +10,8 @@ RUN pip install python-keystoneclient \
                 python-novaclient \
                 python-glanceclient \
                 keystoneauth1
+
+RUN pip install git+https://github.com/grnet/ams-clipw.git
 
 RUN curl -Ls \
         https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
@@ -23,6 +25,7 @@ RUN curl -Ls \
 RUN cat /etc/grid-security/certificates/*.pem >> $(python -m requests.certs)
 
 COPY cloud-info-wrapper.sh /usr/local/bin/cloud-info-wrapper.sh
+COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 
-CMD ["cloud-info-wrapper.sh"]
+CMD ["ams-wrapper.sh"]
 
