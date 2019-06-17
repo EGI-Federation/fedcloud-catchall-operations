@@ -31,9 +31,10 @@ cloudInfo:
   image:
     # the image with the cloud-info-provider ready to run the job
     repository: enolfc/cloudinfoops
-    tag: 0.0.7
+    tag: 0.0.8
     pullPolicy: IfNotPresent
   ams:
+    project: egi_cloud_info
     # ams credentials, specify either token or cert + key
     token:
     cert:

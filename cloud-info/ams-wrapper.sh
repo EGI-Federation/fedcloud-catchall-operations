@@ -17,7 +17,7 @@ fi
 cat > /etc/ams-clipw.settings << EOF
 [AMS]
 ams_host: msg-devel.argo.grnet.gr 
-ams_project: egi_cloud_info
+ams_project: $AMS_PROJECT
 ams_topic: SITE_${SITE_NAME}_ENDPOINT_${GOCDB_ID}
 msg_file_path:
 info_provider_path: /usr/local/bin/cloud-info-wrapper.sh 

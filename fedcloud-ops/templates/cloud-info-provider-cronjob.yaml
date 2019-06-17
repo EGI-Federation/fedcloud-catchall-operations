@@ -38,6 +38,8 @@ spec:
               value: {{ $site }}
             - name: AMS_TOKEN_FILE
               value: /etc/ams/token
+            - name: AMS_PROJECT
+              value: {{ $values.cloudInfo.ams.project }}
             volumeMounts:
             - mountPath: /etc/cloud-info-provider/site
               name: cloud-info-config
