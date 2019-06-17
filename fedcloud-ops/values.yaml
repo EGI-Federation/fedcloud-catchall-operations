@@ -8,11 +8,11 @@ sites:
   # Name-of-site:
   #   endpoint: https://thekeystone-url/v3
   #   vos:
-  #   # a new dict with name of the VO as key 
+  #   # a new dict with name of the VO as key
   #     vo1:
   #       auth:
   #         # the id of the project
-  #         project: xxx 
+  #         project: xxx
   #       defaultNetwork: private | public | private_only | public_only (default is public)
   #       publicNetwork: <name of the public network> (default is UNKNOWN)
 
@@ -27,12 +27,18 @@ auth:
 cloudInfo:
   # how often should the cloud-info-provider run, default every 5 minutes
   # rethink if this is actually a cronjob or a different thing
-  schedule: "*/5 * * * *"
-  image: 
+  schedule: "*/5 */5 * * *"
+  image:
     # the image with the cloud-info-provider ready to run the job
     repository: enolfc/cloudinfoops
-    tag: 0.0.4
+    tag: 0.0.7
     pullPolicy: IfNotPresent
+  ams:
+    # ams credentials, specify either token or cert + key
+    token:
+    cert:
+    key:
+
 
 # Everything below comes from helm, should be reviewed
 

@@ -13,10 +13,10 @@ spec:
         spec:
           restartPolicy: OnFailure
           containers:
-          - name: cloud-info 
+          - name: cloud-info
             image: "{{ $values.cloudInfo.image.repository }}:{{ $values.cloudInfo.image.tag }}"
             imagePullPolicy: {{ $values.cloudInfo.image.pullPolicy }}
-            command: ["/usr/local/bin/cloud-info-wrapper"]
+            command: ["/usr/local/bin/ams-wrapper.sh"]
             env:
             - name: OS_AUTH_URL
               value: {{ $siteConf.endpoint }}
@@ -32,25 +32,34 @@ spec:
               value: /etc/checkin/client_secret
             - name: CHECKIN_REFRESH_TOKEN_FILE
               value: /etc/checkin/refresh_token
-            - name: CLOUD_INFO_CONFIG 
+            - name: CLOUD_INFO_CONFIG
               value: /etc/cloud-info-provider/site/site.yaml
+            - name: SITE_NAME
+              value: {{ $site }}
+            - name: AMS_TOKEN_FILE
+              value: /etc/ams/token
             volumeMounts:
             - mountPath: /etc/cloud-info-provider/site
-              name: cloud-info-config 
+              name: cloud-info-config
             - mountPath: /etc/checkin/
               name: checkin-secret
+            - mountPath: /etc/ams
+              name: ams-secret
             resources:
 {{ toYaml $values.resources | indent 14 }}
           volumes:
           - name: cloud-info-config
             configMap:
-              name: cloud-info-config-{{ $site | lower }} 
+              name: cloud-info-config-{{ $site | lower }}
               items:
-              - key: site.yaml 
+              - key: site.yaml
                 path: site.yaml
-          - name: checkin-secret 
+          - name: checkin-secret
             secret:
-              secretName: checkin-secret 
+              secretName: checkin-secret
+          - name: ams-secret
+            secret:
+              secretName: ams-secret
         {{- with $values.nodeSelector }}
           nodeSelector:
 {{ toYaml . | indent 12 }}
