@@ -27,7 +27,7 @@ auth:
 cloudInfo:
   # how often should the cloud-info-provider run, default every 5 minutes
   # rethink if this is actually a cronjob or a different thing
-  schedule: "*/5 */5 * * *"
+  schedule: "*/5 * * * *"
   image:
     # the image with the cloud-info-provider ready to run the job
     repository: enolfc/cloudinfoops
