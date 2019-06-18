@@ -1,0 +1,32 @@
+sites:
+  IN2P3-IRES:
+    endpoint: https://sbgcloud.in2p3.fr:5000/v3
+    vos:
+      fedcloud.egi.eu:
+        auth:
+          project: a5eb30bba2c2497b90645fb199e34b39
+        # defaultNetwork: private
+        publicNetwork: PUBLIC
+      vo.access.egi.eu:
+        auth:
+          project: 7a91022b9ae74ed9ac1a574972a79499
+        publicNetwork: PUBLIC
+  RECAS-BARI:
+    # we have an issue here with the URL in GOCDB
+    endpoint: https://cloud.recas.ba.infn.it:5000/v3
+    vos:
+      fedcloud.egi.eu:
+        auth:
+          project: 02e47ef981904ceaa30f7c545e563a11
+        defaultNetwork: public
+      vo.access.egi.eu:
+        auth:
+          project: afd721921d6e472490bbc935368ff343
+        defaultNetwork: public
+  UNIV-LILLE:
+    endpoint: https://thor.univ-lille.fr:5000/v3
+    vos:
+      fedcloud.egi.eu:
+        auth:
+          project: def49ef0ac58495f90d8aa2463b33b10
+        publicNetwork: provider
