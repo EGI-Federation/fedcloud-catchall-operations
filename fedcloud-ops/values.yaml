@@ -1,0 +1,62 @@
+# Default values for fedcloud-ops.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#
+
+sites:
+  # This should be a dict of sites as follows:
+  # Name-of-site:
+  #   endpoint: https://thekeystone-url/v3
+  #   vos:
+  #   # a new dict with name of the VO as key
+  #     vo1:
+  #       auth:
+  #         # the id of the project
+  #         project: xxx
+  #       defaultNetwork: private | public | private_only | public_only (default is public)
+  #       publicNetwork: <name of the public network> (default is UNKNOWN)
+
+auth:
+  # A Check-in client id
+  clientId:
+  # A Check-in client secret
+  clientSecret:
+  # A Check-in refresh token for above client
+  refreshToken:
+
+cloudInfo:
+  # how often should the cloud-info-provider run, default every 5 minutes
+  # rethink if this is actually a cronjob or a different thing
+  schedule: "*/5 * * * *"
+  image:
+    # the image with the cloud-info-provider ready to run the job
+    repository: enolfc/cloudinfoops
+    tag: 0.0.8
+    pullPolicy: IfNotPresent
+  ams:
+    project: egi_cloud_info
+    # ams credentials, specify either token or cert + key
+    token:
+    cert:
+    key:
+
+
+# Everything below comes from helm, should be reviewed
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

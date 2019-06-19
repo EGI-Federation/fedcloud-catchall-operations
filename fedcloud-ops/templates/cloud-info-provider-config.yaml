@@ -1,0 +1,22 @@
+{{- range $site, $siteConf := .Values.sites }}
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: cloud-info-config-{{ $site | lower }}
+data:
+  site.yaml: |-
+    site:
+      name: {{ $site }}
+    compute:
+      shares:
+        {{- range $vo, $share := $siteConf.vos }}
+        {{ $vo }}:
+          auth:
+            # the project id in OpenStack
+            project_id: {{ $share.auth.project }}
+          # Default network type: none, public, public_only, private, private_only
+          default_network_type: {{ $share.defaultNetwork | default "private" }}
+          public_network_name: {{ $share.publicNetwork | default "UNKNOWN" }}
+        {{- end }}
+{{- end }}
