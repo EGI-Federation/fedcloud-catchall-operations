@@ -26,12 +26,10 @@ spec:
               value: egi.eu
             - name: OS_PROTOCOL
               value: openid
-            - name: CHECKIN_CLIENT_ID_FILE
-              value: /etc/checkin/client_id
-            - name: CHECKIN_CLIENT_SECRET_FILE
-              value: /etc/checkin/client_secret
-            - name: CHECKIN_REFRESH_TOKEN_FILE
-              value: /etc/checkin/refresh_token
+            - name: CHECKIN_SECRETS_PATH
+              value: /etc/checkin/
+            - name: CHECKIN_OIDC_TOKEN
+              value: https://aai.egi.eu/oidc/token
             - name: CLOUD_INFO_CONFIG
               value: /etc/cloud-info-provider/site/site.yaml
             - name: SITE_NAME
@@ -43,8 +41,10 @@ spec:
             volumeMounts:
             - mountPath: /etc/cloud-info-provider/site
               name: cloud-info-config
-            - mountPath: /etc/checkin/
-              name: checkin-secret
+            {{- range $vo, $share := $siteConf.vos }}
+            - mountPath: /etc/checkin/{{ $vo | lower }}
+              name: checkin-creds-{{ $vo | lower | replace "." "-" }}
+            {{- end }}
             - mountPath: /etc/ams
               name: ams-secret
             resources:
@@ -56,9 +56,11 @@ spec:
               items:
               - key: site.yaml
                 path: site.yaml
-          - name: checkin-secret
+          {{- range $vo, $share := $siteConf.vos }}
+          - name: checkin-creds-{{ $vo | lower | replace "." "-" }}
             secret:
-              secretName: checkin-secret
+              secretName: checkin-cloudinfo-creds-{{ $site | lower }}-{{ $vo | lower }}
+          {{- end }}
           - name: ams-secret
             secret:
               secretName: ams-secret
