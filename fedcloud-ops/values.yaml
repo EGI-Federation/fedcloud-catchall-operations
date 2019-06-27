@@ -45,6 +45,29 @@ cloudInfo:
     cert:
     key:
 
+cloudkeeper:
+  # how to make this a bit random between instances of ck?
+  schedule: "25 */5 * * *"
+  image:
+    # the image with the cloud-info-provider ready to run the job
+    repository: cloudkeeper/cloudkeeper
+    tag: 2.0.0
+    pullPolicy: IfNotPresent
+  # authentication for the appdb requires tokens to be specified
+  # in the following format
+  # # auth:
+  #    # <name of the vo>: <token>
+
+
+cloudkeeperOS:
+  service:
+    type: ClusterIP
+  image:
+    # the image with the cloud-info-provider ready to run the job
+    repository: enolfc/cloudkeeper-os
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+
 
 # Everything below comes from helm, should be reviewed
 
