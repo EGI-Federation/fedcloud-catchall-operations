@@ -13,6 +13,11 @@ sites:
   #       auth:
   #         # the id of the project
   #         project: xxx
+  #         # cloud-info-provider credentials
+  #         cloudInfo:
+  #           clientId:
+  #           clientSecret:
+  #           refreshToken:
   #       defaultNetwork: private | public | private_only | public_only (default is public)
   #       publicNetwork: <name of the public network> (default is UNKNOWN)
 
@@ -31,7 +36,7 @@ cloudInfo:
   image:
     # the image with the cloud-info-provider ready to run the job
     repository: enolfc/cloudinfoops
-    tag: 0.0.8
+    tag: 0.0.11
     pullPolicy: IfNotPresent
   ams:
     project: egi_cloud_info
