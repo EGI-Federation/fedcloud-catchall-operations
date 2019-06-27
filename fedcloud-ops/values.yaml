@@ -21,22 +21,14 @@ sites:
   #       defaultNetwork: private | public | private_only | public_only (default is public)
   #       publicNetwork: <name of the public network> (default is UNKNOWN)
 
-auth:
-  # A Check-in client id
-  clientId:
-  # A Check-in client secret
-  clientSecret:
-  # A Check-in refresh token for above client
-  refreshToken:
-
 cloudInfo:
   # how often should the cloud-info-provider run, default every 5 minutes
   # rethink if this is actually a cronjob or a different thing
-  schedule: "*/5 * * * *"
+  schedule: '*/5 * * * *'
   image:
     # the image with the cloud-info-provider ready to run the job
     repository: enolfc/cloudinfoops
-    tag: 0.0.11
+    tag: '0.1.0'
     pullPolicy: IfNotPresent
   ams:
     project: egi_cloud_info
@@ -47,7 +39,7 @@ cloudInfo:
 
 cloudkeeper:
   # how to make this a bit random between instances of ck?
-  schedule: "25 */5 * * *"
+  schedule: '25 */5 * * *'
   image:
     # the image with the cloud-info-provider ready to run the job
     repository: cloudkeeper/cloudkeeper
@@ -65,7 +57,7 @@ cloudkeeperOS:
   image:
     # the image with the cloud-info-provider ready to run the job
     repository: enolfc/cloudkeeper-os
-    tag: 0.0.1
+    tag: '0.1.0'
     pullPolicy: IfNotPresent
 
 
