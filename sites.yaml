@@ -30,3 +30,9 @@ sites:
         auth:
           project: def49ef0ac58495f90d8aa2463b33b10
         publicNetwork: provider
+  CESNET-MCC:
+    endpoint: https://identity.cloud.muni.cz/v3
+    vos:
+      demo.fedcloud.egi.eu:
+        auth:
+          project: 10b972eed97940089b234f6257d7db72

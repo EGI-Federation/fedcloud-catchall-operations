@@ -1,0 +1,52 @@
+{{- $values := .Values -}}
+{{- range $site, $siteConf := .Values.sites }}
+{{- range $vo, $share := $siteConf.vos }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cloudkeeper-{{ $site | lower }}-{{ $vo | lower }}
+spec:
+  schedule: {{ $values.cloudkeeper.schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: cloudkeeper
+            image: "{{ $values.cloudkeeper.image.repository }}:{{ $values.cloudkeeper.image.tag }}"
+            imagePullPolicy: {{ $values.cloudkeeper.image.pullPolicy }}
+            command:
+            - cloudkeeper
+            # is this URL stable enough?
+            - --image-list=https://$(CLOUDKEEPER_SECRET):x-oauth-basic@vmcaster.appdb.egi.eu/store/vo/{{ $vo }}/image.list
+            - --no-remote-mode
+            - --backend-endpoint=$(BACKEND_ENDPOINT)
+            # yup OpenStack will allow vmdk, so no conversion needed!
+            - --formats=vmdk qcow2
+            - --debug
+            env:
+            - name: BACKEND_ENDPOINT
+              value: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}:50051/
+            - name: CLOUDKEEPER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cloudkeeper-secret-{{ $vo }}
+                  key: token 
+            resources:
+{{ toYaml $values.resources | indent 14 }}
+        {{- with $values.nodeSelector }}
+          nodeSelector:
+{{ toYaml . | indent 12 }}
+        {{- end }}
+        {{- with $values.affinity }}
+          affinity:
+{{ toYaml . | indent 12 }}
+        {{- end }}
+        {{- with $values.tolerations }}
+          tolerations:
+{{ toYaml . | indent 12 }}
+        {{- end }}
+{{- end }}
+{{- end }}

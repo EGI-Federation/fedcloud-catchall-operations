@@ -1,0 +1,23 @@
+language: python
+python:
+  - 3.6
+git:
+  depth: false
+services:
+  - docker
+jobs:
+  include:
+  - stage: build chart and publish
+    install:
+    - pip3 install -r dev-requirements.txt
+    - curl -ssL https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz | tar -xz -C . --strip-components 1 linux-amd64/helm
+    - chmod +x helm
+    - sudo mv helm /usr/local/bin
+    - helm init --client-only
+    script:
+    - helm lint fedcloud-ops 
+    - helm template -f test-sites.yaml fedcloud-ops
+    - CHARTPRESS_OPT=""
+    - if [ "x$TRAVIS_TAG" != "x" ]; then CHARTPRESS_OPT="$CHARTPRESS_OPT --tag $TRAVIS_TAG"; fi
+    - if [ "x$TRAVIS_COMMIT_RANGE" != "x" ]; then CHARTPRESS_OPT="$CHARTPRESS_OPT --commit-range $TRAVIS_COMMIT_RANGE"; fi
+    - chartpress $CHARTPRESS_OPT 

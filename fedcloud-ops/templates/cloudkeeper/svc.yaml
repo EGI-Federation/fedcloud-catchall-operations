@@ -1,0 +1,18 @@
+{{- $values := .Values -}}
+{{- range $site, $siteConf := .Values.sites }}
+{{- range $vo, $share := $siteConf.vos }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}
+spec:
+  type: {{ $values.cloudkeeperOS.service.type }}
+  selector:
+    app: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}
+  ports:
+    - protocol: TCP
+      port: 50051
+      targetPort: 50051
+{{- end }}
+{{- end }}

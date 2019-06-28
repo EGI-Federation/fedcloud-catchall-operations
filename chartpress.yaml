@@ -1,0 +1,15 @@
+charts:
+  - name: fedcloud-ops 
+    imagePrefix: egifedcloud/ops-
+    #repo:
+    #  git: egi-foundation/egi-notebooks-chart
+    #  published: https://egi-foundation.github.io/egi-notebooks-chart
+
+    images:
+      cloudkeeper-os:
+        valuesPath: cloudkeeperOS.image 
+        contextPath: cloudkeeper-os 
+      cloud-info:
+        valuesPath: cloudInfo.image 
+        contextPath: cloud-info
+
