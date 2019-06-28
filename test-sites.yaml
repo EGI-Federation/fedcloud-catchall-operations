@@ -16,9 +16,6 @@ sites:
             refreshToken: foobar 
         defaultNetwork: private
         publicNetwork: PUBLIC
-      vo.access.egi.eu:
-        auth:
-          project:  
   SITE-B:
     endpoint: https://cool.egi.eu:5000/v3
     vos:
