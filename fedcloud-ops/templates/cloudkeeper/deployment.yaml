@@ -10,8 +10,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ck-os-{{ $site | lower }}-{{ $vo | lower }}
+      app: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}
   template:
+    metadata:
+      labels:
+        app: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}
     spec:
       containers:
         - name: cloudkeeper-os
