@@ -40,6 +40,8 @@ spec:
           - https://aai.egi.eu/oidc/.well-known/openid-configuration
           - --openstack-project-id
           - {{ $share.auth.project }}
+          - --connection-listen-address
+          - 0.0.0.0:50051
           env:
           - name: CHECKIN_CLIENT_ID
             valueFrom:
