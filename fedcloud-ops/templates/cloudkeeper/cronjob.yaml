@@ -24,7 +24,7 @@ spec:
             - --no-remote-mode
             - --backend-endpoint=$(BACKEND_ENDPOINT)
             # yup OpenStack will allow vmdk, so no conversion needed!
-            - --formats="vmdk qcow2"
+            - --formats=vmdk qcow2
             - --debug
             env:
             - name: BACKEND_ENDPOINT
