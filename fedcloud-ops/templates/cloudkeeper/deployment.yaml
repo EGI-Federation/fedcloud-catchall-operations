@@ -31,7 +31,7 @@ spec:
           - --openstack-auth-type
           - v3oidcrefreshtoken
           - --openstack-oidc-protocol
-          - openid
+          - {{ $siteConf.protocol | default "openid" }}
           - --openstack-oidc-identity-provider
           - egi.eu
           - --openstack-auth-url

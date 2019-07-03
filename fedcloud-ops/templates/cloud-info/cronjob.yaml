@@ -25,7 +25,7 @@ spec:
             - name: OS_IDENTITY_PROVIDER
               value: egi.eu
             - name: OS_PROTOCOL
-              value: openid
+              value: {{ $siteConf.protocol | default "openid" }}
             - name: CHECKIN_SECRETS_PATH
               value: /etc/checkin/
             - name: CHECKIN_OIDC_TOKEN

@@ -67,6 +67,8 @@ sites:
             clientId: AYY
             clientSecret: BZZ
             refreshToken: CWW
+        # optionally specify a protocol for the Keystone V3 federation API
+        protocol: openid | oidc (default is openid)
         defaultNetwork: private | public | private_only | public_only (default is public)
         publicNetwork: <name of the public network> (default is UNKNOWN)
 ```
