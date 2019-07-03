@@ -8,17 +8,21 @@ GOCDB_ID=$(python -c "from __future__ import print_function; \
                       print(gocdb.get_goc_info('$OS_AUTH_URL', \
                                                'org.openstack.nova')['gocdb_id'], end='')")
 
-
 if test "x$AMS_TOKEN_FILE" != "x"; then
     AMS_TOKEN=$(cat $AMS_TOKEN_FILE)
 fi
 
+AMS_TOPIC=SITE_${SITE_NAME}_ENDPOINT_${GOCDB_ID}
+
+# create TOPIC if not there
+curl -f https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC\?key\=$AMS_TOKEN > /dev/null 2>&1 \
+    || curl -X PUT -f https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC\?key\=$AMS_TOKEN > /dev/null 2>&1
 
 cat > /etc/ams-clipw.settings << EOF
 [AMS]
-ams_host: msg-devel.argo.grnet.gr 
+ams_host: $AMS_HOST
 ams_project: $AMS_PROJECT
-ams_topic: SITE_${SITE_NAME}_ENDPOINT_${GOCDB_ID}
+ams_topic: $AMS_TOPIC
 msg_file_path:
 info_provider_path: /usr/local/bin/cloud-info-wrapper.sh 
 

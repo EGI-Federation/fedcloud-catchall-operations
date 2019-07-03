@@ -31,6 +31,7 @@ cloudInfo:
     tag: '0.1.0'
     pullPolicy: IfNotPresent
   ams:
+    host: msg-devel.argo.grnet.gr
     project: egi_cloud_info
     # ams credentials, specify either token or cert + key
     token:

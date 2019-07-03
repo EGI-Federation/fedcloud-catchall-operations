@@ -28,6 +28,7 @@ helm install -f sites.yaml -f secrets.yaml --name fedcloud fedcloud-ops
 | `cloudInfo.image.repository`     | cloud-info image repository                          | `enolfc/cloudinfoops`     |
 | `cloudInfo.image.tag`            | cloud-info image tag                                 | `0.1.0`                   |
 | `cloudInfo.image.pullPolicy`     | cloud-info image pull policy                         | `IfNotPresent`            |
+| `cloudInfo.ams.host`             | AMS host                                             | `msg-devel.argo.grnet.gr` |
 | `cloudInfo.ams.project`          | cloud-info project name in AMS                       | `egi_cloud_info`          |
 | `cloudInfo.ams.token`            | AMS token                                            |                           |
 | `cloudInfo.ams.cert`             | AMS host cert (alternative to `cloudInfo.ams.token`) |                           |
