@@ -11,6 +11,7 @@ data:
     compute:
       shares:
         {{- range $vo, $share := $siteConf.vos }}
+        {{- if $share.auth.cloudInfo }}
         {{ $vo }}:
           auth:
             # the project id in OpenStack
@@ -18,5 +19,6 @@ data:
           # Default network type: none, public, public_only, private, private_only
           default_network_type: {{ $share.defaultNetwork | default "private" }}
           public_network_name: {{ $share.publicNetwork | default "UNKNOWN" }}
+        {{- end }}
         {{- end }}
 {{- end }}

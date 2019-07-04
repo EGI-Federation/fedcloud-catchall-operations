@@ -48,8 +48,10 @@ spec:
             - mountPath: /etc/cloud-info-provider/site
               name: cloud-info-config
             {{- range $vo, $share := $siteConf.vos }}
+            {{- if $share.auth.cloudInfo }}
             - mountPath: /etc/checkin/{{ $vo | lower }}
               name: checkin-creds-{{ $vo | lower | replace "." "-" }}
+            {{- end }}
             {{- end }}
             - mountPath: /etc/ams
               name: ams-secret
@@ -63,9 +65,11 @@ spec:
               - key: site.yaml
                 path: site.yaml
           {{- range $vo, $share := $siteConf.vos }}
+          {{- if $share.auth.cloudInfo }}
           - name: checkin-creds-{{ $vo | lower | replace "." "-" }}
             secret:
               secretName: checkin-cloudinfo-creds-{{ $site | lower }}-{{ $vo | lower }}
+          {{- end }}
           {{- end }}
           - name: ams-secret
             secret:
