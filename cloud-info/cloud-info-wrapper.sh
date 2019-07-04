@@ -2,7 +2,7 @@
 
 EXTRA_OPTS=""
 
-if test "x${DEBUG}" = "x1"; then
+if [ -n "$DEBUG" ]; then
     EXTRA_OPTS="$EXTRA_OPTS --debug"
 fi
 
