@@ -1,23 +1,32 @@
 language: python
 python:
-  - 3.6
+- 3.6
 git:
   depth: false
 services:
-  - docker
+- docker
 jobs:
   include:
   - stage: build chart and publish
     install:
     - pip3 install -r dev-requirements.txt
-    - curl -ssL https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz | tar -xz -C . --strip-components 1 linux-amd64/helm
+    - curl -ssL https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz
+      | tar -xz -C . --strip-components 1 linux-amd64/helm
     - chmod +x helm
     - sudo mv helm /usr/local/bin
     - helm init --client-only
     script:
-    - helm lint fedcloud-ops 
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - helm lint fedcloud-ops
     - helm template -f test-sites.yaml fedcloud-ops
     - CHARTPRESS_OPT=""
-    - if [ "x$TRAVIS_TAG" != "x" ]; then CHARTPRESS_OPT="$CHARTPRESS_OPT --tag $TRAVIS_TAG"; fi
-    - if [ "x$TRAVIS_COMMIT_RANGE" != "x" ]; then CHARTPRESS_OPT="$CHARTPRESS_OPT --commit-range $TRAVIS_COMMIT_RANGE"; fi
-    - chartpress $CHARTPRESS_OPT 
+    - if [ "x$TRAVIS_TAG" != "x" ]; then CHARTPRESS_OPT="$CHARTPRESS_OPT --tag $TRAVIS_TAG";
+      fi
+    - if [ "x$TRAVIS_COMMIT_RANGE" != "x" ]; then CHARTPRESS_OPT="$CHARTPRESS_OPT
+      --commit-range $TRAVIS_COMMIT_RANGE"; fi
+    - chartpress $CHARTPRESS_OPT --push --publish-chart
+env:
+  global:
+  - secure: k+s/0T1hbrBDvGvTcGpCpsjIxTCCqywde/6YqASd5kvBJX6WlFoKTmh0uZ7Ehk1XaWdj3q9cdDWJcSLy6kaQ8plWveMabO4mtQctKusL8Pq8/3sjE3SqINigVPtibWNCt/clGXmqtd9Z8Ocaha7DeO7k4S2jTfXsNvep7/2qIvC6SHZbNVyUMm3b430FpwRhZFeZNyhjv+4guSOugehV7wG695o6/e74dmZuqAcELA1fsRy+9BhTV9b8R2ye1sOv3DII1nUxhh5uoZv6iiOawv6/Ax5V/uwAMs/H+bHmS7jlh0xG2Oje0s5kG7+qj4qxawxCNH//M3j0WtLTXuhKCmpr44Vf0UqiCnU/prGphTlumule7eqOxDu49IyN+fmR8FjmDMaVs2LcGEWiRPIRAvvoqObnm6ZoZpQ8Df8pRyctKD0VE7S/oyz5Fq+ltWZJ2fcp6M86mS0WkySBlxKUUU2gP8cpY6z9qJspqL1x4onzXk5npN2WyjhQheJ1Z1FOuufcSTCqx9cmNCSfykgCmR8zFehtgB/Co41sR+d6WMvuVLNgtzMovFVkChrhlwdjdNfefCAvenyXmmtsNusTBRtMAqs78mhxtN5cbY1CbsIKEL72tYykcFSHGe4kOscMvgn7eZ+bt9CcB4Rch10PRztH3xOiS6vo30vbVLao7ww=
+  - secure: KGGJwKn2/Oomuugb9Hidnzoyvsw9zK7IkhKiGwCoOhqb+m6kf2WR8x74NzJSJsYeX3/qoOPpOTleA25UDh2uaGKRdqCxPkopglHpI5z7POd7Lwzlo3WqXgmw5j9BcKFz/pSc1t3FemzWnwhOtSGphRO+EaPuPRn/iRhV86h/EXgIUQgy6yP/ILDaTsfuVD4FxLOIcAOwX1FVYPBTUZ60WvRUBOMeKz5jNuxG72x0J9TbO+dzpy5a5bQmMsp4HwY3epmVriHOr51uWm8Bz9wMT9fuz1tUufLxaknis6ecRbtFuk/ZZTxkPa7nAOIbHXmvIZbPZfn1AlP1RbH1zszImwva+Qun+QFaAQRAzxY6CQ4FcurdBCZS1PNzZyVeopsLkEX7PWIRy7jQMZN74XDBN7EtqVD9LCGCQqM/4czo6SRtSSJO+A/o/cSMsMZKlRdSKIYFyK6sHUiKNeUD2jcSKCkyXVwmir5YDbkAxBp7o6AEwGNx6WSMrB/GKlJaO3R2IbjtS+zue0OvAcufVJP/+VXF1NE6yMjkFEYeRibm3i0PgdU7Hn9+xMjpXjXDsChGcZkh9JEiN49aYwMbQydtuHhUJZr7GDptSNqn/p6kQ0LKMc+dyqLahChRcSwl4Pk/CIc9i3LLHOL5gE+V0t33mFunvSqIBnMyo/lv2qcBEbs=
+  - secure: FK2wKCfpp12qMCArbJHLbX8Cp+wfc8Nr3BDptFpamniU8ZVZCvUkxGvVdP/DoMbsttnmutBieJNw+tZdiqtP1vx3HLjryXVaD+ytlrOGYK/+nzUmbEUJ0Q4ANmWpyPkK/RIa3MVpUOcFhTBaeCu2MxQwWxn7Ma8Hqaxw76/F6l2B5X21VmwXCguj8KvkQhRtVY3IDgmmNLCqpw7NV0fniwBGD3kPnLrOmsu+o7Me9ayC4aokgKh5RI2wG+9LBUX7Phqe86LDCF+q+hkHmrNeLCGSQlWlm1zQazMUp1z/ogpKfPSf/Oj0k/IShtDLuGEaE0ucdeW5EHDHMkkY/spS94o191JsPwIc/hHhHKNSp5hXyYnHYf9RL9FNntOrbFUcCWE1UkDINi01D6omPNlvQEY91HfXJL2ch5D2qJVdhvv/sf84zZW/4bhx4i/n1WMtywiK/3Zk4/L0sOCjE4Dx9rjedC7xYIhNfKMn/35bqHH6Mepx8ylDhWlogvCU7TP5tFlrIv7jrerzJ2izIHIFEBwFiWM1K+1WQwtA4DA3uRRpRRCFJEeabSEzjT8f6htZIILqk5iBZNQMQrfLA76oJ1aCKH0vltWdC/6vUh+ApDox73TpveEj5/zRUQfQ2EpD42Niin+p2HmX9f31RPvwbsEr1J2MyOqjBdnyBPHXLRU=
