@@ -40,6 +40,10 @@ spec:
               value: {{ $values.cloudInfo.ams.project }}
             - name: AMS_HOST
               value: {{ $values.cloudInfo.ams.host }}
+            {{- if $values.cloudInfo.debug }}
+            - name: DEBUG
+              value: "1"
+            {{- end }}
             volumeMounts:
             - mountPath: /etc/cloud-info-provider/site
               name: cloud-info-config

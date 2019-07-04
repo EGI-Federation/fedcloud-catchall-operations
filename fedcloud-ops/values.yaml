@@ -25,6 +25,7 @@ sites:
   #       publicNetwork: <name of the public network> (default is UNKNOWN)
 
 cloudInfo:
+  debug: false
   # how often should the cloud-info-provider run, default every 5 minutes
   # rethink if this is actually a cronjob or a different thing
   schedule: '*/5 * * * *'

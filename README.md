@@ -24,6 +24,7 @@ helm install -f sites.yaml -f secrets.yaml --name fedcloud fedcloud-ops
 | Parameter                        | Description                                          | Default                   |
 |----------------------------------|------------------------------------------------------|---------------------------|
 | `sites`                          | A description of the sites to support                | `{}`                      |
+| `cloudInfo.debug`                | Enable debug of cloud-info-provider                  | `false`                   |
 | `cloudInfo.schedule`             | CronJob schedule of cloud-info                       | `*/5 * * * *`             |
 | `cloudInfo.image.repository`     | cloud-info image repository                          | `enolfc/cloudinfoops`     |
 | `cloudInfo.image.tag`            | cloud-info image tag                                 | `0.1.0`                   |
