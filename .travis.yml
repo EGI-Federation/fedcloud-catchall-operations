@@ -19,10 +19,10 @@ jobs:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - helm lint fedcloud-ops
     - helm template -f test-sites.yaml fedcloud-ops
-    - chartpress.sh
+    - ./chartpress.sh
     deploy:
       provider: script
-      script: chartpress.sh --push --publish-chart
+      script: ./chartpress.sh --push --publish-chart
 env:
   global:
   - secure: k+s/0T1hbrBDvGvTcGpCpsjIxTCCqywde/6YqASd5kvBJX6WlFoKTmh0uZ7Ehk1XaWdj3q9cdDWJcSLy6kaQ8plWveMabO4mtQctKusL8Pq8/3sjE3SqINigVPtibWNCt/clGXmqtd9Z8Ocaha7DeO7k4S2jTfXsNvep7/2qIvC6SHZbNVyUMm3b430FpwRhZFeZNyhjv+4guSOugehV7wG695o6/e74dmZuqAcELA1fsRy+9BhTV9b8R2ye1sOv3DII1nUxhh5uoZv6iiOawv6/Ax5V/uwAMs/H+bHmS7jlh0xG2Oje0s5kG7+qj4qxawxCNH//M3j0WtLTXuhKCmpr44Vf0UqiCnU/prGphTlumule7eqOxDu49IyN+fmR8FjmDMaVs2LcGEWiRPIRAvvoqObnm6ZoZpQ8Df8pRyctKD0VE7S/oyz5Fq+ltWZJ2fcp6M86mS0WkySBlxKUUU2gP8cpY6z9qJspqL1x4onzXk5npN2WyjhQheJ1Z1FOuufcSTCqx9cmNCSfykgCmR8zFehtgB/Co41sR+d6WMvuVLNgtzMovFVkChrhlwdjdNfefCAvenyXmmtsNusTBRtMAqs78mhxtN5cbY1CbsIKEL72tYykcFSHGe4kOscMvgn7eZ+bt9CcB4Rch10PRztH3xOiS6vo30vbVLao7ww=
