@@ -1,6 +1,7 @@
 {{- $values := .Values -}}
 {{- range $site, $siteConf := .Values.sites }}
 {{- range $vo, $share := $siteConf.vos }}
+{{- if $share.auth.cloudkeeper }}
 ---
 apiVersion: v1
 kind: Service
@@ -14,5 +15,6 @@ spec:
     - protocol: TCP
       port: 50051
       targetPort: 50051
+{{- end }}
 {{- end }}
 {{- end }}

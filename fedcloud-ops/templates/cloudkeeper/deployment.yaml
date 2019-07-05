@@ -1,6 +1,7 @@
 {{- $values := .Values -}}
 {{- range $site, $siteConf := .Values.sites }}
 {{- range $vo, $share := $siteConf.vos }}
+{{- if $share.auth.cloudkeeper }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -31,7 +32,7 @@ spec:
           - --openstack-auth-type
           - v3oidcrefreshtoken
           - --openstack-oidc-protocol
-          - openid
+          - {{ $siteConf.protocol | default "openid" }}
           - --openstack-oidc-identity-provider
           - egi.eu
           - --openstack-auth-url
@@ -62,5 +63,6 @@ spec:
             - containerPort: 50051
           resources:
 {{ toYaml $values.resources | indent 12 }}
+{{- end }}
 {{- end }}
 {{- end }}

@@ -24,6 +24,7 @@ helm install -f sites.yaml -f secrets.yaml --name fedcloud fedcloud-ops
 | Parameter                        | Description                                          | Default                   |
 |----------------------------------|------------------------------------------------------|---------------------------|
 | `sites`                          | A description of the sites to support                | `{}`                      |
+| `cloudInfo.debug`                | Enable debug of cloud-info-provider                  | `false`                   |
 | `cloudInfo.schedule`             | CronJob schedule of cloud-info                       | `*/5 * * * *`             |
 | `cloudInfo.image.repository`     | cloud-info image repository                          | `enolfc/cloudinfoops`     |
 | `cloudInfo.image.tag`            | cloud-info image tag                                 | `0.1.0`                   |
@@ -67,6 +68,8 @@ sites:
             clientId: AYY
             clientSecret: BZZ
             refreshToken: CWW
+        # optionally specify a protocol for the Keystone V3 federation API
+        protocol: openid | oidc (default is openid)
         defaultNetwork: private | public | private_only | public_only (default is public)
         publicNetwork: <name of the public network> (default is UNKNOWN)
 ```

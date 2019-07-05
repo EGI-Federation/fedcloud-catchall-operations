@@ -25,7 +25,7 @@ spec:
             - name: OS_IDENTITY_PROVIDER
               value: egi.eu
             - name: OS_PROTOCOL
-              value: openid
+              value: {{ $siteConf.protocol | default "openid" }}
             - name: CHECKIN_SECRETS_PATH
               value: /etc/checkin/
             - name: CHECKIN_OIDC_TOKEN
@@ -40,12 +40,18 @@ spec:
               value: {{ $values.cloudInfo.ams.project }}
             - name: AMS_HOST
               value: {{ $values.cloudInfo.ams.host }}
+            {{- if $values.cloudInfo.debug }}
+            - name: DEBUG
+              value: "1"
+            {{- end }}
             volumeMounts:
             - mountPath: /etc/cloud-info-provider/site
               name: cloud-info-config
             {{- range $vo, $share := $siteConf.vos }}
+            {{- if $share.auth.cloudInfo }}
             - mountPath: /etc/checkin/{{ $vo | lower }}
               name: checkin-creds-{{ $vo | lower | replace "." "-" }}
+            {{- end }}
             {{- end }}
             - mountPath: /etc/ams
               name: ams-secret
@@ -59,9 +65,11 @@ spec:
               - key: site.yaml
                 path: site.yaml
           {{- range $vo, $share := $siteConf.vos }}
+          {{- if $share.auth.cloudInfo }}
           - name: checkin-creds-{{ $vo | lower | replace "." "-" }}
             secret:
               secretName: checkin-cloudinfo-creds-{{ $site | lower }}-{{ $vo | lower }}
+          {{- end }}
           {{- end }}
           - name: ams-secret
             secret:

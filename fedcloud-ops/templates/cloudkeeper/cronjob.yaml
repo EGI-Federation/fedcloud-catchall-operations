@@ -1,6 +1,7 @@
 {{- $values := .Values -}}
 {{- range $site, $siteConf := .Values.sites }}
 {{- range $vo, $share := $siteConf.vos }}
+{{- if $share.auth.cloudkeeper }}
 ---
 apiVersion: batch/v1beta1
 kind: CronJob
@@ -48,5 +49,6 @@ spec:
           tolerations:
 {{ toYaml . | indent 12 }}
         {{- end }}
+{{- end }}
 {{- end }}
 {{- end }}
