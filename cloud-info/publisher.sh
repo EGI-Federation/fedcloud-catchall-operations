@@ -9,7 +9,7 @@ export CLOUD_INFO_MIDDLEWARE=openstack
 
 ams-wrapper.sh
 
-if [ -n $OCCI_ENDPOINT ]; then
+if [ -n "$OCCI_ENDPOINT" ]; then
     # OCCI
     export GOCDB_URL=$OCCI_ENDPOINT
     export GOCDB_SERVICE_TYPE=eu.egi.cloud.vm-management.occi
