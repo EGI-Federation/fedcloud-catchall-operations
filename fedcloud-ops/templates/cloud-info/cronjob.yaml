@@ -40,6 +40,10 @@ spec:
               value: {{ $values.cloudInfo.ams.project }}
             - name: AMS_HOST
               value: {{ $values.cloudInfo.ams.host }}
+            {{- if $siteConf.occi }}
+            - name: OCCI_ENDPOINT
+              value: {{ $siteConf.occi }}
+            {{- end }}
             {{- if $values.cloudInfo.debug }}
             - name: DEBUG
               value: "1"

@@ -28,6 +28,7 @@ RUN cat /etc/grid-security/certificates/*.pem >> $(python -m requests.certs)
 
 COPY cloud-info-wrapper.sh /usr/local/bin/cloud-info-wrapper.sh
 COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
+COPY publisher.sh /usr/local/bin/publisher.sh
 
-CMD ["ams-wrapper.sh"]
+CMD ["publisher.sh"]
 
