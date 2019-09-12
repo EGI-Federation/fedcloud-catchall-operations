@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -euo pipefail
 
 CHARTPRESS_OPT="$@"
 TRAVIS_TAG=${TRAVIS_TAG:-""}
