@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 #
 
-sites:
+sites: {}
   # This should be a dict of sites as follows:
   # Name-of-site:
   #   endpoint: https://thekeystone-url/v3

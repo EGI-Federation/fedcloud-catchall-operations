@@ -16,7 +16,7 @@ spec:
           - name: cloud-info
             image: "{{ $values.cloudInfo.image.repository }}:{{ $values.cloudInfo.image.tag }}"
             imagePullPolicy: {{ $values.cloudInfo.image.pullPolicy }}
-            command: ["/usr/local/bin/ams-wrapper.sh"]
+            command: ["/usr/local/bin/publisher.sh"]
             env:
             - name: OS_AUTH_URL
               value: {{ $siteConf.endpoint }}
@@ -40,6 +40,10 @@ spec:
               value: {{ $values.cloudInfo.ams.project }}
             - name: AMS_HOST
               value: {{ $values.cloudInfo.ams.host }}
+            {{- if $siteConf.occi }}
+            - name: OCCI_ENDPOINT
+              value: {{ $siteConf.occi }}
+            {{- end }}
             {{- if $values.cloudInfo.debug }}
             - name: DEBUG
               value: "1"
