@@ -1,9 +1,9 @@
 charts:
   - name: fedcloud-ops 
     imagePrefix: egifedcloud/ops-
-    #repo:
-    #  git: egi-foundation/egi-notebooks-chart
-    #  published: https://egi-foundation.github.io/egi-notebooks-chart
+    repo:
+      git: egi-foundation/fedcloud-catchall-operations
+      published: https://egi-foundation.github.io/egi-fedcloud-operations
 
     images:
       cloudkeeper-os:
