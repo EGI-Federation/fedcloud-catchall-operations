@@ -118,3 +118,10 @@ sites:
       demo.fedcloud.egi.eu:
         auth:
           project: 10b972eed97940089b234f6257d7db72
+  CESGA:
+    endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
+    vos:
+      fedcloud.egi.eu:
+        auth:
+          project: eb7ff20e603d471cb731bdb83a95a2b5
+        publicNetwork: UNKNOWN
