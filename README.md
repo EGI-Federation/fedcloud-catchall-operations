@@ -52,6 +52,8 @@ sites:
   # This should be a dict of sites as follows:
   Name-of-site:
     endpoint: https://thekeystone-url/v3
+    # optionally add the occi endpoint
+    occi: https://the-occi-url/occi1.1/
     vos:
       # a new dict with name of the VO as key
       vo1:
