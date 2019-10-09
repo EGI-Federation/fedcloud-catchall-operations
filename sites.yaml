@@ -1,50 +1,92 @@
 sites:
-  IN2P3-IRES:
-    endpoint: https://sbgcloud.in2p3.fr:5000/v3
+  100IT:
+    endpoint: https://cloud-egi.100percentit.com:5000/v3/
+    vos:
+      dteam:
+        auth:
+          project: 0785b78c70ce4e9f91bf851a4fd156b2
+      fedcloud.egi.eu:
+        auth:
+          project: 7cfb9087632a4df5b738fbd0b795f2ad
+      vo.nextgeoss.eu:
+        auth:
+          project: 744baec7cd3d404799033327891abfd6
+  CESGA:
+    endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
     vos:
       fedcloud.egi.eu:
         auth:
-          project: a5eb30bba2c2497b90645fb199e34b39
-        # defaultNetwork: private
-        publicNetwork: PUBLIC
+          project: eb7ff20e603d471cb731bdb83a95a2b5
       vo.access.egi.eu:
         auth:
-          project: 7a91022b9ae74ed9ac1a574972a79499
-        publicNetwork: PUBLIC
-  RECAS-BARI:
-    endpoint: https://cloud.recas.ba.infn.it:5000/v3
-    occi: http://cloud.recas.ba.infn.it:8787/occi/
-    protocol: oidc
+          project: 3a8e9d966e644405bf19b536adf7743d
+      vo.notebooks.egi.eu:
+        auth:
+          project: fcaf23d103c1485694e7494a59ee5f09
+  CESNET-MCC:
+    endpoint: https://identity.cloud.muni.cz/v3
     vos:
+      demo.fedcloud.egi.eu:
+        auth:
+          project: 10b972eed97940089b234f6257d7db72
+      dteam:
+        auth:
+          project: 0aa5b696969c42988b18beda3f85b885
+      training.egi.eu:
+        auth:
+          project: eae2aa7f26334104906106bca4b82ae3
+      vo.eurogeoss.eu:
+        auth:
+          project: 5bc62d60bbbc49d881bc0a948da710d6
+      vo.geoss.eu:
+        auth:
+          project: 24869cfe0e094f59a3110429e068eef2
+      vo.max-centre.eu:
+        auth:
+          project: 50fc58ed66a14106b40b9c6d7d9af86c
+      vo.nextgeoss.eu:
+        auth:
+          project: 081396a827c94f3da0c922cf6d8fb7f7
+  CLOUDIFIN:
+    endpoint: https://cloud-ctrl.nipne.ro:443/v3
+    vos:
+      benchmark.terradue.com:
+        auth:
+          project: c9aedbfbf1154d3b9a0db9b0d63f7d85
+      dteam:
+        auth:
+          project: f726c16f3e2346bf891021c89b4dc58d
       fedcloud.egi.eu:
         auth:
-          project: 02e47ef981904ceaa30f7c545e563a11
-        defaultNetwork: public
-      vo.access.egi.eu:
-        auth:
-          project: afd721921d6e472490bbc935368ff343
-        defaultNetwork: public
-  UNIV-LILLE:
-    endpoint: https://thor.univ-lille.fr:5000/v3
+          project: 245cdfdce0c84227b9b60d247618f635
+  CYFRONET-CLOUD:
+    endpoint: https://api.cloud.cyfronet.pl:5000/v3
+    occi: https://control.cloud.cyfronet.pl:8787/
     vos:
+      dteam:
+        auth:
+          project: 9b40bb40431c4f4180c280b6675f9bb9
       fedcloud.egi.eu:
         auth:
-          project: def49ef0ac58495f90d8aa2463b33b10
-        publicNetwork: provider
-  INFN-CATANIA-STACK:
-    endpoint: https://stack-server.ct.infn.it:35357/v3
+          project: 1295728b1ce747fb96c043c6e254ad6f
+  IFCA-LCG2:
+    endpoint: https://api.cloud.ifca.es:5000/v3
     vos:
+      demo.fedcloud.egi.eu:
+        auth:
+          project: 2a7e2cd4b6dc4e609dd934964c1715c6
+      dteam:
+        auth:
+          project: 5eb8959a799240a98f4f303f5fbd80be
       fedcloud.egi.eu:
         auth:
-          project: 2669272fcc0c4c6f842a1431eaa5456e
-        defaultNetwork: public
-  UA-BITP:
-    endpoint: https://openstack.bitp.kiev.ua:5000/v3
-    vos:
-      fedcloud.egi.eu:
+          project: 999f045cb1ff4684a15ebb338af69460
+      labss.istc.cnr.it:
         auth:
-          project: 8d48556b378549a3a3f02ce933096c1f
-        publicNetwork: UNKNOWN
+          project: 704b561f184e412ba77cc237d686203b
+      vo.nextgeoss.eu:
+        auth:
+          project: 13c11c4073f4456fac7df84c4eb8f85b
   IISAS-FedCloud:
     endpoint: https://nova.ui.savba.sk:5000/v3
     occi: https://nova.ui.savba.sk:8787/occi1.1
@@ -52,58 +94,109 @@ sites:
       fedcloud.egi.eu:
         auth:
           project: 36de196588924f048dda146e9ade8632
-        publicNetwork: UNKNOWN
+      training.egi.eu:
+        auth:
+          project: 32bef1ab628046a3b1e3f65887908d71
+      vo.nextgeoss.eu:
+        auth:
+          project: 74c210cafce545569426b4de055b27b7
   IISAS-GPUCloud:
     endpoint: https://keystone3.ui.savba.sk:5000/v3
     occi: https://nova3.ui.savba.sk:8787/occi1.1/
     vos:
+      acc-comp.egi.eu:
+        auth:
+          project: 9c0285764cf043ffa1797f1b5c292c6a
       fedcloud.egi.eu:
         auth:
           project: 057a08f7db7245bfbeec7985a01ac596
-        publicNetwork: UNKNOWN
-  SCAI:
-    endpoint: https://fc.scai.fraunhofer.de:5000/v3
+      training.egi.eu:
+        auth:
+          project: 627905392d4d453cbd85e8d56b2367b0
+  IN2P3-IRES:
+    endpoint: https://sbgcloud.in2p3.fr:5000/v3
+    vos:
+      benchmark.terradue.com:
+        auth:
+          project: d579ada647314c91989daa63399fe2fa
+      fedcloud.egi.eu:
+        auth:
+          project: a5eb30bba2c2497b90645fb199e34b39
+      vo.access.egi.eu:
+        auth:
+          project: 7a91022b9ae74ed9ac1a574972a79499
+  INFN-CATANIA-STACK:
+    endpoint: https://stack-server.ct.infn.it:35357/v3
     vos:
       fedcloud.egi.eu:
         auth:
-          project: 162ecb7fe3ee450ca436935f87662858
-        publicNetwork: UNKNOWN
+          project: 2669272fcc0c4c6f842a1431eaa5456e
+      training.egi.eu:
+        auth:
+          project: 00982464978c4b61a5f570e315251f02
+      vo.access.egi.eu:
+        auth:
+          project: 4b9f8d6ab992452ca40921b21984008a
+      vo.dariah.eu:
+        auth:
+          project: 88e6bf19593543d2998743418d0eb219
   INFN-PADOVA-STACK:
     endpoint: https://egi-cloud.pd.infn.it:443/v3/
     vos:
+      dteam:
+        auth:
+          project: 142e67568077410c88587fc309864310
       fedcloud.egi.eu:
         auth:
           project: 260c82efcd854009805e691e207bdd05
-        publicNetwork: UNKNOWN
-  CLOUDIFIN:
-    endpoint: https://cloud-ctrl.nipne.ro:443/v3
-    vos:
-      fedcloud.egi.eu:
-        auth:
-          project: 245cdfdce0c84227b9b60d247618f635
-        publicNetwork: UNKNOWN
-  CYFRONET-CLOUD:
-    endpoint: https://api.cloud.cyfronet.pl:5000/v3
-    occi: https://control.cloud.cyfronet.pl:8787/
-    vos:
-      fedcloud.egi.eu:
-        auth:
-          project: 1295728b1ce747fb96c043c6e254ad6f
-        publicNetwork: UNKNOWN
-  IFCA-LCG2:
-    endpoint: https://api.cloud.ifca.es:5000/v3
-    vos:
-      fedcloud.egi.eu:
-        auth:
-          project: 999f045cb1ff4684a15ebb338af69460
-        publicNetwork: UNKNOWN
   NCG-INGRID-PT:
     endpoint: https://nimbus.ncg.ingrid.pt:5000/v3/
     vos:
       fedcloud.egi.eu:
         auth:
           project: 913896a00c8f4f0fa5b56735d270b0cf
-        publicNetwork: UNKNOWN
+  RECAS-BARI:
+    endpoint: https://cloud.recas.ba.infn.it:5000/v3
+    occi: http://cloud.recas.ba.infn.it:8787/occi/
+    protocol: oidc
+    vos:
+      datafurn.eosc-hub.eu:
+        auth:
+          project: 9532166205f341308ab1c1d4b811976d
+      fedcloud.egi.eu:
+        auth:
+          project: 02e47ef981904ceaa30f7c545e563a11
+      vo.emsodev.eu:
+        auth:
+          project: e2050d49404a4107b67e649780be07fe
+  SCAI:
+    endpoint: https://fc.scai.fraunhofer.de:5000/v3
+    occi: https://fc.scai.fraunhofer.de:8787/occi1.1/
+    vos:
+      fedcloud.egi.eu:
+        auth:
+          project: 162ecb7fe3ee450ca436935f87662858
+  UA-BITP:
+    endpoint: https://openstack.bitp.kiev.ua:5000/v3
+    vos:
+      dteam:
+        auth:
+          project: 1305de6b15384e0c8d77251ab6f703af
+      fedcloud.egi.eu:
+        auth:
+          project: 8d48556b378549a3a3f02ce933096c1f
+      sysbio:
+        auth:
+          project: 8d07a86bfac04320bc8cce369699ef8d
+  UNIV-LILLE:
+    endpoint: https://thor.univ-lille.fr:5000/v3
+    vos:
+      dteam:
+        auth:
+          project: aa893955520a4a98a04453808d6f1232
+      fedcloud.egi.eu:
+        auth:
+          project: def49ef0ac58495f90d8aa2463b33b10
 #  OpenID Connect support failing
 #  GWDG-CLOUD:
 #    endpoint: https://api.prod.cloud.gwdg.de:5000/v3
@@ -111,17 +204,3 @@ sites:
 #      fedcloud.egi.eu:
 #        auth:
 #          project: na
-#        publicNetwork: UNKNOWN
-  CESNET-MCC:
-    endpoint: https://identity.cloud.muni.cz/v3
-    vos:
-      demo.fedcloud.egi.eu:
-        auth:
-          project: 10b972eed97940089b234f6257d7db72
-  CESGA:
-    endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
-    vos:
-      fedcloud.egi.eu:
-        auth:
-          project: eb7ff20e603d471cb731bdb83a95a2b5
-        publicNetwork: UNKNOWN
