@@ -1,13 +1,13 @@
 # fedcloud-catchall-operations
 
-Operation of fedcloud integration components for selected providers. 
+Operation of fedcloud integration components for selected providers.
 This is a helm chart that will deploy the catchall operations for
 the EGI federated cloud.
 
 ## What this does?
 
 The chart will create:
-- a cron job per site that will execute the cloud-info-provider for every 
+- a cron job per site that will execute the cloud-info-provider for every
   vo supporteb by the site and push the information to the AMS in order
   to be consumed by clients.
 - a service per site and VO that will execute cloudkeeper-os to synchronise
@@ -71,7 +71,11 @@ sites:
             clientSecret: BZZ
             refreshToken: CWW
         # optionally specify a protocol for the Keystone V3 federation API
-        protocol: openid | oidc (default is openid)
+        # (default is "openid")
+        #protocol: openid
+        # optionally specify which image formats accepts the site
+        # (default is "vmdk qcow2")
+        #imageFormat: "vmdk qcow2"
         defaultNetwork: private | public | private_only | public_only (default is public)
         publicNetwork: <name of the public network> (default is UNKNOWN)
 ```
