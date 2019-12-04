@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.7
 
 # install poetry so cloudkeeper can be installed
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
