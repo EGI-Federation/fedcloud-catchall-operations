@@ -2,7 +2,8 @@ FROM python:2
 
 # Pip install directly does not install the data files in etc?
 # TODO: pin the cloud-info-provider version
-RUN git clone https://github.com/EGI-Foundation/cloud-info-provider.git /tmp/cloud-info-provider && \
+RUN git clone https://github.com/enolfc/cloud-info-provider.git /tmp/cloud-info-provider && \
+    cd /tmp/cloud-info-provider && git checkout ams && \
     pip install -r /tmp/cloud-info-provider/requirements.txt && \
     cd /tmp/cloud-info-provider && python setup.py install && \
     rm -rf /tmp/cloud-info-provider
