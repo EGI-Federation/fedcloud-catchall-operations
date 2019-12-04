@@ -5,6 +5,7 @@ sites:
       dteam:
         auth:
           project: 0785b78c70ce4e9f91bf851a4fd156b2
+      # NO SLA
       fedcloud.egi.eu:
         auth:
           project: 7cfb9087632a4df5b738fbd0b795f2ad
@@ -25,6 +26,7 @@ sites:
           project: fcaf23d103c1485694e7494a59ee5f09
   CESNET-MCC:
     endpoint: https://identity.cloud.muni.cz/v3
+    imageFormat: raw
     vos:
       demo.fedcloud.egi.eu:
         auth:
@@ -127,6 +129,7 @@ sites:
           project: 7a91022b9ae74ed9ac1a574972a79499
   INFN-CATANIA-STACK:
     endpoint: https://stack-server.ct.infn.it:35357/v3
+    occi: http://stack-server.ct.infn.it:8787/occi1.1/
     vos:
       fedcloud.egi.eu:
         auth:
