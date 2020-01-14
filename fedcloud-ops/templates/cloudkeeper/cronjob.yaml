@@ -29,7 +29,7 @@ spec:
             - --debug
             env:
             - name: BACKEND_ENDPOINT
-              value: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}:50051/
+              value: ck-os-{{ $site | lower }}-{{ $vo | lower | replace "." "-" }}:50051
             - name: CLOUDKEEPER_SECRET
               valueFrom:
                 secretKeyRef:
