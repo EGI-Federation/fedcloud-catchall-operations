@@ -1,0 +1,6 @@
+endpoint: https://thor.univ-lille.fr:5000/v3
+gocdb: UNIV-LILLE
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: e57db5c1e0b24bcbac9904f4ac22dcaa

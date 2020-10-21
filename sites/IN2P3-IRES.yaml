@@ -1,0 +1,6 @@
+endpoint: https://sbgcloud.in2p3.fr:5000/v3
+gocdb: IN2P3-IRES
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: 7a91022b9ae74ed9ac1a574972a79499 

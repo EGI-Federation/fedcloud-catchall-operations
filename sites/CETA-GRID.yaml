@@ -1,0 +1,3 @@
+endpoint: https://controller.ceta-ciemat.es:5000/v3/
+gocdb: CETA-GRID
+vos: {}

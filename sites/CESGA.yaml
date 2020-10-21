@@ -1,0 +1,6 @@
+endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
+gocdb: CESGA 
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: 3a8e9d966e644405bf19b536adf7743d

@@ -1,0 +1,6 @@
+endpoint: https://openstack.bitp.kiev.ua:5000/v3
+gocdb: UA-BITP
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: 8d48556b378549a3a3f02ce933096c1f

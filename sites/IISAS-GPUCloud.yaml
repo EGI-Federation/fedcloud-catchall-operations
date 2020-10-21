@@ -1,0 +1,3 @@
+endpoint: https://keystone3.ui.savba.sk:5000/v3
+gocdb: IISAS-GPUCloud
+vos: {}

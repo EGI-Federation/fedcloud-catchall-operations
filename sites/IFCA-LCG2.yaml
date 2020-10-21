@@ -1,0 +1,6 @@
+endpoint: https://api.cloud.ifca.es:5000/v3
+gocdb: IFCA-LCG2
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: 999f045cb1ff4684a15ebb338af69460

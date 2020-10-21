@@ -1,0 +1,6 @@
+endpoint: https://identity.cloud.muni.cz/v3
+gocdb: CESNET-MCC
+vos:
+  demo.fedcloud.egi.eu:
+    auth:
+      project_id: 10b972eed97940089b234f6257d7db72
