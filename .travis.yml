@@ -7,18 +7,8 @@ services:
 - docker
 jobs:
   include:
-  - stage: build chart and publish
-    install:
-    - pip3 install -r dev-requirements.txt
-    - curl -ssL https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz
-      | tar -xz -C . --strip-components 1 linux-amd64/helm
-    - chmod +x helm
-    - sudo mv helm /usr/local/bin
-    - helm init --client-only
-    script:
-    - helm lint fedcloud-ops
-    - helm template -f test-sites.yaml fedcloud-ops
-    - ./chartpress.sh
+  - script:
+    - ./build.sh
     deploy:
       provider: script
-      script: ./chartpress.sh --push --publish-chart
+      script: ./deploy.sh
