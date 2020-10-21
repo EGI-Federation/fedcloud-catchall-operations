@@ -1,0 +1,11 @@
+# VOs
+vos:
+  sample_vo:
+
+# AMS details
+ams_project: egi_cloud_info
+ams_host: msg.argo.grnet.gr
+ams_token: secret 
+
+# docker image for the cloud info provider
+cloud_info_image: egifedcloud/ops-cloud-info:latest
