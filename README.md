@@ -53,7 +53,7 @@ where:
 The role expects the following variables to be defined:
 
 - `vos` a map that contains entry for each VO with the Check-in credentials:
-  ```
+  ```yaml
   <vo name>:
     auth:
       client_id: <checkin client id>
