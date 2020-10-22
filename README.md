@@ -13,7 +13,7 @@ This repo consists of an ansible playbook that creates:
   credential info from `/etc/fedcloud/vos/<vo>` and sends information
   to the AMS queue
 - a cron job per site that will execute the cloud-info-provider for every
-  vo supporteb by the site and push the information to the AMS in order
+  vo supported by the site and push the information to the AMS in order
   to be consumed by clients.
 
 Sites are configred following the YAML files of the `sites` directory.
