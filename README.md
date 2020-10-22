@@ -19,7 +19,7 @@ This repo consists of an ansible playbook that creates:
 Sites are configred following the YAML files of the `sites` directory.
 There is a file per site that looks like this:
 
-```
+```yaml
 gocdb_site: <name in gocdb of the site>
 endpoint: <keystone endpoint of the site>
 # optionally specify a protocol for the Keystone V3 federation API
