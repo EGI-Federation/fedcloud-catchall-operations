@@ -2,11 +2,11 @@
 
 Operation of fedcloud integration components for selected providers.
 This is a set of docker containers and an ansible role to operate the
-federation components of the EGI Cloud
+federation components of the EGI Cloud Compute service.
 
-## What this does?
+## Implementation
 
-The ansible will create:
+This repo consists of an ansible playbook that creates:
 - a configuration directory `/etc/fedcloud/vos/<vo>` for every VO
   that will contain credentials to authenticate into that VO
 - a cloud-info-provider configuration per site that takes
@@ -16,7 +16,25 @@ The ansible will create:
   vo supporteb by the site and push the information to the AMS in order
   to be consumed by clients.
 
-## Deploying the chart
+Sites are configred following the YAML files of the `sites` directory.
+There is a file per site that looks like this:
+
+```
+gocdb_site: <name in gocdb of the site>
+endpoint: <keystone endpoint of the site>
+# optionally specify a protocol for the Keystone V3 federation API
+protocol: openid | oidc (default is openid)
+vos:
+   <vo name>:
+     auth:
+       project_id: <project id supporting the VO vo name at the site>
+     # any other optional configuration for cloud-info-provider, e.g:
+     defaultNetwork: private | public | private_only | public_only
+     publicNetwork: <name of the public network>
+```
+
+
+## Deployment
 
 ```
 ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml
@@ -31,23 +49,6 @@ where:
   role to configure the host
 
 ### Configuration
-
-The `sites` directory contains a YAML file per site to configure following this
-format:
-
-```
-endpoint: <keystone endpoint of the site>
-gocdb_site: <name in gocdb of the site>
-# optionally specify a protocol for the Keystone V3 federation API
-protocol: openid | oidc (default is openid)
-vos:
-   <vo name>:
-     auth:
-       project_id: <project id supporting the VO vo name at the site>
-     # any other optional configuration for cloud-info-provider, e.g:
-     defaultNetwork: private | public | private_only | public_only
-     publicNetwork: <name of the public network>
-```
 
 The role expects the following variables to be defined:
 
