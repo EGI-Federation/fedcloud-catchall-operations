@@ -8,7 +8,7 @@ federation components of the EGI Cloud Compute service.
 
 This repo consists of an ansible playbook that creates:
 - a configuration directory `/etc/fedcloud/vos/<vo>` for every VO
-  that will contain credentials to authenticate into that VO
+  that will contain credentials to authenticate with that VO
 - a cloud-info-provider configuration per site that takes
   credential info from `/etc/fedcloud/vos/<vo>` and sends information
   to the AMS queue
