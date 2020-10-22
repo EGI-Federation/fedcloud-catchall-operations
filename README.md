@@ -36,7 +36,7 @@ vos:
 
 ## Deployment
 
-```
+```sh
 ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml
 ```
 
