@@ -1,0 +1,3 @@
+gocdb: SCAI
+endpoint: https://fc.scai.fraunhofer.de:5000/v3
+vos: {}

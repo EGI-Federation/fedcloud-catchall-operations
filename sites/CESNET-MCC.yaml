@@ -1,0 +1,27 @@
+gocdb: CESNET-MCC
+endpoint: https://identity.cloud.muni.cz/v3
+vos:
+  covid19.eosc-synergy.eu:
+    auth:
+      project_id: 192e87f713474117a2a22704ac4da1a2
+  vo.geoss.eu:
+    auth:
+      project_id: 24869cfe0e094f59a3110429e068eef2
+  vo.max-centre.eu:
+    auth:
+      project_id: 50fc58ed66a14106b40b9c6d7d9af86c
+  vo.eurogeoss.eu:
+    auth:
+      project_id: 5bc62d60bbbc49d881bc0a948da710d6
+  vo.emphasisproject.eu:
+    auth:
+      project_id: b953842bf4204dc98054f6c3ae581cb5
+  peachnote.com:
+    auth:
+      project_id: bf5fbc4e22164e4d8a464e9c97706830
+  eosc-synergy.eu:
+    auth:
+      project_id: d85ca93c937a4a97adf134ec2593296d
+  panosc.eu:
+    auth:
+      project_id: d868dfd63a674d94bbd9d9b7b54443e3

@@ -1,0 +1,6 @@
+gocdb: TR-FC1-ULAKBIM
+endpoint: https://fcctrl.ulakbim.gov.tr:5000
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: 062cfb2d806a49a4a82055cb1ac4e6a7

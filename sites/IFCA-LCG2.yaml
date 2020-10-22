@@ -1,0 +1,12 @@
+gocdb: IFCA-LCG2
+endpoint: https://api.cloud.ifca.es:5000/v3/
+vos:
+  eosc-synergy.eu:
+    auth:
+      project_id: 3b9754ad8c6046b4aec43ec21abe7d8c
+  vo.access.egi.eu:
+    auth:
+      project_id: 999f045cb1ff4684a15ebb338af69460
+  covid19.eosc-synergy.eu:
+    auth:
+      project_id: e14972ead3154810a5941e511afc208c

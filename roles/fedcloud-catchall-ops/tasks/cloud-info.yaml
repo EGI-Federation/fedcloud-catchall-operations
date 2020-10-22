@@ -1,0 +1,50 @@
+- name: create dirs
+  block:
+  - file:
+      path: /etc/fedcloud
+      state: directory
+  - file:
+      path: /etc/fedcloud/cloud-info
+      state: directory
+  - file:
+      path: /var/lock/cloud-info
+      state: directory
+  - file:
+      path: /var/log/cloud-info
+      state: directory
+
+- name: cloud-info config directory
+  vars:
+    site: "{{ lookup('file', item) | from_yaml }}"
+  template:
+    src: site-info.yaml.j2
+    dest: /etc/fedcloud/cloud-info/{{ site.gocdb }}.yaml
+  with_fileglob:
+  - "sites/*.yaml"
+
+- name: cloud info env 
+  vars:
+    site: "{{ lookup('file', item) | from_yaml }}"
+  template:
+    src: cloud-info.env.j2 
+    dest: /etc/fedcloud/cloud-info/{{ site.gocdb }}.env
+  with_fileglob:
+  - "sites/*.yaml"
+
+- name: cloud info cron
+  vars:
+    site: "{{ lookup('file', item) | from_yaml }}"
+  cron:
+    name: cloud-info-provider {{ site.gocdb }}
+    weekday: "*"
+    minute: "*/5"
+    hour: "*"
+    user: root
+    job: >
+      flock -n -w 250 /var/lock/cloud-info/{{ site.gocdb }} 
+      docker run -v /etc/fedcloud:/etc/fedcloud:ro
+      --env-file /etc/fedcloud/cloud-info/{{ site.gocdb }}.env
+      {{ cloud_info_image }} >> /var/log/cloud-info/{{ site.gocdb }}.log 2>&1
+    cron_file: "cloud-info-{{ site.gocdb }}"
+  with_fileglob:
+  - "sites/*.yaml"

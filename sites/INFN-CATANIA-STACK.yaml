@@ -1,0 +1,3 @@
+gocdb: INFN-CATANIA-STACK
+endpoint: https://stack-server.ct.infn.it:35357/v3
+vos: {}

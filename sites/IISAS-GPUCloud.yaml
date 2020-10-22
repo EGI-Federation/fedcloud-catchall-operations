@@ -1,0 +1,12 @@
+gocdb: IISAS-GPUCloud
+endpoint: https://keystone3.ui.savba.sk:5000/v3/
+vos:
+  eosc-synergy.eu:
+    auth:
+      project_id: 0f1a9bfa6693460987355a7d25ae90c6
+  acc-comp.egi.eu:
+    auth:
+      project_id: 9c0285764cf043ffa1797f1b5c292c6a
+  covid19.eosc-synergy.eu:
+    auth:
+      project_id: aa3e4c91c075413fbe06c44568ee5c4e

@@ -1,0 +1,6 @@
+gocdb: CYFRONET-CLOUD
+endpoint: https://panel.cloud.cyfronet.pl:5000/v3/
+vos:
+  vo.access.egi.eu:
+    auth:
+      project_id: 7635176e4f9b4cb4b3f4192a5bf901a3
