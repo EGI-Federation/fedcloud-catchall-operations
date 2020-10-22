@@ -7,3 +7,9 @@ vos:
   covid19.eosc-synergy.eu:
     auth:
       project_id: e3716e9fb6a241fd91469a6ee05358a1
+  dteam:
+    auth:
+      project_id: 20d255d3226e47e48d5b5b8c1af2ee49
+  fedcloud.egi.eu:
+    auth:
+      project_id: aa7f62b244c946038c093d0bf05827a1

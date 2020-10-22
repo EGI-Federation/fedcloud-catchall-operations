@@ -4,3 +4,9 @@ vos:
   vo.access.egi.eu:
     auth:
       project_id: e57db5c1e0b24bcbac9904f4ac22dcaa
+  fedcloud.egi.eu:
+    auth:
+      project_id: def49ef0ac58495f90d8aa2463b33b10
+  dteam:
+    auth:
+      project_id: aa893955520a4a98a04453808d6f1232

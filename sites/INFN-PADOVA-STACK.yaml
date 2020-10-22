@@ -4,3 +4,6 @@ vos:
   vo.access.egi.eu:
     auth:
       project_id: 5ddb325ca8c2495abfd4e8f230bcd51a
+  dteam:
+    auth:
+      project_id: 142e67568077410c88587fc309864310

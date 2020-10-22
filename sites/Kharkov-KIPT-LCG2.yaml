@@ -1,3 +1,6 @@
 gocdb: Kharkov-KIPT-LCG2
 endpoint: https://cloud.kipt.kharkov.ua:5000/v3
-vos: {}
+vos:
+  fedcloud.egi.eu:
+    auth:
+      project_id: 5bd225f562da4eb99bcc407a692033c2

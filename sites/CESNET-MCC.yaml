@@ -1,6 +1,15 @@
 gocdb: CESNET-MCC
 endpoint: https://identity.cloud.muni.cz/v3
 vos:
+  dteam:
+    auth:
+      project_id: 0aa5b696969c42988b18beda3f85b885
+  demo.fedcloud.egi.eu:
+    auth:
+      project_id: 10b972eed97940089b234f6257d7db72
+  vo.nextgeoss.eu:
+    auth:
+      project_id: 081396a827c94f3da0c922cf6d8fb7f7
   covid19.eosc-synergy.eu:
     auth:
       project_id: 192e87f713474117a2a22704ac4da1a2
@@ -25,3 +34,6 @@ vos:
   panosc.eu:
     auth:
       project_id: d868dfd63a674d94bbd9d9b7b54443e3
+  training.egi.eu:
+    auth:
+      project_id: eae2aa7f26334104906106bca4b82ae3

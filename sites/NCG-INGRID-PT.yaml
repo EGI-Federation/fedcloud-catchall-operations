@@ -7,3 +7,6 @@ vos:
   eosc-synergy.eu:
     auth:
       project_id: ddf0c468c8af4e0bbb9808bfc0288381
+  training.egi.eu:
+    auth:
+      project_id: e51b8a89b30945adbf52a5d568912e4c
