@@ -1,4 +1,3 @@
-endpoint: https://cloud.recas.ba.infn.it:5000/v3
-protocol: oidc
 gocdb: RECAS-BARI
+endpoint: https://cloud.recas.ba.infn.it:5000/v3
 vos: {}

@@ -1,5 +1,5 @@
-endpoint: https://openstack.bitp.kiev.ua:5000/v3
 gocdb: UA-BITP
+endpoint: https://openstack.bitp.kiev.ua:5000/v3
 vos:
   vo.access.egi.eu:
     auth:

@@ -1,3 +1,9 @@
-endpoint: https://nimbus.ncg.ingrid.pt:5000/v3/
 gocdb: NCG-INGRID-PT
-vos: {}
+endpoint: https://stratus.ncg.ingrid.pt:5000/v3
+vos:
+  covid19.eosc-synergy.eu:
+    auth:
+      project_id: 05e52356addc44e18ef2bd14f2e2f67d
+  eosc-synergy.eu:
+    auth:
+      project_id: ddf0c468c8af4e0bbb9808bfc0288381

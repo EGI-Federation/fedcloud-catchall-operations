@@ -1,5 +1,5 @@
-endpoint: https://api.cloud.cyfronet.pl:5000/v3
 gocdb: CYFRONET-CLOUD
+endpoint: https://panel.cloud.cyfronet.pl:5000/v3/
 vos:
   vo.access.egi.eu:
     auth:

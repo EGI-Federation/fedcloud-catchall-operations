@@ -1,0 +1,3 @@
+gocdb: fedcloud.srce.hr
+endpoint: https://cloud.cro-ngi.hr:5000/v3/
+vos: {}

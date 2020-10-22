@@ -1,5 +1,5 @@
+gocdb: TR-FC1-ULAKBIM
 endpoint: https://fcctrl.ulakbim.gov.tr:5000
-gocdb: TR-FC1-ULAKBIM 
 vos:
   vo.access.egi.eu:
     auth:

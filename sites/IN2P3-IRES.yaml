@@ -1,6 +1,12 @@
-endpoint: https://sbgcloud.in2p3.fr:5000/v3
 gocdb: IN2P3-IRES
+endpoint: https://sbgcloud.in2p3.fr:5000/v3
 vos:
+  vo.emphasisproject.eu:
+    auth:
+      project_id: 3232754379c3469c9e8dbe8f403a8835
   vo.access.egi.eu:
     auth:
-      project_id: 7a91022b9ae74ed9ac1a574972a79499 
+      project_id: 7a91022b9ae74ed9ac1a574972a79499
+  med.semmelweis-univ.hu:
+    auth:
+      project_id: 8bea7dbd202f4cbcafb7e00334f320f2

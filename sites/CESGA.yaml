@@ -1,6 +1,12 @@
+gocdb: CESGA
 endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
-gocdb: CESGA 
 vos:
   vo.access.egi.eu:
     auth:
       project_id: 3a8e9d966e644405bf19b536adf7743d
+  eosc-synergy.eu:
+    auth:
+      project_id: 57bcb0efcba4467fa225add92fdc194c
+  covid19.eosc-synergy.eu:
+    auth:
+      project_id: 972298c557184a2192ebc861f3184da8
