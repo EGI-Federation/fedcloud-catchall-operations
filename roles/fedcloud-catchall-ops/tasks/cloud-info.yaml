@@ -48,5 +48,3 @@
     cron_file: "cloud-info-{{ site.gocdb }}"
   with_fileglob:
   - "sites/*.yaml"
-
-
