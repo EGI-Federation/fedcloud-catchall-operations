@@ -1,5 +1,5 @@
 gocdb: IISAS-FedCloud
-endpoint: https://cloud.ui.savba.sk:5000/v3/
+endpoint: https://nova.ui.savba.sk:5000/v3/
 vos:
   covid19.eosc-synergy.eu:
     auth:
@@ -7,3 +7,30 @@ vos:
   eosc-synergy.eu:
     auth:
       project_id: d09a0c28397f4b41ad4bd62e7d63b51e
+  training.egi.eu:
+    auth:
+      project_id: 32bef1ab628046a3b1e3f65887908d71
+  fedcloud.egi.eu:
+    auth:
+      project_id: 36de196588924f048dda146e9ade8632
+  vo.nextgeoss.eu:
+    auth:
+      project_id: 74c210cafce545569426b4de055b27b7
+  ops:
+    auth:
+      project_id: d3ed40840c5b4ae59f6418ba92abd5cd
+
+### https://goc.egi.eu/portal/index.php?Page_Type=Service&id=12355
+
+gocdb: IISAS-FedCloud
+endpoint: https://cloud.ui.savba.sk:5000/v3/
+vos:
+  ops:
+    auth:
+      project_id: 06f5a36f70684fd7b27518625458b69d
+  eosc-synergy.eu:
+    auth:
+      project_id: 51f736d36ce34b9ebdf196cfcabd24ee
+  covid19.eosc-synergy.eu:
+    auth:
+      project_id: a22bbffb007745b2934bf308b0a4d186
