@@ -7,3 +7,12 @@ vos:
   eosc-synergy.eu:
     auth:
       project_id: ddf0c468c8af4e0bbb9808bfc0288381
+  fedcloud.egi.eu:
+    auth:
+      project_id: bd5a81e1670b48f18af33b05512a9d77
+  opencoast.eosc-hub.eu:
+    auth:
+      project_id: b0cea6bd85844b0693ceda70d9f94a09
+  worsica.vo.incd.pt:
+    auth:
+      project_id: a53ca78c534046e5b13f4537ae698411
