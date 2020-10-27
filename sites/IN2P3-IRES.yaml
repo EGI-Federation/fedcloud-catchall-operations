@@ -10,3 +10,6 @@ vos:
   med.semmelweis-univ.hu:
     auth:
       project_id: 8bea7dbd202f4cbcafb7e00334f320f2
+  fedcloud.egi.eu:
+    auth:
+      project_id: a5eb30bba2c2497b90645fb199e34b39
