@@ -1,3 +1,9 @@
 gocdb: fedcloud.srce.hr
 endpoint: https://cloud.cro-ngi.hr:5000/v3/
-vos: {}
+vos:
+  dteam:
+    auth:
+      project_id: 8fbe7b83bfa7420ea75bbceb761ad079
+  fedcloud.egi.eu:
+    auth:
+      project_id: 662f67f51f4c451987e62b17820a2bc5

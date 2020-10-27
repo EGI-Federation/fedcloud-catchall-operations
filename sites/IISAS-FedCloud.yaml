@@ -1,9 +1,0 @@
-gocdb: IISAS-FedCloud
-endpoint: https://cloud.ui.savba.sk:5000/v3/
-vos:
-  covid19.eosc-synergy.eu:
-    auth:
-      project_id: a87268866a534fe38c49f5ec154d0223
-  eosc-synergy.eu:
-    auth:
-      project_id: d09a0c28397f4b41ad4bd62e7d63b51e

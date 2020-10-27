@@ -1,6 +1,9 @@
 gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
 vos:
+  vo.nextgeoss.eu:
+    auth:
+      project_id: 13c11c4073f4456fac7df84c4eb8f85b
   eosc-synergy.eu:
     auth:
       project_id: 3b9754ad8c6046b4aec43ec21abe7d8c
@@ -10,3 +13,12 @@ vos:
   covid19.eosc-synergy.eu:
     auth:
       project_id: e14972ead3154810a5941e511afc208c
+  training.egi.eu:
+    auth:
+      project_id: f1d0308880134d04964097524eace710
+  demo.fedcloud.egi.eu:
+    auth:
+      project_id: 2a7e2cd4b6dc4e609dd934964c1715c6
+  dteam:
+    auth:
+      project_id: 5eb8959a799240a98f4f303f5fbd80be

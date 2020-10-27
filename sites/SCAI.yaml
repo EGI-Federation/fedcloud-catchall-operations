@@ -1,3 +1,6 @@
 gocdb: SCAI
 endpoint: https://fc.scai.fraunhofer.de:5000/v3
-vos: {}
+vos:
+  fedcloud.egi.eu:
+    auth:
+      project_id: 162ecb7fe3ee450ca436935f87662858
