@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -18,5 +20,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: cloud-info 
+          file: cloud-info/Dockerfile
           push: false 
           tags: egifedcloud/ops-cloud-info:latest
