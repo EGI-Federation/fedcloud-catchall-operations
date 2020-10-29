@@ -22,3 +22,24 @@ vos:
   dteam:
     auth:
       project_id: 5eb8959a799240a98f4f303f5fbd80be
+  o3as.data.kit.edu:
+    auth:
+      project_id: 352db003073549749351fad26cd55074
+  vo.lifewatch.eu:
+    auth:
+      project_id: 3c8d36c4136946238e82d995fd274d1c
+  opencoast.eosc-hub.eu:
+    auth:
+      project_id: 4ebc1727dbed465c8ef72617a9075b4f
+  worsica.eosc.eu:
+    auth:
+      project_id: 7bb9c2694f9040c68cd72cb994f5ce89
+  d4science.org:
+    auth:
+      project_id: 9170e65775964a3ba6b18d83a2ad1968
+  biinsight.eosc-hub.eu:
+    auth:
+      project_id: d602bda767b4490a82b2f62f9347a0f5
+  enmr.eu:
+    auth:
+      project_id: b6b1c395b7da4e8aa1d0895bd695b0ba
