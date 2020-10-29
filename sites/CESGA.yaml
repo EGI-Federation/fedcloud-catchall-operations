@@ -1,27 +1,28 @@
-gocdb: CESGA
 endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
+gocdb: CESGA
 vos:
-  benchmark.terradue.com:
-    auth:
-      project_id: c948a24f5e564668af0e9a106e38a944
-  vo.access.egi.eu:
-    auth:
-      project_id: 3a8e9d966e644405bf19b536adf7743d
-  eosc-synergy.eu:
-    auth:
-      project_id: 57bcb0efcba4467fa225add92fdc194c
-  vo.emso-eric.eu:
-    auth:
-      project_id: 916506ac136741c28e4326975eef0bff
-  covid19.eosc-synergy.eu:
-    auth:
-      project_id: 972298c557184a2192ebc861f3184da8
-  vo.nextgeoss.eu:
-    auth:
-      project_id: b1d2ef2cc2284c57bcde21cf4ab141e3
-  vo.envri-fair.eu:
-    auth:
-      project_id: c1c9c25774fe418599bced1d45862c60
-  vo.notebooks.egi.eu:
-    auth:
-      project_id: fcaf23d103c1485694e7494a59ee5f09
+- auth:
+    project_id: c948a24f5e564668af0e9a106e38a944
+  name: benchmark.terradue.com
+- auth:
+    project_id: 972298c557184a2192ebc861f3184da8
+  name: covid19.eosc-synergy.eu
+- auth:
+    project_id: 57bcb0efcba4467fa225add92fdc194c
+  name: eosc-synergy.eu
+- auth:
+    project_id: 3a8e9d966e644405bf19b536adf7743d
+  name: vo.access.egi.eu
+- auth:
+    project_id: 916506ac136741c28e4326975eef0bff
+  name: vo.emso-eric.eu
+- auth:
+    project_id: c1c9c25774fe418599bced1d45862c60
+  name: vo.envri-fair.eu
+- auth:
+    project_id: b1d2ef2cc2284c57bcde21cf4ab141e3
+  name: vo.nextgeoss.eu
+- auth:
+    project_id: fcaf23d103c1485694e7494a59ee5f09
+  name: vo.notebooks.egi.eu
+

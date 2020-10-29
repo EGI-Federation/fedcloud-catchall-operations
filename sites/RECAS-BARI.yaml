@@ -1,22 +1,22 @@
-gocdb: RECAS-BARI
 endpoint: https://cloud.recas.ba.infn.it:5000/v3
-protocol: oidc
+gocdb: RECAS-BARI
 vos:
-  fedcloud.egi.eu:
-    auth:
-      project_id: 02e47ef981904ceaa30f7c545e563a11
-  vo.nextgeoss.eu:
-    auth:
-      project_id: 8e08188521744ee8869466d299dfb42d
-  datafurn.eosc-hub.eu:
-    auth:
-      project_id: 9532166205f341308ab1c1d4b811976d
-  vo.policycloud.eu:
-    auth:
-      project_id: a5d5df1f012c4070a81f8ce1ac8fe05e
-  kampal.eosc-hub.eu:
-    auth:
-      project_id: a81cd014a37243cb86f6ccdb275193f2
-  vo.emso-eric.eu:
-    auth:
-      project_id: bdfc0b6ca97146088034443609d88aba
+- auth:
+    project_id: 9532166205f341308ab1c1d4b811976d
+  name: datafurn.eosc-hub.eu
+- auth:
+    project_id: 02e47ef981904ceaa30f7c545e563a11
+  name: fedcloud.egi.eu
+- auth:
+    project_id: a81cd014a37243cb86f6ccdb275193f2
+  name: kampal.eosc-hub.eu
+- auth:
+    project_id: bdfc0b6ca97146088034443609d88aba
+  name: vo.emso-eric.eu
+- auth:
+    project_id: 8e08188521744ee8869466d299dfb42d
+  name: vo.nextgeoss.eu
+- auth:
+    project_id: a5d5df1f012c4070a81f8ce1ac8fe05e
+  name: vo.policycloud.eu
+

@@ -1,8 +1,18 @@
+- name: stop cron while we update
+  systemd:
+    name: cron
+    state: stopped
+
 - name: Install docker
   include: docker.yaml
 
 - name: Handle secrets
   include: vo-config.yaml
 
-- name: Configura cloud-info 
+- name: Configure cloud-info
   include: cloud-info.yaml
+
+- name: stop cron while we update
+  systemd:
+    name: cron
+    state: started

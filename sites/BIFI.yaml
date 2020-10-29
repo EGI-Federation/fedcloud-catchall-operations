@@ -1,12 +1,13 @@
-gocdb: BIFI
 endpoint: https://colossus.cesar.unizar.es:5000/v3
+gocdb: BIFI
 vos:
-  gosafe.eng.it:
-    auth:
-      project_id: 34671c4356fd4c66835f30650c20612e
-  covid19.eosc-synergy.eu:
-    auth:
-      project_id: 36b6d10a0c194fa8991e7e8d15297478
-  eosc-synergy.eu:
-    auth:
-      project_id: fdfa9b81582447729f16de6cf61b16e4
+- auth:
+    project_id: 36b6d10a0c194fa8991e7e8d15297478
+  name: covid19.eosc-synergy.eu
+- auth:
+    project_id: fdfa9b81582447729f16de6cf61b16e4
+  name: eosc-synergy.eu
+- auth:
+    project_id: 34671c4356fd4c66835f30650c20612e
+  name: gosafe.eng.it
+

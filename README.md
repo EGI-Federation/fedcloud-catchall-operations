@@ -25,12 +25,12 @@ endpoint: <keystone endpoint of the site>
 # optionally specify a protocol for the Keystone V3 federation API
 protocol: openid | oidc (default is openid)
 vos:
-   <vo name>:
-     auth:
-       project_id: <project id supporting the VO vo name at the site>
-     # any other optional configuration for cloud-info-provider, e.g:
-     defaultNetwork: private | public | private_only | public_only
-     publicNetwork: <name of the public network>
+- name: <vo name>
+  auth:
+    project_id: <project id supporting the VO vo name at the site>
+  # any other optional configuration for cloud-info-provider, e.g:
+  defaultNetwork: private | public | private_only | public_only
+  publicNetwork: <name of the public network>
 ```
 
 
