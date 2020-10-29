@@ -9,5 +9,5 @@ fi
 
 docker push egifedcloud/ops-cloud-info:latest
 if [ -n "$TRAVIS_TAG" ]; then
-	docker push egifedcloud/ops-cloud-info:$TRAVIS_TAG
+	docker push "egifedcloud/ops-cloud-info:$TRAVIS_TAG"
 fi
