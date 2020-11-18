@@ -4,8 +4,8 @@ site:
 compute:
   shares:
 {% for vo in site.vos %}
-{% if vo in vos and vos[vo] and "auth" in vos[vo] %}
-    {{ vo }}:
-      {{ site.vos[vo] | default({}) | to_nice_yaml(indent=2) | indent(6) }} 
+{% if vo.name in vos and vos[vo.name] and "auth" in vos[vo.name] %}
+    {{ vo.name }}:
+      {{ vo | default({}) | to_nice_yaml(indent=2) | indent(6) }}
 {% endif %}
 {% endfor %}
