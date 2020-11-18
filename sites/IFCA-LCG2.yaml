@@ -1,45 +1,45 @@
-gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
+gocdb: IFCA-LCG2
 vos:
-  vo.nextgeoss.eu:
-    auth:
-      project_id: 13c11c4073f4456fac7df84c4eb8f85b
-  eosc-synergy.eu:
-    auth:
-      project_id: 3b9754ad8c6046b4aec43ec21abe7d8c
-  vo.access.egi.eu:
-    auth:
-      project_id: 999f045cb1ff4684a15ebb338af69460
-  covid19.eosc-synergy.eu:
-    auth:
-      project_id: e14972ead3154810a5941e511afc208c
-  training.egi.eu:
-    auth:
-      project_id: f1d0308880134d04964097524eace710
-  demo.fedcloud.egi.eu:
-    auth:
-      project_id: 2a7e2cd4b6dc4e609dd934964c1715c6
-  dteam:
-    auth:
-      project_id: 5eb8959a799240a98f4f303f5fbd80be
-  o3as.data.kit.edu:
-    auth:
-      project_id: 352db003073549749351fad26cd55074
-  vo.lifewatch.eu:
-    auth:
-      project_id: 3c8d36c4136946238e82d995fd274d1c
-  opencoast.eosc-hub.eu:
-    auth:
-      project_id: 4ebc1727dbed465c8ef72617a9075b4f
-  worsica.eosc.eu:
-    auth:
-      project_id: 7bb9c2694f9040c68cd72cb994f5ce89
-  d4science.org:
-    auth:
-      project_id: 9170e65775964a3ba6b18d83a2ad1968
-  biinsight.eosc-hub.eu:
-    auth:
-      project_id: d602bda767b4490a82b2f62f9347a0f5
-  enmr.eu:
-    auth:
-      project_id: b6b1c395b7da4e8aa1d0895bd695b0ba
+- auth:
+    project_id: d602bda767b4490a82b2f62f9347a0f5
+  name: biinsight.eosc-hub.eu
+- auth:
+    project_id: e14972ead3154810a5941e511afc208c
+  name: covid19.eosc-synergy.eu
+- auth:
+    project_id: 9170e65775964a3ba6b18d83a2ad1968
+  name: d4science.org
+- auth:
+    project_id: 2a7e2cd4b6dc4e609dd934964c1715c6
+  name: demo.fedcloud.egi.eu
+- auth:
+    project_id: 5eb8959a799240a98f4f303f5fbd80be
+  name: dteam
+- auth:
+    project_id: b6b1c395b7da4e8aa1d0895bd695b0ba
+  name: enmr.eu
+- auth:
+    project_id: 3b9754ad8c6046b4aec43ec21abe7d8c
+  name: eosc-synergy.eu
+- auth:
+    project_id: 352db003073549749351fad26cd55074
+  name: o3as.data.kit.edu
+- auth:
+    project_id: 4ebc1727dbed465c8ef72617a9075b4f
+  name: opencoast.eosc-hub.eu
+- auth:
+    project_id: f1d0308880134d04964097524eace710
+  name: training.egi.eu
+- auth:
+    project_id: 999f045cb1ff4684a15ebb338af69460
+  name: vo.access.egi.eu
+- auth:
+    project_id: 3c8d36c4136946238e82d995fd274d1c
+  name: vo.lifewatch.eu
+- auth:
+    project_id: 13c11c4073f4456fac7df84c4eb8f85b
+  name: vo.nextgeoss.eu
+- auth:
+    project_id: 7bb9c2694f9040c68cd72cb994f5ce89
+  name: worsica.eosc.eu
