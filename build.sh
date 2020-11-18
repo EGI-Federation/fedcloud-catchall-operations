@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+set -x
+
 EXTRA_TAG=""
 if [ -n "$TRAVIS_TAG" ]; then
     EXTRA_TAG="-t egifedcloud/ops-cloud-info:$TRAVIS_TAG"
