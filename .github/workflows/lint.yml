@@ -1,18 +1,11 @@
 ---
-name: Super-Linter
+name: Lint
 
-# Run this workflow every time a new commit pushed to your repository
-on:
-  pull_request:
-  push:
+on: [pull_request]
 
 jobs:
-  # Set the job key. The key is displayed as the job name
-  # when a job name is not provided
   super-lint:
-    # Name the Job
-    name: Lint code base
-    # Set the type of machine to run on
+    name: Lint with Supper-Linter
     runs-on: ubuntu-latest
 
     steps:
