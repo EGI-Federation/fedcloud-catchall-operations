@@ -3,7 +3,7 @@ name: Build containers
 
 on:
   push:
-  pull-request:
+  pull_request:
 
 jobs:
   builder:
