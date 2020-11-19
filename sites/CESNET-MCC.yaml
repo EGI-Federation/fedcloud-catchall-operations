@@ -1,39 +1,39 @@
-gocdb: CESNET-MCC
 endpoint: https://identity.cloud.muni.cz/v3
+gocdb: CESNET-MCC
 vos:
-  dteam:
-    auth:
-      project_id: 0aa5b696969c42988b18beda3f85b885
-  demo.fedcloud.egi.eu:
-    auth:
-      project_id: 10b972eed97940089b234f6257d7db72
-  vo.nextgeoss.eu:
-    auth:
-      project_id: 081396a827c94f3da0c922cf6d8fb7f7
-  covid19.eosc-synergy.eu:
-    auth:
-      project_id: 192e87f713474117a2a22704ac4da1a2
-  vo.geoss.eu:
-    auth:
-      project_id: 24869cfe0e094f59a3110429e068eef2
-  vo.max-centre.eu:
-    auth:
-      project_id: 50fc58ed66a14106b40b9c6d7d9af86c
-  vo.eurogeoss.eu:
-    auth:
-      project_id: 5bc62d60bbbc49d881bc0a948da710d6
-  vo.emphasisproject.eu:
-    auth:
-      project_id: b953842bf4204dc98054f6c3ae581cb5
-  peachnote.com:
-    auth:
-      project_id: bf5fbc4e22164e4d8a464e9c97706830
-  eosc-synergy.eu:
-    auth:
-      project_id: d85ca93c937a4a97adf134ec2593296d
-  panosc.eu:
-    auth:
-      project_id: d868dfd63a674d94bbd9d9b7b54443e3
-  training.egi.eu:
-    auth:
-      project_id: eae2aa7f26334104906106bca4b82ae3
+- auth:
+    project_id: 192e87f713474117a2a22704ac4da1a2
+  name: covid19.eosc-synergy.eu
+- auth:
+    project_id: 10b972eed97940089b234f6257d7db72
+  name: demo.fedcloud.egi.eu
+- auth:
+    project_id: 0aa5b696969c42988b18beda3f85b885
+  name: dteam
+- auth:
+    project_id: d85ca93c937a4a97adf134ec2593296d
+  name: eosc-synergy.eu
+- auth:
+    project_id: d868dfd63a674d94bbd9d9b7b54443e3
+  name: panosc.eu
+- auth:
+    project_id: bf5fbc4e22164e4d8a464e9c97706830
+  name: peachnote.com
+- auth:
+    project_id: eae2aa7f26334104906106bca4b82ae3
+  name: training.egi.eu
+- auth:
+    project_id: b953842bf4204dc98054f6c3ae581cb5
+  name: vo.emphasisproject.eu
+- auth:
+    project_id: 5bc62d60bbbc49d881bc0a948da710d6
+  name: vo.eurogeoss.eu
+- auth:
+    project_id: 24869cfe0e094f59a3110429e068eef2
+  name: vo.geoss.eu
+- auth:
+    project_id: 50fc58ed66a14106b40b9c6d7d9af86c
+  name: vo.max-centre.eu
+- auth:
+    project_id: 081396a827c94f3da0c922cf6d8fb7f7
+  name: vo.nextgeoss.eu

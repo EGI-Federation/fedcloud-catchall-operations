@@ -1,12 +1,12 @@
-gocdb: UA-BITP
 endpoint: https://openstack.bitp.kiev.ua:5000/v3
+gocdb: UA-BITP
 vos:
-  vo.access.egi.eu:
-    auth:
-      project_id: 8d48556b378549a3a3f02ce933096c1f
-  dteam:
-    auth:
-      project_id: 1305de6b15384e0c8d77251ab6f703af
-  fedcloud.egi.eu:
-    auth:
-      project_id: 8d48556b378549a3a3f02ce933096c1f
+- auth:
+    project_id: 1305de6b15384e0c8d77251ab6f703af
+  name: dteam
+- auth:
+    project_id: 8d48556b378549a3a3f02ce933096c1f
+  name: fedcloud.egi.eu
+- auth:
+    project_id: 8d48556b378549a3a3f02ce933096c1f
+  name: vo.access.egi.eu

@@ -1,12 +1,12 @@
+endpoint: https://fcctrl.ulakbim.gov.tr:5000/v3
 gocdb: TR-FC1-ULAKBIM
-endpoint: https://fcctrl.ulakbim.gov.tr:5000
 vos:
-  vo.access.egi.eu:
-    auth:
-      project_id: 062cfb2d806a49a4a82055cb1ac4e6a7
-  fedcloud.egi.eu:
-    auth:
-      project_id: db1fc06c331d437882c37412d5f9ab87
-  dteam:
-    auth:
-      project_id: f8ebc54e5f3e40adb1bcb37abbe60637
+- auth:
+    project_id: f8ebc54e5f3e40adb1bcb37abbe60637
+  name: dteam
+- auth:
+    project_id: db1fc06c331d437882c37412d5f9ab87
+  name: fedcloud.egi.eu
+- auth:
+    project_id: 062cfb2d806a49a4a82055cb1ac4e6a7
+  name: vo.access.egi.eu

@@ -1,12 +1,12 @@
-gocdb: CYFRONET-CLOUD
 endpoint: https://panel.cloud.cyfronet.pl:5000/v3/
+gocdb: CYFRONET-CLOUD
 vos:
-  vo.access.egi.eu:
-    auth:
-      project_id: 7635176e4f9b4cb4b3f4192a5bf901a3
-  fedcloud.egi.eu:
-    auth:
-      project_id: 1295728b1ce747fb96c043c6e254ad6f
-  dteam:
-    auth:
-      project_id: 9b40bb40431c4f4180c280b6675f9bb9
+- auth:
+    project_id: 9b40bb40431c4f4180c280b6675f9bb9
+  name: dteam
+- auth:
+    project_id: 1295728b1ce747fb96c043c6e254ad6f
+  name: fedcloud.egi.eu
+- auth:
+    project_id: 7635176e4f9b4cb4b3f4192a5bf901a3
+  name: vo.access.egi.eu
