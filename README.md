@@ -20,19 +20,19 @@ Sites are configred following the YAML files of the `sites` directory.
 There is a file per site that looks like this:
 
 ```yaml
-gocdb_site: <name in gocdb of the site>
+gocdb: <name in gocdb of the site>
 endpoint: <keystone endpoint of the site>
 # optionally specify a protocol for the Keystone V3 federation API
 protocol: openid | oidc (default is openid)
 vos:
-   <vo name>:
-     auth:
-       project_id: <project id supporting the VO vo name at the site>
-     # any other optional configuration for cloud-info-provider, e.g:
-     defaultNetwork: private | public | private_only | public_only
-     publicNetwork: <name of the public network>
+# List of VOs defined as follows
+- name: <vo name>
+  auth:
+    project_id: <project id supporting the VO vo name at the site>
+  # any other optional configuration for cloud-info-provider, e.g:
+  defaultNetwork: private | public | private_only | public_only
+  publicNetwork: <name of the public network>
 ```
-
 
 ## Deployment
 
