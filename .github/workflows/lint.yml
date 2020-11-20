@@ -1,7 +1,7 @@
 ---
 name: Lint
 
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
   super-lint:
@@ -20,8 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Check validity of yaml files
-      - naeme: Check YAML schema
+      - name: Check YAML schema
         run: |
           curl -L https://github.com/neilpa/yajsv/releases/download/v1.4.0/yajsv.linux.amd64 > yajsv
           chmod +x yajsv
-
