@@ -1,7 +1,10 @@
 FROM python:3
 
+
+ARG CLOUD_INFO_VERSION=0.12.1
+
 # hadolint ignore=DL3013
-RUN pip install git+https://github.com/EGI-Foundation/cloud-info-provider.git@0.12.1 \
+RUN pip install "git+https://github.com/EGI-Foundation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
                 python-glanceclient python-novaclient python-keystoneclient keystoneauth1
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
