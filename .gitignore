@@ -1,2 +1,4 @@
 # file with secrets
 secrets.yaml
+# the inventory
+inventory.yaml
