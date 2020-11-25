@@ -1,0 +1,8 @@
+all:
+  hosts:
+    FLOATING_IP:
+  vars:
+    ansible_user: egi
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no
+      -o UserKnownHostsFile=/dev/null'
+

@@ -1,0 +1,15 @@
+#cloud-config
+
+users:
+- name: egi
+  gecos: EGI
+  primary_group: egi
+  groups: users
+  shell: /bin/bash
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  ssh_import_id:
+  - gh:enolfc
+  - gh: gwarf
+  ssh_authorized_keys:
+  # This is the cloud-info-provider user ssh key
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCq6uentQ9Cunqy0IXveKddOZVDRUYuLLiDVGBiu+VC5R3EIJLwT0H66ZQFG44tDLkkWJ1nSKbl+U9FwobD2QKmmRhbaHhnCLZxVAH2EuXph6DL/Fp3hzFt1B+6S+G2qUtGPn0zl+jyYW7kU3T+40RfjI8sGnz1Jg/14iI+DRDbB4XOlB/EO47dBT80ub0PUl8BL3WPZXI8pjPqDoVgCjfzkv0p0R3x2gp4d26Af5itOflJlfl6CQ06lw8lACRnTztB8xvlvxtQhTbqgTbVGe11BMW+R81n8X9mRmMWAKQ4ob+E6xRvuotFIAqzXCNvkhATBWbsRJllnmWwGOlBu03PVchkklIqG1CTxOAxfiEj9V+evpZ18rwEaR/Doa9e1MU+OGlLtflK73taeHpbcpFAlcjsqHMugCbx0wNErbKL4XdQWE0Vwfbfx4EpYfU17/Hc+9ZkAKevoHyPdpAvkF7GGFMnOUSr3HEvVeq6j0HmKbfc9qghivDecHYHYVlDvZM=

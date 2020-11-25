@@ -1,0 +1,114 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    outputs:
+      fip: ${{ steps.fip.outputs.stdout }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup python
+      uses: actions/setup-python@v2
+    - name: Install python packages
+      run: |
+        pip install egicli
+    - name: Get OS_TOKEN
+      env:
+        CHECKIN_CLIENT_ID: ${{ secrets.CHECKIN_CLIENT_ID }}
+        CHECKIN_CLIENT_SECRET: ${{ secrets.CHECKIN_CLIENT_SECRET }}
+        CHECKIN_REFRESH_TOKEN: ${{ secrets.CHECKIN_REFRESH_TOKEN }}
+      run: |
+        # this should be confiurable
+        EGI_SITE=IFCA-LCG2
+        PROJECT_ID=2a7e2cd4b6dc4e609dd934964c1715c6
+        eval "$(egicli endpoint token --site $EGI_SITE --project-id $PROJECT_ID)"
+        echo "::add-mask::$OS_TOKEN"
+        sed -i -e "s/secret/$OS_TOKEN/" terraform/clouds.yaml
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+    - name: Terraform Format
+      id: fmt
+      run: |
+        cd terraform
+        terraform fmt -check
+    - name: Terraform init
+      id: init
+      run: |
+        cd terraform
+        terraform init
+    - name: terraform plan
+      id: plan
+      if: github.event_name == 'pull_request'
+      run: |
+        cd terraform
+        terraform plan -no-color
+      continue-on-error: true
+    - name: Update Pull Request
+      uses: actions/github-script@0.9.0
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+          <details><summary>Show Plan</summary>
+          \`\`\`${process.env.PLAN}\`\`\`
+          </details>
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      run: |
+        cd terraform
+        terraform apply -auto-approve
+    - name: Floating IP
+      id: fip
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      run: |
+        cd terraform
+        terraform output -no-color floating_ip
+
+  ansible:
+    name: 'Ansible'
+    runs-on: ubuntu-latest
+    needs: [terraform]
+    if: github.event_name == 'pull_request'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup python
+      uses: actions/setup-python@v2
+    - name: Install python packages
+      run: pip install ansible
+    - name: Run playbook
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        FIP: ${{ needs.terraform.outputs.fip }}
+      run: |
+        FIP=$(echo "$FIP" | tr -d '\n' | tr -d ' ')
+        sed -i -e "s/FLOATING_IP/$FIP/" inventory.yaml
+        cat inventory.yaml
+        mkdir -p ~/.ssh
+        echo -e "${SSH_KEY//_/\\n}" > ~/.ssh/id_rsa
+        chmod og-rwx ~/.ssh/id_rsa
+        ansible-playbook -i inventory.yaml playbook.yaml

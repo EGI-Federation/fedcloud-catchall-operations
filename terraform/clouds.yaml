@@ -1,0 +1,16 @@
+backend_token: &bt "secret"
+deploy_token: &dt "secret"
+
+clouds:
+  backend:
+    auth_type: token
+    auth:
+      auth_url: https://api.cloud.ifca.es:5000/v3/
+      token: *bt
+      project_id: 2a7e2cd4b6dc4e609dd934964c1715c6
+  deploy:
+    auth_type: token
+    auth:
+      auth_url: https://api.cloud.ifca.es:5000/v3/
+      token: *dt
+      project_id: 2a7e2cd4b6dc4e609dd934964c1715c6
