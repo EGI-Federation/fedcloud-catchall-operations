@@ -1,8 +1,0 @@
-- name: Install docker
-  include: docker.yaml
-
-- name: Handle secrets
-  include: vo-config.yaml
-
-- name: Configura cloud-info 
-  include: cloud-info.yaml

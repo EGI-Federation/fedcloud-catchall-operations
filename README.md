@@ -1,23 +1,13 @@
 # fedcloud-catchall-operations
 
 Operation of fedcloud integration components for selected providers.
-This is a set of docker containers and an ansible role to operate the
-federation components of the EGI Cloud Compute service.
 
-## Implementation
+## Site Configuration
 
-This repo consists of an ansible playbook that creates:
-- a configuration directory `/etc/fedcloud/vos/<vo>` for every VO
-  that will contain credentials to authenticate with that VO
-- a cloud-info-provider configuration per site that takes
-  credential info from `/etc/fedcloud/vos/<vo>` and sends information
-  to the AMS queue
-- a cron job per site that will execute the cloud-info-provider for every
-  vo supported by the site and push the information to the AMS in order
-  to be consumed by clients.
-
-Sites are configred following the YAML files of the `sites` directory.
-There is a file per site that looks like this:
+This repo consists of the main configuration for the fedcloud
+catchall operations. For every endpoint, a file in the `sites`
+directory should describe its configuration with a format as
+follows:
 
 ```yaml
 gocdb: <name in gocdb of the site>
@@ -34,7 +24,16 @@ vos:
   publicNetwork: <name of the public network>
 ```
 
+## Docker containers
+
+Componets are run as docker containers, which if not available
+upstream, are generated in this repo.
+
 ## Deployment
+
+Deployment is managed on a separate private repository that includes
+several secrets. Deployment is done with ansible using a [dedicated
+role](https://github.com/EGI-Foundation/ansible-role-fedcloud-ops) with:
 
 ```sh
 ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml
@@ -47,22 +46,3 @@ where:
   a valid token for the AMS
 - `playbook.yaml` is an ansible playbook that just uses the `fedcloud-catchall-ops`
   role to configure the host
-
-### Configuration
-
-The role expects the following variables to be defined:
-
-- `vos` a map that contains entry for each VO with the Check-in credentials:
-  ```yaml
-  <vo name>:
-    auth:
-      client_id: <checkin client id>
-      client_secret: <checkin client secret>
-      refresh_token: <checkin refresh token>
-  ```
-
-- `ams_project`: name of the AMS project to use (default `egi_cloud_info`)
-- `ams_host`: name of the AMS host (default `msg.argo.grnet.gr`)
-- `ams_token`: secret to use to connect to AMS
-- `cloud_info_image`: docker image for the cloud-info-provider
-  (default `egifedcloud/ops-cloud-info:latest`)
