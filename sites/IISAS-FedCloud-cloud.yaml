@@ -10,3 +10,10 @@ vos:
 - auth:
     project_id: 06f5a36f70684fd7b27518625458b69d
   name: ops
+- auth:
+    project_id: a3684e7440aa42f287cf5e9e85ea4cae
+  name: mswss.ui.savba.sk
+- auth:
+    project_id: 071a2c4b52494bccbc3606d59d0e6951
+  name: mteam.data.kit.edu
+  
