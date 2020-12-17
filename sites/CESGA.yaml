@@ -25,3 +25,31 @@ vos:
 - auth:
     project_id: fcaf23d103c1485694e7494a59ee5f09
   name: vo.notebooks.egi.eu
+- auth:
+    project_id: 707711a8c2154caab35fa9ccdf38434a
+  name: ops
+- auth:
+    project_id: 835c2dd1be6f4e319dfce60b34c1b1c3
+  name: blazarmonitoring.asi.it
+- auth:
+    project_id: 69522b33d33a4c53a471eb269e069d5b
+  name: d4science.org
+- auth:
+    project_id: 7f23f4323ff54359964d3afdd1f2a8c7
+  name: enmr.eu
+- auth:
+    project_id: 4a22f140a5fb4678aa1599fbf0b44b2f
+  name: o3as.data.kit.edu
+- auth:
+    project_id: ed8399d460a44bde9c69484ccc6a53b6
+  name: vo.stars4all.eu
+- auth:
+    project_id: 11b8dbe34f9f4379bf2339121a1429e0
+  name: fusion
+- auth:
+    project_id: 50a0ce2d050048c68bc3094b6682d837
+  name: lagoproject.net
+- auth:
+    project_id: a91154f2803b4414a4f34039539833fa
+  name: mswss.ui.savba.sk
+
