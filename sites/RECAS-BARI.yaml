@@ -1,5 +1,6 @@
 endpoint: https://cloud.recas.ba.infn.it:5000/v3
 gocdb: RECAS-BARI
+protocol: oidc
 vos:
 - auth:
     project_id: 9532166205f341308ab1c1d4b811976d
