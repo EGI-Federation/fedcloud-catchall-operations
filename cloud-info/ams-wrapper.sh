@@ -12,10 +12,11 @@ if test "x$AMS_TOKEN_FILE" != "x"; then
     AMS_TOKEN=$(cat "$AMS_TOKEN_FILE")
 fi
 
-AMS_TOPIC="SITE_${SITE_NAME}_ENDPOINT_${GOCDB_ID}"
+SITE_TOPIC=$(echo "$SITE_NAME" | tr "." "-")
+AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
 
 # exit if TOPIC is not available.
-curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC\?key\=$AMS_TOKEN" > /dev/null 2>&1 \
+curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_TOKEN" > /dev/null 2>&1 \
     || (echo "Topic $AMS_TOPIC is not avaiable, aborting!"; false)
 
 
