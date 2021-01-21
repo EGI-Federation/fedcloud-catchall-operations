@@ -52,4 +52,6 @@ vos:
 - auth:
     project_id: a91154f2803b4414a4f34039539833fa
   name: mswss.ui.savba.sk
-
+- auth:
+    project_id: f5575c54231747109d6b2466334085bb
+  name: vo.clarin.eu
