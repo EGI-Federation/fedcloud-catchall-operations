@@ -61,7 +61,9 @@ jobs:
         sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
         sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
         sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
-        sed -i -e "s#%ANSIBLE_SECRETS%#$(echo $ANSIBLE_SECRETS | base64)#" cloud-init.yaml
+        ANSIBLE_ENCODED_SECRETS="$(echo $ANSIBLE_SECRETS | base64)"
+        echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
+        sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
     - name: terraform plan
       id: plan
       if: github.event_name == 'pull_request'

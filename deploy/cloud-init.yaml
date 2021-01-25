@@ -40,7 +40,8 @@ write_files:
             -H "Accept: application/vnd.github.v3+raw" \
             "https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-deployment/tarball/$COMMIT_SHA" | \
             tar xz --strip=1
-    echo "%ANSIBLE_SECRETS%" | base64 -d > ./deploy/secrets.yaml
-    ./deploy/deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SLACK_WEBHOOK_URL
+    cd deploy
+    echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
+    ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SLACK_WEBHOOK_URL
   path: /var/lib/cloud/scripts/per-boot/deploy.sh
   permissions: '0755'
