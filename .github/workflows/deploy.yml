@@ -1,0 +1,107 @@
+---
+name: 'Deploy'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    outputs:
+      fip: ${{ steps.fip.outputs.stdout }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup python
+      uses: actions/setup-python@v2
+    - name: Install python packages
+      run: |
+        pip install egicli pyyaml
+    - name: Get OS_TOKEN
+      env:
+        CHECKIN_CLIENT_ID: ${{ secrets.CHECKIN_CLIENT_ID }}
+        CHECKIN_CLIENT_SECRET: ${{ secrets.CHECKIN_CLIENT_SECRET }}
+        CHECKIN_REFRESH_TOKEN: ${{ secrets.CHECKIN_REFRESH_TOKEN }}
+      run: |
+        cd deploy
+        EGI_SITE=$(python -c  "import yaml; print(yaml.safe_load(open('clouds.yaml').read())['clouds']['backend']['site'])")
+        echo "EGI_SITE=$EGI_SITE" >> $GITHUB_ENV
+        PROJECT_ID=$(python -c  "import yaml; print(yaml.safe_load(open('clouds.yaml').read())['clouds']['backend']['auth']['project_id'])")
+        eval "$(egicli endpoint token --site $EGI_SITE --project-id $PROJECT_ID)"
+        echo "::add-mask::$OS_TOKEN"
+        sed -i -e "s/secret/$OS_TOKEN/" clouds.yaml
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+    - name: Terraform Format
+      id: fmt
+      run: |
+        cd deploy
+        terraform fmt -check
+    - name: Terraform init
+      id: init
+      run: |
+        cd deploy
+        terraform init
+    - name: Generate token for gettint git repo at VM
+      uses: tibdex/github-app-token@v1
+      id: generate-token
+      with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.APP_PRIVATE_KEY }}
+    - name: Adjust cloud-init file
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
+      run: |
+        cd deploy
+        sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
+        sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
+        sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
+        ANSIBLE_ENCODED_SECRETS="$(echo $ANSIBLE_SECRETS | base64 -w 0)"
+        echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
+        sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
+    - name: terraform plan
+      id: plan
+      if: github.event_name == 'pull_request'
+      run: |
+        cd deploy
+        terraform plan -no-color -var-file="$EGI_SITE.tfvars"
+      continue-on-error: true
+    - name: Update Pull Request
+      uses: actions/github-script@v3.1
+      if: github.event_name == 'pull_request'
+      env:
+        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+          <details><summary>Show Plan</summary>
+
+          \`\`\`
+          ${process.env.PLAN}
+          \`\`\`
+
+          </details>
+
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: |
+        cd deploy
+        terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"

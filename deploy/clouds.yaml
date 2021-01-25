@@ -1,0 +1,19 @@
+---
+backend_token: &bt "secret"
+deploy_token: &dt "secret"
+
+clouds:
+  backend:
+    site: CESNET-MCC
+    auth_type: token
+    auth:
+      auth_url: https://identity.cloud.muni.cz/v3
+      token: *bt
+      project_id: 10b972eed97940089b234f6257d7db72
+  deploy:
+    site: CESNET-MCC
+    auth_type: token
+    auth:
+      auth_url: https://identity.cloud.muni.cz/v3
+      token: *dt
+      project_id: 10b972eed97940089b234f6257d7db72
