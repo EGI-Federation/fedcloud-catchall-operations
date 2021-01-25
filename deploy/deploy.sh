@@ -2,6 +2,8 @@
 # Configure current host with ansible
 # Expects as arguments the OAUTH_TOKEN, the COMMIT_SHA and the SLACK_WEBHOOK_URL
 
+set -e
+
 OAUTH_TOKEN="$1"
 COMMIT_SHA="$2"
 SLACK_WEBHOOK_URL="$3"
