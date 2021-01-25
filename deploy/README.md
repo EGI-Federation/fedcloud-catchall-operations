@@ -8,7 +8,6 @@ the infrastructure
 Deployment is performed in 2 phases:
 
 1. Terraforming the VM where the cloud-info-provider is run
-
 1. Configuring the VM with ansible to run the cloud-info-provider
 
 Everything is managed automatically via GitHub actions, on pull-requests
