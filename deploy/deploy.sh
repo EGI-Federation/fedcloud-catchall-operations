@@ -25,7 +25,7 @@ else
    header="Failed deployment :boom:"
 fi
 
-GITHUB_COMMIT_URL="https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-deployment/commits/$COMMIT_SHA/pulls"
+GITHUB_COMMIT_URL="https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-operations/commits/$COMMIT_SHA/pulls"
 
 # Find out PR we need to update
 ISSUE_NUMBER=$(curl \
@@ -33,7 +33,7 @@ ISSUE_NUMBER=$(curl \
                  -H "Accept: application/vnd.github.groot-preview+json" \
                  "$GITHUB_COMMIT_URL" | jq .[0].number)
 
-GITHUB_ISSUE_URL="https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-deployment/issues/$ISSUE_NUMBER/comments"
+GITHUB_ISSUE_URL="https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-operations/issues/$ISSUE_NUMBER/comments"
 
 {
   echo "### Ansible deployment: \`$status_summary\`"
@@ -73,7 +73,7 @@ cat > slack_body.json << EOF
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "fedcloud-catchall-deployment was completed for <$comment_url| PR \`#$ISSUE_NUMBER\`> "
+            "text": "fedcloud-catchall-operations deployment was completed for <$comment_url| PR \`#$ISSUE_NUMBER\`> "
           }
         }
       ]
