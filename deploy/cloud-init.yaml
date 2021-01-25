@@ -30,7 +30,7 @@ write_files:
     mkdir -p /var/tmp/egi
     cd /var/tmp/egi || exit
 
-    # Valid GitHub token to access the deployment repo
+    # Valid GitHub token to access the repo
     OAUTH_TOKEN="%TOKEN%"
     SLACK_WEBHOOK_URL="%SLACK_WEBHOOK_URL%"
     COMMIT_SHA="%REF%"
@@ -40,7 +40,7 @@ write_files:
     # at the end
     curl -L -H "Authorization: token $OAUTH_TOKEN" \
             -H "Accept: application/vnd.github.v3+raw" \
-            "https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-deployment/tarball/$COMMIT_SHA" | \
+            "https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
             tar xz --strip=1 || true
     cd deploy
     echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
