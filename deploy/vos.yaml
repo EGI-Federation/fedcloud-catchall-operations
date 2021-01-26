@@ -51,6 +51,8 @@ vos:
   mathematical-software:
   mswss.ui.savba.sk:
     auth: "{{ fedcloud_sa }}"
+  mteam.data.kit.edu:
+    auth: "{{ fedcloud_sa }}"
   o3as.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
   ops:
