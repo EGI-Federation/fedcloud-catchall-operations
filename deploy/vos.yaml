@@ -61,6 +61,8 @@ vos:
     auth: "{{ robot_sa }}"
   peachnote.com:
     auth: "{{ fedcloud_sa }}"
+  saps-vo.i3m.upv.es:
+    auth: "{{ fedcloud_sa }}"
   training.egi.eu:
     auth: "{{ fedcloud_sa }}"
   umsa.cerit-sc.cz:
