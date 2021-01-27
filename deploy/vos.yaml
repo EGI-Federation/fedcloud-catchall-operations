@@ -18,6 +18,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   covid19.eosc-synergy.eu:
     auth: "{{ fedcloud_sa }}"
+  cryoem.instruct-eric.eu:
+    auth: "{{ fedcloud_sa }}"
   d4science.org:
     auth: "{{ fedcloud_sa }}"
   datafurn.eosc-hub.eu:
