@@ -30,6 +30,8 @@ vos:
   eli-laser.eu:
   enmr.eu:
     auth: "{{ robot_sa }}"
+  EOServices-vo.indra.es:
+    auth: "{{ fedcloud_sa }}"
   eosc-synergy.eu:
     auth: "{{ fedcloud_sa }}"
   extras-fp7.eu:
