@@ -63,6 +63,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   training.egi.eu:
     auth: "{{ fedcloud_sa }}"
+  umsa.cerit-sc.cz:
+    auth: "{{ fedcloud_sa }}"
   verce.eu:
   vo.access.egi.eu:
     auth: "{{ fedcloud_sa }}"
