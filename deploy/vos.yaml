@@ -97,6 +97,7 @@ vos:
   vo.iiasa.ac.at:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
   vo.nbis.se:
   vo.nextgeoss.eu:
