@@ -10,3 +10,9 @@ vos:
 - auth:
     project_id: 34671c4356fd4c66835f30650c20612e
   name: gosafe.eng.it
+- auth:
+    project_id: 621b1977bb384beab1519713c7e695f0
+  name: o3as.data.kit.edu
+- auth:
+    project_id: worsica.vo.incd.pt
+  name: fce23a2c4eca447a9d5b9c2bdab55e26
