@@ -10,6 +10,7 @@ vos:
   bioexcel:
   bioisi:
   biomed:
+    auth: "{{ robot_sa }}"
   blazarmonitoring.asi.it:
     auth: "{{ robot_sa }}"
   chipster.csc.fi:
@@ -17,6 +18,8 @@ vos:
   cloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   covid19.eosc-synergy.eu:
+    auth: "{{ fedcloud_sa }}"
+  cryoem.instruct-eric.eu:
     auth: "{{ fedcloud_sa }}"
   d4science.org:
     auth: "{{ fedcloud_sa }}"
@@ -30,6 +33,8 @@ vos:
   eli-laser.eu:
   enmr.eu:
     auth: "{{ robot_sa }}"
+  EOServices-vo.indra.es:
+    auth: "{{ fedcloud_sa }}"
   eosc-synergy.eu:
     auth: "{{ fedcloud_sa }}"
   extras-fp7.eu:
@@ -51,13 +56,19 @@ vos:
   mathematical-software:
   mswss.ui.savba.sk:
     auth: "{{ fedcloud_sa }}"
+  mteam.data.kit.edu:
+    auth: "{{ fedcloud_sa }}"
   o3as.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
   ops:
     auth: "{{ robot_sa }}"
   peachnote.com:
     auth: "{{ fedcloud_sa }}"
+  saps-vo.i3m.upv.es:
+    auth: "{{ fedcloud_sa }}"
   training.egi.eu:
+    auth: "{{ fedcloud_sa }}"
+  umsa.cerit-sc.cz:
     auth: "{{ fedcloud_sa }}"
   verce.eu:
   vo.access.egi.eu:
@@ -86,6 +97,7 @@ vos:
   vo.iiasa.ac.at:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
   vo.nbis.se:
   vo.nextgeoss.eu:
