@@ -14,5 +14,5 @@ vos:
     project_id: 621b1977bb384beab1519713c7e695f0
   name: o3as.data.kit.edu
 - auth:
-    project_id: worsica.vo.incd.pt
-  name: fce23a2c4eca447a9d5b9c2bdab55e26
+    project_id: fce23a2c4eca447a9d5b9c2bdab55e26
+  name: worsica.vo.incd.pt
