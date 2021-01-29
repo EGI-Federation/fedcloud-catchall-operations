@@ -67,3 +67,6 @@ vos:
 - auth:
     project_id: 89140661b6be4ef281ab7a67d4c83e0c
   name: vo.europlanet-vespa.eu
+- auth:
+    project_id: 10e31299a9b548fdbe36e4dbe571168e
+  name: umsa.cerit-sc.cz
