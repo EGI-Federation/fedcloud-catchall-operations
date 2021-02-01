@@ -38,6 +38,9 @@ vos:
     project_id: 4ebc1727dbed465c8ef72617a9075b4f
   name: opencoast.eosc-hub.eu
 - auth:
+    project_id: a372c1e2fba040e58fd0cb524a3ccd34
+  name: ops
+- auth:
     project_id: ccb3f2fe96a44c86b564a17dca9a326c
   name: seadatanet-pilot.eosc-hub.eu
 - auth:
