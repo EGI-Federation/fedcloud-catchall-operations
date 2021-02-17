@@ -70,6 +70,7 @@ jobs:
       id: plan
       if: github.event_name == 'pull_request'
       run: |
+        touch ~/.config/openstack/secure.yaml
         cd deploy
         terraform plan -no-color -var-file="$EGI_SITE.tfvars"
       continue-on-error: true
