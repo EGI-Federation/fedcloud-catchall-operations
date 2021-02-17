@@ -36,6 +36,7 @@ jobs:
         eval "$(egicli endpoint token --site $EGI_SITE --project-id $PROJECT_ID)"
         echo "::add-mask::$OS_TOKEN"
         sed -i -e "s/secret/$OS_TOKEN/" clouds.yaml
+        touch ~/.config/openstack/secure.yaml
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
     - name: Terraform Format
@@ -70,7 +71,6 @@ jobs:
       id: plan
       if: github.event_name == 'pull_request'
       run: |
-        touch ~/.config/openstack/secure.yaml
         cd deploy
         terraform plan -no-color -var-file="$EGI_SITE.tfvars"
       continue-on-error: true
