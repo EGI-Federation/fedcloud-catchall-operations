@@ -11,7 +11,6 @@ SLACK_WEBHOOK_URL="$4"
 
 ansible-galaxy install git+https://github.com/EGI-Foundation/ansible-role-fedcloud-ops.git
 
-
 # Configure!
 if ansible-playbook -i inventory.yaml  \
        --extra-vars @secrets.yaml \
