@@ -16,7 +16,7 @@ if ansible-playbook -i inventory.yaml  \
        --extra-vars @secrets.yaml \
        --extra-vars @extra-vars.yaml \
        --extra-vars @vos.yaml \
-       --extra-vars "cloud_info_image=egifedcloud/ops-cloud-info:sha-$SHORT_SHA"
+       --extra-vars "cloud_info_image=egifedcloud/ops-cloud-info:sha-$SHORT_SHA" \
        playbook.yaml >ansible.log 2>&1 ; then
    status_summary="success"
    color="#6DBF59"
