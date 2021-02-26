@@ -64,6 +64,7 @@ jobs:
         cd deploy
         sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
         sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
+        sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
         sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
         ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
         echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"

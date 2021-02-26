@@ -6,7 +6,8 @@ set -e
 
 OAUTH_TOKEN="$1"
 COMMIT_SHA="$2"
-SLACK_WEBHOOK_URL="$3"
+SHORT_SHA="$3"
+SLACK_WEBHOOK_URL="$4"
 
 ansible-galaxy install git+https://github.com/EGI-Foundation/ansible-role-fedcloud-ops.git
 
@@ -15,6 +16,7 @@ if ansible-playbook -i inventory.yaml  \
        --extra-vars @secrets.yaml \
        --extra-vars @extra-vars.yaml \
        --extra-vars @vos.yaml \
+       --extra-vars "cloud_info_image=egifedcloud/ops-cloud-info:sha-$SHORT_SHA"
        playbook.yaml >ansible.log 2>&1 ; then
    status_summary="success"
    color="#6DBF59"

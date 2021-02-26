@@ -34,6 +34,7 @@ write_files:
     OAUTH_TOKEN="%TOKEN%"
     SLACK_WEBHOOK_URL="%SLACK_WEBHOOK_URL%"
     COMMIT_SHA="%REF%"
+    SHORT_COMMIT_SHA="%SHORT_REF%"
 
     # get the repo code and untar at cwd, this may fail if the token expired (e.g. VM rebooted)
     # still the deploy should be-executed just in case something is missing, so adding a true
@@ -44,6 +45,6 @@ write_files:
             tar xz --strip=1 || true
     cd deploy
     echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
-    ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SLACK_WEBHOOK_URL
+    ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SHORT_COMMIT_SHA $SLACK_WEBHOOK_URL
   path: /var/lib/cloud/scripts/per-boot/deploy.sh
   permissions: '0755'

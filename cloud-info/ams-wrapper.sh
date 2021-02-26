@@ -24,6 +24,7 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                             --middleware "$CLOUD_INFO_MIDDLEWARE" \
                             --auth-refresher oidcvorefresh \
+			    --ignore-share-errors \
                             --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
                             --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
                             --format glue21 \
