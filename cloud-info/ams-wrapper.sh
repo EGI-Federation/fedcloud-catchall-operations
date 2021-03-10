@@ -5,8 +5,9 @@ set -e
 # This may fail if the OS_AUTH_URL is not the one registered in GOC
 GOCDB_ID=$(python -c "from __future__ import print_function; \
                       from cloud_info_provider.providers import gocdb; \
-		      print(gocdb.find_in_gocdb('$GOCDB_URL', \
-                                                '$GOCDB_SERVICE_TYPE')['gocdb_id'], end='')")
+                      print(gocdb.find_in_gocdb('$GOCDB_URL', \
+                                                '$GOCDB_SERVICE_TYPE',
+                                                timeout=60)['gocdb_id'], end='')")
 
 if test "x$AMS_TOKEN_FILE" != "x"; then
     AMS_TOKEN=$(cat "$AMS_TOKEN_FILE")
@@ -24,7 +25,7 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                             --middleware "$CLOUD_INFO_MIDDLEWARE" \
                             --auth-refresher oidcvorefresh \
-			    --ignore-share-errors \
+                            --ignore-share-errors \
                             --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
                             --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
                             --format glue21 \
