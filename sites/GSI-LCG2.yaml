@@ -1,9 +1,9 @@
 endpoint: https://egiosc.gsi.de:5000/v3/
 gocdb: GSI-LCG2
 vos:
-- auth:
-    project_id: e26bbd8bb8f74fbc94cbe3c3b75d9e6c
-  name: dteam
-- auth:
-    project_id: f7eefadbe584422685e77a146bd79c98
-  name: ops
+- name: dteam
+  auth:
+    project_id: b761864a53df410d949c87a958a36619
+- name: ops
+  auth:
+    project_id: c585e9ae796649f2be13d113a43749aa
