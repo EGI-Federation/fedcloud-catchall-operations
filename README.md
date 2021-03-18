@@ -33,7 +33,7 @@ upstream, are generated in this repo.
 
 Deployment is managed on a separate private repository that includes
 several secrets. Deployment is done with ansible using a [dedicated
-role](https://github.com/EGI-Foundation/ansible-role-fedcloud-ops) with:
+role](https://github.com/EGI-Federation/ansible-role-fedcloud-ops) with:
 
 ```sh
 ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml

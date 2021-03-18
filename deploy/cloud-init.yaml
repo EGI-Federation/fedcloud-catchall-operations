@@ -41,7 +41,7 @@ write_files:
     # at the end
     curl -L -H "Authorization: token $OAUTH_TOKEN" \
             -H "Accept: application/vnd.github.v3+raw" \
-            "https://api.github.com/repos/EGI-Foundation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
+            "https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
             tar xz --strip=1 || true
     cd deploy
     echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
