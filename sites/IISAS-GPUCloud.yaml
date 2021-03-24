@@ -13,3 +13,6 @@ vos:
 - auth:
     project_id: 627905392d4d453cbd85e8d56b2367b0
   name: training.egi.eu
+- auth:
+    project_id: f82b19069f644c0dafcad4b7f6a4dac0
+  name: cryoem.instruct-eric.eu
