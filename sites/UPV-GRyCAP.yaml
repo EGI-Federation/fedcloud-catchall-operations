@@ -1,0 +1,9 @@
+endpoint: https://menoscloud.i3m.upv.es:5000/v3
+gocdb: UPV-GRyCAP
+vos:
+- auth:
+    project_id: 292568ead7454709a17f19189d5a840a
+  name: ops
+- auth:
+    project_id: db929e9034f04d1698c1a0d58283366e
+  name: fedcloud.egi.eu
