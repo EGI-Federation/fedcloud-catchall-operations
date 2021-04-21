@@ -19,3 +19,9 @@ vos:
 - auth:
     project_id: b0159e11cb4b470eba90d113593e90c9
   name: vo.nbis.se
+- auth:
+    project_id: 0606cbf2743c4bbc8680227247f4d616
+  name: fusion
+- auth:
+    project_id: 4b607492b48c4d9c9942ca243ae16a58
+  name: eiscat.se
