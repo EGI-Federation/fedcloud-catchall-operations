@@ -16,3 +16,6 @@ vos:
 - auth:
     project_id: f82b19069f644c0dafcad4b7f6a4dac0
   name: cryoem.instruct-eric.eu
+- auth:
+    project_id: 6c8c9a38f957420b86e0cdeb58def770
+  name: mswss.ui.savba.sk
