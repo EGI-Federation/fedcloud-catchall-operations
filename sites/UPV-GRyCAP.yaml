@@ -7,3 +7,9 @@ vos:
 - auth:
     project_id: db929e9034f04d1698c1a0d58283366e
   name: fedcloud.egi.eu
+- auth:
+    project_id: 6f84e31391024330b16d29d6ccd26932
+  name: eosc-synergy.eu
+- auth:
+    project_id: e7608e969cfd4f49907cff17d1774898
+  name: saps-vo.i3m.upv.es
