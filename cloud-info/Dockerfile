@@ -5,7 +5,7 @@ ARG CLOUD_INFO_VERSION=e59aee029d7ef3f23c20473c14e71a2d8142fa92
 
 # hadolint ignore=DL3013
 RUN pip install --no-cache-dir \
-        "git+https://github.com/EGI-Foundation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
+        "git+https://github.com/EGI-Federation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
         python-glanceclient python-novaclient python-keystoneclient keystoneauth1
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

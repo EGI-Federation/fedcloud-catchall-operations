@@ -3,6 +3,8 @@ name: Build and push containers
 
 on:
   push:
+    branches:
+    - main
   pull_request:
 
 jobs:
@@ -15,10 +17,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Docker meta
         id: docker_meta
-        uses: crazy-max/ghaction-docker-meta@v1
+        uses: crazy-max/ghaction-docker-meta@v2.3.0
         with:
           images: egifedcloud/ops-cloud-info
-          tag-sha: true
+          tags: |
+            type=sha
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
