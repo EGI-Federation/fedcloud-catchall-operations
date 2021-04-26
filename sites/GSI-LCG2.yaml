@@ -1,4 +1,4 @@
-endpoint: https://egiosc.gsi.de:5000/v3/
+endpoint: https://egiosc.gsi.de:5000/v3
 gocdb: GSI-LCG2
 vos:
 - name: dteam
