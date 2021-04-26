@@ -76,3 +76,6 @@ vos:
 - auth:
     project_id: 28b74c3073a74b34a729cbf9777e7344
   name: vo.notebooks.egi.eu
+- auth:
+    project_id: 426b25102bdb49b8b6969cef5aabaecf
+  name: fusion
