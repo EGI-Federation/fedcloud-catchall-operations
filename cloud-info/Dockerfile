@@ -9,7 +9,6 @@ RUN pip install --no-cache-dir \
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-
 # CA certificates: install and add to python
 # hadolint ignore=DL3015, DL3008
 RUN curl -Ls \
@@ -26,4 +25,3 @@ COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
 
 CMD ["publisher.sh"]
-
