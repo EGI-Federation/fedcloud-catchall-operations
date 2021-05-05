@@ -1,4 +1,5 @@
 endpoint: https://stratus.ncg.ingrid.pt:5000/v3
+filename: NCG-INGRID-PT.yaml
 gocdb: NCG-INGRID-PT
 vos:
 - auth:
@@ -19,3 +20,15 @@ vos:
 - auth:
     project_id: a53ca78c534046e5b13f4537ae698411
   name: worsica.vo.incd.pt
+- auth:
+    project_id: 05e52356addc44e18ef2bd14f2e2f67d
+  name: covid-synergy
+- auth:
+    project_id: a53ca78c534046e5b13f4537ae698411
+  name: worsica
+- auth:
+    project_id: ddf0c468c8af4e0bbb9808bfc0288381
+  name: eosc-synergy
+- auth:
+    project_id: 14e8f964db4c4a8ea286b0886ab51e7c
+  name: lago

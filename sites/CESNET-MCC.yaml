@@ -1,4 +1,5 @@
 endpoint: https://identity.cloud.muni.cz/v3
+filename: CESNET-MCC.yaml
 gocdb: CESNET-MCC
 vos:
 - auth:
@@ -67,3 +68,9 @@ vos:
 - auth:
     project_id: 89140661b6be4ef281ab7a67d4c83e0c
   name: vo.europlanet-vespa.eu
+- auth:
+    project_id: 10e31299a9b548fdbe36e4dbe571168e
+  name: umsa.cerit-sc.cz
+- auth:
+    project_id: d0ebf0fad0a04be19f93fdf794469544
+  name: cryoem.instruct-eric.eu
