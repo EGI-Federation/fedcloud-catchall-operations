@@ -1,5 +1,4 @@
 endpoint: https://identity.cloud.muni.cz/v3
-filename: CESNET-MCC.yaml
 gocdb: CESNET-MCC
 vos:
 - auth:

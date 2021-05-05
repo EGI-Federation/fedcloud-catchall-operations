@@ -1,5 +1,4 @@
 endpoint: https://api.cloud.ifca.es:5000/v3/
-filename: IFCA-LCG2.yaml
 gocdb: IFCA-LCG2
 vos:
 - auth:

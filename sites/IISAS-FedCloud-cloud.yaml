@@ -1,5 +1,4 @@
 endpoint: https://cloud.ui.savba.sk:5000/v3/
-filename: IISAS-FedCloud-cloud.yaml
 gocdb: IISAS-FedCloud
 vos:
 - auth:

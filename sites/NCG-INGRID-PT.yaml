@@ -1,5 +1,4 @@
 endpoint: https://stratus.ncg.ingrid.pt:5000/v3
-filename: NCG-INGRID-PT.yaml
 gocdb: NCG-INGRID-PT
 vos:
 - auth:
