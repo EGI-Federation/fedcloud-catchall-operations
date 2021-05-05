@@ -1,0 +1,12 @@
+endpoint: https://egiosc.gsi.de:5000/v3
+gocdb: GSI-LCG2
+vos:
+- name: dteam
+  auth:
+    project_id: b761864a53df410d949c87a958a36619
+- name: fedcloud.egi.eu
+  auth:
+    project_id: 83ce3056c13c4dc4a5763e9fd1aa34ad
+- name: ops
+  auth:
+    project_id: c585e9ae796649f2be13d113a43749aa

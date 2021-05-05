@@ -1,9 +1,18 @@
-gocdb: INFN-PADOVA-STACK
 endpoint: https://egi-cloud.pd.infn.it:443/v3
+gocdb: INFN-PADOVA-STACK
 vos:
-  vo.access.egi.eu:
-    auth:
-      project_id: 5ddb325ca8c2495abfd4e8f230bcd51a
-  dteam:
-    auth:
-      project_id: 142e67568077410c88587fc309864310
+- auth:
+    project_id: 142e67568077410c88587fc309864310
+  name: dteam
+- auth:
+    project_id: 5ddb325ca8c2495abfd4e8f230bcd51a
+  name: vo.access.egi.eu
+- auth:
+    project_id: 02c6590d5e2945d686715520f3a16129
+  name: cms
+- auth:
+    project_id: ecd4227c23fd4c85b833a1c7e58cfbba
+  name: enmr.eu
+- auth:
+    project_id: f9b54a925f8a467bba107f577dae7479
+  name: ops

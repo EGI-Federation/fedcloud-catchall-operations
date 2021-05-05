@@ -1,12 +1,9 @@
-gocdb: 100IT
 endpoint: https://cloud-egi.100percentit.com:5000/v3/
+gocdb: 100IT
 vos:
-  vo.nextgeoss.eu:
-    auth:
-      project_id: 744baec7cd3d404799033327891abfd6
-  fedcloud.egi.eu:
-    auth:
-      project_id: 7cfb9087632a4df5b738fbd0b795f2ad
-  dteam:
-    auth:
-      project_id: 0785b78c70ce4e9f91bf851a4fd156b2
+- auth:
+    project_id: 0785b78c70ce4e9f91bf851a4fd156b2
+  name: dteam
+- auth:
+    project_id: 7cfb9087632a4df5b738fbd0b795f2ad
+  name: fedcloud.egi.eu

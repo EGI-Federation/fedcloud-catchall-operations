@@ -1,0 +1,50 @@
+#cloud-config
+---
+users:
+- name: egi
+  gecos: EGI
+  primary_group: egi
+  groups: users
+  shell: /bin/bash
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  ssh_import_id:
+  - gh:enolfc
+  - gh:gwarf
+
+apt:
+  sources:
+    ansible-ppa.list:
+      source: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main"
+      keyid: 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367
+
+packages:
+- git
+- ansible
+- jq
+
+write_files:
+- content: |
+    #!/bin/sh
+    set -e
+
+    mkdir -p /var/tmp/egi
+    cd /var/tmp/egi || exit
+
+    # Valid GitHub token to access the repo
+    OAUTH_TOKEN="%TOKEN%"
+    SLACK_WEBHOOK_URL="%SLACK_WEBHOOK_URL%"
+    COMMIT_SHA="%REF%"
+    SHORT_COMMIT_SHA="%SHORT_REF%"
+
+    # get the repo code and untar at cwd, this may fail if the token expired (e.g. VM rebooted)
+    # still the deploy should be-executed just in case something is missing, so adding a true
+    # at the end
+    curl -L -H "Authorization: token $OAUTH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+raw" \
+            "https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
+            tar xz --strip=1 || true
+    cd deploy
+    echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
+    ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SHORT_COMMIT_SHA $SLACK_WEBHOOK_URL
+  path: /var/lib/cloud/scripts/per-boot/deploy.sh
+  permissions: '0755'

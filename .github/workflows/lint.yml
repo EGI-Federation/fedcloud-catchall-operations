@@ -1,0 +1,27 @@
+---
+name: Lint
+
+on: [pull_request, push]
+
+jobs:
+  super-lint:
+    name: Lint with Supper-Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out a copy of your repository on the ubuntu-latest machine
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Runs the Super-Linter action
+      - name: Run Super-Linter
+        uses: github/super-linter@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Check validity of yaml files
+      - name: Check YAML schema
+        run: |
+          curl -L https://github.com/neilpa/yajsv/releases/download/v1.4.0/yajsv.linux.amd64 > yajsv
+          chmod +x yajsv
+          ./yajsv -s schema.json sites/*.yaml

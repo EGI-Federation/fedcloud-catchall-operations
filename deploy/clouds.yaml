@@ -1,0 +1,19 @@
+---
+backend_token: &bt "secret"
+deploy_token: &dt "secret"
+
+clouds:
+  backend:
+    site: NCG-INGRID-PT
+    auth_type: token
+    auth:
+      auth_url:  https://stratus.ncg.ingrid.pt:5000/v3
+      token: *bt
+      project_id: 6b042927bcfa466cb9eb56d3ea679987
+  deploy:
+    site: NCG-INGRID-PT
+    auth_type: token
+    auth:
+      auth_url:  https://stratus.ncg.ingrid.pt:5000/v3
+      token: *dt
+      project_id: 6b042927bcfa466cb9eb56d3ea679987

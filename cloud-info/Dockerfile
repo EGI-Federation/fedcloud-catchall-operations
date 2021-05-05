@@ -1,18 +1,16 @@
 FROM python:3
 
-# Pip install directly does not install the data files in etc?
-# TODO: pin the cloud-info-provider version
-RUN git clone https://github.com/EGI-Foundation/cloud-info-provider.git /tmp/cloud-info-provider && \
-    pip install -r /tmp/cloud-info-provider/requirements.txt && \
-    cd /tmp/cloud-info-provider && python setup.py install && \
-    rm -rf /tmp/cloud-info-provider
+ARG CLOUD_INFO_VERSION=96ab000d7382477a84d494f101cfcf16c5377fe9
 
-# OpenStack should be a different cloud-info-provider package...
-RUN pip install python-keystoneclient \
-                python-novaclient \
-                python-glanceclient \
-                keystoneauth1
+# hadolint ignore=DL3013
+RUN pip install --no-cache-dir \
+        "git+https://github.com/EGI-Federation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
+        python-glanceclient python-novaclient python-keystoneclient keystoneauth1
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# CA certificates: install and add to python
+# hadolint ignore=DL3015, DL3008
 RUN curl -Ls \
         https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
         | apt-key add - \
@@ -20,12 +18,10 @@ RUN curl -Ls \
         > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
     && apt-get install -y jq ca-policy-egi-core \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN cat /etc/grid-security/certificates/*.pem >> $(python -m requests.certs)
+    && rm -rf /var/lib/apt/lists/* \
+    && cat /etc/grid-security/certificates/*.pem >> "$(python -m requests.certs)"
 
 COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
 
 CMD ["publisher.sh"]
-
