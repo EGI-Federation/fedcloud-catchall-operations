@@ -44,20 +44,8 @@ vos:
     project_id: 7bb9c2694f9040c68cd72cb994f5ce89
   name: worsica.eosc.eu
 - auth:
-    project_id: 352db003073549749351fad26cd55074
-  name: VO:o3as.data.kit.edu
-- auth:
-    project_id: 3b9754ad8c6046b4aec43ec21abe7d8c
-  name: VO:eosc-synergy.eu
-- auth:
-    project_id: 7bb9c2694f9040c68cd72cb994f5ce89
-  name: VO:worsica.vo.incd.pt
-- auth:
     project_id: c7db08b907ef4f0fae73bdd6587bc79e
-  name: VO:cryoem.instruct-eric.eu
-- auth:
-    project_id: e14972ead3154810a5941e511afc208c
-  name: VO:covid19.eosc-synergy.eu
+  name: cryoem.instruct-eric.eu
 - auth:
     project_id: 77c86367335f4e9cb1e9ccab72d24f0a
-  name: VO:lagoproject.net
+  name: lagoproject.net
