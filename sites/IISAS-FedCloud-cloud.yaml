@@ -16,4 +16,12 @@ vos:
 - auth:
     project_id: 071a2c4b52494bccbc3606d59d0e6951
   name: mteam.data.kit.edu
-  
+- auth:
+    project_id: a87268866a534fe38c49f5ec154d0223
+  name: covid19.eosc-synergy.eu
+- auth:
+    project_id: d09a0c28397f4b41ad4bd62e7d63b51e
+  name: eosc-synergy.eu
+- auth:
+    project_id: af0a1e8165b94365903088e00e34b063
+  name: cryoem.instruct-eric.eu

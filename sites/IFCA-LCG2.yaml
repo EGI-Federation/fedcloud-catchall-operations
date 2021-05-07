@@ -43,3 +43,9 @@ vos:
 - auth:
     project_id: 7bb9c2694f9040c68cd72cb994f5ce89
   name: worsica.eosc.eu
+- auth:
+    project_id: c7db08b907ef4f0fae73bdd6587bc79e
+  name: cryoem.instruct-eric.eu
+- auth:
+    project_id: 77c86367335f4e9cb1e9ccab72d24f0a
+  name: lagoproject.net
