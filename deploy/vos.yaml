@@ -30,6 +30,8 @@ vos:
   drihm.eu:
   dteam:
     auth: "{{ robot_sa }}"
+  eiscat.se:
+    auth: "{{ robot_sa }}"
   eli-laser.eu:
   enmr.eu:
     auth: "{{ robot_sa }}"
