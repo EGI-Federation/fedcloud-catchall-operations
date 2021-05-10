@@ -62,6 +62,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   o3as.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
+  opencoast.eosc-hub.eu:
+    auth: "{{ robot_sa }}"
   ops:
     auth: "{{ robot_sa }}"
   peachnote.com:
