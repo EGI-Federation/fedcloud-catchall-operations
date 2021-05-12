@@ -17,7 +17,7 @@ jobs:
       fip: ${{ steps.fip.outputs.stdout }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.4
     - name: Setup python
       uses: actions/setup-python@v2
     - name: Install python packages
