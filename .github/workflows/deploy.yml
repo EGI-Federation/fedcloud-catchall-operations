@@ -19,7 +19,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Setup python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v2.2.2
     - name: Install python packages
       run: |
         pip install egicli pyyaml
