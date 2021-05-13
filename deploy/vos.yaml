@@ -88,6 +88,8 @@ vos:
   vo.emsodev.eu:
   vo.emso-eric.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.enes.org:
+    auth: "{{ fedcloud_sa }}"
   vo.envri-fair.eu:
     auth: "{{ fedcloud_sa }}"
   vo.eurogeoss.eu:
