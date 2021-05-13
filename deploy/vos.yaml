@@ -30,6 +30,8 @@ vos:
   drihm.eu:
   dteam:
     auth: "{{ robot_sa }}"
+  eiscat.se:
+    auth: "{{ robot_sa }}"
   eli-laser.eu:
   enmr.eu:
     auth: "{{ robot_sa }}"
@@ -60,6 +62,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   o3as.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
+  opencoast.eosc-hub.eu:
+    auth: "{{ robot_sa }}"
   ops:
     auth: "{{ robot_sa }}"
   peachnote.com:
@@ -83,6 +87,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.emsodev.eu:
   vo.emso-eric.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.enes.org:
     auth: "{{ fedcloud_sa }}"
   vo.envri-fair.eu:
     auth: "{{ fedcloud_sa }}"
