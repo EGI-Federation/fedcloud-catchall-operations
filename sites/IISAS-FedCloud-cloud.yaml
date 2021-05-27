@@ -22,4 +22,6 @@ vos:
 - auth:
     project_id: 982ce52d45fe4e33a1c952ab9484c711
   name: cloud.egi.eu
-
+- auth:
+    project_id: 71dc9c3785cc4876bfb1a4bfc681e0f3
+  name: vo.access.egi.eu
