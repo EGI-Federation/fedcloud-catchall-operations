@@ -10,7 +10,7 @@ RUN mkdir -p /var/spool/caso && \
 COPY caso.conf /etc/caso/caso.conf
 COPY voms.json /etc/caso/voms.json
 
-RUN pip install git+https://github.com/IFCA/caso.git@$CASO_VERSION
+RUN pip install --no-cache-dir git+https://github.com/IFCA/caso.git@$CASO_VERSION
 
 # CA certificates: install and add to python
 # hadolint ignore=DL3015, DL3008
