@@ -25,3 +25,10 @@ vos:
 - auth:
     project_id: 71dc9c3785cc4876bfb1a4bfc681e0f3
   name: vo.access.egi.eu
+- auth:
+    project_id: 38f5e55946a34ecea1a58971ba60ace6
+  name: acc-comp.egi.eu
+- auth:
+    project_id: 6c4aff79522448ac8191e70dcf4a672a
+  name: vo.nextgeoss.eu
+  
