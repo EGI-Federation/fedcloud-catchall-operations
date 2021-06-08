@@ -1,5 +1,5 @@
 endpoint: https://cloud.recas.ba.infn.it:5000/v3
-gocdb: RECAS-BARI
+gocdb: INFN-CLOUD-BARI
 protocol: oidc
 vos:
 - auth:
@@ -11,6 +11,9 @@ vos:
 - auth:
     project_id: a81cd014a37243cb86f6ccdb275193f2
   name: kampal.eosc-hub.eu
+- auth:
+    project_id: 1fd23a3332bf4a01a40a1d5edf8e016e
+  name: ops
 - auth:
     project_id: bdfc0b6ca97146088034443609d88aba
   name: vo.emso-eric.eu

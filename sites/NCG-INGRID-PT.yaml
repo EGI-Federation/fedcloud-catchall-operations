@@ -19,3 +19,6 @@ vos:
 - auth:
     project_id: a53ca78c534046e5b13f4537ae698411
   name: worsica.vo.incd.pt
+- auth:
+    project_id: 14e8f964db4c4a8ea286b0886ab51e7c
+  name: lagoproject.net
