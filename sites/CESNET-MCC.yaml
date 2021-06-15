@@ -79,3 +79,6 @@ vos:
 - auth:
     project_id: 426b25102bdb49b8b6969cef5aabaecf
   name: fusion
+- auth:
+    project_id: 721251d671ea4268876043a9474ba3de
+  name: vip-competence-centre-biomed
