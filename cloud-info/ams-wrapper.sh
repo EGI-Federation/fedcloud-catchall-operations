@@ -28,6 +28,7 @@ cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                             --ignore-share-errors \
                             --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
                             --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
+                            --oidc-scopes "openid email profile eduperson_entitlement" \
                             --format glue21 \
                             --publisher ams \
                             --ams-token "$AMS_TOKEN" \

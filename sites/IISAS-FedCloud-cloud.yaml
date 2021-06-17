@@ -31,4 +31,10 @@ vos:
 - auth:
     project_id: 6c4aff79522448ac8191e70dcf4a672a
   name: vo.nextgeoss.eu
+- auth:
+    project_id: 74f63e431be04330862fd6d51434dcea
+  name: biomed
+- auth:
+    project_id: ba233ccdb3a84ecb961ad340f4b34369
+  name: training.egi.eu
   

@@ -10,3 +10,6 @@ vos:
 - name: ops
   auth:
     project_id: c585e9ae796649f2be13d113a43749aa
+- name: vo.access.egi.eu
+  auth:
+    project_id: 1392719e6e4c4bf7ba0fce8c0acbbd22

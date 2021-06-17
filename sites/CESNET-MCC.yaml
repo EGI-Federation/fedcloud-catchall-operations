@@ -27,7 +27,7 @@ vos:
   name: ops
 - auth:
     project_id: d868dfd63a674d94bbd9d9b7b54443e3
-  name: panosc.eu
+  name: vo.panosc.eu
 - auth:
     project_id: bf5fbc4e22164e4d8a464e9c97706830
   name: peachnote.com
@@ -79,3 +79,6 @@ vos:
 - auth:
     project_id: 426b25102bdb49b8b6969cef5aabaecf
   name: fusion
+- auth:
+    project_id: 721251d671ea4268876043a9474ba3de
+  name: vip-competence-centre-biomed
