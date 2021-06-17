@@ -1,4 +1,4 @@
-endpoint: https://cloud-api-pub.cr.cnaf.infn.it:5000/v3/
+endpoint: https://cloud-api-pub.cr.cnaf.infn.it:5000/v3
 gocdb: INFN-CLOUD-CNAF
 region: sdds
 vos:
