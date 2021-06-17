@@ -28,4 +28,4 @@ jobs:
       # Validate things according to GOC
       - name: Validate GOC info
         run: |
-          ./validate-sites.sh
+          ./validate.sh
