@@ -14,6 +14,8 @@ gocdb: <name in gocdb of the site>
 endpoint: <keystone endpoint of the site>
 # optionally specify a protocol for the Keystone V3 federation API
 protocol: openid | oidc (default is openid)
+# optionally specify a region name if using different regions
+region: myregion
 vos:
 # List of VOs defined as follows
 - name: <vo name>
