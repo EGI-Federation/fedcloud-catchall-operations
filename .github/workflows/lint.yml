@@ -5,7 +5,7 @@ on: [pull_request, push]
 
 jobs:
   super-lint:
-    name: Lint with Supper-Linter
+    name: Lint files
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +15,7 @@ jobs:
 
       # Runs the Super-Linter action
       - name: Run Super-Linter
-        uses: github/super-linter@v4.1.0
+        uses: github/super-linter@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -24,4 +24,8 @@ jobs:
         run: |
           curl -L https://github.com/neilpa/yajsv/releases/download/v1.4.0/yajsv.linux.amd64 > yajsv
           chmod +x yajsv
-          ./yajsv -s schema.json sites/*.yaml
+
+      # Validate things according to GOC
+      - name: Validate GOC info
+        run: |
+          ./validate.sh
