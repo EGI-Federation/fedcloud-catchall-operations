@@ -22,7 +22,7 @@ jobs:
       uses: actions/setup-python@v2
     - name: Install python packages
       run: |
-        pip install egicli pyyaml
+        pip install pyyaml git+https://github.com/EGI-Federation/egicli.git
     - name: Get OS_TOKEN
       env:
         CHECKIN_CLIENT_ID: ${{ secrets.CHECKIN_CLIENT_ID }}

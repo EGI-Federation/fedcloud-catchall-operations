@@ -11,6 +11,8 @@ vos:
   bioisi:
   biomed:
     auth: "{{ robot_sa }}"
+  vip-competence-centre-biomed:
+    auth: "{{ robot_sa }}"    
   blazarmonitoring.asi.it:
     auth: "{{ robot_sa }}"
   chipster.csc.fi:
