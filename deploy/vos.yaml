@@ -114,6 +114,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.obsea.es:
     auth: "{{ fedcloud_sa }}"
+  vo.operas-eu.org:
+    auth: "{{ fedcloud_sa }}"
   vo.panosc.eu:
     auth: "{{ fedcloud_sa }}"
   vo.policycloud.eu:
