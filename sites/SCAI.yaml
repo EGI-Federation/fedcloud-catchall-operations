@@ -4,3 +4,6 @@ vos:
 - auth:
     project_id: 162ecb7fe3ee450ca436935f87662858
   name: fedcloud.egi.eu
+- auth:
+    project_id: 67bbf0ad6c4d4446b0c0c41197108f2c
+  name: ops
