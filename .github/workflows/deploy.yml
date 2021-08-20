@@ -34,7 +34,7 @@ jobs:
         EGI_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
         echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
         PROJECT_ID="$(yq -r .clouds.backend.auth.project_id clouds.yaml)"
-        eval $(egicli endpoint token --site "$EGI_SITE" --project-id "$PROJECT_ID")
+        eval "$(egicli endpoint token --site "$EGI_SITE" --project-id "$PROJECT_ID")"
         echo "::add-mask::$OS_TOKEN"
         sed -i -e "s/secret/$OS_TOKEN/" clouds.yaml
         mkdir -p ~/.config/openstack
