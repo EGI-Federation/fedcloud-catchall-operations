@@ -28,3 +28,6 @@ vos:
 - auth:
     project_id: a59bd0a9ed754941962846c4a081d6ca
   name: vo.enes.org
+- auth:
+    project_id: 4d155cb4af3f46af89c56fd91d9387f0
+  name: vo.agiliacenter.com
