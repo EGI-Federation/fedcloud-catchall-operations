@@ -13,8 +13,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    outputs:
-      fip: ${{ steps.fip.outputs.stdout }}
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -22,18 +20,21 @@ jobs:
       uses: actions/setup-python@v2
     - name: Install python packages
       run: |
-        pip install pyyaml git+https://github.com/EGI-Federation/egicli.git
+        curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
+        chmod +x jq
+        pip install yq git+https://github.com/EGI-Federation/egicli.git
     - name: Get OS_TOKEN
       env:
         CHECKIN_CLIENT_ID: ${{ secrets.CHECKIN_CLIENT_ID }}
         CHECKIN_CLIENT_SECRET: ${{ secrets.CHECKIN_CLIENT_SECRET }}
         CHECKIN_REFRESH_TOKEN: ${{ secrets.CHECKIN_REFRESH_TOKEN }}
       run: |
+        PATH="$PWD:$PATH"
         cd deploy
-        EGI_SITE=$(python -c  "import yaml; print(yaml.safe_load(open('clouds.yaml').read())['clouds']['backend']['site'])")
-        echo "EGI_SITE=$EGI_SITE" >> $GITHUB_ENV
-        PROJECT_ID=$(python -c  "import yaml; print(yaml.safe_load(open('clouds.yaml').read())['clouds']['backend']['auth']['project_id'])")
-        eval "$(egicli endpoint token --site $EGI_SITE --project-id $PROJECT_ID)"
+        EGI_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
+        echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
+        PROJECT_ID="$(yq -r .clouds.backend.auth.project_id clouds.yaml)"
+        eval "$(egicli endpoint token --site "$EGI_SITE" --project-id "$PROJECT_ID")"
         echo "::add-mask::$OS_TOKEN"
         sed -i -e "s/secret/$OS_TOKEN/" clouds.yaml
         mkdir -p ~/.config/openstack
@@ -77,7 +78,7 @@ jobs:
         terraform plan -no-color -var-file="$EGI_SITE.tfvars"
       continue-on-error: true
     - name: Update Pull Request
-      uses: actions/github-script@v4.0.2
+      uses: actions/github-script@v4
       if: github.event_name == 'pull_request'
       env:
         PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
