@@ -1,13 +1,14 @@
-endpoint: https://cloud-api-pub.cr.cnaf.infn.it:5000/v3
+---
 gocdb: INFN-CLOUD-CNAF
+endpoint: https://cloud-api-pub.cr.cnaf.infn.it:5000/v3
 region: sdds
 vos:
-- auth:
+- name: dteam
+  auth:
     project_id: a8af02aad2894e9e8b5d4775c9736b8a
-  name: fedcloud.egi.eu
-- auth:
+- name: fedcloud.egi.eu
+  auth:
+    project_id: a8af02aad2894e9e8b5d4775c9736b8a
+- name: ops
+  auth:
     project_id: 8b6a8afe225344dea808ec17a26de56d
-  name: ops
-- auth:
-    project_id: a8af02aad2894e9e8b5d4775c9736b8a
-  name: dteam

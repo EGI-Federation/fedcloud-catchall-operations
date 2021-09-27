@@ -1,15 +1,16 @@
-endpoint: https://cloud-ctrl.nipne.ro:443/v3
+---
 gocdb: CLOUDIFIN
+endpoint: https://cloud-ctrl.nipne.ro:443/v3
 vos:
-- auth:
+- name: benchmark.terradue.com
+  auth:
     project_id: c9aedbfbf1154d3b9a0db9b0d63f7d85
-  name: benchmark.terradue.com
-- auth:
+- name: dteam
+  auth:
     project_id: f726c16f3e2346bf891021c89b4dc58d
-  name: dteam
-- auth:
+- name: fedcloud.egi.eu
+  auth:
     project_id: 245cdfdce0c84227b9b60d247618f635
-  name: fedcloud.egi.eu
-- auth:
+- name: ops
+  auth:
     project_id: 21440821c8904e5b8ce5ec101a1ca879
-  name: ops
