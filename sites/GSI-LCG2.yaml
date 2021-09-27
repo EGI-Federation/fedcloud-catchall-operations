@@ -1,5 +1,6 @@
-endpoint: https://egiosc.gsi.de:5000/v3
+---
 gocdb: GSI-LCG2
+endpoint: https://egiosc.gsi.de:5000/v3
 vos:
 - name: dteam
   auth:

@@ -1,12 +1,13 @@
-endpoint: https://cloud-egi.100percentit.com:5000/v3/
+---
 gocdb: 100IT
+endpoint: https://cloud-egi.100percentit.com:5000/v3/
 vos:
-- auth:
+- name: dteam
+  auth:
     project_id: 0785b78c70ce4e9f91bf851a4fd156b2
-  name: dteam
-- auth:
-    project_id: 24426f375b494df5b47f1efebc272e5c
-  name: ops
-- auth:
+- name: fedcloud.egi.eu
+  auth:
     project_id: 7cfb9087632a4df5b738fbd0b795f2ad
-  name: fedcloud.egi.eu
+- name: ops
+  auth:
+    project_id: 24426f375b494df5b47f1efebc272e5c

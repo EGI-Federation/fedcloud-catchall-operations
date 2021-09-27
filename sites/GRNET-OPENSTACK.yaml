@@ -1,6 +1,7 @@
-endpoint: https://keystone-louros.cloud.grnet.gr:5000/v3
+---
 gocdb: GRNET-OPENSTACK
+endpoint: https://keystone-louros.cloud.grnet.gr:5000/v3
 vos:
-- auth:
+- name: ops
+  auth:
     project_id: fd88c4b7bf9242fdbde17b484ccdb032
-  name: ops

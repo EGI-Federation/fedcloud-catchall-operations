@@ -1,24 +1,25 @@
-endpoint: https://colossus.cesar.unizar.es:5000/v3
+---
 gocdb: BIFI
+endpoint: https://colossus.cesar.unizar.es:5000/v3
 vos:
-- auth:
+- name: covid19.eosc-synergy.eu
+  auth:
     project_id: 36b6d10a0c194fa8991e7e8d15297478
-  name: covid19.eosc-synergy.eu
-- auth:
+- name: eosc-synergy.eu
+  auth:
     project_id: fdfa9b81582447729f16de6cf61b16e4
-  name: eosc-synergy.eu
-- auth:
+- name: gosafe.eng.it
+  auth:
     project_id: 34671c4356fd4c66835f30650c20612e
-  name: gosafe.eng.it
-- auth:
-    project_id: 487298e2e77b4896a5059b747373ea6d
-  name: ops
-- auth:
-    project_id: 621b1977bb384beab1519713c7e695f0
-  name: o3as.data.kit.edu
-- auth:
-    project_id: fce23a2c4eca447a9d5b9c2bdab55e26
-  name: worsica.vo.incd.pt
-- auth:
+- name: lagoproject.net
+  auth:
     project_id: bb8a629f3e644b69befbf17130c1dee3
-  name: lagoproject.net
+- name: o3as.data.kit.edu
+  auth:
+    project_id: 621b1977bb384beab1519713c7e695f0
+- name: ops
+  auth:
+    project_id: 487298e2e77b4896a5059b747373ea6d
+- name: worsica.vo.incd.pt
+  auth:
+    project_id: fce23a2c4eca447a9d5b9c2bdab55e26

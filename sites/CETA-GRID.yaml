@@ -1,27 +1,28 @@
-endpoint: https://controller.ceta-ciemat.es:5000/v3/
+---
 gocdb: CETA-GRID
+endpoint: https://controller.ceta-ciemat.es:5000/v3/
 vos:
-- auth:
+- name: covid19.eosc-synergy.eu
+  auth:
     project_id: e3716e9fb6a241fd91469a6ee05358a1
-  name: covid19.eosc-synergy.eu
-- auth:
+- name: dteam
+  auth:
     project_id: 20d255d3226e47e48d5b5b8c1af2ee49
-  name: dteam
-- auth:
+- name: eosc-synergy.eu
+  auth:
     project_id: 0819ebde41fd4c0d95560fc23dc575a4
-  name: eosc-synergy.eu
-- auth:
+- name: fedcloud.egi.eu
+  auth:
     project_id: aa7f62b244c946038c093d0bf05827a1
-  name: fedcloud.egi.eu
-- auth:
-    project_id: 38414631e27c485eae87f6dcb3082873
-  name: worsica.vo.incd.pt
-- auth:
-    project_id: 91b83525d63c48d78740e6799cfed2c4
-  name: o3as.data.kit.edu
-- auth:
-    project_id: 72a9570bfd554e898bd1bf05afdbb3f7
-  name: ops
-- auth:
+- name: lagoproject.net
+  auth:
     project_id: 9d234e59f4734ebdaf1e271067e40978
-  name: lagoproject.net
+- name: o3as.data.kit.edu
+  auth:
+    project_id: 91b83525d63c48d78740e6799cfed2c4
+- name: ops
+  auth:
+    project_id: 72a9570bfd554e898bd1bf05afdbb3f7
+- name: worsica.vo.incd.pt
+  auth:
+    project_id: 38414631e27c485eae87f6dcb3082873
