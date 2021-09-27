@@ -8,5 +8,8 @@ vos:
     project_id: 8d48556b378549a3a3f02ce933096c1f
   name: fedcloud.egi.eu
 - auth:
+    project_id: ea6e7637552d476d8247b5d42a07df7d
+  name: ops
+- auth:
     project_id: 8d48556b378549a3a3f02ce933096c1f
   name: vo.access.egi.eu
