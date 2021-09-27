@@ -5,6 +5,9 @@ vos:
     project_id: 2669272fcc0c4c6f842a1431eaa5456e
   name: fedcloud.egi.eu
 - auth:
+    project_id: 9e1b34b0fbb14f4d963c23fe5160b2ed
+  name: ops
+- auth:
     project_id: 00982464978c4b61a5f570e315251f02
   name: training.egi.eu
 - auth:

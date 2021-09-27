@@ -20,5 +20,8 @@ vos:
     project_id: 91b83525d63c48d78740e6799cfed2c4
   name: o3as.data.kit.edu
 - auth:
+    project_id: 72a9570bfd554e898bd1bf05afdbb3f7
+  name: ops
+- auth:
     project_id: 9d234e59f4734ebdaf1e271067e40978
   name: lagoproject.net
