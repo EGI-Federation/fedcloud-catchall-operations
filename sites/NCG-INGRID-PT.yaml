@@ -14,6 +14,9 @@ vos:
     project_id: b0cea6bd85844b0693ceda70d9f94a09
   name: opencoast.eosc-hub.eu
 - auth:
+    project_id: f9b54a925f8a467bba107f577dae7479
+  name: ops
+- auth:
     project_id: e51b8a89b30945adbf52a5d568912e4c
   name: training.egi.eu
 - auth:
