@@ -2,6 +2,9 @@
 gocdb: NCG-INGRID-PT
 endpoint: https://stratus.ncg.ingrid.pt:5000/v3
 vos:
+- name: cloud.egi.eu
+  auth:
+    project_id: 6b042927bcfa466cb9eb56d3ea679987
 - name: covid19.eosc-synergy.eu
   auth:
     project_id: 05e52356addc44e18ef2bd14f2e2f67d
