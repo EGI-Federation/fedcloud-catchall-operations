@@ -56,3 +56,9 @@ vos:
 - name: vo.stars4all.eu
   auth:
     project_id: ed8399d460a44bde9c69484ccc6a53b6
+- name: vo.deltares.nl
+  auth:
+    project_id: 6808ae202f6044f8aea95495ac3588b9
+- name: vo.plocan.eu
+  auth:
+    project_id: 7d4e7efd1eab46fb949aa06c35aeb60d
