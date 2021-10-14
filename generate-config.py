@@ -1,5 +1,6 @@
 import argparse
 import json
+
 import yaml
 
 CHECKIN_ISS = "https://aai.egi.eu/oidc/"
