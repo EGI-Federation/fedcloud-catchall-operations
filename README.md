@@ -26,6 +26,21 @@ vos:
   publicNetwork: <name of the public network>
 ```
 
+## Generating configs
+
+The mapping configuration of the VOs supported at each site can be easily
+generated with the `generate-config.py` utility. It takes as parameter
+the YAML file describing the site config and will dump a json for Keystone,
+caso, or cloudkeeper-os with the desired mapping:
+
+```shell
+$ python generate-config --config-type keystone sites/SITE.yaml
+```
+
+This mapping file should work for most cases. If you have special requirements
+open an issue so we can tune the generation to meet your needs!
+
+
 ## Docker containers
 
 Componets are run as docker containers, which if not available
