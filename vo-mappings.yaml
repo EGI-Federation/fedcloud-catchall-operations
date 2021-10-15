@@ -5,6 +5,7 @@ vos:
   biinsight.eosc-hub.eu: "urn:mace:egi.eu:group:biinsight.eosc-hub.eu:vm_operator:role=member#aai.egi.eu"
   bioisi: "urn:mace:egi.eu:group:bioisi:vm_operator:role=member#aai.egi.eu"
   biomed: "urn:mace:egi.eu:group:biomed:vm_operator:role=member#aai.egi.eu"
+  /biomed/vip: "urn:mace:egi.eu:group:biomed:vm_operator:role=member#aai.egi.eu"
   blazarmonitoring.asi.it: "urn:mace:egi.eu:group:blazarmonitoring.asi.it:vm_operator:role=member#aai.egi.eu"
   chipster.csc.fi: "urn:mace:egi.eu:group:chipster.csc.fi:vm_operator:role=member#aai.egi.eu"
   cloud.egi.eu: "urn:mace:egi.eu:group:cloud.egi.eu:vm_operator:role=member#aai.egi.eu"
