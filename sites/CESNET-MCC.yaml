@@ -47,7 +47,7 @@ vos:
 - name: umsa.cerit-sc.cz
   auth:
     project_id: 10e31299a9b548fdbe36e4dbe571168e
-- name: vip-competence-centre-biomed
+- name: /biomed/vip
   auth:
     project_id: 721251d671ea4268876043a9474ba3de
 - name: vo.clarin.eu
