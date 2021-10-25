@@ -1,2 +1,3 @@
 # keep secrets out
 secrets.yaml
+.venv
