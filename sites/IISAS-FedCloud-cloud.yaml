@@ -2,9 +2,6 @@
 gocdb: IISAS-FedCloud
 endpoint: https://cloud.ui.savba.sk:5000/v3/
 vos:
-- name: acc-comp.egi.eu
-  auth:
-    project_id: 38f5e55946a34ecea1a58971ba60ace6
 - name: biomed
   auth:
     project_id: 74f63e431be04330862fd6d51434dcea
