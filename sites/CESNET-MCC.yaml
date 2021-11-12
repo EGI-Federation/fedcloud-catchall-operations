@@ -23,9 +23,10 @@ vos:
 - name: dteam
   auth:
     project_id: 0aa5b696969c42988b18beda3f85b885
-- name: egi-services
-  auth:
-    project_id: 723f0655bb484ea892249ac7183c9581
+#Not an EGI VO
+#- name: egi-services
+#  auth:
+#    project_id: 723f0655bb484ea892249ac7183c9581
 - name: enmr.eu
   auth:
     project_id: 8f4f75b011fe44ef99105a32817d2fc0
