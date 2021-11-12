@@ -18,15 +18,3 @@ jobs:
         uses: github/super-linter/slim@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Check validity of yaml files
-      - name: Check YAML schema
-        run: |
-          curl -L https://github.com/neilpa/yajsv/releases/download/v1.4.0/yajsv.linux.amd64 > yajsv
-          chmod +x yajsv
-          ./yajsv -s schema.json sites/*.yaml
-
-      # Validate things according to GOC
-      - name: Validate GOC info
-        run: |
-          ./validate.sh
