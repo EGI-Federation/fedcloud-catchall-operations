@@ -2,6 +2,9 @@
 gocdb: NCG-INGRID-PT
 endpoint: https://stratus.ncg.ingrid.pt:5000/v3
 vos:
+- name: aquamonitor.c-scale.eu
+  auth:
+    project_id: 8258f24c93b14473ba58892f5f2748f4
 - name: cloud.egi.eu
   auth:
     project_id: 6b042927bcfa466cb9eb56d3ea679987
