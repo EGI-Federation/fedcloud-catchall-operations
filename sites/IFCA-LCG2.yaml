@@ -2,9 +2,10 @@
 gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
 vos:
-- name: acc-comp.egi.eu
-  auth:
-    project_id: 403847ab342247b89b0ba2ede2c82b39
+# VO decommissioned
+#- name: acc-comp.egi.eu
+#  auth:
+#    project_id: 403847ab342247b89b0ba2ede2c82b39
 - name: biinsight.eosc-hub.eu
   auth:
     project_id: d602bda767b4490a82b2f62f9347a0f5
@@ -23,9 +24,10 @@ vos:
 - name: dteam
   auth:
     project_id: 5eb8959a799240a98f4f303f5fbd80be
-- name: ec-meloa.eu
-  auth:
-    project_id: 6b8f8974b27247adb4cc2990b81e6019
+#This is not an EGI VO
+#- name: ec-meloa.eu
+#  auth:
+#    project_id: 6b8f8974b27247adb4cc2990b81e6019
 - name: enmr.eu
   auth:
     project_id: b6b1c395b7da4e8aa1d0895bd695b0ba
@@ -59,7 +61,7 @@ vos:
 - name: vo.lifewatch.eu
   auth:
     project_id: 3c8d36c4136946238e82d995fd274d1c
-- name: vo.openbiomap.lifewatch.eu
+- name: /vo.lifewatch.eu/openbiomap
   auth:
     project_id: ac7bc26131d248ecb6add521e648c331
 - name: worsica.vo.incd.pt

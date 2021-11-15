@@ -4,7 +4,7 @@ Operation of fedcloud integration components for selected providers.
 
 ## Site Configuration
 
-This repo consists of the main configuration for the fedcloud catchall
+This repository consists of the main configuration for the fedcloud catchall
 operations. For every endpoint, a file in the `sites` directory should describe
 its configuration with a format as follows:
 
@@ -42,7 +42,7 @@ open an issue so we can tune the generation to meet your needs!
 ## Docker containers
 
 Components are run as docker containers, which if not available upstream, are
-generated in this repo.
+generated in this repository.
 
 ## Deployment
 
