@@ -43,7 +43,7 @@ article](https://help.github.com/articles/about-pull-requests/) if you're not
 familiar with GitHub Pull Requests.
 
 Once you open a pull request, maintainers will review your code using the
-built-in code review process in Github PRs. The process at this point is as
+built-in code review process in GitHub PRs. The process at this point is as
 follows:
 
 1. A maintainer will review your code and merge it if no changes are necessary.
@@ -60,7 +60,7 @@ be easier to send pull requests.
 
 ### Branches and Commits
 
-You should submit your patch as a git branch named after the Github issue, such
+You should submit your patch as a git branch named after the GitHub issue, such
 as `#3`\. This is called a _topic branch_ and allows users to associate a
 branch of code with the issue.
 
@@ -93,6 +93,6 @@ and vice-versa. If you have any questions or if you would like to get involved
 in the wider EGI community you can check out:
 
 - [EGI Community Forum](https://community.egi.eu/)
-- [EGI website](https://www.egi.eu)
+- [EGI site](https://www.egi.eu)
 
 **This file has been modified from the Chef Cookbook Contributing Guide**.
