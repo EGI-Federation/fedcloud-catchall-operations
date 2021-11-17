@@ -1,6 +1,6 @@
 ---
-backend_token: &bt "secret"
-deploy_token: &dt "secret"
+backend_token: &bt "backend_secret"
+deploy_token: &dt "deploy_secret"
 
 clouds:
   backend:
@@ -11,9 +11,9 @@ clouds:
       token: *bt
       project_id: 6b042927bcfa466cb9eb56d3ea679987
   deploy:
-    site: NCG-INGRID-PT
+    site: IISAS-FedCloud
     auth_type: token
     auth:
-      auth_url:  https://stratus.ncg.ingrid.pt:5000/v3
+      auth_url: https://cloud.ui.savba.sk:5000/v3/
       token: *dt
-      project_id: 6b042927bcfa466cb9eb56d3ea679987
+      project_id: 982ce52d45fe4e33a1c952ab9484c711
