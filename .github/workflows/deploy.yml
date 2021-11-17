@@ -37,13 +37,13 @@ jobs:
         echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
         BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-refresh-token $CHECKIN_REFRESH_TOKEN \
                                                            --oidc-client-id $CHECKIN_CLIENT_ID \
-                                                           --oidc-client-secret $CHECKIN_CLIENT_SECRET
+                                                           --oidc-client-secret $CHECKIN_CLIENT_SECRET \
                                                            --site $BACKEND_SITE --vo $VO -j | jq ".[0].Result.id")"
         echo "::add-mask::$BACKEND_OS_TOKEN"
         sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
         DEPLOY_OS_TOKEN="$(fedcloud openstack token issue --oidc-refresh-token $CHECKIN_REFRESH_TOKEN \
                                                            --oidc-client-id $CHECKIN_CLIENT_ID \
-                                                           --oidc-client-secret $CHECKIN_CLIENT_SECRET
+                                                           --oidc-client-secret $CHECKIN_CLIENT_SECRET \
                                                            --site $EGI_SITE --vo $VO -j | jq ".[0].Result.id")"
         echo "::add-mask::$DEPLOY_OS_TOKEN"
         sed -i -e "s/deploy_secret/$DEPLOY_OS_TOKEN/" clouds.yaml
