@@ -34,8 +34,8 @@ cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
 # Publishing on our own as message is too large for some providers
 ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
 
-echo -n '{"messages":[{"attributes":{},"data":"' > ams-payload
+printf '{"messages":[{"attributes":{},"data":"' > ams-payload
 grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | base64 -w 0 >> ams-payload
-echo -n '"}]}' >> ams-payload
+printf '"}]}' >> ams-payload
 
 curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
