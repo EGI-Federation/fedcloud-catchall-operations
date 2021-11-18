@@ -29,8 +29,13 @@ cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                             --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
                             --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
                             --oidc-scopes "openid email profile eduperson_entitlement" \
-                            --format glue21 \
-                            --publisher ams \
-                            --ams-token "$AMS_TOKEN" \
-                            --ams-topic "$AMS_TOPIC" \
-                            --ams-host "$AMS_HOST"
+                            --format glue21 > cloud-info.out
+
+# Publishing on our own as message is too large for some providers
+ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
+
+echo -n '{"messages":[{"attributes":{},"data":"' > ams-payload
+grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | base64 -w 0 >> ams-payload
+echo -n '"}]}' >> ams-payload
+
+curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
