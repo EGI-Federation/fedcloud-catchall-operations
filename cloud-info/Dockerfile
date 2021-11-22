@@ -1,6 +1,6 @@
 FROM python:3
 
-ARG CLOUD_INFO_VERSION=06abfc1cf63ad8ecad4443a8955d87982f9a1c19
+ARG CLOUD_INFO_VERSION=a1aa462fc5d1ccbad2f7c0e68336003d761ec63e
 
 # hadolint ignore=DL3013
 RUN pip install --no-cache-dir \

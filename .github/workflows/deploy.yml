@@ -22,8 +22,8 @@ jobs:
       run: |
         curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
         chmod +x jq
-        pip install yq git+https://github.com/EGI-Federation/egicli.git
-    - name: Get OS_TOKEN
+        pip install yq fedcloudclient
+    - name: Configure providers access
       env:
         CHECKIN_CLIENT_ID: ${{ secrets.CHECKIN_CLIENT_ID }}
         CHECKIN_CLIENT_SECRET: ${{ secrets.CHECKIN_CLIENT_SECRET }}
@@ -31,12 +31,23 @@ jobs:
       run: |
         PATH="$PWD:$PATH"
         cd deploy
-        EGI_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
+        BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
+        BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
+        EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
+        DEPLOY_VO="$(yq -r .clouds.deploy.vo clouds.yaml)"
         echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
-        PROJECT_ID="$(yq -r .clouds.backend.auth.project_id clouds.yaml)"
-        eval "$(egicli endpoint token --site "$EGI_SITE" --project-id "$PROJECT_ID")"
-        echo "::add-mask::$OS_TOKEN"
-        sed -i -e "s/secret/$OS_TOKEN/" clouds.yaml
+        BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-refresh-token "$CHECKIN_REFRESH_TOKEN" \
+                                                           --oidc-client-id "$CHECKIN_CLIENT_ID" \
+                                                           --oidc-client-secret "$CHECKIN_CLIENT_SECRET" \
+                                                           --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
+        echo "::add-mask::$BACKEND_OS_TOKEN"
+        sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
+        DEPLOY_OS_TOKEN="$(fedcloud openstack token issue --oidc-refresh-token "$CHECKIN_REFRESH_TOKEN" \
+                                                           --oidc-client-id "$CHECKIN_CLIENT_ID" \
+                                                           --oidc-client-secret "$CHECKIN_CLIENT_SECRET" \
+                                                           --site "$EGI_SITE" --vo "$DEPLOY_VO" -j | jq -r '.[0].Result.id')"
+        echo "::add-mask::$DEPLOY_OS_TOKEN"
+        sed -i -e "s/deploy_secret/$DEPLOY_OS_TOKEN/" clouds.yaml
         mkdir -p ~/.config/openstack
         touch ~/.config/openstack/secure.yaml
     - name: Setup Terraform
@@ -97,7 +108,7 @@ jobs:
           </details>
 
           *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-          github.issues.createComment({
+          github.rest.issues.createComment({
             issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,

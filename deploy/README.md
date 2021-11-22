@@ -20,6 +20,6 @@ Secrets are stored in GitHub. These include:
 - `ANSIBLE_SECRETS`: `yaml` file with robot account credentials and AMS token
   for pushing messages
 - `APP_ID` and `APP_PRIVATE_KEY`: credentials for GitHub app capable of
-  getting a token to pull the repo at the deployed VM
+  getting a token to pull the repository at the deployed VM
 - `CHECKIN_CLIENT_ID`, `CHECKIN_CLIENT_SECRET` and `CHECKIN_REFRESH_TOKEN` with
   valid Check-in credentials for deployment of the VM on the provider

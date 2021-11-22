@@ -2,6 +2,8 @@
 vos:
   acc-comp.egi.eu:
     auth: "{{ fedcloud_sa }}"
+  aquamonitor.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   belle:
   benchmark.terradue.com:
     auth: "{{ robot_sa }}"
@@ -11,8 +13,8 @@ vos:
   bioisi:
   biomed:
     auth: "{{ robot_sa }}"
-  vip-competence-centre-biomed:
-    auth: "{{ robot_sa }}"    
+  "/biomed/vip":
+    auth: "{{ robot_sa }}"
   blazarmonitoring.asi.it:
     auth: "{{ robot_sa }}"
   chipster.csc.fi:
@@ -20,6 +22,8 @@ vos:
   cloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   covid19.eosc-synergy.eu:
+    auth: "{{ fedcloud_sa }}"
+  cos4cloud-eosc.eu:
     auth: "{{ fedcloud_sa }}"
   cryoem.instruct-eric.eu:
     auth: "{{ fedcloud_sa }}"
@@ -49,13 +53,21 @@ vos:
   geohazards.terradue.com:
   gosafe.eng.it:
     auth: "{{ fedcloud_sa }}"
+  HighResLandSurf.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
+  hisea.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   gridifin.ro:
   hidronav.eosc-hub.eu:
   hydrology.terradue.com:
   kampal.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
+  lagoproject.net:
+    auth: "{{ eduteams }}"
   lhcb:
   med.semmelweis-univ.hu:
+    auth: "{{ fedcloud_sa }}"
+  minka-sdg.org:
     auth: "{{ fedcloud_sa }}"
   mathematical-software:
   mswss.ui.savba.sk:
@@ -66,9 +78,13 @@ vos:
     auth: "{{ fedcloud_sa }}"
   opencoast.eosc-hub.eu:
     auth: "{{ robot_sa }}"
+  openrisknet.org:
+    auth: "{{ fedcloud_sa }}"
   ops:
     auth: "{{ robot_sa }}"
   peachnote.com:
+    auth: "{{ fedcloud_sa }}"
+  return.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   saps-vo.i3m.upv.es:
     auth: "{{ fedcloud_sa }}"
@@ -79,9 +95,13 @@ vos:
   verce.eu:
   vo.access.egi.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.agiliacenter.com:
+    auth: "{{ fedcloud_sa }}"
   vo.clarin.eu:
   vo.crmdr.org:
   vo.dariah.eu:
+  vo.deltares.nl:
+    auth: "{{ fedcloud_sa }}"
   vo.digitbrain.eu:
     auth: "{{ fedcloud_sa }}"
   vo.elixir-europe.org:
@@ -106,6 +126,8 @@ vos:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
     auth: "{{ fedcloud_sa }}"
+  "/vo.lifewatch.eu/openbiomap":
+    auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
   vo.nbis.se:
   vo.nextgeoss.eu:
@@ -117,6 +139,8 @@ vos:
   vo.operas-eu.org:
     auth: "{{ fedcloud_sa }}"
   vo.panosc.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.plocan.eu:
     auth: "{{ fedcloud_sa }}"
   vo.policycloud.eu:
     auth: "{{ fedcloud_sa }}"
