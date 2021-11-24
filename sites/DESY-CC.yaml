@@ -1,5 +1,5 @@
 ---
-gocdb: DESY-HH
+gocdb: DESY-CC
 endpoint: https://ccmi-api.desy.de:5000/v3
 vos:
 - name: fedcloud.egi.eu
