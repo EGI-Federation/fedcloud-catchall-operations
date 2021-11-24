@@ -32,7 +32,7 @@ jobs:
         set -x
         mkdir ~/.mytoken
         curl https://raw.githubusercontent.com/oidc-mytoken/client/master/config/example-config.yaml > ~/.mytoken/config.yaml
-        OIDC_TOKEN=$(mytoken AT --MT-env MYTOKEN)
+        OIDC_TOKEN=$(./mytoken AT --MT-env MYTOKEN)
         echo "::add-mask::$OIDC_TOKEN"
         PATH="$PWD:$PATH"
         cd deploy
