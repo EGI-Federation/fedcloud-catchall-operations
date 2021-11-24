@@ -41,11 +41,11 @@ jobs:
         EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
         DEPLOY_VO="$(yq -r .clouds.deploy.vo clouds.yaml)"
         echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
-        BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-refresh-token "$OIDC_TOKEN" \
+        BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
                                                            --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
         echo "::add-mask::$BACKEND_OS_TOKEN"
         sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
-        DEPLOY_OS_TOKEN="$(fedcloud openstack token issue --oidc-refresh-token "$OIDC_TOKEN" \
+        DEPLOY_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
                                                            --site "$EGI_SITE" --vo "$DEPLOY_VO" -j | jq -r '.[0].Result.id')"
         echo "::add-mask::$DEPLOY_OS_TOKEN"
         sed -i -e "s/deploy_secret/$DEPLOY_OS_TOKEN/" clouds.yaml
