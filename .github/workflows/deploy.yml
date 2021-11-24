@@ -29,6 +29,7 @@ jobs:
         CHECKIN_CLIENT_SECRET: ${{ secrets.CHECKIN_CLIENT_SECRET }}
         CHECKIN_REFRESH_TOKEN: ${{ secrets.CHECKIN_REFRESH_TOKEN }}
       run: |
+        set -x
         PATH="$PWD:$PATH"
         cd deploy
         BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
