@@ -25,24 +25,21 @@ jobs:
         pip install yq fedcloudclient
         curl -L https://github.com/oidc-mytoken/client/releases/download/v0.3.0/mytoken_0.3.0_Linux_x86_64.tar.gz \
           | tar -xzf -
+        mkdir ~/.mytoken
+        curl https://raw.githubusercontent.com/oidc-mytoken/client/master/config/example-config.yaml > ~/.mytoken/config.yaml
     - name: Configure providers access
       env:
         MYTOKEN: ${{ secrets.MYTOKEN }}
       run: |
-        set -x
-        mkdir ~/.mytoken
-        curl https://raw.githubusercontent.com/oidc-mytoken/client/master/config/example-config.yaml > ~/.mytoken/config.yaml
-        OIDC_TOKEN=$(./mytoken AT --MT-env MYTOKEN)
-        echo "::add-mask::$OIDC_TOKEN"
         PATH="$PWD:$PATH"
+        OIDC_TOKEN=$(mytoken AT --MT-env MYTOKEN)
+        echo "::add-mask::$OIDC_TOKEN"
         cd deploy
         BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
         BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
         EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
         DEPLOY_VO="$(yq -r .clouds.deploy.vo clouds.yaml)"
         echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
-        fedcloud site show --site NCG-INGRID-PT
-        fedcloud site show-project-id --vo cloud.egi.eu --site NCG-INGRID-PT
         BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
                                                            --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
         echo "::add-mask::$BACKEND_OS_TOKEN"
