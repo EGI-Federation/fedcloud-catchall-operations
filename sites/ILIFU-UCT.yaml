@@ -1,0 +1,9 @@
+gocdb: ILIFU-UCT
+endpoint: https://dashboard2.ilifu.ac.za:5000/v3
+vos:
+- name: ops
+  auth:
+    project_id: 668927725bfa4b87a8f02a214095f34d
+- name: vo.access.egi.eu
+  auth:
+    project_id: a8c0add4584e4230832f84adb0539809
