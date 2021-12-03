@@ -128,6 +128,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   "/vo.lifewatch.eu/openbiomap":
     auth: "{{ fedcloud_sa }}"
+  vo.mightee.idia.za:
+    auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
   vo.nbis.se:
   vo.nextgeoss.eu:
