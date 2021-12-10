@@ -62,3 +62,7 @@ vos:
 - name: vo.plocan.eu
   auth:
     project_id: 7d4e7efd1eab46fb949aa06c35aeb60d
+- name: vo.obsea.es
+  auth:
+    project_id: 218b07e978ea4ba280dd4b554c0d1cd9
+
