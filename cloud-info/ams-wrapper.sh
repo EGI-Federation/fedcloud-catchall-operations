@@ -35,7 +35,7 @@ cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
 ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
 
 printf '{"messages":[{"attributes":{},"data":"' > ams-payload
-grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | base64 -w 0 >> ams-payload
+grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | gzip | base64 -w 0 >> ams-payload
 printf '"}]}' >> ams-payload
 
 curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
