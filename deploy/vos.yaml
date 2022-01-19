@@ -57,6 +57,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  icecube:
+    auth: "{{ fedcloud_sa }}"
   gridifin.ro:
   hidronav.eosc-hub.eu:
   hydrology.terradue.com:
