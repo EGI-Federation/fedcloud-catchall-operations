@@ -84,3 +84,6 @@ vos:
 - name: vo.panosc.eu
   auth:
     project_id: d868dfd63a674d94bbd9d9b7b54443e3
+- name: icecube
+  auth:
+    project_id: 14c82a422b094c32b4858ce959fa1a0d

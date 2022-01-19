@@ -1,3 +1,0 @@
-rules:
-  # disabled as otherwise CA installation breaks
-  apt-get_recommends: off
