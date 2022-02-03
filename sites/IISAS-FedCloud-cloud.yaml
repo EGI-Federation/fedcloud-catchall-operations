@@ -35,3 +35,9 @@ vos:
 - name: vo.nextgeoss.eu
   auth:
     project_id: 6c4aff79522448ac8191e70dcf4a672a
+- name: vo.matrycs.eu
+  auth:
+    project_id: 6c2453d04ee544868b70684928d96337
+- name: vo.bd4nrg.eu
+  auth:
+    project_id: 74128e581e6941ad91c7fce06f14e6c8
