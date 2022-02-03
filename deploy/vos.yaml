@@ -132,6 +132,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   "/vo.lifewatch.eu/openbiomap":
     auth: "{{ fedcloud_sa }}"
+  vo.matrycs.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.mightee.idia.za:
     auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
