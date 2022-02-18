@@ -87,3 +87,6 @@ vos:
 - name: icecube
   auth:
     project_id: 14c82a422b094c32b4858ce959fa1a0d
+- name: university.eosc-synergy.eu
+  auth:
+    project_id: a478488b79df46c4a086ecb7a321b038
