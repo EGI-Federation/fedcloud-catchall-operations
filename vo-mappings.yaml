@@ -43,6 +43,7 @@ vos:
   saps-vo.i3m.upv.es: "urn:mace:egi.eu:group:saps-vo.i3m.upv.es:vm_operator:role=member#aai.egi.eu"
   training.egi.eu: "urn:mace:egi.eu:group:training.egi.eu:vm_operator:role=member#aai.egi.eu"
   umsa.cerit-sc.cz: "urn:mace:egi.eu:group:umsa.cerit-sc.cz:vm_operator:role=member#aai.egi.eu"
+  university.eosc-synergy.eu: "urn:mace:egi.eu:group:university.eosc-synergy.eu:vm_operator:role=member#aai.egi.eu"
   vo.access.egi.eu: "urn:mace:egi.eu:group:vo.access.egi.eu:vm_operator:role=member#aai.egi.eu"
   vo.agiliacenter.com: "urn:mace:egi.eu:group:vo.agiliacenter.com:vm_operator:role=member#aai.egi.eu"
   vo.bd4nrg.eu: "urn:mace:egi.eu:group:vo.bd4nrg.eu:role=vm_operator#aai.egi.eu"
