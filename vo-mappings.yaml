@@ -47,6 +47,7 @@ vos:
   vo.access.egi.eu: "urn:mace:egi.eu:group:vo.access.egi.eu:vm_operator:role=member#aai.egi.eu"
   vo.agiliacenter.com: "urn:mace:egi.eu:group:vo.agiliacenter.com:vm_operator:role=member#aai.egi.eu"
   vo.bd4nrg.eu: "urn:mace:egi.eu:group:vo.bd4nrg.eu:role=vm_operator#aai.egi.eu"
+  vo.carouseldancing.org: "urn:mace:egi.eu:group:vo.carouseldancing.org:role=vm_operator#aai.egi.eu"
   vo.clarin.eu: "urn:mace:egi.eu:group:vo.clarin.eu:vm_operator:role=member#aai.egi.eu"
   vo.deltares.nl: "urn:mace:egi.eu:group:vo.deltares.nl:vm_operator:role=member#aai.egi.eu"
   vo.elixir-europe.org: "urn:mace:egi.eu:group:vo.elixir-europe.org:vm_operator:role=member#aai.egi.eu"
