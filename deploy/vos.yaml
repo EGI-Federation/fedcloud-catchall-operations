@@ -160,5 +160,7 @@ vos:
   dih-voucher01.eosc-hub.eu:
   vo.max-centre.eu:
     auth: "{{ fedcloud_sa }}"
+  waterwatch.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"

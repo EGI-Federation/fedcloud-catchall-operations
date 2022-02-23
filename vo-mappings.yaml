@@ -74,4 +74,5 @@ vos:
   vo.policycloud.eu: "urn:mace:egi.eu:group:vo.policycloud.eu:vm_operator:role=member#aai.egi.eu"
   vo.seadatanet.eu: "urn:mace:egi.eu:group:vo.seadatanet.eu:vm_operator:role=member#aai.egi.eu"
   vo.stars4all.eu: "urn:mace:egi.eu:group:vo.stars4all.eu:vm_operator:role=member#aai.egi.eu"
+  waterwatch.c-scale.eu: "urn:mace:egi.eu:group:waterwatch.c-scale.eu:vm_operator:role=member#aai.egi.eu"
   worsica.vo.incd.pt: "urn:mace:egi.eu:group:worsica.vo.incd.pt:vm_operator:role=member#aai.egi.eu"
