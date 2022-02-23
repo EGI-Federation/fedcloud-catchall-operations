@@ -90,3 +90,6 @@ vos:
 - name: university.eosc-synergy.eu
   auth:
     project_id: a478488b79df46c4a086ecb7a321b038
+- name: waterwatch.c-scale.eu
+  auth:
+    project_id: acf5d12568914e65a80150efb087cbb8
