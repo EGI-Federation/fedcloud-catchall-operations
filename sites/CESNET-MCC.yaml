@@ -96,3 +96,6 @@ vos:
 - name: vo.carouseldancing.org
   auth:
     project_id: 7ace5ca998b849619bd34e922fbd2cb7
+- name: vo.pangeo.eu
+  auth:
+    project_id: 05e0ff6e03774082aadacc75bfc1d783
