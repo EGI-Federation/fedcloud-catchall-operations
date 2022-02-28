@@ -87,3 +87,18 @@ vos:
 - name: icecube
   auth:
     project_id: 14c82a422b094c32b4858ce959fa1a0d
+- name: university.eosc-synergy.eu
+  auth:
+    project_id: a478488b79df46c4a086ecb7a321b038
+- name: waterwatch.c-scale.eu
+  auth:
+    project_id: acf5d12568914e65a80150efb087cbb8
+- name: vo.carouseldancing.org
+  auth:
+    project_id: 7ace5ca998b849619bd34e922fbd2cb7
+- name: vo.pangeo.eu
+  auth:
+    project_id: 05e0ff6e03774082aadacc75bfc1d783
+- name: vo.neanias.eu
+  auth:
+    project_id: bc7b84252d3c4a42a6d1d346865a7631

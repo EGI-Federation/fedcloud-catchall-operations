@@ -94,12 +94,16 @@ vos:
     auth: "{{ fedcloud_sa }}"
   umsa.cerit-sc.cz:
     auth: "{{ fedcloud_sa }}"
+  university.eosc-synergy.eu:
+    auth: "{{ fedcloud_sa }}"
   verce.eu:
   vo.access.egi.eu:
     auth: "{{ fedcloud_sa }}"
   vo.agiliacenter.com:
     auth: "{{ fedcloud_sa }}"
   vo.bd4nrg.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
   vo.clarin.eu:
   vo.crmdr.org:
@@ -138,6 +142,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
   vo.nbis.se:
+  vo.neanias.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.nextgeoss.eu:
     auth: "{{ fedcloud_sa }}"
   vo.notebooks.egi.eu:
@@ -145,6 +151,8 @@ vos:
   vo.obsea.es:
     auth: "{{ fedcloud_sa }}"
   vo.operas-eu.org:
+    auth: "{{ fedcloud_sa }}"
+  vo.pangeo.eu:
     auth: "{{ fedcloud_sa }}"
   vo.panosc.eu:
     auth: "{{ fedcloud_sa }}"
@@ -157,6 +165,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   dih-voucher01.eosc-hub.eu:
   vo.max-centre.eu:
+    auth: "{{ fedcloud_sa }}"
+  waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
