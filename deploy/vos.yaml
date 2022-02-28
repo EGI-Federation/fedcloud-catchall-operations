@@ -142,6 +142,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.mrilab.es:
   vo.nbis.se:
+  vo.neanias.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.nextgeoss.eu:
     auth: "{{ fedcloud_sa }}"
   vo.notebooks.egi.eu:
@@ -149,6 +151,8 @@ vos:
   vo.obsea.es:
     auth: "{{ fedcloud_sa }}"
   vo.operas-eu.org:
+    auth: "{{ fedcloud_sa }}"
+  vo.pangeo.eu:
     auth: "{{ fedcloud_sa }}"
   vo.panosc.eu:
     auth: "{{ fedcloud_sa }}"
