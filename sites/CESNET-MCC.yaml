@@ -102,3 +102,6 @@ vos:
 - name: vo.neanias.eu
   auth:
     project_id: bc7b84252d3c4a42a6d1d346865a7631
+- name: vo.environmental.egi.eu
+  auth:
+    project_id: 29e6fbf618984a0c98ffcdf0222ad815
