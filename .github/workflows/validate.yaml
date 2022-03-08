@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       # Check yaml files comply to schema
       - name: Check YAML schema
         run: |
@@ -19,7 +19,7 @@ jobs:
           chmod +x yajsv
           ./yajsv -s schema.json sites/*.yaml
       - name: Setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Validate GOC and VOs
