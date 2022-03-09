@@ -1,6 +1,6 @@
 ---
 gocdb: SCAI
-endpoint: https://fc.scai.fraunhofer.de:5000/v3
+endpoint: https://cloud.scai.fraunhofer.de:5000
 vos:
 - name: fedcloud.egi.eu
   auth:
