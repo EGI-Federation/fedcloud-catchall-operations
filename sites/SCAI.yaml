@@ -2,9 +2,10 @@
 gocdb: SCAI
 endpoint: https://cloud.scai.fraunhofer.de:5000
 vos:
+- name: ops
+  auth:
+    project_id: e9d70580d83f4da0a859093248791b7b
 - name: vo.access.egi.eu
   auth:
     project_id: 7583e1bb07544efdac165e7a121c663e
-- name: ops
-  auth:
-    project_id: 67bbf0ad6c4d4446b0c0c41197108f2c
+
