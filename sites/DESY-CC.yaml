@@ -8,3 +8,9 @@ vos:
 - name: vo.panosc.eu
   auth:
     project_id: ac06d127fc14463c9bd283f08e731eb2
+- name: vo.cite.gr
+  auth:
+    project_id: cf702115862145869d78aadab4021f81
+- name: vo.openrdm.eu
+  auth:
+    project_id: 270eaf591c4b489a8f6dc1400fe2ed3c
