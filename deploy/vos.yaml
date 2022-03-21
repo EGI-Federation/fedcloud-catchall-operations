@@ -105,6 +105,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
+  vo.cite.gr:
+    auth: "{{ fedcloud_sa }}"
   vo.clarin.eu:
   vo.crmdr.org:
   vo.dariah.eu:
