@@ -1,8 +1,9 @@
 FROM centos:7
 
+COPY cloudkeeper.repo /etc/yum.repos.d/cloudkeeper.repo
+
 # hadolint ignore=DL3033
-RUN curl http://appdb.egi.eu:9009/api/repofiles/index.php?id=1141 > /etc/yum.repos.d/cloudkeeper.repo \
-    && yum install -y centos-release-openstack-stein vim \
+RUN yum install -y centos-release-openstack-stein \
     && yum install -y cloudkeeper-os \
     && yum clean all
 
