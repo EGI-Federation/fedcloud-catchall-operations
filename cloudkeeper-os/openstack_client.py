@@ -32,8 +32,7 @@ CFG_GROUP = "keystone_authtoken"
 
 
 def get_session(project_name, domain_name):
-    """Get an auth session.
-    """
+    """Get an auth session."""
     try:
         # attempt with project_id
         auth_params = dict(CONF[CFG_GROUP])
@@ -44,27 +43,25 @@ def get_session(project_name, domain_name):
     except exceptions.Unauthorized:
         # attempt with project_name
         auth_params = dict(CONF[CFG_GROUP])
-        auth_params.update(dict(project_name=project_name,
-                                domain_name=domain_name))
+        auth_params.update(dict(project_name=project_name, domain_name=domain_name))
         auth = v3.Password(**auth_params)
         sess = session.Session(auth=auth, verify=False)
     return sess
 
 
 def get_glance_client(project_name, domain_name):
-    """Get a glance client
-    """
+    """Get a glance client"""
     LOG.debug("Get a glance client for the project: '%s'" % project_name)
 
     endpoint_type = CONF.endpoint_type
     try:
         sess = get_session(project_name=project_name, domain_name=domain_name)
         if endpoint_type:
-            LOG.debug("Glance client is accessing Glance through the "
-                      "following endpoint type: %s" % endpoint_type)
-            glance_client = glanceclient.Client(
-                session=sess, interface=endpoint_type
+            LOG.debug(
+                "Glance client is accessing Glance through the "
+                "following endpoint type: %s" % endpoint_type
             )
+            glance_client = glanceclient.Client(session=sess, interface=endpoint_type)
         else:
             glance_client = glanceclient.Client(session=sess)
     except webob.exc.HTTPForbidden as err:
