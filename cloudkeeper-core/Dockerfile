@@ -1,5 +1,6 @@
 FROM ruby:2.6
-MAINTAINER Enol Fernandez <enol.fernandez@egi.eu>
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # We do need install recommends for the CAs
 # hadolint ignore=DL3015, DL3008
