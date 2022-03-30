@@ -18,12 +18,11 @@
 """
 
 import glanceclient.v2.client as glanceclient
-from keystoneauth1 import exceptions
+import webob.exc
+from keystoneauth1 import exceptions, session
 from keystoneauth1.identity import v3
-from keystoneauth1 import session
 from oslo_config import cfg
 from oslo_log import log
-import webob.exc
 
 CONF = cfg.CONF
 LOG = log.getLogger(__name__)
