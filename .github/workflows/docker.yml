@@ -16,7 +16,9 @@ jobs:
       matrix:
         image:
         - cloud-info
-        - caso 
+        - caso
+        - cloudkeeper-os
+        - cloudkeeper-core
 
     steps:
       - name: Checkout
