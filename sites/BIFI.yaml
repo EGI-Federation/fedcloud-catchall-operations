@@ -20,6 +20,6 @@ vos:
 - name: worsica.vo.incd.pt
   auth:
     project_id: 46f55a92f3904d509d75525930d8d0eb
-- name: phiri.eu
+- name: vo.phiri.eu
   auth:
     project_id: 1d64c6e5237b46af8acb44f79b7b5a15
