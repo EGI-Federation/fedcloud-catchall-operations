@@ -6,7 +6,7 @@ ARG CLOUD_INFO_VERSION=a1aa462fc5d1ccbad2f7c0e68336003d761ec63e
 RUN pip install --no-cache-dir \
         "git+https://github.com/EGI-Federation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
         "git+https://github.com/enolfc/argo-ams-library.git@callable" \
-        python-glanceclient python-novaclient python-keystoneclient keystoneauth1
+        python-glanceclient python-novaclient python-keystoneclient keystoneauth1 yq
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

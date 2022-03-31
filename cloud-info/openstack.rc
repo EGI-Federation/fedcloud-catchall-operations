@@ -1,3 +1,6 @@
+# Cloud info config
+CLOUD_INFO_CONFIG=/etc/cloud-info-provider/openstack.yaml
+
 # OpenStack AUTH variables
 OS_AUTH_URL=https://example.com:5000/v3
 OS_PROJECT_DOMAIN_ID=default

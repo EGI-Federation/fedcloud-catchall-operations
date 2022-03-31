@@ -20,6 +20,10 @@ elif test "x$HOSTCERT" != "x" -a  "x$HOSTKEY" != "x"; then
                            print(ams.token)")
 fi
 
+if test "x$SITE_NAME" = "x"; then
+    SITE_NAME="$(yq -r .site.name "$CLOUD_INFO_CONFIG" | tr "." "-")"
+fi
+
 SITE_TOPIC=$(echo "$SITE_NAME" | tr "." "-")
 AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
 
