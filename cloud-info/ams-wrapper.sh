@@ -11,6 +11,13 @@ GOCDB_ID=$(python -c "from __future__ import print_function; \
 
 if test "x$AMS_TOKEN_FILE" != "x"; then
     AMS_TOKEN=$(cat "$AMS_TOKEN_FILE")
+elif test "x$HOSTCERT" != "x" -a  "x$HOSTKEY" != "x"; then
+    AMS_TOKEN=$(python -c "from argo_ams_library import ArgoMessagingService; \
+			   ams = ArgoMessagingService(endpoint='$AMS_HOST', \
+                                                      project='$AMS_PROJECT', \
+                                                      cert='$HOSTCERT', \
+                                                      key='$HOSTKEY'); \
+                           print(ams.token)")
 fi
 
 SITE_TOPIC=$(echo "$SITE_NAME" | tr "." "-")
@@ -19,7 +26,6 @@ AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
 # exit if TOPIC is not available.
 curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_TOKEN" > /dev/null 2>&1 \
     || (echo "Topic $AMS_TOPIC is not avaiable, aborting!"; false)
-
 
 # Other OS related parameter should be available as env variables
 cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \

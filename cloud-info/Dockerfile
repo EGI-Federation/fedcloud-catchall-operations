@@ -5,6 +5,7 @@ ARG CLOUD_INFO_VERSION=a1aa462fc5d1ccbad2f7c0e68336003d761ec63e
 # hadolint ignore=DL3013
 RUN pip install --no-cache-dir \
         "git+https://github.com/EGI-Federation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
+        "git+https://github.com/enolfc/argo-ams-library.git@callable" \
         python-glanceclient python-novaclient python-keystoneclient keystoneauth1
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -23,5 +24,7 @@ RUN curl -Ls \
 
 COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
+COPY openstack.rc /etc/cloud-info-provider/openstack.rc
+COPY openstack.yaml /etc/cloud-info-provider/openstack.yaml
 
 CMD ["publisher.sh"]
