@@ -9,9 +9,9 @@ GOCDB_ID=$(python -c "from __future__ import print_function; \
                                                 '$GOCDB_SERVICE_TYPE',
                                                 timeout=60)['gocdb_id'], end='')")
 
-if test "x$AMS_TOKEN_FILE" != "x"; then
+if test "$AMS_TOKEN_FILE" != ""; then
     AMS_TOKEN=$(cat "$AMS_TOKEN_FILE")
-elif test "x$HOSTCERT" != "x" -a  "x$HOSTKEY" != "x"; then
+elif test "$HOSTCERT" != "" -a  "$HOSTKEY" != ""; then
     AMS_TOKEN=$(python -c "from argo_ams_library import ArgoMessagingService; \
 			   ams = ArgoMessagingService(endpoint='$AMS_HOST', \
                                                       project='$AMS_PROJECT', \
@@ -20,7 +20,7 @@ elif test "x$HOSTCERT" != "x" -a  "x$HOSTKEY" != "x"; then
                            print(ams.token)")
 fi
 
-if test "x$SITE_NAME" = "x"; then
+if test "$SITE_NAME" = ""; then
     SITE_NAME="$(yq -r .site.name "$CLOUD_INFO_CONFIG" | tr "." "-")"
 fi
 
