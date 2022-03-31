@@ -31,15 +31,23 @@ AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
 curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_TOKEN" > /dev/null 2>&1 \
     || (echo "Topic $AMS_TOPIC is not avaiable, aborting!"; false)
 
-# Other OS related parameter should be available as env variables
-cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
-                            --middleware "$CLOUD_INFO_MIDDLEWARE" \
-                            --auth-refresher oidcvorefresh \
-                            --ignore-share-errors \
-                            --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
-                            --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
-                            --oidc-scopes "openid email profile eduperson_entitlement" \
-                            --format glue21 > cloud-info.out
+
+# Any OS related parameter should be available as env variables
+if test "$CHECKIN_SECRETS_PATH" = ""; then
+    cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+                                --middleware "$CLOUD_INFO_MIDDLEWARE" \
+                                --ignore-share-errors \
+                                --format glue21 > cloud-info.out
+else
+    cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+                                --middleware "$CLOUD_INFO_MIDDLEWARE" \
+                                --ignore-share-errors \
+                                --auth-refresher oidcvorefresh \
+                                --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
+                                --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
+                                --oidc-scopes "openid email profile eduperson_entitlement" \
+                                --format glue21 > cloud-info.out
+fi
 
 # Publishing on our own as message is too large for some providers
 ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
