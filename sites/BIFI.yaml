@@ -23,3 +23,6 @@ vos:
 - name: vo.phiri.eu
   auth:
     project_id: 1d64c6e5237b46af8acb44f79b7b5a15
+- name: vo.bd4nrg.eu
+  auth:
+    project_id: 3e18859848be489a8d741b264049f4a9
