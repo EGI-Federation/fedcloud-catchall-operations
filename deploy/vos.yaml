@@ -124,6 +124,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.envri-fair.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.environmental.egi.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
   vo.europlanet-vespa.eu:
@@ -159,6 +161,8 @@ vos:
   vo.pangeo.eu:
     auth: "{{ fedcloud_sa }}"
   vo.panosc.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.phiri.eu:
     auth: "{{ fedcloud_sa }}"
   vo.plocan.eu:
     auth: "{{ fedcloud_sa }}"
