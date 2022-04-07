@@ -115,6 +115,7 @@ vos:
   vo.digitbrain.eu:
     auth: "{{ fedcloud_sa }}"
   vo.elixir-europe.org:
+  vo.eoscfuture-sp.panosc.eu:
   vo.emphasisproject.eu:
     auth: "{{ fedcloud_sa }}"
   vo.emsodev.eu:
