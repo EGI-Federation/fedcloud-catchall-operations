@@ -136,6 +136,7 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.grand-est.fr:
   vo.iiasa.ac.at:
+  vo.inactive-sarscov2.eu:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
     auth: "{{ fedcloud_sa }}"
