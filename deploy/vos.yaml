@@ -138,6 +138,8 @@ vos:
   vo.iiasa.ac.at:
   vo.inactive-sarscov2.eu:
   vo.indigo-datacloud.eu:
+  vo.lethe-project.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.lifewatch.eu:
     auth: "{{ fedcloud_sa }}"
   "/vo.lifewatch.eu/openbiomap":
