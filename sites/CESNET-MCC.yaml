@@ -105,3 +105,6 @@ vos:
 - name: vo.environmental.egi.eu
   auth:
     project_id: 29e6fbf618984a0c98ffcdf0222ad815
+- name: vo.eoscfuture-sp.panosc.eu
+  auth:
+    project_id: c91eeff7bf7845bc901b319512f2ebdb
