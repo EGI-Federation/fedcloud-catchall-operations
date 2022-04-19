@@ -47,3 +47,6 @@ vos:
 - name: vo.operas-eu.org
   auth:
     project_id: bc4fed7e87514dd884924c77cad714bc
+- name: vo.lethe-project.eu
+  auth:
+    project_id: f064d2b5f42a4704958f3bfbff7404bd
