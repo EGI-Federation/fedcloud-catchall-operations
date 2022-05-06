@@ -13,5 +13,5 @@ vos:
   auth:
     project_id: 8b6a8afe225344dea808ec17a26de56d
  - name: vo.i-nergy.eu
-  auth:
+   auth:
     project_id: ce2be245c0a24b52a0d31ede99c0bd63
