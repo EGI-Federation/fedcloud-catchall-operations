@@ -166,7 +166,9 @@ vos:
   dteam:
     auth: "{{ robot_sa }}"
     expiry: 2022-07-27 00:00:00
+  enmr.eu:
     auth: "{{ robot_sa }}"
+    expiry: 2023-01-08 00:00:00
   fusion:
     auth: "{{ robot_sa }}"
     expiry: 2024-01-04 00:00:00
@@ -186,7 +188,6 @@ vos:
   demo.fedcloud.egi.eu:
   drihm.eu:
   eiscat.se:
-  enmr.eu:
   fedcloud.egi.eu:
   lagoproject.net:
   opencoast.eosc-hub.eu:
