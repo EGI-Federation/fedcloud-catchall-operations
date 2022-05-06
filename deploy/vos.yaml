@@ -1,184 +1,207 @@
 ---
 vos:
-  acc-comp.egi.eu:
-    auth: "{{ fedcloud_sa }}"
-  aquamonitor.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
-  belle:
-  benchmark.terradue.com:
-    auth: "{{ robot_sa }}"
-  biinsight.eosc-hub.eu:
-    auth: "{{ fedcloud_sa }}"
-  bioexcel:
-  bioisi:
-  biomed:
-    auth: "{{ robot_sa }}"
-  "/biomed/vip":
-    auth: "{{ robot_sa }}"
-  blazarmonitoring.asi.it:
-    auth: "{{ robot_sa }}"
-  chipster.csc.fi:
-  cms:
-  cloud.egi.eu:
-    auth: "{{ fedcloud_sa }}"
-  covid19.eosc-synergy.eu:
-    auth: "{{ fedcloud_sa }}"
-  cos4cloud-eosc.eu:
-    auth: "{{ fedcloud_sa }}"
-  cryoem.instruct-eric.eu:
-    auth: "{{ fedcloud_sa }}"
-  d4science.org:
-    auth: "{{ fedcloud_sa }}"
-  datafurn.eosc-hub.eu:
-    auth: "{{ fedcloud_sa }}"
-  demo.fedcloud.egi.eu:
-    auth: "{{ robot_sa }}"
-  drihm.eu:
-  dteam:
-    auth: "{{ robot_sa }}"
-  eiscat.se:
-    auth: "{{ robot_sa }}"
-  eli-laser.eu:
-  enmr.eu:
-    auth: "{{ robot_sa }}"
   EOServices-vo.indra.es:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-18 00:00:00
+  benchmark.terradue.com:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-05-06 00:00:00
+  biinsight.eosc-hub.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-14 00:00:00
+  cloud.egi.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-19 00:00:00	
+  covid19.eosc-synergy.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-29 00:00:00	
+  cryoem.instruct-eric.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-19 00:00:00
+  d4science.org:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-18 00:00:00
+  datafurn.eosc-hub.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-30 00:00:00	
   eosc-synergy.eu:
     auth: "{{ fedcloud_sa }}"
-  extras-fp7.eu:
-  fedcloud.egi.eu:
-    auth: "{{ enol_sa }}"
-  fusion:
-    auth: "{{ robot_sa }}"
-  geohazards.terradue.com:
-  gosafe.eng.it:
-    auth: "{{ fedcloud_sa }}"
-  HighResLandSurf.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
-  hisea.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-29 00:00:00	
   icecube:
     auth: "{{ fedcloud_sa }}"
-  gridifin.ro:
-  hidronav.eosc-hub.eu:
-  hydrology.terradue.com:
+    expiry: 2023-01-17 00:00:00
+  ispravision.vo.egi.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-01 00:00:00
   kampal.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-  lagoproject.net:
-    auth: "{{ eduteams }}"
-  lhcb:
+    expiry: 2022-09-30 00:00:00	
   med.semmelweis-univ.hu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-29 00:00:00	
   minka-sdg.org:
     auth: "{{ fedcloud_sa }}"
-  mathematical-software:
+    expiry: 2022-11-08 00:00:00
   mswss.ui.savba.sk:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-18 00:00:00
   mteam.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-20 00:00:00
   o3as.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
-  opencoast.eosc-hub.eu:
-    auth: "{{ robot_sa }}"
-  openrisknet.org:
-    auth: "{{ fedcloud_sa }}"
-  ops:
-    auth: "{{ robot_sa }}"
+    expiry: 2022-10-07 00:00:00	
   peachnote.com:
     auth: "{{ fedcloud_sa }}"
-  return.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-29 00:00:00	
   saps-vo.i3m.upv.es:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-19 00:00:00
   training.egi.eu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-30 22:59:59
   umsa.cerit-sc.cz:
     auth: "{{ fedcloud_sa }}"
-  university.eosc-synergy.eu:
-    auth: "{{ fedcloud_sa }}"
-  verce.eu:
+    expiry: 2023-04-20 00:00:00
   vo.access.egi.eu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2022-07-23 00:00:00
   vo.agiliacenter.com:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-18 00:00:00
   vo.bd4nrg.eu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-02-01 00:00:00
   vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-02-23 00:00:00
   vo.cite.gr:
     auth: "{{ fedcloud_sa }}"
-  vo.clarin.eu:
-  vo.crmdr.org:
-  vo.dariah.eu:
-  vo.deltares.nl:
-    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-03-04 00:00:00
   vo.digitbrain.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.elixir-europe.org:
-  vo.eoscfuture-sp.panosc.eu:
+    expiry: 2022-10-01 00:00:00
   vo.emphasisproject.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.emsodev.eu:
+    expiry: 2023-02-14 00:00:00
   vo.emso-eric.eu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-30 00:00:00	
   vo.enes.org:
     auth: "{{ fedcloud_sa }}"
-  vo.envri-fair.eu:
-    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-05-13 00:00:00
   vo.environmental.egi.eu:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2023-03-03 00:00:00
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.europlanet-vespa.eu:
-  vo.formation.idgrilles.fr:
-  vo.france-grilles.fr:
+    expiry: 2022-09-30 00:00:00
   vo.geoss.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.grand-est.fr:
-  vo.iiasa.ac.at:
-  vo.inactive-sarscov2.eu:
-  vo.indigo-datacloud.eu:
+    expiry: 2023-04-28 00:00:00
+  vo.i-nergy.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-05-06 00:00:00
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.lifewatch.eu:
-    auth: "{{ fedcloud_sa }}"
-  "/vo.lifewatch.eu/openbiomap":
-    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-19 00:00:00
   vo.matrycs.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.mightee.idia.za:
-    auth: "{{ fedcloud_sa }}"
-  vo.mrilab.es:
-  vo.nbis.se:
-  vo.neanias.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.nextgeoss.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.notebooks.egi.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.obsea.es:
-    auth: "{{ fedcloud_sa }}"
-  vo.openrdm.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.operas-eu.org:
-    auth: "{{ fedcloud_sa }}"
-  vo.pangeo.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.panosc.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.phiri.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.plocan.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.policycloud.eu:
-    auth: "{{ fedcloud_sa }}"
-  vo.sbg.in2p3.fr:
-  vo.stars4all.eu:
-    auth: "{{ fedcloud_sa }}"
-  dih-voucher01.eosc-hub.eu:
+    expiry: 2023-02-01 00:00:00
   vo.max-centre.eu:
     auth: "{{ fedcloud_sa }}"
-  waterwatch.c-scale.eu:
+    expiry: 2022-09-30 00:00:00
+  vo.mightee.idia.za:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2022-11-30 00:00:00
+  vo.neanias.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-02-28 00:00:00
+  vo.nextgeoss.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-30 00:00:00
+  vo.notebooks.egi.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: na
+  vo.obsea.es:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-01 00:00:00
+  vo.operas-eu.org:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-06-25 00:00:00
+  vo.panosc.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-30 00:00:00
+  vo.phiri.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-03-29 00:00:00
+  vo.plocan.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-14 00:00:00
+  vo.policycloud.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-09-30 00:00:00
+  vo.projectescape.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-05-05 00:00:00
+  vo.seadatanet.org:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-18 00:00:00
+  vo.stars4all.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-18 00:00:00
+  vo.ubora-biomedical.org:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-01 00:00:00
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
+    expiry: 2022-11-17 00:00:00
+  wp9-pilot2.eosc-hub.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2022-10-01 00:00:00
+  # certificate based VOs
+  biomed:
+    auth: "{{ robot_sa }}"
+    expiry: 2023-01-09 00:00:00
+  dteam:
+    auth: "{{ robot_sa }}"
+    expiry: 2022-07-27 00:00:00
+    auth: "{{ robot_sa }}"
+  fusion:
+    auth: "{{ robot_sa }}"
+    expiry: 2024-01-04 00:00:00
+  ops:
+    auth: "{{ robot_sa }}"
+    expiry: 2022-12-26 00:00:00
+  # Missing membership
+  belle:
+  bioisi:
+  /biomed/vip:
+  /vo.lifewatch.eu/openbiomap:
+  aquamonitor.c-scale.eu:
+  blazarmonitoring.asi.it:
+  chipster.csc.fi:
+  cms:
+  cos4cloud-eosc.eu:
+  demo.fedcloud.egi.eu:
+  drihm.eu:
+  eiscat.se:
+  enmr.eu:
+  fedcloud.egi.eu:
+  lagoproject.net:
+  opencoast.eosc-hub.eu:
+  openrisknet.org:
+  university.eosc-synergy.eu:
+  vo.clarin.eu:
+  vo.deltares.nl:
+  vo.elixir-europe.org:
+  vo.envri-fair.eu:
+  vo.eoscfuture-sp.panosc.eu:
+  vo.europlanet-vespa.eu:
+  vo.inactive-sarscov2.eu:
+  vo.indigo-datacloud.eu:
+  vo.lifewatch.eu:
+  vo.nbis.se:
+  vo.openrdm.eu:
+  vo.pangeo.eu:
+  waterwatch.c-scale.eu:
