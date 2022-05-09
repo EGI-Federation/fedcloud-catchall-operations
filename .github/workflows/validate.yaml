@@ -42,6 +42,8 @@ jobs:
         run: |
           for f in sites/*.yaml; do
             for vo in $(yq -r ".vos[].name" < "$f"); do
+              # remove FQAN stuff
+              vo=$(echo $vo | sed 's#/\([^/]*\)/.*#\1#')
               grep "$vo" deploy/vos.yaml > /dev/null || (echo "VO $vo not configured" ; exit 1)
             done
           done
