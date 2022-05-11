@@ -87,6 +87,9 @@ vos:
   vo.cite.gr:
     auth: "{{ fedcloud_sa }}"
     expiry: 2023-03-04 00:00:00
+  vo.decido-project.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-04-28 00:00:00
   vo.deltares.nl:
     auth: "{{ fedcloud_sa }}"
     expiry: 2023-05-09 00:00:00
