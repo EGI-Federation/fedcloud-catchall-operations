@@ -195,9 +195,6 @@ vos:
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
     expiry: never
-  fedcloud.egi.eu:
-    auth: "{{ fedcloud_sa }}"
-    expiry: never
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
     expiry: 2024-01-09 00:00:00
@@ -219,6 +216,9 @@ vos:
   enmr.eu:
     auth: "{{ robot_sa }}"
     expiry: 2023-01-08 00:00:00
+  fedcloud.egi.eu:
+    auth: "{{ robot_sa }}"
+    expiry: never
   fusion:
     auth: "{{ robot_sa }}"
     expiry: 2024-01-04 00:00:00
