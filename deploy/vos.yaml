@@ -108,6 +108,9 @@ vos:
   vo.environmental.egi.eu:
     auth: "{{ fedcloud_sa }}"
     expiry: 2023-03-03 00:00:00
+  vo.eu-openscreen.eu:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-05-12 00:00:00
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
     expiry: 2022-09-30 00:00:00
@@ -168,6 +171,9 @@ vos:
   vo.seadatanet.org:
     auth: "{{ fedcloud_sa }}"
     expiry: 2022-10-18 00:00:00
+  vo.sphinxsys.org:
+    auth: "{{ fedcloud_sa }}"
+    expiry: 2023-05-11 00:00:00
   vo.stars4all.eu:
     auth: "{{ fedcloud_sa }}"
     expiry: 2023-04-18 00:00:00
