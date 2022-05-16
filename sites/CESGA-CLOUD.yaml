@@ -1,0 +1,8 @@
+---
+gocdb: CESGA-CLOUD
+endpoint: https://cloud-pps.srv.cesga.es:5000/v3
+vos:
+- name: ops
+  auth:
+    project_id: b6c3ac04ac524340a12008fd681f0f81
+
