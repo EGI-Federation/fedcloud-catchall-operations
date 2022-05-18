@@ -207,6 +207,9 @@ vos:
   biomed:
     auth: "{{ robot_sa }}"
     expiry: 2023-01-09 00:00:00
+  cesga:
+    auth: "{{ robot_sa }}"
+    expiry: 2023-05-18 00:00:00
   dteam:
     auth: "{{ robot_sa }}"
     expiry: 2022-07-27 00:00:00
