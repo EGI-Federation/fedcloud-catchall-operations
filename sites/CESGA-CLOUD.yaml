@@ -5,4 +5,6 @@ vos:
 - name: ops
   auth:
     project_id: b6c3ac04ac524340a12008fd681f0f81
-
+- name: cesga
+  auth:
+    project_id: 8656c10a8df8404f8fd78a2d470e1f1b
