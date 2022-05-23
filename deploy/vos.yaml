@@ -5,241 +5,165 @@ vos:
   #
   EOServices-vo.indra.es:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-18 00:00:00
   benchmark.terradue.com:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-06 00:00:00
   biinsight.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-14 00:00:00
   cloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-19 00:00:00
   cos4cloud-eosc.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-09 00:00:00
   covid19.eosc-synergy.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-29 00:00:00
   cryoem.instruct-eric.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-19 00:00:00
   d4science.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-18 00:00:00
   datafurn.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   eosc-synergy.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-29 00:00:00
   icecube:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-01-17 00:00:00
   ispravision.vo.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-01 00:00:00
   kampal.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   med.semmelweis-univ.hu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-29 00:00:00
   minka-sdg.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-11-08 00:00:00
   mswss.ui.savba.sk:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-18 00:00:00
   mteam.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-20 00:00:00
   o3as.data.kit.edu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-07 00:00:00
   openrisknet.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-09 00:00:00
   peachnote.com:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-29 00:00:00
   saps-vo.i3m.upv.es:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-19 00:00:00
   training.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-30 22:59:59
   umsa.cerit-sc.cz:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-20 00:00:00
   vo.access.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-07-23 00:00:00
   vo.agiliacenter.com:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-18 00:00:00
   vo.bd4nrg.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-02-01 00:00:00
   vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-02-23 00:00:00
   vo.cite.gr:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-03-04 00:00:00
   vo.decido-project.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-28 00:00:00
   vo.deltares.nl:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-09 00:00:00
   vo.digitbrain.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-01 00:00:00
   vo.emphasisproject.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-02-14 00:00:00
   vo.emso-eric.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   vo.enes.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-05-13 00:00:00
   vo.environmental.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-03-03 00:00:00
   vo.eu-openscreen.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-12 00:00:00
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   vo.geoss.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-28 00:00:00
   vo.i-nergy.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-06 00:00:00
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-19 00:00:00
   vo.matrycs.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-02-01 00:00:00
   vo.max-centre.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   vo.mightee.idia.za:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-11-30 00:00:00
   vo.neanias.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-02-28 00:00:00
   vo.nextgeoss.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   vo.notebooks.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: never
   vo.obsea.es:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-01 00:00:00
   vo.openrdm.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-03-21 00:00:00
   vo.operas-eu.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-06-25 00:00:00
   vo.pangeo.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-27 00:00:00
   vo.panosc.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   vo.phiri.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-03-29 00:00:00
   vo.plocan.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-14 00:00:00
   vo.policycloud.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-09-30 00:00:00
   vo.projectescape.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-05 00:00:00
   vo.seadatanet.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-18 00:00:00
   vo.sphinxsys.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-05-11 00:00:00
   vo.stars4all.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2023-04-18 00:00:00
   vo.ubora-biomedical.org:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-01 00:00:00
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-11-17 00:00:00
   wp9-pilot2.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2022-10-01 00:00:00
   #
   # Perun based
   #
   aquamonitor.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2024-01-08 00:00:00
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: never
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2024-01-09 00:00:00
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: 2024-04-23 00:00:00
   #
   # certificate based VOs
   #
   biomed:
     auth: "{{ robot_sa }}"
-    expiry: 2023-01-09 00:00:00
   cesga:
     auth: "{{ robot_sa }}"
-    expiry: 2023-05-18 00:00:00
   dteam:
     auth: "{{ robot_sa }}"
-    expiry: 2022-07-27 00:00:00
   eiscat.se:
     auth: "{{ robot_sa }}"
-    expiry: never
   enmr.eu:
     auth: "{{ robot_sa }}"
-    expiry: 2023-01-08 00:00:00
   fedcloud.egi.eu:
     auth: "{{ robot_sa }}"
-    expiry: never
   fusion:
     auth: "{{ robot_sa }}"
-    expiry: 2024-01-04 00:00:00
   ops:
     auth: "{{ robot_sa }}"
-    expiry: 2022-12-26 00:00:00
 
   # Eduteams based
   vo.eoscfuture-sp.panosc.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: never
   # FIXME: these 2 need to be added to the Check-in configuration
   vo.europlanet-vespa.eu:
     auth: "{{ fedcloud_sa }}"
-    expiry: never
   lagoproject.net:
     auth: "{{ fedcloud_sa }}"
-    expiry: never
 
   #
   # Missing membership
