@@ -67,3 +67,6 @@ vos:
 - name: worsica.vo.incd.pt
   auth:
     project_id: 7bb9c2694f9040c68cd72cb994f5ce89
+- name: ispravision.vo.egi.eu
+  auth:
+    project_id: ed9a5bb0f5a5444ba2ad5cd97072a189
