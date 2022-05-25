@@ -8,4 +8,6 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: 7583e1bb07544efdac165e7a121c663e
-
+- name: vo.sphinxsys.org
+  auth:
+    project_id: 2f0ef6cd7e884d408d672899e0cc8a3c
