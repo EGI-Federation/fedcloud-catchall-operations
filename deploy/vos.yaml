@@ -9,6 +9,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   biinsight.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
+  cesga.es:
+    auth: "{{ fedcloud_sa }}"
   cloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   cos4cloud-eosc.eu:
