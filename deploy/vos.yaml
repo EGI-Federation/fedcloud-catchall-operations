@@ -83,6 +83,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.i-nergy.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.intelligg.com:
+    auth: "{{ fedcloud_sa }}"
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
   vo.matrycs.eu:
@@ -138,6 +140,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.nbis.se:
+    auth: "{{ fedcloud_sa }}"
   #
   # certificate based VOs
   #
@@ -161,7 +165,6 @@ vos:
   # Eduteams based
   vo.eoscfuture-sp.panosc.eu:
     auth: "{{ fedcloud_sa }}"
-  # FIXME: these 2 need to be added to the Check-in configuration
   vo.europlanet-vespa.eu:
     auth: "{{ fedcloud_sa }}"
   lagoproject.net:
@@ -181,7 +184,6 @@ vos:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
   vo.inactive-sarscov2.eu:
-  vo.nbis.se:
   university.eosc-synergy.eu:
   # unclear
   vo.elixir-europe.org:
