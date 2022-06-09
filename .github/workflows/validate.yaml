@@ -19,7 +19,9 @@ jobs:
           chmod +x yajsv
           ./yajsv -s schema.json sites/*.yaml
       - name: Setup python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Validate GOC and VOs
