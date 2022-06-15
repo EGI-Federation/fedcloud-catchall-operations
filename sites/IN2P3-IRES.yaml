@@ -53,3 +53,6 @@ vos:
 - name: saps-vo.i3m.upv.es
   auth:
     project_id: 96709738ce5a4439a0e14a77db9d3882
+- name: pithia
+  auth:
+    project_id: 7408db293bcd473a98e44924263f1190
