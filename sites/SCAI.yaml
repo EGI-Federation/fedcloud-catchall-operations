@@ -4,10 +4,10 @@ endpoint: https://cloud.scai.fraunhofer.de:5000/v3
 vos:
 - name: ops
   auth:
-    project_id: e9d70580d83f4da0a859093248791b7b
+    project_id: 7884889abbe44c43b331027fc2f39b75
 - name: vo.access.egi.eu
   auth:
-    project_id: 7583e1bb07544efdac165e7a121c663e
+    project_id: d12c055894f245b28c75c95e4ca78407
 - name: vo.sphinxsys.org
   auth:
-    project_id: 2f0ef6cd7e884d408d672899e0cc8a3c
+    project_id: 76988e64e1ed4f5597a83a0e6ddeaa05
