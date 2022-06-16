@@ -109,6 +109,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.phiri.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.pithia.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.plocan.eu:
     auth: "{{ fedcloud_sa }}"
   vo.policycloud.eu:
