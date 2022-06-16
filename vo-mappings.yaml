@@ -82,6 +82,7 @@ vos:
   vo.pangeo.eu: "urn:mace:egi.eu:group:vo.pangeo.eu:role=vm_operator#aai.egi.eu"
   vo.panosc.eu: "urn:mace:egi.eu:group:vo.panosc.eu:role=vm_operator#aai.egi.eu"
   vo.phiri.eu: "urn:mace:egi.eu:group:vo.phiri.eu:role=vm_operator#aai.egi.eu"
+  vo.pithia.eu: "urn:mace:egi.eu:group:vo.pithia.eu:role=vm_operator#aai.egi.eu"
   vo.plocan.eu: "urn:mace:egi.eu:group:vo.plocan.eu:role=vm_operator#aai.egi.eu"
   vo.policycloud.eu: "urn:mace:egi.eu:group:vo.policycloud.eu:role=vm_operator#aai.egi.eu"
   vo.projectescape.eu: "urn:mace:egi.eu:group:vo.projectescape.eu:role=vm_operator#aai.egi.eu"
