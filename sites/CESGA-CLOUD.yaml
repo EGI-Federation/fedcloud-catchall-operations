@@ -8,3 +8,7 @@ vos:
 - name: cesga.es
   auth:
     project_id: 7274a80de0954f0f88a594f94642b1fb
+- name: eosc-synergy.eu
+  auth:
+    project_id: 8b3f809f2b0841e6b91b7f60d08da8c9
+
