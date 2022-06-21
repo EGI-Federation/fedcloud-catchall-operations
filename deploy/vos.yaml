@@ -1,8 +1,6 @@
 ---
 vos:
-  #
   # Co-manage service account
-  #
   EOServices-vo.indra.es:
     auth: "{{ fedcloud_sa }}"
   benchmark.terradue.com:
@@ -24,6 +22,8 @@ vos:
   datafurn.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
   eosc-synergy.eu:
+    auth: "{{ fedcloud_sa }}"
+  fermi-lat.infn.it:
     auth: "{{ fedcloud_sa }}"
   icecube:
     auth: "{{ fedcloud_sa }}"
@@ -131,22 +131,20 @@ vos:
     auth: "{{ fedcloud_sa }}"
   wp9-pilot2.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-  #
+
   # Perun based
-  #
   aquamonitor.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-  waterwatch.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
   vo.nbis.se:
     auth: "{{ fedcloud_sa }}"
-  #
+  waterwatch.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
+
   # certificate based VOs
-  #
   biomed:
     auth: "{{ robot_sa }}"
   cesga:
@@ -172,9 +170,7 @@ vos:
   lagoproject.net:
     auth: "{{ fedcloud_sa }}"
 
-  #
   # Missing membership
-  #
   chipster.csc.fi:
   cms:
   belle:
