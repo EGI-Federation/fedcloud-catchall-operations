@@ -9,6 +9,9 @@ vos:
 - name: fedcloud.egi.eu
   auth:
     project_id: a8af02aad2894e9e8b5d4775c9736b8a
+- name: fermi-lat.infn.it
+  auth:
+    project_id: d20b02f7f6254acab37b29a0e74015c2
 - name: ops
   auth:
     project_id: 8b6a8afe225344dea808ec17a26de56d
