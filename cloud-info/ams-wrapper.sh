@@ -49,6 +49,10 @@ else
                                 --format glue21 > cloud-info.out
 fi
 
+# Fail if there are no shares
+grep -q GLUE2ShareID cloud-info.out \
+    || (echo "No share information available, aborting!"; false)
+
 # Publishing on our own as message is too large for some providers
 ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
 
