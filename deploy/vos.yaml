@@ -101,6 +101,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.obsea.es:
     auth: "{{ fedcloud_sa }}"
+  vo.oipub.com:
+    auth: "{{ fedcloud_sa }}"
   vo.openrdm.eu:
     auth: "{{ fedcloud_sa }}"
   vo.operas-eu.org:
