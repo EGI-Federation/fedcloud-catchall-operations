@@ -85,7 +85,9 @@ jobs:
         ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
         echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
         sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
-        ANSIBLE_ENCODED_SECRETS_KEYCLOAK="$(echo "$ANSIBLE_SECRETS_KEYCLOAK" | base64 -w 0)"
+        echo "$ANSIBLE_SECRETS_KEYCLOAK" > secrets.yaml
+        echo "checkin_token_endpoint: https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" >> secrets.yaml
+        ANSIBLE_ENCODED_SECRETS_KEYCLOAK="$(cat secrets.yaml | base64 -w 0)"
         echo "::add-mask::$ANSIBLE_ENCODED_SECRETS_KEYCLOAK"
         sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS_KEYCLOAK/" cloud-init-keycloak.yaml
     - name: terraform plan
