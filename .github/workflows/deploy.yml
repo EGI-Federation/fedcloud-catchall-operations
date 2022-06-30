@@ -74,15 +74,20 @@ jobs:
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
+        ANSIBLE_SECRETS_KEYCLOAK: ${{ secrets.ANSIBLE_SECRETS_KEYCLOAK }}
       run: |
         cd deploy
         sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
         sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
         sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
         sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
+        cp cloud-init.yaml cloud-init-keycloak.yaml
         ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
         echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
         sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
+        ANSIBLE_ENCODED_SECRETS_KEYCLOAK="$(echo "$ANSIBLE_SECRETS_KEYCLOAK" | base64 -w 0)"
+        echo "::add-mask::$ANSIBLE_ENCODED_SECRETS_KEYCLOAK"
+        sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS_KEYCLOAK/" cloud-init-keycloak.yaml
     - name: terraform plan
       id: plan
       if: github.event_name == 'pull_request'
