@@ -63,6 +63,7 @@ vos:
   vo.eu-openscreen.eu: "urn:mace:egi.eu:group:vo.eu-openscreen.eu:role=vm_operator#aai.egi.eu"
   vo.eurogeoss.eu: "urn:mace:egi.eu:group:vo.eurogeoss.eu:role=vm_operator#aai.egi.eu"
   vo.europlanet-vespa.eu: "urn:mace:egi.eu:group:vo.europlanet-vespa.eu:role=vm_operator#aai.egi.eu"
+  vo.fuvex.es: "urn:mace:egi.eu:group:vo.fuvex.es:role=vm_operator#aai.egi.eu"
   vo.geoss.eu: "urn:mace:egi.eu:group:vo.geoss.eu:role=vm_operator#aai.egi.eu"
   vo.i-nergy.eu: "urn:mace:egi.eu:group:vo.i-nergy.eu:role=vm_operator#aai.egi.eu"
   vo.inactive-sarscov2.eu: "urn:mace:egi.eu:group:vo.inactive-sarscov2.eu:role=vm_operator#aai.egi.eu"
