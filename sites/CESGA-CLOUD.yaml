@@ -11,4 +11,6 @@ vos:
 - name: eosc-synergy.eu
   auth:
     project_id: 8b3f809f2b0841e6b91b7f60d08da8c9
-
+- name: vo.deltares.nl
+  auth:
+    project_id: 8a244d1b0d0f4f8e8c9519fae4cfc8ee
