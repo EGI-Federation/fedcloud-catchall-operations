@@ -41,3 +41,6 @@ vos:
 - name: vo.bd4nrg.eu
   auth:
     project_id: 74128e581e6941ad91c7fce06f14e6c8
+- name: vo.oipub.com
+  auth:
+    project_id: e188494f39564812987a4ee5f58084a7
