@@ -14,3 +14,6 @@ vos:
 - name: vo.deltares.nl
   auth:
     project_id: 8a244d1b0d0f4f8e8c9519fae4cfc8ee
+- name: vo.obsea.es
+  auth:
+    project_id: 277dd78e3b3b4c8caf93ad42fddaec38
