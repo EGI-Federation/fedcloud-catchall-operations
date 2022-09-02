@@ -1,6 +1,7 @@
 vos:
   EOServices-vo.indra.es: "urn:mace:egi.eu:group:EOServices-vo.indra.es:role=vm_operator#aai.egi.eu"
   aquamonitor.c-scale.eu: "urn:mace:egi.eu:group:aquamonitor.c-scale.eu:role=member#aai.egi.eu"
+  hisea.c-scale.eu: "urn:mace:egi.eu:group:hisea.c-scale.eu:role=member#aai.egi.eu"
   belle: "urn:mace:egi.eu:group:belle:role=vm_operator#aai.egi.eu"
   benchmark.terradue.com: "urn:mace:egi.eu:group:benchmark.terradue.com:role=vm_operator#aai.egi.eu"
   biinsight.eosc-hub.eu: "urn:mace:egi.eu:group:biinsight.eosc-hub.eu:role=vm_operator#aai.egi.eu"
