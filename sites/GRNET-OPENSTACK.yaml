@@ -5,3 +5,6 @@ vos:
 - name: ops
   auth:
     project_id: fd88c4b7bf9242fdbde17b484ccdb032
+- name: hisea.c-scale.eu
+  auth:
+    project_id: 761d439913b34b90850ce5c44d0e96eb
