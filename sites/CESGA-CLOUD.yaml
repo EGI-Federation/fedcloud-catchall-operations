@@ -17,3 +17,6 @@ vos:
 - name: vo.obsea.es
   auth:
     project_id: 277dd78e3b3b4c8caf93ad42fddaec38
+- name: bioisi
+  auth:
+    project_id: 458f3225272243d7b1c0551d3af3f130
