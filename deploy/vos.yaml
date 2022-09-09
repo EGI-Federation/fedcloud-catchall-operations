@@ -141,6 +141,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
+  eval.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   vo.nbis.se:
