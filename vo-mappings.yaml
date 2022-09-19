@@ -15,6 +15,7 @@ vos:
   cms: "urn:mace:egi.eu:group:cms:role=vm_operator#aai.egi.eu"
   covid19.eosc-synergy.eu: "urn:mace:egi.eu:group:covid19.eosc-synergy.eu:role=vm_operator#aai.egi.eu"
   cos4cloud-eosc.eu: "urn:mace:egi.eu:group:cos4cloud-eosc.eu:role=vm_operator#aai.egi.eu"
+  crystal_channelling_simulation.vo.egi.eu: "urn:mace:egi.eu:group:crystal_channelling_simulation.vo.egi.eu:role=vm_operator#aai.egi.eu" 
   cryoem.instruct-eric.eu: "urn:mace:egi.eu:group:cryoem.instruct-eric.eu:role=vm_operator#aai.egi.eu"
   d4science.org: "urn:mace:egi.eu:group:d4science.org:role=vm_operator#aai.egi.eu"
   datafurn.eosc-hub.eu: "urn:mace:egi.eu:group:datafurn.eosc-hub.eu:role=vm_operator#aai.egi.eu"
