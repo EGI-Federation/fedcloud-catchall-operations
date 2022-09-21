@@ -23,3 +23,6 @@ vos:
 - name: benchmark.terradue.com
   auth:
     project_id: 5fe3458a96084df893200e92bdb33213
+- name: vo.plocan.eu
+  auth:
+    project_id: 2ce3f160cdd64d46b02f3b1f856ed8ec
