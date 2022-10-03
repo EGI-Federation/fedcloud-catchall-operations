@@ -16,7 +16,8 @@ apt:
   sources:
     ansible-ppa.list:
       source: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main"
-      keyid: 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367
+      # this is not a secret
+      keyid: 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367 # gitleaks:allow
 
 packages:
 - git
