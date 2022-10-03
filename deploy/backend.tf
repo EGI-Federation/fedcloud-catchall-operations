@@ -4,6 +4,9 @@ terraform {
     container = "terraform"
     cloud     = "backend"
   }
+  required_providers {
+    openstack = "~> 1.48"
+  }
 }
 
 # The provider where the deployment is actually performed
