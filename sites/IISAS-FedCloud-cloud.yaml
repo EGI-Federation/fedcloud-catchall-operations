@@ -44,3 +44,6 @@ vos:
 - name: vo.oipub.com
   auth:
     project_id: e188494f39564812987a4ee5f58084a7
+- name: vo.policycloud.eu
+  auth:
+    project_id: cf4c6fdd25834d26909e583d543b74ea
