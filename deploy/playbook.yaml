@@ -6,3 +6,4 @@
     tags: ["all", "docker"]
     vars:
       site_config_dir: ../sites/
+      checkin_token_endpoint: https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token
