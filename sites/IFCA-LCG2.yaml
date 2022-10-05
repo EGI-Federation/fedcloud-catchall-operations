@@ -70,3 +70,6 @@ vos:
 - name: ispravision.vo.egi.eu
   auth:
     project_id: ed9a5bb0f5a5444ba2ad5cd97072a189
+- name: vo.digitbrain.eu
+  auth:
+    project_id: 3eff18b8a237407ea2ed56aa9cb5d07c

@@ -11,3 +11,6 @@ vos:
 - name: ops
   auth:
     project_id: 24426f375b494df5b47f1efebc272e5c
+- name: vo.digitbrain.eu
+  auth:
+    project_id: 3d181dc16e654078a9cbbe1a9df6228f
