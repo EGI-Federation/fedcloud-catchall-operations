@@ -26,3 +26,12 @@ vos:
 - name: worsica.vo.incd.pt
   auth:
     project_id: ef3e041a01a44915a3654c7c09af1fb1
+- name: saps-vo.i3m.upv.es
+  auth:
+    project_id: 0691729e8ea04d90aab9603cb1d2dc7f 
+- name: EOServices-vo.indra.es
+  auth:
+    project_id: 9882d85f83884bbf9cf0dd4ab54c0aac
+- name: mswss.ui.savba.sk
+  auth:
+    project_id: a9236c4cdd9f49ffa9663b4678132080
