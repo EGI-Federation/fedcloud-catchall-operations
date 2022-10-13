@@ -47,3 +47,6 @@ vos:
 - name: vo.policycloud.eu
   auth:
     project_id: cf4c6fdd25834d26909e583d543b74ea
+- name: vo.e-rihs.eu
+  auth:
+    project_id: 6eb56eb83eb54aad9c3226cdeb716c8c
