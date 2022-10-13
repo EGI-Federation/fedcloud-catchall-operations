@@ -83,6 +83,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.e-rihs.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.fuvex.es:
     auth: "{{ fedcloud_sa }}"
   vo.geoss.eu:
