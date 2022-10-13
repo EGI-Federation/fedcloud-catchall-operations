@@ -29,6 +29,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   icecube:
     auth: "{{ fedcloud_sa }}"
+  in-sar-cubes.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   ispravision.vo.egi.eu:
     auth: "{{ fedcloud_sa }}"
   kampal.eosc-hub.eu:
@@ -80,6 +82,8 @@ vos:
   vo.eu-openscreen.eu:
     auth: "{{ fedcloud_sa }}"
   vo.eurogeoss.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.e-rihs.eu:
     auth: "{{ fedcloud_sa }}"
   vo.fuvex.es:
     auth: "{{ fedcloud_sa }}"
