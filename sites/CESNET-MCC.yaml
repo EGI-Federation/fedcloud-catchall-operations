@@ -114,3 +114,7 @@ vos:
 - name: eval.c-scale.eu
   auth:
     project_id: d6283bc95d5c4296abb799596867818c
+- name: in-sar-cubes.c-scale.eu
+  auth:
+    project_id: b28570e8eca54db3b837b85a4f27932f
+  
