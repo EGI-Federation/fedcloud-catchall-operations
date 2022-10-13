@@ -32,6 +32,7 @@ vos:
   fusion: "urn:mace:egi.eu:group:fusion:role=vm_operator#aai.egi.eu"
   hisea.c-scale.eu: "urn:mace:egi.eu:group:hisea.c-scale.eu:role=member#aai.egi.eu"
   icecube: "urn:mace:egi.eu:group:icecube:role=vm_operator#aai.egi.eu"
+  in-sar-cubes.c-scale.eu: "urn:mace:egi.eu:group:in-sar-cubes.c-scale.eu:role=member#aai.egi.eu"
   lagoproject.net: "urn:mace:egi.eu:group:lagoproject.net:role=member#aai.egi.eu"
   kampal.eosc-hub.eu: "urn:mace:egi.eu:group:kampal.eosc-hub.eu:role=vm_operator#aai.egi.eu"
   med.semmelweis-univ.hu: "urn:mace:egi.eu:group:med.semmelweis-univ.hu:role=vm_operator#aai.egi.eu"
