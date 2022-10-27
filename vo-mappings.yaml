@@ -13,6 +13,7 @@ vos:
   chipster.csc.fi: "urn:mace:egi.eu:group:chipster.csc.fi:role=vm_operator#aai.egi.eu"
   cloud.egi.eu: "urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
   cms: "urn:mace:egi.eu:group:cms:role=vm_operator#aai.egi.eu"
+  coastmonitor.c-scale.eu: "urn:mace:egi.eu:group:coastmonitor.c-scale.eu:role=member#aai.egi.eu"
   covid19.eosc-synergy.eu: "urn:mace:egi.eu:group:covid19.eosc-synergy.eu:role=vm_operator#aai.egi.eu"
   cos4cloud-eosc.eu: "urn:mace:egi.eu:group:cos4cloud-eosc.eu:role=vm_operator#aai.egi.eu"
   crystal_channelling_simulation.vo.egi.eu: "urn:mace:egi.eu:group:crystal_channelling_simulation.vo.egi.eu:role=vm_operator#aai.egi.eu"
