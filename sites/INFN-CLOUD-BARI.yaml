@@ -6,6 +6,9 @@ vos:
 - name: aquamonitor.c-scale.eu
   auth:
     project_id: f06e8196b73f416c85de7d6db26fad62
+- name: coastmonitor.c-scale.eu
+  auth:
+    project_id: 7b555e9cde9540469beaaed15fca5f0a
 - name: datafurn.eosc-hub.eu
   auth:
     project_id: 9532166205f341308ab1c1d4b811976d

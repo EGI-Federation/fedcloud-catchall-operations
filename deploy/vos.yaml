@@ -145,6 +145,8 @@ vos:
   # Perun based
   aquamonitor.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  coastmonitor.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   eval.c-scale.eu:
