@@ -17,3 +17,9 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: 1392719e6e4c4bf7ba0fce8c0acbbd22
+- name: vo.envrihub.eu
+  auth:
+    project_id: 09ea02290dcb4aa0b3bde9b179a45c43
+- name: vo.complex-systems.eu
+  auth:
+    project_id: 260beefcea224be6a278ccb8e89668dd
