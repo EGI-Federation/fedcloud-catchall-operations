@@ -55,6 +55,7 @@ vos:
   vo.carouseldancing.org: "urn:mace:egi.eu:group:vo.carouseldancing.org:role=vm_operator#aai.egi.eu"
   vo.cite.gr: "urn:mace:egi.eu:group:vo.cite.gr:role=vm_operator#aai.egi.eu"
   vo.clarin.eu: "urn:mace:egi.eu:group:vo.clarin.eu:role=vm_operator#aai.egi.eu"
+  vo.complex-systems.eu: "urn:mace:egi.eu:group:vo.complex-systems.eu:role=vm_operator#aai.egi.eu"
   vo.decido-project.eu: "urn:mace:egi.eu:group:vo.decido-project.eu:role=vm_operator#aai.egi.eu"
   vo.deltares.nl: "urn:mace:egi.eu:group:vo.deltares.nl:role=vm_operator#aai.egi.eu"
   vo.digitbrain.eu: "urn:mace:egi.eu:group:vo.digitbrain.eu:role=vm_operator#aai.egi.eu"
