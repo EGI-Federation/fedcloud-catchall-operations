@@ -71,6 +71,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.digitbrain.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.ebrain-health.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.emphasisproject.eu:
     auth: "{{ fedcloud_sa }}"
   vo.emso-eric.eu:
