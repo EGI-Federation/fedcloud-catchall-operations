@@ -71,6 +71,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.digitbrain.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.ebrain-health.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.emphasisproject.eu:
     auth: "{{ fedcloud_sa }}"
   vo.emso-eric.eu:
@@ -192,7 +194,9 @@ vos:
   drihm.eu:
   opencoast.eosc-hub.eu:
   vo.clarin.eu:
+  vo.complex-systems.eu:  
   vo.envri-fair.eu:
+  vo.envrihub.eu:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
   vo.inactive-sarscov2.eu:
