@@ -52,7 +52,7 @@ def keystone_config(site, entitlements):
 def caso_config(site, *args):
     mapping = {}
     for vo in site.get("vos", []):
-        vo_name = get_vo_name_from_fqan(vo["name"])
+        vo_name = vo["name"]
         vo_project = vo["auth"]["project_id"]
         mapping[vo_name] = {"projects": [vo_project]}
     print(json.dumps(mapping, indent=4))
