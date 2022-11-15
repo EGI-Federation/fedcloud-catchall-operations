@@ -26,17 +26,17 @@ def basic_mapping(local_group, entitlement):
 def get_entitlements(fqan, entitlements):
     try:
         return entitlements[fqan]
-    except Keyerror:
+    except KeyError:
         if not fqan.startswith("/"):
             raise Exception(f"No entitlement defined for vo {fqan}")
         # FQAN is /<name of the VO>/extra/
         #      or /VO=<name of the VO>/extra/
-        vo_name = fqan.split[1]
+        vo_name = fqan.split("/")[1]
         if vo_name.startswith("VO="):
             vo_name = vo_name[3:]
         try:
             return entitlements[vo_name]
-        except Keyerror:
+        except KeyError:
             raise Exception(f"No entitlement defined for vo {vo_name}")
 
 
