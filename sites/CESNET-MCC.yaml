@@ -120,6 +120,6 @@ vos:
 - name: /vo.pangeo.eu/swift
   auth:
     project_id: 57102d3e06b7476088fe4924370ae170
-- name: vo.pangeo.eu-escience
+- name: /vo.pangeo.eu/escience
   auth:
     project_id: 5e5a45e153d3424997fda0c4fd21a21f
