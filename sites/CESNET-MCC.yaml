@@ -117,4 +117,9 @@ vos:
 - name: in-sar-cubes.c-scale.eu
   auth:
     project_id: b28570e8eca54db3b837b85a4f27932f
-  
+- name: /vo.pangeo.eu/swift
+  auth:
+    project_id: 57102d3e06b7476088fe4924370ae170
+- name: /vo.pangeo.eu/escience
+  auth:
+    project_id: 5e5a45e153d3424997fda0c4fd21a21f
