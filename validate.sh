@@ -13,14 +13,15 @@ do
     goc_site=$(grep "^gocdb:" "$f" | cut -f2 -d":" | tr -d "[:space:]")
     endpoint=$(grep "^endpoint:" "$f" | cut -f2- -d":" | tr -d "[:space:]")
     echo "Searching for endpoint $endpoint in $goc_site site ($f)"
-    curl -s "$goc_method&sitename=$goc_site&service_type=org.openstack.nova" > "/tmp/site-$goc_site.xml"
-    if ! grep -q "<SITENAME>$goc_site</SITENAME>" "/tmp/site-$goc_site.xml"
+    GOC_SITE_FILE=$(mktemp)
+    curl -s "$goc_method&sitename=$goc_site&service_type=org.openstack.nova" > "$GOC_SITE_FILE"
+    if ! grep -q "<SITENAME>$goc_site</SITENAME>" "$GOC_SITE_FILE"
     then
         echo "\033[0;31m[ERROR] Site $goc_site not found in GOC\033[0m"
         exit_value=1
         continue
     fi
-    if ! grep -q "<URL>$endpoint</URL>" "/tmp/site-$goc_site.xml"
+    if ! grep -q "<URL>$endpoint</URL>" "$GOC_SITE_FILE"
     then
         echo "\033[0;31m[ERROR] URL $endpoint for $goc_site not found in GOC\033[0m"
         exit_value=1
@@ -41,6 +42,7 @@ do
             exit_value=1
         fi
     done
+    rm "$GOC_SITE_FILE"
 done
 
 rm "$VO_LIST"
