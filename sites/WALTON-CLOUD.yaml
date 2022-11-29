@@ -1,0 +1,7 @@
+---
+gocdb: WALTON-CLOUD 
+endpoint: https://waltoncloud.eu:5000/v3
+vos:
+- name: ops
+  auth:
+    project_id: xxx
