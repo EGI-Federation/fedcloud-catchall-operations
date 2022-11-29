@@ -1,6 +1,6 @@
 ---
 gocdb: WALTON-CLOUD 
-endpoint: https://waltoncloud.eu:5000/v3
+endpoint: https://horizon.waltoncloud.eu:5000/v3
 vos:
 - name: ops
   auth:
