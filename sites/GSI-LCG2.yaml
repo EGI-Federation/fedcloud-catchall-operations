@@ -23,3 +23,6 @@ vos:
 - name: vo.complex-systems.eu
   auth:
     project_id: 260beefcea224be6a278ccb8e89668dd
+- name: vo.inteligg.com
+  auth:
+    project_id: 9fe5330bec51464bad89d368d73b88fc
