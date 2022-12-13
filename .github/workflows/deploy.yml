@@ -34,7 +34,7 @@ jobs:
         MYTOKEN: ${{ secrets.MYTOKEN }}
         REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
       run: |
-        OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/oidc/token" \
+        OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
                           -d "grant_type=refresh_token&refresh_token=$REFRESH_TOKEN&client_id=token-portal&scope=openid%20email%20profile%20voperson_id%20eduperson_entitlement" \
                         | jq -r ".access_token")
         echo "::add-mask::$OIDC_TOKEN"
