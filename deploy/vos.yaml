@@ -139,6 +139,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.ubora-biomedical.org:
     auth: "{{ fedcloud_sa }}"
+  vo.usegalaxy.eu:
+    auth: "{{ fedcloud_sa }}"
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
   wp9-pilot2.eosc-hub.eu:

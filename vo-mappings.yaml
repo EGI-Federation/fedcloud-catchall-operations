@@ -102,6 +102,7 @@ vos:
   vo.seadatanet.org: "urn:mace:egi.eu:group:vo.seadatanet.org:role=vm_operator#aai.egi.eu"
   vo.sphinxsys.org: "urn:mace:egi.eu:group:vo.sphinxsys.org:role=vm_operator#aai.egi.eu"
   vo.stars4all.eu: "urn:mace:egi.eu:group:vo.stars4all.eu:role=vm_operator#aai.egi.eu"
+  vo.usegalaxy.eu: "urn:mace:egi.eu:group:vo.usegalaxy.eu:vm_operator:role=member#aai.egi.eu"
   vo.ubora-biomedical.org: "urn:mace:egi.eu:group:vo.ubora-biomedical.org:role=vm_operator#aai.egi.eu"
   waterwatch.c-scale.eu: "urn:mace:egi.eu:group:waterwatch.c-scale.eu:role=member#aai.egi.eu"
   worsica.vo.incd.pt: "urn:mace:egi.eu:group:worsica.vo.incd.pt:role=vm_operator#aai.egi.eu"
