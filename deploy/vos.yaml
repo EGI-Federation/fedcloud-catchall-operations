@@ -93,7 +93,7 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.i-nergy.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.intelligg.com:
+  vo.inteligg.com:
     auth: "{{ fedcloud_sa }}"
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
@@ -138,6 +138,8 @@ vos:
   vo.stars4all.eu:
     auth: "{{ fedcloud_sa }}"
   vo.ubora-biomedical.org:
+    auth: "{{ fedcloud_sa }}"
+  vo.usegalaxy.eu:
     auth: "{{ fedcloud_sa }}"
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
