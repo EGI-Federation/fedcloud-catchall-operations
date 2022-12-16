@@ -159,8 +159,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.nbis.se:
-    auth: "{{ fedcloud_sa }}"
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
 
@@ -180,6 +178,8 @@ vos:
   fusion:
     auth: "{{ robot_sa }}"
   ops:
+    auth: "{{ robot_sa }}"
+  vo.nbis.se:
     auth: "{{ robot_sa }}"
 
   # Eduteams based
