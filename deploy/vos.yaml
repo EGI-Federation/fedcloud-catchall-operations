@@ -159,6 +159,10 @@ vos:
     auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  lost-salvage.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
+  plankton.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
 
