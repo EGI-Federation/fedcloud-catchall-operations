@@ -6,8 +6,13 @@ exit_value=0
 
 # Get all VOs names
 VO_LIST=$(mktemp)
-curl -s "http://cclavoisier01.in2p3.fr:8080/lavoisier/VoList?accept=json" \
+curl --silent "http://cclavoisier01.in2p3.fr:8080/lavoisier/VoList?accept=json" \
     | jq -r ".data[].name" > "$VO_LIST"
+
+# Get fedcloudclient sites
+FEDCLOUD_CLI_SITES=$(mktemp)
+curl --output "$FEDCLOUD_CLI_SITES" \
+    "https://raw.githubusercontent.com/tdviet/fedcloudclient/master/config/sites.yaml"
 
 for f in sites/*.yaml
 do
@@ -30,7 +35,7 @@ do
         exit_value=1
     else
         printf "\033[0;32m[OK]\033[0m\n"
-     fi
+    fi
     # check if all VOs configured do exist
     # Try to use FQAN
     # So the VO that comes from the file, it will be either:
@@ -46,6 +51,14 @@ do
             exit_value=1
         fi
     done
+
+    # check if site is also on:
+    # https://github.com/tdviet/fedcloudclient/blob/master/config/sites.yaml
+    if ! grep -q "$f" "$FEDCLOUD_CLI_SITES"
+    then
+        printf "\033[0;31m[ERROR] Site %s not found in fedcloudclient\033[0m\n" "$goc_site"
+        exit_value=1
+    fi
 done
 
 rm "$VO_LIST"
