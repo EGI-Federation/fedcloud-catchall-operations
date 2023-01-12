@@ -67,7 +67,7 @@ grep --extended-regexp --invert-match --regexp='#' --regexp='^$' "$FEDCLOUD_CLI_
     --expression='s/https:\/\/raw.githubusercontent.com\/EGI-Federation\/fedcloud-catchall-operations\/main\///g' \
       > "$SITES_CHECK"
 
-while read SITE
+while read -r SITE
 do
     if ! [ -s "$SITE" ]
     then
