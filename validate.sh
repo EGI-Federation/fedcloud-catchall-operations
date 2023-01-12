@@ -11,8 +11,11 @@ curl --silent "http://cclavoisier01.in2p3.fr:8080/lavoisier/VoList?accept=json" 
 
 # Get fedcloudclient sites
 FEDCLOUD_CLI_SITES=$(mktemp)
-curl --output "$FEDCLOUD_CLI_SITES" \
-    "https://raw.githubusercontent.com/tdviet/fedcloudclient/master/config/sites.yaml"
+curl "https://raw.githubusercontent.com/tdviet/fedcloudclient/master/config/sites.yaml" \
+    > "$FEDCLOUD_CLI_SITES"
+
+# Temp file for nova endpoint
+NOVA_ENDPOINT=$(mktemp)
 
 for f in sites/*.yaml
 do
@@ -20,15 +23,15 @@ do
     endpoint=$(grep "^endpoint:" "$f" | cut -f2- -d":" | tr -d "[:space:]")
     printf "Searching for endpoint %s in %s site (%s)\n" \
         "$endpoint"  "$goc_site" "$f"
-    curl -s "$goc_method&sitename=$goc_site&service_type=org.openstack.nova" \
-        > "/tmp/site-$goc_site.xml"
-    if ! grep -q "<SITENAME>$goc_site</SITENAME>" "/tmp/site-$goc_site.xml"
+    curl --silent "$goc_method&sitename=$goc_site&service_type=org.openstack.nova" \
+        > "$NOVA_ENDPOINT"
+    if ! grep -q "<SITENAME>$goc_site</SITENAME>" "$NOVA_ENDPOINT"
     then
         printf "\033[0;31m[ERROR] Site %s not found in GOC\033[0m\n" "$goc_site"
         exit_value=1
         continue
     fi
-    if ! grep -q "<URL>$endpoint</URL>" "/tmp/site-$goc_site.xml"
+    if ! grep -q "<URL>$endpoint</URL>" "$NOVA_ENDPOINT"
     then
         printf "\033[0;31m[ERROR] URL %s for %s not found in GOC\033[0m\n" \
             "$endpoint" "$goc_site"
@@ -77,6 +80,7 @@ do
 done < "$SITES_CHECK"
 
 rm "$SITES_CHECK"
+rm "$NOVA_ENDPOINT"
 rm "$FEDCLOUD_CLI_SITES"
 rm "$VO_LIST"
 
