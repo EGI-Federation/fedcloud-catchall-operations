@@ -60,9 +60,6 @@ vos:
 - name: vo.emphasisproject.eu
   auth:
     project_id: b953842bf4204dc98054f6c3ae581cb5
-- name: vo.eurogeoss.eu
-  auth:
-    project_id: 5bc62d60bbbc49d881bc0a948da710d6
 - name: vo.europlanet-vespa.eu
   auth:
     project_id: 89140661b6be4ef281ab7a67d4c83e0c
