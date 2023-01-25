@@ -39,6 +39,6 @@ vos:
 - name: vo.seadatanet.org
   auth:
     project_id: 50c9ea335b7d429296eb1623a97ff311
-- name vo.decido-project.eu
+- name: vo.decido-project.eu
   auth:
     project_id: 2760d1fb0575417a9c83af158450844d
