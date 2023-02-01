@@ -120,3 +120,6 @@ vos:
 - name: /vo.pangeo.eu/escience
   auth:
     project_id: 5e5a45e153d3424997fda0c4fd21a21f
+- name: vo.thepund.it
+  auth:
+    project_id: a0faee5136134d1ab1e62385c3e45c75
