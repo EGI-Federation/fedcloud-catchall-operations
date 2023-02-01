@@ -50,3 +50,6 @@ vos:
 - name: vo.e-rihs.eu
   auth:
     project_id: 6eb56eb83eb54aad9c3226cdeb716c8c
+- name: icecube
+  auth:
+    project_id: 6538cd611f9d44f8b07e82fecfd38b6b
