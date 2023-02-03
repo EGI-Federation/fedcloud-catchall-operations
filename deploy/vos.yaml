@@ -137,6 +137,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.stars4all.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.thepund.it:
+    auth: "{{ fedcloud_sa }}"
   vo.ubora-biomedical.org:
     auth: "{{ fedcloud_sa }}"
   vo.usegalaxy.eu:
