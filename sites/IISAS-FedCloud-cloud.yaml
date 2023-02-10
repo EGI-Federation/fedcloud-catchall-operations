@@ -53,3 +53,6 @@ vos:
 - name: icecube
   auth:
     project_id: 6538cd611f9d44f8b07e82fecfd38b6b
+- name: vo.beamide.com
+  auth:
+    project_id: 5139b731becd4f0b8fbf5fc19b909d58
