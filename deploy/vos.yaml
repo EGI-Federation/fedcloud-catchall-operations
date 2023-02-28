@@ -61,6 +61,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.bd4nrg.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.beamide.com:
+    auth: "{{ fedcloud_sa }}"
   vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
   vo.cite.gr:
@@ -136,6 +138,8 @@ vos:
   vo.sphinxsys.org:
     auth: "{{ fedcloud_sa }}"
   vo.stars4all.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.thepund.it:
     auth: "{{ fedcloud_sa }}"
   vo.ubora-biomedical.org:
     auth: "{{ fedcloud_sa }}"
