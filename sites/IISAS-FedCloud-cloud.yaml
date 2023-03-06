@@ -56,3 +56,6 @@ vos:
 - name: vo.beamide.com
   auth:
     project_id: 5139b731becd4f0b8fbf5fc19b909d58
+- name: vo.builtrix.tech
+  auth:
+    project_id: 7451e8cba04646449ad9b8b6b470c5de
