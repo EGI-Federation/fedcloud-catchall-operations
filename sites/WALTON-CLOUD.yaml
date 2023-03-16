@@ -4,4 +4,4 @@ endpoint: https://horizon.waltoncloud.eu:5000/v3
 vos:
 - name: ops
   auth:
-    project_id: xxx
+    project_id: 786ae008b6694cfca45e04001fe2054c
