@@ -27,7 +27,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/EGI-Federation/fedcloud-${{ matrix.image }}
+          images: ghcr.io/egi-federation/fedcloud-${{ matrix.image }}
           tags: |
             type=sha
       - name: Set up QEMU
