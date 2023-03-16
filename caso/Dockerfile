@@ -1,5 +1,8 @@
 FROM python:3
 
+
+LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # We do need install recommends for the CAs

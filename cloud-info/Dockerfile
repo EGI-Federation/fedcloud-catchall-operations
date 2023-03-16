@@ -1,5 +1,7 @@
 FROM python:3
 
+LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
+
 ARG CLOUD_INFO_VERSION=f6f6a2e265cc9608d791f31a8ef2903302ca33f6
 
 # hadolint ignore=DL3013
