@@ -18,9 +18,15 @@ vos:
 - name: kampal.eosc-hub.eu
   auth:
     project_id: a81cd014a37243cb86f6ccdb275193f2
+- name: lost-salvage.c-scale.eu
+  auth:
+    project_id: 1e3b7769107b40f0b25bd2922ac1ff73
 - name: ops
   auth:
     project_id: 1fd23a3332bf4a01a40a1d5edf8e016e
+- name: plankton.c-scale.eu
+  auth:
+    project_id: f775db035db64f2a9163c0237cbb81f2
 - name: vo.emso-eric.eu
   auth:
     project_id: bdfc0b6ca97146088034443609d88aba
@@ -33,3 +39,6 @@ vos:
 - name: vo.seadatanet.org
   auth:
     project_id: 50c9ea335b7d429296eb1623a97ff311
+- name: vo.decido-project.eu
+  auth:
+    project_id: 2760d1fb0575417a9c83af158450844d

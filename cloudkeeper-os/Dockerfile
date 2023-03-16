@@ -1,5 +1,7 @@
 FROM centos:7
 
+LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
+
 COPY cloudkeeper.repo /etc/yum.repos.d/cloudkeeper.repo
 
 # hadolint ignore=DL3033

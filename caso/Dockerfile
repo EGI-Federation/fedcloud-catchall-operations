@@ -1,5 +1,8 @@
 FROM python:3
 
+
+LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # We do need install recommends for the CAs
@@ -26,10 +29,10 @@ RUN for f in /etc/grid-security/certificates/*.pem ; do \
 
 
 # New CMD packages are missing, so going for pip instead
-# Using version 3.0.0
-ARG CASO_VERSION=3.0.0
+# Version 3.0.0 is broken in the dates management
+ARG CASO_VERSION=fix-dates
 
-RUN pip install --no-cache-dir git+https://github.com/IFCA/caso.git@$CASO_VERSION
+RUN pip install --no-cache-dir git+https://github.com/enolfc/caso.git@$CASO_VERSION
 
 COPY caso.conf /etc/caso/caso.conf
 COPY voms.json /etc/caso/voms.json

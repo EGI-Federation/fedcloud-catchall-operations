@@ -14,6 +14,9 @@ vos:
 - name: eosc-synergy.eu
   auth:
     project_id: ddf0c468c8af4e0bbb9808bfc0288381
+- name: gltfca.c-scale.eu
+  auth:
+    project_id: ace9ecd40164498783fa18bc2dbc06ed
 - name: fedcloud.egi.eu
   auth:
     project_id: bd5a81e1670b48f18af33b05512a9d77

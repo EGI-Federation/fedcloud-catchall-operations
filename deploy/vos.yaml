@@ -61,6 +61,10 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.bd4nrg.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.beamide.com:
+    auth: "{{ fedcloud_sa }}"
+  vo.builtrix.tech:
+    auth: "{{ fedcloud_sa }}"
   vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
   vo.cite.gr:
@@ -93,7 +97,7 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.i-nergy.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.intelligg.com:
+  vo.inteligg.com:
     auth: "{{ fedcloud_sa }}"
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
@@ -137,7 +141,11 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.stars4all.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.thepund.it:
+    auth: "{{ fedcloud_sa }}"
   vo.ubora-biomedical.org:
+    auth: "{{ fedcloud_sa }}"
+  vo.usegalaxy.eu:
     auth: "{{ fedcloud_sa }}"
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
@@ -153,9 +161,13 @@ vos:
     auth: "{{ fedcloud_sa }}"
   eval.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  gltfca.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.nbis.se:
+  lost-salvage.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
+  plankton.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
@@ -176,6 +188,8 @@ vos:
   fusion:
     auth: "{{ robot_sa }}"
   ops:
+    auth: "{{ robot_sa }}"
+  vo.nbis.se:
     auth: "{{ robot_sa }}"
 
   # Eduteams based
