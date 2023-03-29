@@ -27,6 +27,9 @@ vos:
 - name: plankton.c-scale.eu
   auth:
     project_id: f775db035db64f2a9163c0237cbb81f2
+- name: vo.access.egi.eu
+  auth:
+    project_id: afd721921d6e472490bbc935368ff343
 - name: vo.emso-eric.eu
   auth:
     project_id: bdfc0b6ca97146088034443609d88aba
