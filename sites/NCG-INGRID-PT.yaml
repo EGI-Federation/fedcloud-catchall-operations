@@ -32,6 +32,9 @@ vos:
 - name: training.egi.eu
   auth:
     project_id: e51b8a89b30945adbf52a5d568912e4c
+- name: vo.access.egi.eu
+  auth:
+    project_id: bd5a81e1670b48f18af33b05512a9d77
 - name: worsica.vo.incd.pt
   auth:
     project_id: a53ca78c534046e5b13f4537ae698411
