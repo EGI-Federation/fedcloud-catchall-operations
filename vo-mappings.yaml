@@ -114,3 +114,4 @@ vos:
   worsica.vo.incd.pt: "urn:mace:egi.eu:group:worsica.vo.incd.pt:role=vm_operator#aai.egi.eu"
   wp9-pilot2.eosc-hub.eu: "urn:mace:egi.eu:group:wp9-pilot2.eosc-hub.eu:role=vm_operator#aai.egi.eu"
   ispravision.vo.egi.eu: "urn:mace:egi.eu:group:ispravision.vo.egi.eu:role=vm_operator#aai.egi.eu"
+  culturalheritage.vo.egi.eu: "urn:mace:egi.eu:group:culturalheritage.vo.egi.eu:CH-cloud_operators:role=member#aai.egi.eu"
