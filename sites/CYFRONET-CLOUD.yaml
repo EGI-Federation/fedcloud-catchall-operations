@@ -14,3 +14,6 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: 7635176e4f9b4cb4b3f4192a5bf901a3
+- name: culturalheritage.vo.egi.eu
+  auth:
+    project_id: 0a9d5dd734854a15a4b5d1c8a21772bc
