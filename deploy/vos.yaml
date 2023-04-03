@@ -19,6 +19,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   crystal_channelling_simulation.vo.egi.eu:
     auth: "{{ fedcloud_sa }}"
+  culturalheritage.vo.egi.eu:
+    auth: "{{ fedcloud_sa }}"
   d4science.org:
     auth: "{{ fedcloud_sa }}"
   datafurn.eosc-hub.eu:
