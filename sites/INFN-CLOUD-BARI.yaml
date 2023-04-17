@@ -9,15 +9,9 @@ vos:
 - name: coastmonitor.c-scale.eu
   auth:
     project_id: 7b555e9cde9540469beaaed15fca5f0a
-- name: datafurn.eosc-hub.eu
-  auth:
-    project_id: 9532166205f341308ab1c1d4b811976d
 - name: fedcloud.egi.eu
   auth:
     project_id: 02e47ef981904ceaa30f7c545e563a11
-- name: kampal.eosc-hub.eu
-  auth:
-    project_id: a81cd014a37243cb86f6ccdb275193f2
 - name: lost-salvage.c-scale.eu
   auth:
     project_id: 1e3b7769107b40f0b25bd2922ac1ff73

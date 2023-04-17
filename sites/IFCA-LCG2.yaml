@@ -2,13 +2,6 @@
 gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
 vos:
-# VO decommissioned
-#- name: acc-comp.egi.eu
-#  auth:
-#    project_id: 403847ab342247b89b0ba2ede2c82b39
-- name: biinsight.eosc-hub.eu
-  auth:
-    project_id: d602bda767b4490a82b2f62f9347a0f5
 - name: cos4cloud-eosc.eu
   auth:
     project_id: c614975f1176494eaf6d6c389e1f3e2c
