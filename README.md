@@ -21,6 +21,7 @@ vos:
     auth:
       project_id: <project id supporting the VO vo name at the site>
     # any other optional configuration for cloud-info-provider, e.g:
+    # not really used for now
     defaultNetwork: private | public | private_only | public_only
     publicNetwork: <name of the public network>
 ```
