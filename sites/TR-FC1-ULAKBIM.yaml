@@ -32,3 +32,6 @@ vos:
 - name: vo.nbis.se
   auth:
     project_id: b0159e11cb4b470eba90d113593e90c9
+- name: vo.imagine-ai.eu
+  auth:
+    project_id: 3c1f7074ad974024849cfd01a4b3858d
