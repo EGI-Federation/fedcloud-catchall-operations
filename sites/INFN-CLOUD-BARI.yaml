@@ -39,3 +39,6 @@ vos:
 - name: vo.decido-project.eu
   auth:
     project_id: 2760d1fb0575417a9c83af158450844d
+- name: vo.usegalaxy.eu
+  auth:
+    project_id: 58a75eadb95e43c88ade9d3415e9e1dc
