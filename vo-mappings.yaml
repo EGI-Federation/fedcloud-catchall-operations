@@ -40,7 +40,6 @@ vos:
   lost-salvage.c-scale.eu: "urn:mace:egi.eu:group:lost-salvage.c-scale.eu:role=member#aai.egi.eu"
   kampal.eosc-hub.eu: "urn:mace:egi.eu:group:kampal.eosc-hub.eu:role=vm_operator#aai.egi.eu"
   med.semmelweis-univ.hu: "urn:mace:egi.eu:group:med.semmelweis-univ.hu:role=vm_operator#aai.egi.eu"
-  minka-sdg.org: "urn:mace:egi.eu:group:minka-sdg.org:role=vm_operator#aai.egi.eu"
   mswss.ui.savba.sk: "urn:mace:egi.eu:group:mswss.ui.savba.sk:role=vm_operator#aai.egi.eu"
   mteam.data.kit.edu: "urn:mace:egi.eu:group:mteam.data.kit.edu:role=vm_operator#aai.egi.eu"
   o3as.data.kit.edu: "urn:mace:egi.eu:group:o3as.data.kit.edu:role=vm_operator#aai.egi.eu"
