@@ -30,9 +30,6 @@ vos:
 - name: lagoproject.net
   auth:
     project_id: 77c86367335f4e9cb1e9ccab72d24f0a
-- name: minka-sdg.org
-  auth:
-    project_id: 5fa5ffd825a54f2e8ea3490fdd6502fb
 - name: o3as.data.kit.edu
   auth:
     project_id: 352db003073549749351fad26cd55074
