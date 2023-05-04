@@ -39,8 +39,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   med.semmelweis-univ.hu:
     auth: "{{ fedcloud_sa }}"
-  minka-sdg.org:
-    auth: "{{ fedcloud_sa }}"
   mswss.ui.savba.sk:
     auth: "{{ fedcloud_sa }}"
   mteam.data.kit.edu:
