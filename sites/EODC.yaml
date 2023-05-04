@@ -5,3 +5,6 @@ vos:
 - name: eval.c-scale.eu
   auth: 
     project_id: 9197366d7240406c9fcb7431bee8e569
+- name: ops
+  auth:
+    project_id: 9197366d7240406c9fcb7431bee8e569
