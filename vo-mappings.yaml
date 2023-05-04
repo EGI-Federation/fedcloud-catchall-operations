@@ -80,6 +80,7 @@ vos:
   vo.fuvex.es: "urn:mace:egi.eu:group:vo.fuvex.es:role=vm_operator#aai.egi.eu"
   vo.geoss.eu: "urn:mace:egi.eu:group:vo.geoss.eu:role=vm_operator#aai.egi.eu"
   vo.i-nergy.eu: "urn:mace:egi.eu:group:vo.i-nergy.eu:role=vm_operator#aai.egi.eu"
+  vo.imagine-ai.eu: "urn:mace:egi.eu: group:vo.imagine-ai.eu:role=vm_operator#aai.egi.eu"
   vo.inactive-sarscov2.eu: "urn:mace:egi.eu:group:vo.inactive-sarscov2.eu:role=vm_operator#aai.egi.eu"
   vo.indigo-datacloud.eu: "urn:mace:egi.eu:group:vo.indigo-datacloud.eu:role=vm_operator#aai.egi.eu"
   vo.inteligg.com: "urn:mace:egi.eu:group:vo.inteligg.com:role=vm_operator#aai.egi.eu"
