@@ -1,3 +1,4 @@
+---
 vos:
   EOServices-vo.indra.es: "urn:mace:egi.eu:group:EOServices-vo.indra.es:role=vm_operator#aai.egi.eu"
   aquamonitor.c-scale.eu: "urn:mace:egi.eu:group:aquamonitor.c-scale.eu:role=member#aai.egi.eu"

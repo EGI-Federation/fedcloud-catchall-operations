@@ -30,9 +30,9 @@ RUN for f in /etc/grid-security/certificates/*.pem ; do \
 
 # New CMD packages are missing, so going for pip instead
 # Version 3.0.0 is broken in the dates management
-ARG CASO_VERSION=fix-dates
+ARG CASO_VERSION=4.1.1
 
-RUN pip install --no-cache-dir git+https://github.com/enolfc/caso.git@$CASO_VERSION
+RUN pip install --no-cache-dir git+https://github.com/IFCA/caso.git@$CASO_VERSION
 
 COPY caso.conf /etc/caso/caso.conf
 COPY voms.json /etc/caso/voms.json

@@ -2,8 +2,8 @@
 - hosts: all
   become: true
   roles:
-  - role: ansible-role-fedcloud-ops
-    tags: ["all", "docker"]
-    vars:
-      site_config_dir: ../sites/
-      checkin_token_endpoint: https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token
+    - role: ansible-role-fedcloud-ops
+      tags: ["all", "docker"]
+      vars:
+        site_config_dir: ../sites/
+        checkin_token_endpoint: https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token

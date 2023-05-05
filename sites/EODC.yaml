@@ -1,6 +1,6 @@
 ---
 gocdb: EODC
-endpoint: https://cloud.eodc.eu:5000/v3
+endpoint: https://cloud.eodc.eu:5000/v3/
 vos:
 - name: eval.c-scale.eu
   auth: 
