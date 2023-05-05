@@ -67,9 +67,9 @@ done
 for site in $(yq -r '.[]' < "$FEDCLOUD_CLI_SITES")
 do
     set -x
-    if ! test -s sites/$(basename "$site")
+    if ! test -s "sites/$(basename "$site")"
     then
-        printf "\033[0;31m[ERROR] Site %s not found in fedcloud-catchall-operations\033[0m\n" "$site"
+        printf "\033[0;31m[ERROR] Site %s not found in fedcloud-catchall-operations\033[0m\n" "$(basename "$site")"
         exit_value=1
     fi
 done
