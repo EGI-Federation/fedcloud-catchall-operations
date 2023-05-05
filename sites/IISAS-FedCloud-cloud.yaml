@@ -59,3 +59,9 @@ vos:
 - name: vo.builtrix.tech
   auth:
     project_id: 7451e8cba04646449ad9b8b6b470c5de
+- name: vo.ai4eosc.eu
+  auth:
+    project_id: 4d40037774784f22907d537070e85f42
+- name: vo.latitudo40.com.eu
+  auth:
+    project_id: 8cab8753df654e92a763d756905715fd
