@@ -1,4 +1,4 @@
 - hosts: all
   become: true
   roles:
-  - fedcloud-catchall-ops
+    - fedcloud-catchall-ops

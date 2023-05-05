@@ -4,7 +4,7 @@ name: Build and push containers
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
 
 jobs:
@@ -15,10 +15,10 @@ jobs:
     strategy:
       matrix:
         image:
-        - cloud-info
-        - caso
-        - cloudkeeper-os
-        - cloudkeeper-core
+          - cloud-info
+          - caso
+          - cloudkeeper-os
+          - cloudkeeper-core
 
     steps:
       - name: Checkout
