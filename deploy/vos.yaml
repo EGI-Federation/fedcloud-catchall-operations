@@ -97,6 +97,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.i-nergy.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.imagine-ai.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.inteligg.com:
     auth: "{{ fedcloud_sa }}"
   vo.lethe-project.eu:
