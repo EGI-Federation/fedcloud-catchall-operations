@@ -64,22 +64,15 @@ do
     fi
 done
 
-SITES_CHECK=$(mktemp)
-grep --extended-regexp --invert-match --regexp='#' --regexp='^$' "$FEDCLOUD_CLI_SITES" \
-  | sed --expression='s/"//g' --expression='s/- //g' \
-    --expression='s/https:\/\/raw.githubusercontent.com\/EGI-Federation\/fedcloud-catchall-operations\/main\///g' \
-      > "$SITES_CHECK"
-
-while read -r SITE
+for site in $(yq -r '.[]' < "$FEDCLOUD_CLI_SITES")
 do
-    if ! [ -s "$SITE" ]
+    if ! test -s "sites/$(basename "$site")"
     then
-        printf "\033[0;31m[ERROR] Site %s not found in fedcloud-catchall-operations\033[0m\n" "$goc_site"
+        printf "\033[0;31m[ERROR] Site %s not found in fedcloud-catchall-operations\033[0m\n" "$(basename "$site")"
         exit_value=1
     fi
-done < "$SITES_CHECK"
+done
 
-rm "$SITES_CHECK"
 rm "$NOVA_ENDPOINT"
 rm "$FEDCLOUD_CLI_SITES"
 rm "$VO_LIST"
