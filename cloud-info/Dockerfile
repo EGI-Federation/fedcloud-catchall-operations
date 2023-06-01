@@ -30,6 +30,6 @@ COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
 COPY openstack.rc /etc/cloud-info-provider/openstack.rc
 COPY openstack.yaml /etc/cloud-info-provider/openstack.yaml
-COPY config_generator /usr/local/bin/config_generator
+COPY config_generator.py /usr/local/bin/config_generator.py
 
 CMD ["publisher.sh"]

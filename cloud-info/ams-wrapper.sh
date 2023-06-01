@@ -34,7 +34,8 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 
 # Attempt to generate the site configuration
 AUTO_CONFIG_PATH="$(mktemp -d)"
-if VO_SECRETS_PATH="$AUTO_CONFIG_PATH/vos" config_generator > "$AUTO_CONFIG_PATH/site.yaml"; then
+export CHECKIN_SECRETS_FILE="$CHECKIN_SECRETS_PATH/secrets.yaml"
+if VO_SECRETS_PATH="$AUTO_CONFIG_PATH/vos" config_generator.py > "$AUTO_CONFIG_PATH/site.yaml"; then
     # this worked, let's update the env
     export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
     export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
