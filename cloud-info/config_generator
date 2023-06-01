@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Discover projects for cloud-info-povider and generate configuration
 
 Takes its own configuration from env variables:
@@ -7,6 +8,7 @@ OS_AUTH_URL, OS_IDENTITY_PROVIDER, OS_PROTOCOL: OpenStack endpoint config
 SITE_NAME: site name 
 """
 
+import logging
 import os
 
 from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
@@ -15,7 +17,6 @@ from fedcloudclient.endpoint import (
     get_projects_from_single_site,
 )
 import yaml
-
 
 
 def refresh_token(token_url, secrets):
@@ -43,12 +44,19 @@ def get_shares(auth_url, identity_provider, protocol, access_token):
     for p in projects:
         vo = p.get("VO", None)
         if not vo:
+            logging.warning(
+                "Discarding project %s as it does not have VO property", p["name"]
+            )
+            continue
+        if not p.get("enabled", False):
+            logging.warning("Discarding project %s as it is not enabled", p["name"])
             continue
         shares[vo] = {"auth": {"project_id": p["id"]}}
     return shares
 
 
 def main():
+    logging.basicConfig()
     # get config from env
     checkin_secrets_file = os.environ["CHECKIN_SECRETS_FILE"]
     checkin_token_url = os.environ["CHECKIN_OIDC_TOKEN"]
