@@ -1,5 +1,5 @@
 ---
-gocdb: INFN-CATANIA-STACK
+gocdb: CLOUD-INFN-CATANIA
 endpoint: https://stack-server.ct.infn.it:5000/v3
 vos:
 - name: fedcloud.egi.eu
