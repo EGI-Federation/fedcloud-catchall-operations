@@ -8,7 +8,9 @@ ARG CLOUD_INFO_VERSION=f6f6a2e265cc9608d791f31a8ef2903302ca33f6
 RUN pip install --no-cache-dir \
         "git+https://github.com/EGI-Federation/cloud-info-provider.git@$CLOUD_INFO_VERSION" \
         "git+https://github.com/ARGOeu/argo-ams-library@devel" \
-        python-glanceclient python-novaclient python-keystoneclient keystoneauth1 yq
+        python-glanceclient python-novaclient python-keystoneclient keystoneauth1 yq \
+	fedcloudclient
+
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -28,5 +30,6 @@ COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
 COPY openstack.rc /etc/cloud-info-provider/openstack.rc
 COPY openstack.yaml /etc/cloud-info-provider/openstack.yaml
+COPY config_generator /usr/local/bin/config_generator
 
 CMD ["publisher.sh"]
