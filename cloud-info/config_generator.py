@@ -3,20 +3,20 @@
 
 Takes its own configuration from env variables:
 CHECKIN_SECRETS_FILE: yaml file with the check-in secrets to get access tokens
-CHECKIN_OIDC_TOKEN: URL for token refreshal 
+CHECKIN_OIDC_TOKEN: URL for token refreshal
 OS_AUTH_URL, OS_IDENTITY_PROVIDER, OS_PROTOCOL: OpenStack endpoint config
-SITE_NAME: site name 
+SITE_NAME: site name
 """
 
 import logging
 import os
 
+import yaml
 from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
 from fedcloudclient.endpoint import (
-    retrieve_unscoped_token,
     get_projects_from_single_site,
+    retrieve_unscoped_token,
 )
-import yaml
 
 
 def refresh_token(token_url, secrets):
