@@ -11,9 +11,8 @@ RUN apt-get update \
     && curl -L http://repository.egi.eu/sw/production/cas/1/current/repo-files/egi-trustanchors.list > /etc/apt/sources.list.d/egi-trustanchors.list \
     && curl https://dl.igtf.net/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add - \
     && apt-get update \
-    && apt-get -qy install --fix-missing \
-       ca-policy-egi-core \
-       fetch-crl \
+    && apt-get -qy install --fix-missing fetch-crl \
+    && (apt-get -qy install --fix-missing ca-policy-egi-core || true) \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \

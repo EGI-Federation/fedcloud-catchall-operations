@@ -22,7 +22,8 @@ RUN curl -Ls \
     && echo 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
         > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
-    && apt-get install -y jq ca-policy-egi-core \
+    && apt-get install -y jq \
+    && (apt-get install -y ca-policy-egi-core || true) \
     && rm -rf /var/lib/apt/lists/* \
     && cat /etc/grid-security/certificates/*.pem >> "$(python -m requests.certs)"
 
