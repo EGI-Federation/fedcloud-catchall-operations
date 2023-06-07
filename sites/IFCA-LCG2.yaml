@@ -2,13 +2,6 @@
 gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
 vos:
-# VO decommissioned
-#- name: acc-comp.egi.eu
-#  auth:
-#    project_id: 403847ab342247b89b0ba2ede2c82b39
-- name: biinsight.eosc-hub.eu
-  auth:
-    project_id: d602bda767b4490a82b2f62f9347a0f5
 - name: cos4cloud-eosc.eu
   auth:
     project_id: c614975f1176494eaf6d6c389e1f3e2c
@@ -37,9 +30,6 @@ vos:
 - name: lagoproject.net
   auth:
     project_id: 77c86367335f4e9cb1e9ccab72d24f0a
-- name: minka-sdg.org
-  auth:
-    project_id: 5fa5ffd825a54f2e8ea3490fdd6502fb
 - name: o3as.data.kit.edu
   auth:
     project_id: 352db003073549749351fad26cd55074
@@ -70,3 +60,6 @@ vos:
 - name: ispravision.vo.egi.eu
   auth:
     project_id: ed9a5bb0f5a5444ba2ad5cd97072a189
+- name: vo.digitbrain.eu
+  auth:
+    project_id: 3eff18b8a237407ea2ed56aa9cb5d07c

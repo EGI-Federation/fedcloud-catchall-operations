@@ -14,122 +14,117 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Setup python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.x
-    - name: Install environment
-      run: |
-        curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
-        chmod +x jq
-        pip install yq git+https://github.com/tdviet/fedcloudclient.git
-        curl -L https://github.com/oidc-mytoken/client/releases/download/v0.3.0/mytoken_0.3.0_Linux_x86_64.tar.gz \
-          | tar -xzf -
-        mkdir ~/.mytoken
-        curl https://raw.githubusercontent.com/oidc-mytoken/client/master/config/example-config.yaml > ~/.mytoken/config.yaml
-    - name: Configure providers access
-      env:
-        MYTOKEN: ${{ secrets.MYTOKEN }}
-        REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-      run: |
-        OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/oidc/token" \
-                          -d "grant_type=refresh_token&refresh_token=$REFRESH_TOKEN&client_id=token-portal&scope=openid%20email%20profile%20voperson_id%20eduperson_entitlement" \
-                        | jq -r ".access_token")
-        echo "::add-mask::$OIDC_TOKEN"
-        cd deploy
-        BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
-        BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
-        EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
-        DEPLOY_VO="$(yq -r .clouds.deploy.vo clouds.yaml)"
-        echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
-        BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
-                                                           --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
-        echo "::add-mask::$BACKEND_OS_TOKEN"
-        sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
-        DEPLOY_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
-                                                           --site "$EGI_SITE" --vo "$DEPLOY_VO" -j | jq -r '.[0].Result.id')"
-        echo "::add-mask::$DEPLOY_OS_TOKEN"
-        sed -i -e "s/deploy_secret/$DEPLOY_OS_TOKEN/" clouds.yaml
-        mkdir -p ~/.config/openstack
-        touch ~/.config/openstack/secure.yaml
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-    - name: Terraform Format
-      id: fmt
-      run: |
-        cd deploy
-        terraform fmt -check
-    - name: Terraform init
-      id: init
-      run: |
-        cd deploy
-        terraform init
-    - name: Generate token for gettint git repo at VM
-      uses: tibdex/github-app-token@v1
-      id: generate-token
-      with:
-        app_id: ${{ secrets.APP_ID }}
-        private_key: ${{ secrets.APP_PRIVATE_KEY }}
-    - name: Adjust cloud-init file
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
-        ANSIBLE_SECRETS_KEYCLOAK: ${{ secrets.ANSIBLE_SECRETS_KEYCLOAK }}
-      run: |
-        cd deploy
-        sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
-        sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
-        sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
-        sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
-        cp cloud-init.yaml cloud-init-keycloak.yaml
-        ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
-        echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
-        sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
-        echo "$ANSIBLE_SECRETS_KEYCLOAK" > secrets.yaml
-        echo "checkin_token_endpoint: https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" >> secrets.yaml
-        ANSIBLE_ENCODED_SECRETS_KEYCLOAK="$(base64 -w 0 < secrets.yaml)"
-        echo "::add-mask::$ANSIBLE_ENCODED_SECRETS_KEYCLOAK"
-        sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS_KEYCLOAK/" cloud-init-keycloak.yaml
-    - name: terraform plan
-      id: plan
-      if: github.event_name == 'pull_request'
-      run: |
-        cd deploy
-        terraform plan -no-color -var-file="$EGI_SITE.tfvars"
-      continue-on-error: true
-    - name: Update Pull Request
-      uses: actions/github-script@v6
-      if: github.event_name == 'pull_request'
-      env:
-        PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-          <details><summary>Show Plan</summary>
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - name: Install environment
+        run: |
+          curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
+          chmod +x jq
+          pip install yq git+https://github.com/tdviet/fedcloudclient.git
+          curl -L https://github.com/oidc-mytoken/client/releases/download/v0.3.0/mytoken_0.3.0_Linux_x86_64.tar.gz \
+            | tar -xzf -
+          mkdir ~/.mytoken
+          curl https://raw.githubusercontent.com/oidc-mytoken/client/master/config/example-config.yaml > ~/.mytoken/config.yaml
+      - name: Configure providers access
+        env:
+          MYTOKEN: ${{ secrets.MYTOKEN }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+        run: |
+          OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
+                            -d "grant_type=refresh_token&refresh_token=$REFRESH_TOKEN&client_id=token-portal&scope=openid%20email%20profile%20voperson_id%20eduperson_entitlement" \
+                          | jq -r ".access_token")
+          echo "::add-mask::$OIDC_TOKEN"
+          cd deploy
+          BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
+          BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
+          EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
+          DEPLOY_VO="$(yq -r .clouds.deploy.vo clouds.yaml)"
+          echo "EGI_SITE=$EGI_SITE" >> "$GITHUB_ENV"
+          BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
+                                                             --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
+          echo "::add-mask::$BACKEND_OS_TOKEN"
+          sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
+          DEPLOY_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
+                                                             --site "$EGI_SITE" --vo "$DEPLOY_VO" -j | jq -r '.[0].Result.id')"
+          echo "::add-mask::$DEPLOY_OS_TOKEN"
+          sed -i -e "s/deploy_secret/$DEPLOY_OS_TOKEN/" clouds.yaml
+          mkdir -p ~/.config/openstack
+          touch ~/.config/openstack/secure.yaml
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.9
+      - name: Terraform Format
+        id: fmt
+        run: |
+          cd deploy
+          terraform fmt -check
+      - name: Terraform init
+        id: init
+        run: |
+          cd deploy
+          terraform init
+      - name: Generate token for gettint git repo at VM
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Adjust cloud-init file
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
+        run: |
+          cd deploy
+          sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
+          sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
+          sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
+          sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
+          ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
+          echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
+          sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
+      - name: terraform plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: |
+          cd deploy
+          terraform plan -no-color -var-file="$EGI_SITE.tfvars"
+        continue-on-error: true
+      - name: Update Pull Request
+        uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            <details><summary>Show Plan</summary>
 
-          \`\`\`
-          ${process.env.PLAN}
-          \`\`\`
+            \`\`\`
+            ${process.env.PLAN}
+            \`\`\`
 
-          </details>
+            </details>
 
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: output
-          })
-    - name: Terraform Plan Status
-      if: steps.plan.outcome == 'failure'
-      run: exit 1
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: |
-        cd deploy
-        terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          cd deploy
+          terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"

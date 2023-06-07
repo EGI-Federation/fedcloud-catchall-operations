@@ -1,3 +1,4 @@
+---
 cloudkeeper:
   image-lists-file: /etc/cloudkeeper/image-lists.conf
   ca-dir: /etc/grid-security/certificates/ # CA directory

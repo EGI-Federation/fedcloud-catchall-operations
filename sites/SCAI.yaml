@@ -11,3 +11,9 @@ vos:
 - name: vo.sphinxsys.org
   auth:
     project_id: 76988e64e1ed4f5597a83a0e6ddeaa05
+- name: vo.ebrain-health.eu
+  auth:
+    project_id: 4733227537724f7aade971aedefb015a
+- name: vo.fuvex.es
+  auth:
+    project_id: e22d4912b50f47698b336e74cd18eee9

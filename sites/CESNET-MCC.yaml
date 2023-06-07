@@ -60,9 +60,6 @@ vos:
 - name: vo.emphasisproject.eu
   auth:
     project_id: b953842bf4204dc98054f6c3ae581cb5
-- name: vo.eurogeoss.eu
-  auth:
-    project_id: 5bc62d60bbbc49d881bc0a948da710d6
 - name: vo.europlanet-vespa.eu
   auth:
     project_id: 89140661b6be4ef281ab7a67d4c83e0c
@@ -114,3 +111,15 @@ vos:
 - name: eval.c-scale.eu
   auth:
     project_id: d6283bc95d5c4296abb799596867818c
+- name: in-sar-cubes.c-scale.eu
+  auth:
+    project_id: b28570e8eca54db3b837b85a4f27932f
+- name: /vo.pangeo.eu/swift
+  auth:
+    project_id: 57102d3e06b7476088fe4924370ae170
+- name: /vo.pangeo.eu/escience
+  auth:
+    project_id: 5e5a45e153d3424997fda0c4fd21a21f
+- name: vo.thepund.it
+  auth:
+    project_id: a0faee5136134d1ab1e62385c3e45c75

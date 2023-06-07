@@ -6,18 +6,24 @@ vos:
 - name: aquamonitor.c-scale.eu
   auth:
     project_id: f06e8196b73f416c85de7d6db26fad62
-- name: datafurn.eosc-hub.eu
+- name: coastmonitor.c-scale.eu
   auth:
-    project_id: 9532166205f341308ab1c1d4b811976d
+    project_id: 7b555e9cde9540469beaaed15fca5f0a
 - name: fedcloud.egi.eu
   auth:
     project_id: 02e47ef981904ceaa30f7c545e563a11
-- name: kampal.eosc-hub.eu
+- name: lost-salvage.c-scale.eu
   auth:
-    project_id: a81cd014a37243cb86f6ccdb275193f2
+    project_id: 1e3b7769107b40f0b25bd2922ac1ff73
 - name: ops
   auth:
     project_id: 1fd23a3332bf4a01a40a1d5edf8e016e
+- name: plankton.c-scale.eu
+  auth:
+    project_id: f775db035db64f2a9163c0237cbb81f2
+- name: vo.access.egi.eu
+  auth:
+    project_id: afd721921d6e472490bbc935368ff343
 - name: vo.emso-eric.eu
   auth:
     project_id: bdfc0b6ca97146088034443609d88aba
@@ -30,3 +36,9 @@ vos:
 - name: vo.seadatanet.org
   auth:
     project_id: 50c9ea335b7d429296eb1623a97ff311
+- name: vo.decido-project.eu
+  auth:
+    project_id: 2760d1fb0575417a9c83af158450844d
+- name: vo.usegalaxy.eu
+  auth:
+    project_id: 58a75eadb95e43c88ade9d3415e9e1dc

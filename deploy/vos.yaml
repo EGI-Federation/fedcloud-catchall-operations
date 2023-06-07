@@ -19,6 +19,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   crystal_channelling_simulation.vo.egi.eu:
     auth: "{{ fedcloud_sa }}"
+  culturalheritage.vo.egi.eu:
+    auth: "{{ fedcloud_sa }}"
   d4science.org:
     auth: "{{ fedcloud_sa }}"
   datafurn.eosc-hub.eu:
@@ -29,13 +31,13 @@ vos:
     auth: "{{ fedcloud_sa }}"
   icecube:
     auth: "{{ fedcloud_sa }}"
+  in-sar-cubes.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   ispravision.vo.egi.eu:
     auth: "{{ fedcloud_sa }}"
   kampal.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
   med.semmelweis-univ.hu:
-    auth: "{{ fedcloud_sa }}"
-  minka-sdg.org:
     auth: "{{ fedcloud_sa }}"
   mswss.ui.savba.sk:
     auth: "{{ fedcloud_sa }}"
@@ -59,6 +61,10 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.bd4nrg.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.beamide.com:
+    auth: "{{ fedcloud_sa }}"
+  vo.builtrix.tech:
+    auth: "{{ fedcloud_sa }}"
   vo.carouseldancing.org:
     auth: "{{ fedcloud_sa }}"
   vo.cite.gr:
@@ -68,6 +74,8 @@ vos:
   vo.deltares.nl:
     auth: "{{ fedcloud_sa }}"
   vo.digitbrain.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.ebrain-health.eu:
     auth: "{{ fedcloud_sa }}"
   vo.emphasisproject.eu:
     auth: "{{ fedcloud_sa }}"
@@ -81,13 +89,17 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.e-rihs.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.fuvex.es:
     auth: "{{ fedcloud_sa }}"
   vo.geoss.eu:
     auth: "{{ fedcloud_sa }}"
   vo.i-nergy.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.intelligg.com:
+  vo.imagine-ai.eu:
+    auth: "{{ fedcloud_sa }}"
+  vo.inteligg.com:
     auth: "{{ fedcloud_sa }}"
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
@@ -131,7 +143,11 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.stars4all.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.thepund.it:
+    auth: "{{ fedcloud_sa }}"
   vo.ubora-biomedical.org:
+    auth: "{{ fedcloud_sa }}"
+  vo.usegalaxy.eu:
     auth: "{{ fedcloud_sa }}"
   worsica.vo.incd.pt:
     auth: "{{ fedcloud_sa }}"
@@ -141,13 +157,19 @@ vos:
   # Perun based
   aquamonitor.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  coastmonitor.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   eval.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
+  gltfca.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
   hisea.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.nbis.se:
+  lost-salvage.c-scale.eu:
+    auth: "{{ fedcloud_sa }}"
+  plankton.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
@@ -169,6 +191,8 @@ vos:
     auth: "{{ robot_sa }}"
   ops:
     auth: "{{ robot_sa }}"
+  vo.nbis.se:
+    auth: "{{ robot_sa }}"
 
   # Eduteams based
   vo.eoscfuture-sp.panosc.eu:
@@ -186,7 +210,9 @@ vos:
   drihm.eu:
   opencoast.eosc-hub.eu:
   vo.clarin.eu:
+  vo.complex-systems.eu:  
   vo.envri-fair.eu:
+  vo.envrihub.eu:
   vo.indigo-datacloud.eu:
   vo.lifewatch.eu:
   vo.inactive-sarscov2.eu:

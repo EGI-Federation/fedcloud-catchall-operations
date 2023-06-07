@@ -2,6 +2,9 @@
 gocdb: CYFRONET-CLOUD
 endpoint: https://panel.cloud.cyfronet.pl:5000/v3/
 vos:
+- name: culturalheritage.vo.egi.eu
+  auth:
+    project_id: 0a9d5dd734854a15a4b5d1c8a21772bc
 - name: dteam
   auth:
     project_id: 9b40bb40431c4f4180c280b6675f9bb9

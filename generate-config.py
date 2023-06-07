@@ -23,13 +23,27 @@ def basic_mapping(local_group, entitlement):
     }
 
 
+def get_entitlements(fqan, entitlements):
+    try:
+        return entitlements[fqan]
+    except KeyError:
+        if not fqan.startswith("/"):
+            raise Exception(f"No entitlement defined for vo {fqan}")
+        # FQAN is /<name of the VO>/extra/
+        #      or /VO=<name of the VO>/extra/
+        vo_name = fqan.split("/")[1]
+        if vo_name.startswith("VO="):
+            vo_name = vo_name[3:]
+        try:
+            return entitlements[vo_name]
+        except KeyError:
+            raise Exception(f"No entitlement defined for vo {vo_name}")
+
+
 def keystone_config(site, entitlements):
     mapping = []
     for vo in site.get("vos", []):
-        vo_name = vo["name"]
-        ent = entitlements.get(vo_name, None)
-        if not ent:
-            raise Exception(f"No entitlement defined for vo {vo_name}")
+        ent = get_entitlements(vo["name"], entitlements)
         vo_project = vo["auth"]["project_id"]
         mapping.append(basic_mapping(vo_project, ent))
     print(json.dumps(mapping, indent=4))
