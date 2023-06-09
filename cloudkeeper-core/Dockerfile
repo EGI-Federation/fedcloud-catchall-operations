@@ -8,11 +8,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
     && apt-get -qy install --fix-missing --no-install-recommends curl qemu-utils \
-    && curl -L http://repository.egi.eu/sw/production/cas/1/current/repo-files/egi-trustanchors.list > /etc/apt/sources.list.d/egi-trustanchors.list \
     && curl https://dl.igtf.net/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add - \
+    && echo 'deb https://egi-igtf.ndpf.info/distribution/egi-1.120-1b/current egi-igtf core' \
+             > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
     && apt-get -qy install --fix-missing fetch-crl \
-    && (apt-get -qy install --fix-missing ca-policy-egi-core || true) \
+    && apt-get -qy install --fix-missing ca-policy-egi-core \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
