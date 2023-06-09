@@ -86,6 +86,7 @@ vos:
   vo.inactive-sarscov2.eu: "urn:mace:egi.eu:group:vo.inactive-sarscov2.eu:role=vm_operator#aai.egi.eu"
   vo.indigo-datacloud.eu: "urn:mace:egi.eu:group:vo.indigo-datacloud.eu:role=vm_operator#aai.egi.eu"
   vo.inteligg.com: "urn:mace:egi.eu:group:vo.inteligg.com:role=vm_operator#aai.egi.eu"
+  vo.latitudo40.com.eu: "urn:mace:egi.eu:group:vo.latitudo40.com.eu:role=vm_operator#aai.egi.eu"
   vo.lethe-project.eu: "urn:mace:egi.eu:group:vo.lethe-project.eu:role=vm_operator#aai.egi.eu"
   vo.lifewatch.eu: "urn:mace:egi.eu:group:vo.lifewatch.eu:role=vm_operator#aai.egi.eu"
   /vo.lifewatch.eu/openbiomap: "urn:mace:egi.eu:group:vo.lifewatch.eu:role=vm_operator#aai.egi.eu"

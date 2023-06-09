@@ -103,6 +103,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.inteligg.com:
     auth: "{{ fedcloud_sa }}"
+  vo.latitudo40.com.eu:
+    auth: "{{ fedcloud_sa }}"
   vo.lethe-project.eu:
     auth: "{{ fedcloud_sa }}"
   vo.matrycs.eu:
