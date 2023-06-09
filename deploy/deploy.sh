@@ -28,6 +28,10 @@ else
    header="Failed deployment :boom:"
 fi
 
+# This is a temporary way to get the auto discovery working while we transition for all sites
+# copy the secrets to the /etc/egi/vos dir which is readable from the containers
+cp secrets.yaml /etc/egi/vos/secrets.yaml
+
 GITHUB_COMMIT_URL="https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/commits/$COMMIT_SHA/pulls"
 
 # Find out PR we need to update

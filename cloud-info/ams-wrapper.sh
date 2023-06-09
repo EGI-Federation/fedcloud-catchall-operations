@@ -32,6 +32,15 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
     || (echo "Topic $AMS_TOPIC is not avaiable, aborting!"; false)
 
 
+# Attempt to generate the site configuration
+AUTO_CONFIG_PATH="$(mktemp -d)"
+export CHECKIN_SECRETS_FILE="$CHECKIN_SECRETS_PATH/secrets.yaml"
+if VO_SECRETS_PATH="$AUTO_CONFIG_PATH/vos" config_generator.py > "$AUTO_CONFIG_PATH/site.yaml"; then
+    # this worked, let's update the env
+    export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
+    export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
+fi
+
 # Any OS related parameter should be available as env variables
 if test "$CHECKIN_SECRETS_PATH" = ""; then
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
@@ -61,3 +70,5 @@ grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | gzip | base64 -w 0 >> ams-payl
 printf '"}]}' >> ams-payload
 
 curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
+
+rm -rf "$VO_CONFIG_PATH"
