@@ -84,6 +84,8 @@ def main():
             for field in "client_id", "client_secret", "refresh_token":
                 with open(os.path.join(dir_path, field), "w+") as f:
                     f.write(secrets[s].get(field, None) or "")
+    if not shares:
+        raise Exception("No shares found!")
     config = {"site": {"name": site_name}, "compute": {"shares": shares}}
     print(yaml.dump(config))
 
