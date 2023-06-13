@@ -137,8 +137,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.plocan.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.policycloud.eu:
-    auth: "{{ fedcloud_sa }}"
   vo.projectescape.eu:
     auth: "{{ fedcloud_sa }}"
   vo.seadatanet.org:
