@@ -30,9 +30,6 @@ vos:
 - name: vo.nextgeoss.eu
   auth:
     project_id: 8e08188521744ee8869466d299dfb42d
-- name: vo.policycloud.eu
-  auth:
-    project_id: a5d5df1f012c4070a81f8ce1ac8fe05e
 - name: vo.seadatanet.org
   auth:
     project_id: 50c9ea335b7d429296eb1623a97ff311
