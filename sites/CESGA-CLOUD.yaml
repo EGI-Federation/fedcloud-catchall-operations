@@ -23,3 +23,6 @@ vos:
 - name: vo.plocan.eu
   auth:
     project_id: 2ce3f160cdd64d46b02f3b1f856ed8ec
+- name: vo.emso-eric.eu
+  auth:
+    project_id: c76094afeb98405d921820ae7588d92a
