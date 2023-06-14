@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cloud_info_catchall"
+version = "0.0.1"
+description = "Some tools to make cloud-info work with our deployment"
+authors = [
+  { name = "Enol Fernandez", email = "enol.fernandez@egi.eu" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.10"
+
+[project.scripts]
+config-generator = "cloud_info_catchall.config_generator:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
