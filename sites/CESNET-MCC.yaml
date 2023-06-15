@@ -123,3 +123,6 @@ vos:
 - name: vo.thepund.it
   auth:
     project_id: a0faee5136134d1ab1e62385c3e45c75
+- name: vo.enes.org
+  auth:
+    project_id: 786566209a7444f89a561172fa28e117
