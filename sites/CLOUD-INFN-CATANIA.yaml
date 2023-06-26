@@ -17,6 +17,3 @@ vos:
 - name: vo.notebooks.egi.eu
   auth:
     project_id: 745695ccd17042fabf96d2410a4278d9
-- name: vo.obsea.es
-  auth:
-    project_id: f182c5b57816472293dd7758a6c1d4da
