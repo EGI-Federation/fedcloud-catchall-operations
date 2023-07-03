@@ -54,6 +54,9 @@ vos:
 - name: /vo.lifewatch.eu/openbiomap
   auth:
     project_id: ac7bc26131d248ecb6add521e648c331
+- name: vo.obsea.es
+  auth:
+    project_id: 9ce2e985504d44d5af102ad3b537ffad
 - name: worsica.vo.incd.pt
   auth:
     project_id: 7bb9c2694f9040c68cd72cb994f5ce89
