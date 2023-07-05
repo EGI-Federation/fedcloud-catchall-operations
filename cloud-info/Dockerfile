@@ -19,7 +19,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -Ls \
         https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
         | apt-key add - \
-    && echo 'deb https://egi-igtf.ndpf.info/distribution/egi-1.120-1b/current egi-igtf core' \
+    && echo 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
         > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
     && apt-get install -y jq \

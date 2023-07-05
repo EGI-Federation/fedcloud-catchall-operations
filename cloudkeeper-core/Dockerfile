@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update \
     && apt-get -qy install --fix-missing --no-install-recommends curl qemu-utils \
     && curl https://dl.igtf.net/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add - \
-    && echo 'deb https://egi-igtf.ndpf.info/distribution/egi-1.120-1b/current egi-igtf core' \
+    && echo 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
              > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
     && apt-get -qy install --fix-missing fetch-crl \
