@@ -42,7 +42,7 @@ vos:
 - name: vo.ai4eosc.eu
   auth:
     project_id: f44e296a9ea441548456d25fb5b467c9
-- name: VO:vo.imagine-ai.eu
+- name: vo.imagine-ai.eu
   auth:
     project_id: 2f9d982c4a654c38aad616f5a1f7146d
 - name: vo.lifewatch.eu
