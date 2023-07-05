@@ -113,8 +113,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.mightee.idia.za:
     auth: "{{ fedcloud_sa }}"
-  vo.neanias.eu:
-    auth: "{{ fedcloud_sa }}"
   vo.nextgeoss.eu:
     auth: "{{ fedcloud_sa }}"
   vo.notebooks.egi.eu:
