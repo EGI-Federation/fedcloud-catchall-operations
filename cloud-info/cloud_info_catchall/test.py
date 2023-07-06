@@ -75,7 +75,7 @@ class TestConfig(unittest.TestCase):
             "baz.eu": {
                 "client_id": "barz",
                 "refresh_token": "foobarz",
-            }
+            },
         }
         m_shares.side_effect = [
             {"foobar.eu": {"auth": {"project_id": "id1"}}},
@@ -86,7 +86,7 @@ class TestConfig(unittest.TestCase):
         handle = m_file()
         for vo in vos:
             for field in vos[vo]:
-                m_file.assert_any_call(f'vo/{vo}/{field}', 'w+'),
+                m_file.assert_any_call(f"vo/{vo}/{field}", "w+"),
                 handle.write.assert_any_call(vos[vo][field])
         m_refresh.assert_has_calls([call(vos["foobar.eu"]), call(vos["baz.eu"])])
         m_shares.assert_called_with(m_refresh.return_value)
