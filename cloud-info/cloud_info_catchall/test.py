@@ -1,7 +1,7 @@
 """ Tests for the config generator """
 
 import unittest
-from unittest.mock import patch, call, mock_open
+from unittest.mock import call, mock_open, patch
 
 from cloud_info_catchall.config_generator import ShareDiscovery
 from fedcloudclient.endpoint import TokenException

@@ -23,7 +23,7 @@ RUN curl -Ls \
 
 
 COPY . /cloud-info/
-RUN pip install /cloud-info
+RUN pip install --no-cache-dir /cloud-info
 
 COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
