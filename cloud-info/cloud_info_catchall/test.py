@@ -1,7 +1,7 @@
 """ Tests for the config generator """
 
-from unittest.mock import patch, call, mock_open
 import unittest
+from unittest.mock import patch, call, mock_open
 
 from cloud_info_catchall.config_generator import ShareDiscovery
 from fedcloudclient.endpoint import TokenException
@@ -66,23 +66,29 @@ class TestConfig(unittest.TestCase):
         d = ShareDiscovery(
             "https://openstack.org", "egi.eu", "oidc", "https://aai.egi.eu", "vo"
         )
-        secrets = {
-            "client_id": "bar",
-            "client_secret": "foo",
-            "refresh_token": "foobar",
-        }
-        secrets2 = {
-            "client_id": "barz",
-            "client_secret": "fooz",
-            "refresh_token": "foobarz",
+        vos = {
+            "foobar.eu": {
+                "client_id": "bar",
+                "client_secret": "foo",
+                "refresh_token": "foobar",
+            },
+            "baz.eu": {
+                "client_id": "barz",
+                "refresh_token": "foobarz",
+            }
         }
         m_shares.side_effect = [
             {"foobar.eu": {"auth": {"project_id": "id1"}}},
             {"baz.eu": {"auth": {"project_id": "id2"}}},
         ]
-        with patch("builtins.open", mock_open()) as mock_file:
-            s = d.generate_shares({"s1": secrets, "s2": secrets2})
-        m_refresh.assert_has_calls([call(secrets), call(secrets2)])
+        with patch("builtins.open", mock_open()) as m_file:
+            s = d.generate_shares({"s1": vos["foobar.eu"], "s2": vos["baz.eu"]})
+        handle = m_file()
+        for vo in vos:
+            for field in vos[vo]:
+                m_file.assert_any_call(f'vo/{vo}/{field}', 'w+'),
+                handle.write.assert_any_call(vos[vo][field])
+        m_refresh.assert_has_calls([call(vos["foobar.eu"]), call(vos["baz.eu"])])
         m_shares.assert_called_with(m_refresh.return_value)
         m_makedirs.assert_has_calls(
             [call("vo/foobar.eu", exist_ok=True), call("vo/baz.eu", exist_ok=True)]

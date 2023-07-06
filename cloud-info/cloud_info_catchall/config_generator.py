@@ -10,9 +10,9 @@ SITE_NAME: site name
 import logging
 import os
 
+import fedcloudclient.endpoint as fedcli
 import yaml
 from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
-import fedcloudclient.endpoint as fedcli
 
 
 class ShareDiscovery:
