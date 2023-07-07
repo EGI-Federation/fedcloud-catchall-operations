@@ -1,3 +1,4 @@
 # keep secrets out
 secrets.yaml
 .venv
+__pycache__
