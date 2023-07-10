@@ -15,5 +15,5 @@ jobs:
       run: |
         cd cloud-info
         pip install -r requirements.txt
-        pip install -e .
+        pip install .
         python3 -m cloud_info_catchall.test 
