@@ -1,41 +1,23 @@
 ---
 gocdb: INFN-CLOUD-BARI
-endpoint: https://cloud.recas.ba.infn.it:5000/v3
-protocol: oidc
+endpoint: https://keystone.recas.ba.infn.it/v3
+protocol: openid
 vos:
-- name: aquamonitor.c-scale.eu
-  auth:
-    project_id: f06e8196b73f416c85de7d6db26fad62
-- name: coastmonitor.c-scale.eu
-  auth:
-    project_id: 7b555e9cde9540469beaaed15fca5f0a
-- name: fedcloud.egi.eu
-  auth:
-    project_id: 02e47ef981904ceaa30f7c545e563a11
-- name: lost-salvage.c-scale.eu
-  auth:
-    project_id: 1e3b7769107b40f0b25bd2922ac1ff73
 - name: ops
   auth:
-    project_id: 1fd23a3332bf4a01a40a1d5edf8e016e
-- name: plankton.c-scale.eu
-  auth:
-    project_id: f775db035db64f2a9163c0237cbb81f2
-- name: vo.access.egi.eu
-  auth:
-    project_id: afd721921d6e472490bbc935368ff343
+    project_id: 690609ffff9a42ed96b42b4b745b9e5d
 - name: vo.emso-eric.eu
   auth:
-    project_id: bdfc0b6ca97146088034443609d88aba
-- name: vo.nextgeoss.eu
-  auth:
-    project_id: 8e08188521744ee8869466d299dfb42d
-- name: vo.seadatanet.org
-  auth:
-    project_id: 50c9ea335b7d429296eb1623a97ff311
+    project_id: 18ef543d904b441cbb9c5f2302dbd154
 - name: vo.decido-project.eu
   auth:
-    project_id: 2760d1fb0575417a9c83af158450844d
+    project_id: 9ca3e35cbd1b4b3f8c7676908dc10b78
 - name: vo.usegalaxy.eu
   auth:
-    project_id: 58a75eadb95e43c88ade9d3415e9e1dc
+    project_id: b82b6407118642d0af8ae32235ba974e
+- name: vo.nbis.se
+  auth:
+    project_id: 779d51b021904fe990913cc0bf738031
+- name: vo.binare-oy.eu
+  auth:
+    project_id: f08cb68480de4ac38dbe3cf63e42bf38
