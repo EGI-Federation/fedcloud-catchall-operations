@@ -59,8 +59,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.ai4eosc.eu:
     auth: "{{ fedcloud_sa }}"
-  vo.agiliacenter.com:
-    auth: "{{ fedcloud_sa }}"
   vo.bd4nrg.eu:
     auth: "{{ fedcloud_sa }}"
   vo.beamide.com:
