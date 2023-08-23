@@ -91,6 +91,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.eurogeoss.eu:
     auth: "{{ fedcloud_sa }}"
+  vo.eurosea.marine.ie:
+    auth: "{{ fedcloud_sa }}"
   vo.e-rihs.eu:
     auth: "{{ fedcloud_sa }}"
   vo.fuvex.es:

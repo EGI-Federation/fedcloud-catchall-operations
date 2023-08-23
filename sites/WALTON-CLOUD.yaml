@@ -5,3 +5,6 @@ vos:
 - name: ops
   auth:
     project_id: 786ae008b6694cfca45e04001fe2054c
+- name: vo.eurosea.marine.ie
+  auth:
+    project_id: 30e1e1ad790043108f18a627474296df
