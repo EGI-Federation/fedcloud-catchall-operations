@@ -21,7 +21,8 @@ RUN apt-get update \
 
 RUN fetch-crl -p 2 -T 30 || exit 0
 
-RUN gem install cloudkeeper -v 1.7.1
+RUN gem install google-protobuf -v 3.23.4 \
+    && gem install cloudkeeper -v 1.7.1
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
