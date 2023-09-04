@@ -8,9 +8,6 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: d12c055894f245b28c75c95e4ca78407
-- name: vo.sphinxsys.org
-  auth:
-    project_id: 76988e64e1ed4f5597a83a0e6ddeaa05
 - name: vo.ebrain-health.eu
   auth:
     project_id: 4733227537724f7aade971aedefb015a
