@@ -23,6 +23,3 @@ vos:
 - name: vo.inteligg.com
   auth:
     project_id: 9fe5330bec51464bad89d368d73b88fc
-- name: vo.usegalaxy.eu
-  auth:
-    project_id: ddbf76b4a9dd4a8293bd8a804eab68f4
