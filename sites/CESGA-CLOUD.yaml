@@ -26,3 +26,6 @@ vos:
 - name: vo.emso-eric.eu
   auth:
     project_id: c76094afeb98405d921820ae7588d92a
+- name: vo.aneris.eu
+  auth:
+    project_id: ec4d71d1142b46a39f7cf704d79219c5
