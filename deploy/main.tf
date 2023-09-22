@@ -10,5 +10,5 @@ resource "openstack_compute_instance_v2" "cloud-info" {
 }
 
 output "instance-id" {
-  value = "${openstack_compute_instance_v2.cloud-info.id}"
+  value = openstack_compute_instance_v2.cloud-info.id
 }
