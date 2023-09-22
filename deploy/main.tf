@@ -8,3 +8,7 @@ resource "openstack_compute_instance_v2" "cloud-info" {
     uuid = var.net_id
   }
 }
+
+output "instance-id" {
+  value = "${openstack_compute_instance_v2.cloud-info.id}"
+}
