@@ -142,7 +142,7 @@ jobs:
             openstack --os-cloud backend object save fedcloud-catchall "$VM_ID"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run:
+        run: |
           cd deploy
           # show the status
           cat $VM_ID
