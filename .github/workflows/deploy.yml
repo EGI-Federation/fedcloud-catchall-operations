@@ -145,5 +145,5 @@ jobs:
         run: |
           cd deploy
           # show the status
-          cat $VM_ID
-          grep -v "error" $VM_ID
+          cat "$VM_ID"
+          grep -v "error" "$VM_ID"
