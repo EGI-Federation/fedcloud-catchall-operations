@@ -139,7 +139,7 @@ jobs:
           max_attempts: 10
           command: |
             cd deploy
-            openstack --os-cloud backend object save fedcloud-catchall $VM_ID
+            openstack --os-cloud backend object save fedcloud-catchall "$VM_ID"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run:
