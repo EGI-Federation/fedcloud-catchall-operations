@@ -87,6 +87,7 @@ jobs:
           ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
           echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
           sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
+          sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)" cloud-init.yaml
       - name: terraform plan
         id: plan
         if: github.event_name == 'pull_request'
@@ -124,7 +125,25 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
       - name: Terraform Apply
+        id: terraform-apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           cd deploy
           terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
+          echo "VM_ID=$(terraform output -raw instance-id)" >> "$GITHUB_ENV"
+      - name: Get the status file from swift
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 10
+          command: |
+            cd deploy
+            openstack --os-cloud backend object save fedcloud-catchall $VM_ID
+      - name: Look for errors
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run:
+          cd deploy
+          # show the status
+          cat $VM_ID
+          grep -v "error" $VM_ID
