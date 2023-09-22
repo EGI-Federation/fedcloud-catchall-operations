@@ -140,6 +140,8 @@ jobs:
           command: |
             cd deploy
             openstack --os-cloud backend object save fedcloud-catchall "$VM_ID"
+            # we don't need it around
+            openstack --os-cloud backend object delete fedcloud-catchall "$VM_ID"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
