@@ -47,7 +47,8 @@ write_files:
               tar xz --strip=1
       cd deploy
       echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
-      ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SHORT_COMMIT_SHA $SLACK_WEBHOOK_URL
+      ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" \
+                  "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
     path: /var/lib/cloud/scripts/per-boot/deploy.sh
     permissions: '0755'
   - content: |
@@ -56,9 +57,10 @@ write_files:
       mkdir -p /var/tmp/egi
       VM_ID="$(cloud-init query instance_id)"
 
-      cloud-init status --wait -l > /var/tmp/egi/$VM_ID
+      cloud-init status --wait -l > "/var/tmp/egi/$VM_ID"
       # try 10 times, otherwise just die
-      retry -t 10 -d 90 openstack --os-cloud backend object create --name $VM_ID fedcloud-catchall /var/tmp/egi/$VM_ID
+      retry -t 10 -d 90 openstack --os-cloud backend object create \
+            --name "$VM_ID" fedcloud-catchall "/var/tmp/egi/$VM_ID"
     path: /usr/local/bin/notify.sh
     permissions: '0755'
   - content: |
