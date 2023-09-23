@@ -71,7 +71,7 @@ write_files:
       [Install]
       WantedBy=multi-user.target
     path: /etc/systemd/system/notify.service
-  - content: %CLOUDS_YAML%
+  - content: "%CLOUDS_YAML%"
     encoding: base64
     path: /etc/openstack/clouds.yaml
     permissions: '0644'
