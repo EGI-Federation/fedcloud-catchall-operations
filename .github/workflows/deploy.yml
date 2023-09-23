@@ -87,7 +87,7 @@ jobs:
           ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
           echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
           sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
-          sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)" cloud-init.yaml
+          sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)/" cloud-init.yaml
       - name: terraform plan
         id: plan
         if: github.event_name == 'pull_request'
