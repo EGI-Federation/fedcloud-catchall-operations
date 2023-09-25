@@ -68,19 +68,13 @@ jobs:
         run: |
           cd deploy
           terraform init
-      - name: Generate token for getting git repo at VM
-        uses: tibdex/github-app-token@v2
-        id: generate-token
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Adjust cloud-init file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
         run: |
           cd deploy
-          sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
+          sed -i -e "s/%TOKEN%/${{ secrets.GITHUB_TOKEN }}/" cloud-init.yaml
           sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
           sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
           sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
@@ -130,22 +124,28 @@ jobs:
         run: |
           cd deploy
           terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
-          echo "VM_ID=$(terraform output -raw instance-id)" >> "$GITHUB_ENV"
+      - name: Get VM ID
+        id: terraform-vm-id
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          cd deploy
+          terraform output -raw instance-id
       - name: Get the status file from swift
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 10
-          max_attempts: 10
-          command: |
-            cd deploy
-            openstack --os-cloud backend object save fedcloud-catchall "$VM_ID"
-            # we don't need it around
-            openstack --os-cloud backend object delete fedcloud-catchall "$VM_ID"
+          max_attempts: 20
+          retry_wait_seconds: 40
+          command: >
+            set -x &&
+            pushd deploy &&
+            openstack --os-cloud backend object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
+            openstack --os-cloud backend object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           cd deploy
-          # show the status
-          cat "$VM_ID"
-          grep -v "error" "$VM_ID"
+          # show the status in the build log
+          cat "${{ steps.terraform-vm-id.outputs.stdout }}"
+          grep -v "error" "${{ steps.terraform-vm-id.outputs.stdout }}"

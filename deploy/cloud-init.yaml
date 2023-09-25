@@ -59,7 +59,7 @@ write_files:
 
       cloud-init status --wait -l > "/var/tmp/egi/$VM_ID"
       # try 10 times, otherwise just die
-      retry -t 10 -d 90 openstack --os-cloud backend object create \
+      retry -t 10 -d 90 -- openstack --os-cloud backend object create \
             --name "$VM_ID" fedcloud-catchall "/var/tmp/egi/$VM_ID"
     path: /usr/local/bin/notify.sh
     permissions: '0755'
