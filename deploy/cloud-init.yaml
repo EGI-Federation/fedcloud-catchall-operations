@@ -10,7 +10,6 @@ users:
     ssh_import_id:
       - gh:enolfc
       - gh:gwarf
-      - gh:CatalinCondurache
 
 apt:
   sources:
@@ -23,6 +22,8 @@ packages:
   - git
   - ansible
   - jq
+  - python3-openstackclient
+  - retry
 
 write_files:
   - content: |
@@ -32,21 +33,47 @@ write_files:
       mkdir -p /var/tmp/egi
       cd /var/tmp/egi || exit
 
+      systemctl start notify
+
       # Valid GitHub token to access the repo
       OAUTH_TOKEN="%TOKEN%"
       SLACK_WEBHOOK_URL="%SLACK_WEBHOOK_URL%"
       COMMIT_SHA="%REF%"
       SHORT_COMMIT_SHA="%SHORT_REF%"
 
-      # get the repo code and untar at cwd, this may fail if the token expired (e.g. VM rebooted)
-      # still the deploy should be-executed just in case something is missing, so adding a true
-      # at the end
-      curl -L -H "Authorization: token $OAUTH_TOKEN" \
-              -H "Accept: application/vnd.github.v3+raw" \
+      # get the repo code and untar at cwd
+      curl -L -H "Accept: application/vnd.github.v3+raw" \
               "https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
-              tar xz --strip=1 || true
+              tar xz --strip=1
       cd deploy
       echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
-      ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SHORT_COMMIT_SHA $SLACK_WEBHOOK_URL
+      ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" \
+                  "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
     path: /var/lib/cloud/scripts/per-boot/deploy.sh
     permissions: '0755'
+  - content: |
+      #!/bin/sh
+
+      mkdir -p /var/tmp/egi
+      VM_ID="$(cloud-init query instance_id)"
+
+      cloud-init status --wait -l > "/var/tmp/egi/$VM_ID"
+      # try 10 times, otherwise just die
+      retry -t 10 -d 90 openstack --os-cloud backend object create \
+            --name "$VM_ID" fedcloud-catchall "/var/tmp/egi/$VM_ID"
+    path: /usr/local/bin/notify.sh
+    permissions: '0755'
+  - content: |
+      [Unit]
+      Description=Notify the github action
+
+      [Service]
+      ExecStart=/usr/local/bin/notify.sh
+
+      [Install]
+      WantedBy=multi-user.target
+    path: /etc/systemd/system/notify.service
+  - content: "%CLOUDS_YAML%"
+    encoding: base64
+    path: /etc/openstack/clouds.yaml
+    permissions: '0644'
