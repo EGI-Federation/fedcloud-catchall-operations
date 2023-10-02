@@ -31,8 +31,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   icecube:
     auth: "{{ fedcloud_sa }}"
-  in-sar-cubes.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
   ispravision.vo.egi.eu:
     auth: "{{ fedcloud_sa }}"
   kampal.eosc-hub.eu:
@@ -161,19 +159,9 @@ vos:
   # Perun based
   aquamonitor.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
-  coastmonitor.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
   demo.fedcloud.egi.eu:
     auth: "{{ fedcloud_sa }}"
   eval.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
-  gltfca.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
-  hisea.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
-  lost-salvage.c-scale.eu:
-    auth: "{{ fedcloud_sa }}"
-  plankton.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
   waterwatch.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
