@@ -73,6 +73,17 @@ do
     fi
 done
 
+# check that the VO mappings are up to date according to ops portal
+for vo in $(yq -r '.vos | keys[]' < vo-mappings.yaml | cut -f2 -d"/" | sed "s/^VO=//")
+do
+    if ! grep -q "^$vo\$" "$VO_LIST"
+    then
+        printf "\033[0;31m[ERROR] VO %s not found in ops portal\033[0m\n" \
+            "$vo"
+        exit_value=1
+    fi
+done
+
 rm "$NOVA_ENDPOINT"
 rm "$FEDCLOUD_CLI_SITES"
 rm "$VO_LIST"
