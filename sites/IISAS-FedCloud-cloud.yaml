@@ -47,3 +47,6 @@ vos:
 - name: vo.latitudo40.com.eu
   auth:
     project_id: 8cab8753df654e92a763d756905715fd
+- name: vo.usegalaxy.eu
+  auth:
+    project_id: 7a23c4fa956a499c854eb215f3a95218
