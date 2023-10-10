@@ -1,5 +1,5 @@
-# Cloud info version is f6f6a2e265cc9608d791f31a8ef2903302ca33f6
-git+https://github.com/EGI-Federation/cloud-info-provider.git@f6f6a2e265cc9608d791f31a8ef2903302ca33f6
+# Cloud info version is 0.13.0
+git+https://github.com/EGI-Federation/cloud-info-provider.git@0.13.0
 git+https://github.com/ARGOeu/argo-ams-library@devel
 python-glanceclient
 python-novaclient
@@ -7,5 +7,6 @@ python-keystoneclient
 keystoneauth1
 yq
 fedcloudclient
+PyJWT
 
 
