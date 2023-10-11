@@ -18,6 +18,7 @@ requires-python = ">=3.10"
 
 [project.scripts]
 config-generator = "cloud_info_catchall.config_generator:main"
+token-generator = "cloud_info_catchall.token_generator:main"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
