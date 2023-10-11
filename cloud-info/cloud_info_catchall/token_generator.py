@@ -70,6 +70,7 @@ def valid_token(token_file, oidc_config, min_time):
         logging.warning(f"Unable to open / expired token: {e}")
         return False
 
+
 def generate_tokens(oidc_config, scopes, access_token_dir, token_ttl, secrets):
     for s in secrets:
         # not our thing
@@ -94,6 +95,7 @@ def main():
     oidc_config = requests.get(oidc_config_url).json()
     scopes = os.environ.get("CHECKIN_SCOPES", CHECKIN_SCOPES)
     access_token_dir = os.environ["ACCESS_TOKEN_DIR"]
+    os.makedirs(access_token_dir, exist_ok=True)
     token_ttl = int(os.environ.get("ACCESS_TOKEN_TTL", ACCESS_TOKEN_TTL))
     secrets = read_secrets(checkin_secrets_file)
     generate_tokens(oidc_config, scopes, access_token_dir, token_ttl, secrets)
