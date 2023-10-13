@@ -4,19 +4,19 @@ Takes its own configuration from env variables:
 CHECKIN_SECRETS_FILE: yaml file with the check-in secrets to get access tokens
 CHECKIN_SCOPES: Scopes to request in the access token
 CHECKIN_OIDC_URL: Discovery URL for Check-in
-ACCESS_TOKEN_SECRETS_FILE: File where to dump the new access tokens if needed 
+ACCESS_TOKEN_SECRETS_FILE: File where to dump the new access tokens if needed
 ACCESS_TOKEN_TTL: Minimum TTL for the access token
 """
 
 import calendar
-from datetime import datetime, timezone
 import json
 import logging
 import os
+from datetime import datetime, timezone
 
+import jwt
 import requests
 import yaml
-import jwt
 
 # Default OIDC URL for Check-in
 CHECKIN_OIDC_URL = "https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
@@ -55,7 +55,7 @@ def valid_token(token, oidc_config, min_time):
         headers = jwt.get_unverified_header(token)
         kid = headers["kid"]
         key = public_keys[kid]
-        payload = jwt.decode(token, key=public_keys[kid], algorithms=[headers["alg"]])
+        payload = jwt.decode(token, key=key, algorithms=[headers["alg"]])
         # this comes from JWT documentation
         # https://pyjwt.readthedocs.io/en/stable/usage.html#expiration-time-claim-exp
         now = calendar.timegm(datetime.now(tz=timezone.utc).utctimetuple())

@@ -1,8 +1,8 @@
 """Discover projects for cloud-info-povider and generate configuration
 
 Takes its own configuration from env variables:
-SECRETS_FILE: yaml file with the secrets to access shares 
-The yaml includes as many credentials as wanted in 2 formats 
+SECRETS_FILE: yaml file with the secrets to access shares
+The yaml includes as many credentials as wanted in 2 formats
 ```
 ---
 secret_name:
@@ -20,19 +20,14 @@ VO_SECRETS_PATH: directory to create VO structure with credentials
 TOKEN_URL: URL to refresh tokens
 OS_AUTH_URL, OS_IDENTITY_PROVIDER, OS_PROTOCOL: OpenStack endpoint config
 SITE_NAME: site name
-
-
 """
 
 import logging
 import os
 
-import fedcloudclient.endpoint as fedcli
 import yaml
-from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
-
 from cloud_info_catchall.share_discovery import (
-    AccessTokenDiscovery,
+    AccessTokenShareDiscovery,
     RefresherShareDiscovery,
 )
 
@@ -42,7 +37,7 @@ def read_secrets(secrets_file):
         return yaml.load(f.read(), Loader=yaml.SafeLoader)
 
 
-def generate_shares(self, config, secrets):
+def generate_shares(config, secrets):
     """calls the share discovery class according to the secret type
     that we have"""
     shares = {}
@@ -62,9 +57,9 @@ def generate_shares(self, config, secrets):
     return shares
 
 
-def generate_shares_config(self, config, secrets):
+def generate_shares_config(config, secrets):
     shares = generate_shares(config, secrets)
-    return {"site": {"name": site_name}, "compute": {"shares": shares}}
+    return {"site": {"name": config["site_name"]}, "compute": {"shares": shares}}
 
 
 def main():
@@ -79,7 +74,7 @@ def main():
         "token_url": os.environ["TOKEN_URL"],
         "vo_dir": os.environ.get("VO_SECRETS_PATH", ""),
     }
-    secrets = read_secrets(checkin_secrets_file)
+    secrets = read_secrets(secrets_file)
     shares_config = generate_shares_config(config, secrets)
     print(yaml.dump(shares_config))
 

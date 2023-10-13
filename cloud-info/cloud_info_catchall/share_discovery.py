@@ -5,7 +5,6 @@ import logging
 import os
 
 import fedcloudclient.endpoint as fedcli
-import yaml
 from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
 
 
@@ -50,22 +49,8 @@ class ShareDiscovery:
         """do any additional configuration to support the shares"""
         pass
 
-    def generate_shares(self, secrets):
-        shares = {}
-        for s in secrets:
-            # not our thing
-            if not isinstance(secrets[s], dict):
-                continue
-            access_token = self.get_token(secrets[s])
-            token_shares = self.get_token_shares(access_token)
-            shares.update(token_shares)
-        if not shares:
-            logging.error("No shares generated!")
-            raise Exception("No shares found!")
-        return shares
-
     def get_token(self):
-        raise NotImplemented
+        raise NotImplementedError
 
 
 class RefresherShareDiscovery(ShareDiscovery):
@@ -75,6 +60,7 @@ class RefresherShareDiscovery(ShareDiscovery):
     def __init__(self, config, secret):
         super().__init__(config, secret)
         self.token_url = config["token_url"]
+        self.vo_dir = config["vo_dir"]
 
     def get_token(self):
         # fake the options for refreshing
@@ -105,7 +91,7 @@ class AccessTokenShareDiscovery(ShareDiscovery):
     """Uses existing access token to create VO configuration"""
 
     def get_token(self):
-        return secret["access_token"]
+        return self.secret["access_token"]
 
     def build_share(self, project, access_token):
         s = super().build_share(project, access_token)

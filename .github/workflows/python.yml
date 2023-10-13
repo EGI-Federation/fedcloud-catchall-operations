@@ -1,6 +1,8 @@
 name: Python testing
 
-on: pull_request
+on:
+  - pull_request
+  - push
 
 jobs:
   test:
@@ -9,11 +11,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 
+    - name: Set up Python
       uses: actions/setup-python@v4
-    - name: Test cloud-info-generator 
+    - name: Test cloud-info-generator
       run: |
         cd cloud-info
         pip install -r requirements.txt
         pip install .
-        python3 -m cloud_info_catchall.test 
+        cd cloud_info_catchall
+        python3 -m unittest
