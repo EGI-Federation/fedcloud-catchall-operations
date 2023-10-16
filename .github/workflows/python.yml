@@ -19,7 +19,6 @@ jobs:
       run: |
         cd cloud-info
         pip install -r requirements.txt
-        pip install -Uv setuptools
-        pip install . -vv
+        pip install .
         cd cloud_info_catchall
         python3 -m unittest
