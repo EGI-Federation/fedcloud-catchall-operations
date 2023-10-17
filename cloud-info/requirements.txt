@@ -8,5 +8,6 @@ keystoneauth1
 yq
 fedcloudclient
 PyJWT
+responses
 
 
