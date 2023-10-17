@@ -82,7 +82,7 @@ def generate_tokens(oidc_config, scopes, tokens, token_ttl, secrets):
 
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig()
     # get config from env
     checkin_secrets_file = os.environ["CHECKIN_SECRETS_FILE"]
     oidc_config_url = os.environ.get("CHECKIN_OIDC_URL", CHECKIN_OIDC_URL)

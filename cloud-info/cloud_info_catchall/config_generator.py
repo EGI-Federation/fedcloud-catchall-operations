@@ -67,11 +67,11 @@ def main():
     # get config from env
     secrets_file = os.environ["SECRETS_FILE"]
     config = {
-        "os_auth_url": os.environ["OS_AUTH_URL"],
-        "os_identity_provider": os.environ["OS_IDENTITY_PROVIDER"],
-        "os_protocol": os.environ["OS_PROTOCOL"],
+        "auth_url": os.environ["OS_AUTH_URL"],
+        "identity_provider": os.environ["OS_IDENTITY_PROVIDER"],
+        "protocol": os.environ["OS_PROTOCOL"],
         "site_name": os.environ["SITE_NAME"],
-        "token_url": os.environ["TOKEN_URL"],
+        "token_url": os.environ.get("TOKEN_URL", ""),
         "vo_dir": os.environ.get("VO_SECRETS_PATH", ""),
     }
     secrets = read_secrets(secrets_file)
