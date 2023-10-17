@@ -71,6 +71,9 @@ def generate_tokens(oidc_config, scopes, tokens, token_ttl, secrets):
         # not our thing
         if not isinstance(secrets[s], dict):
             continue
+        if "refresh_token" in secrets[s]:
+            # ignore those that have refresh token
+            continue
         token = tokens.get(s, {}).get("access_token", None)
         if not valid_token(token, oidc_config, token_ttl):
             logging.info("Token needs refreshing")
