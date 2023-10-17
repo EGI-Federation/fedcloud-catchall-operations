@@ -34,20 +34,39 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 
 # Attempt to generate the site configuration
 AUTO_CONFIG_PATH="$(mktemp -d)"
+
+# First get valid access token
 export CHECKIN_SECRETS_FILE="$CHECKIN_SECRETS_PATH/secrets.yaml"
-if VO_SECRETS_PATH="$AUTO_CONFIG_PATH/vos" config-generator > "$AUTO_CONFIG_PATH/site.yaml"; then
-    # this worked, let's update the env
-    export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
-    export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
+# TODO(enolfc): avoid creating new tokens for every provider
+export ACCESS_TOKEN_FILE="$AUTO_CONFIG_PATH/token.yaml"
+USE_ACCESS_TOKEN=0
+if token-generator; then
+    # TODO(enolfc): even if this belows fails, we should use access token as it will provide
+    # access to more projects
+    if SECRETS_FILE="$ACCESS_TOKEN_FILE" config-generator > "$AUTO_CONFIG_PATH/site.yaml"; then
+        # this worked, let's update the env
+        export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
+        export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
+        USE_ACCESS_TOKEN=1
+    fi
 fi
 
 # Any OS related parameter should be available as env variables
 if test "$CHECKIN_SECRETS_PATH" = ""; then
+    # Case 1: manual config
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                                 --middleware "$CLOUD_INFO_MIDDLEWARE" \
                                 --ignore-share-errors \
                                 --format glue21 > cloud-info.out
+elif test "$USE_ACCESS_TOKEN" -eq 1; then
+    # Case 2: access token style
+    cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+                                --middleware "$CLOUD_INFO_MIDDLEWARE" \
+                                --ignore-share-errors \
+                                --auth-refresher accesstoken \
+                                --format glue21 > cloud-info.out
 else
+    # Case 3: oidc refresh style
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                                 --middleware "$CLOUD_INFO_MIDDLEWARE" \
                                 --ignore-share-errors \
