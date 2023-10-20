@@ -17,8 +17,6 @@ jobs:
         image:
           - cloud-info
           - caso
-          - cloudkeeper-os
-          - cloudkeeper-core
 
     steps:
       - name: Checkout
