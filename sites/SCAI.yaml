@@ -11,6 +11,3 @@ vos:
 - name: vo.ebrain-health.eu
   auth:
     project_id: 4733227537724f7aade971aedefb015a
-- name: vo.fuvex.es
-  auth:
-    project_id: e22d4912b50f47698b336e74cd18eee9
