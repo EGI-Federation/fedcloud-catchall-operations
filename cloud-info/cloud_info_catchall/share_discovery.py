@@ -20,7 +20,9 @@ class ShareDiscovery:
 
     def get_project_vo(self, project):
         if not project.get("enabled", False):
-            logging.warning(f"Discarding project {project['name']} as it is not enabled")
+            logging.warning(
+                f"Discarding project {project['name']} as it is not enabled"
+            )
             return None
         vo = project.get("egi.VO", None)
         if not vo:
