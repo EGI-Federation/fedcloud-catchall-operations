@@ -25,6 +25,38 @@ class ShareDiscoveryTest(unittest.TestCase):
     def setUp(self):
         self.discoverer = self.DISCOVERER_CLASS(self.CONFIG, self.SECRET)
 
+    def test_get_project_vo_disabled(self):
+        p = {
+            "enabled": False,
+            "name": "foo.eu",
+            "VO": "foo",
+        }
+        self.assertEqual(self.discoverer.get_project_vo(p), None)
+
+    def test_get_project_vo_egi_property(self):
+        p = {
+            "enabled": True,
+            "name": "foo.eu",
+            "VO": "bar",
+            "egi.VO": "foo",
+        }
+        self.assertEqual(self.discoverer.get_project_vo(p), "foo")
+
+    def test_get_project_vo_property(self):
+        p = {
+            "enabled": True,
+            "name": "foo.eu",
+            "VO": "bar",
+        }
+        self.assertEqual(self.discoverer.get_project_vo(p), "bar")
+
+    def test_get_project_no_vo_property(self):
+        p = {
+            "enabled": True,
+            "name": "foo.eu",
+        }
+        self.assertEqual(self.discoverer.get_project_vo(p), None)
+
     @patch("fedcloudclient.endpoint.get_projects_from_single_site")
     @patch("fedcloudclient.endpoint.retrieve_unscoped_token")
     def test_token_shares(self, m_fedcli_token, m_proj):
