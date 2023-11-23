@@ -56,3 +56,6 @@ vos:
 - name: vo.pithia.eu
   auth:
     project_id: 7408db293bcd473a98e44924263f1190
+- name: vo.eries.eu
+  auth:
+    project_id: 2dc049b22ab64e72a93f45ae7f4f8a06
