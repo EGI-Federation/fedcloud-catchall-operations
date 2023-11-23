@@ -65,6 +65,7 @@ vos:
   vo.envrihub.eu: "urn:mace:egi.eu:group:vo.envrihub.eu:role=vm_operator#aai.egi.eu"
   vo.envri-fair.eu: "urn:mace:egi.eu:group:vo.envri-fair.eu:role=vm_operator#aai.egi.eu"
   vo.environmental.egi.eu: "urn:mace:egi.eu:group:vo.environmental.egi.eu:role=vm_operator#aai.egi.eu"
+  vo.eries.eu: "urn:mace:egi.eu:group:vo.eries.eu:vm_operator:role=member#aai.egi.eu"
   vo.europlanet-vespa.eu: "urn:mace:egi.eu:group:vo.europlanet-vespa.eu:role=vm_operator#aai.egi.eu"
   vo.eurosea.marine.ie: "urn:mace:egi.eu:group:vo.eurosea.marine.ie:role=member#aai.egi.eu"
   vo.geoss.eu: "urn:mace:egi.eu:group:vo.geoss.eu:role=vm_operator#aai.egi.eu"
