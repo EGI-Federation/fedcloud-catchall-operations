@@ -68,8 +68,8 @@ elif test "$USE_ACCESS_TOKEN" -eq 1; then
 else
     # Let's use the service account directly on the info provider
     CHECKIN_DISCOVERY="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
-    CLIENT_ID="$(yq -r '.fedcloudops.client_id' < $CHECKIN_SECRETS_FILE)"
-    CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' < $CHECKIN_SECRETS_FILE)"
+    CLIENT_ID="$(yq -r '.fedcloudops.client_id' < "$CHECKIN_SECRETS_FILE")"
+    CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' < "$CHECKIN_SECRETS_FILE")"
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                                 --middleware "$CLOUD_INFO_MIDDLEWARE" \
                                 --ignore-share-errors \
