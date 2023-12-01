@@ -66,14 +66,19 @@ elif test "$USE_ACCESS_TOKEN" -eq 1; then
                                 --auth-refresher accesstoken \
                                 --format glue21 > cloud-info.out
 else
-    # Case 3: oidc refresh style
+    # Let's use the service account directly on the info provider
+    CHECKIN_DISCOVERY="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
+    CLIENT_ID="$(yq -r '.fedcloudops.client_id' < "$CHECKIN_SECRETS_FILE")"
+    CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' < "$CHECKIN_SECRETS_FILE")"
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                                 --middleware "$CLOUD_INFO_MIDDLEWARE" \
                                 --ignore-share-errors \
-                                --auth-refresher oidcvorefresh \
-                                --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
-                                --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
-                                --oidc-scopes "openid email profile eduperson_entitlement" \
+                                --os-auth-type v3oidcclientcredentials \
+				--os-discovery-endpoint "$CHECKIN_DISCOVERY" \
+				--os-client-id "$CLIENT_ID" \
+				--os-client-secret "$CLIENT_SECRET" \
+				--os-access-token-type access_token \
+				--os-openid-scope "openid profile eduperson_entitlement email" \
                                 --format glue21 > cloud-info.out
 fi
 
