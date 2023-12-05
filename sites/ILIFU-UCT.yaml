@@ -1,5 +1,5 @@
 gocdb: ILIFU-UCT
-endpoint: https://dashboard2.ilifu.ac.za:5000/v3
+endpoint: https://openstack.ilifu.ac.za:5000/v3
 vos:
 - name: ops
   auth:

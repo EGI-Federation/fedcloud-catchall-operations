@@ -11,9 +11,6 @@ vos:
 - name: ops
   auth:
     project_id: c585e9ae796649f2be13d113a43749aa
-- name: training.egi.eu
-  auth:
-    project_id: bf115eb3fc7144a5808688de17185da2
 - name: vo.access.egi.eu
   auth:
     project_id: 1392719e6e4c4bf7ba0fce8c0acbbd22
@@ -26,6 +23,3 @@ vos:
 - name: vo.inteligg.com
   auth:
     project_id: 9fe5330bec51464bad89d368d73b88fc
-- name: vo.usegalaxy.eu
-  auth:
-    project_id: ddbf76b4a9dd4a8293bd8a804eab68f4

@@ -36,7 +36,6 @@ GITHUB_COMMIT_URL="https://api.github.com/repos/EGI-Federation/fedcloud-catchall
 
 # Find out PR we need to update
 ISSUE_NUMBER=$(curl \
-                 -H "Authorization: token $OAUTH_TOKEN" \
                  -H "Accept: application/vnd.github.groot-preview+json" \
                  "$GITHUB_COMMIT_URL" | jq .[0].number)
 

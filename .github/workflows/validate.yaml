@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # Check yaml files comply to schema
       - name: Check YAML schema
         run: |
@@ -27,19 +27,6 @@ jobs:
       - name: Validate GOC and VOs
         run: |
           ./validate.sh
-      - name: Check all configs can be generated
-        run: |
-          exit_value=0
-          for f in sites/*.yaml; do
-              for c in "caso" "keystone" "cloudkeeper-os"; do
-                  echo "$c config for $f"
-                  if ! ./generate-config.py --config-type "$c" "$f" > /dev/null ; then
-                      echo "FAILED!"
-                      exit_value=1
-                  fi
-              done
-          done
-          exit $exit_value
       - name: Check all VOs are in the deployment dir
         run: |
           for f in sites/*.yaml; do

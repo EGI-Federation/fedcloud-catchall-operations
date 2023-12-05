@@ -14,9 +14,6 @@ vos:
 - name: vo.deltares.nl
   auth:
     project_id: 8a244d1b0d0f4f8e8c9519fae4cfc8ee
-- name: vo.obsea.es
-  auth:
-    project_id: 277dd78e3b3b4c8caf93ad42fddaec38
 - name: bioisi
   auth:
     project_id: 458f3225272243d7b1c0551d3af3f130
@@ -29,3 +26,6 @@ vos:
 - name: vo.emso-eric.eu
   auth:
     project_id: c76094afeb98405d921820ae7588d92a
+- name: vo.aneris.eu
+  auth:
+    project_id: ec4d71d1142b46a39f7cf704d79219c5

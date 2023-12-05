@@ -2,18 +2,12 @@
 gocdb: IISAS-FedCloud
 endpoint: https://cloud.ui.savba.sk:5000/v3/
 vos:
-- name: biomed
-  auth:
-    project_id: 74f63e431be04330862fd6d51434dcea
 - name: cloud.egi.eu
   auth:
     project_id: 982ce52d45fe4e33a1c952ab9484c711
 - name: covid19.eosc-synergy.eu
   auth:
     project_id: a22bbffb007745b2934bf308b0a4d186
-- name: cryoem.instruct-eric.eu
-  auth:
-    project_id: af0a1e8165b94365903088e00e34b063
 - name: eosc-synergy.eu
   auth:
     project_id: 51f736d36ce34b9ebdf196cfcabd24ee
@@ -32,9 +26,6 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: 71dc9c3785cc4876bfb1a4bfc681e0f3
-- name: vo.nextgeoss.eu
-  auth:
-    project_id: 6c4aff79522448ac8191e70dcf4a672a
 - name: vo.matrycs.eu
   auth:
     project_id: 6c2453d04ee544868b70684928d96337
@@ -47,18 +38,15 @@ vos:
 - name: vo.e-rihs.eu
   auth:
     project_id: 6eb56eb83eb54aad9c3226cdeb716c8c
-- name: icecube
-  auth:
-    project_id: 6538cd611f9d44f8b07e82fecfd38b6b
 - name: vo.beamide.com
   auth:
     project_id: 5139b731becd4f0b8fbf5fc19b909d58
-- name: vo.builtrix.tech
-  auth:
-    project_id: 7451e8cba04646449ad9b8b6b470c5de
 - name: vo.ai4eosc.eu
   auth:
     project_id: 4d40037774784f22907d537070e85f42
 - name: vo.latitudo40.com.eu
   auth:
     project_id: 8cab8753df654e92a763d756905715fd
+- name: vo.usegalaxy.eu
+  auth:
+    project_id: 7a23c4fa956a499c854eb215f3a95218

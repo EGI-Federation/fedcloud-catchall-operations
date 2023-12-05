@@ -96,9 +96,6 @@ vos:
 - name: vo.pangeo.eu
   auth:
     project_id: 05e0ff6e03774082aadacc75bfc1d783
-- name: vo.neanias.eu
-  auth:
-    project_id: bc7b84252d3c4a42a6d1d346865a7631
 - name: vo.environmental.egi.eu
   auth:
     project_id: 29e6fbf618984a0c98ffcdf0222ad815
@@ -111,9 +108,6 @@ vos:
 - name: eval.c-scale.eu
   auth:
     project_id: d6283bc95d5c4296abb799596867818c
-- name: in-sar-cubes.c-scale.eu
-  auth:
-    project_id: b28570e8eca54db3b837b85a4f27932f
 - name: /vo.pangeo.eu/swift
   auth:
     project_id: 57102d3e06b7476088fe4924370ae170

@@ -5,9 +5,6 @@ vos:
 - name: cos4cloud-eosc.eu
   auth:
     project_id: c614975f1176494eaf6d6c389e1f3e2c
-- name: covid19.eosc-synergy.eu
-  auth:
-    project_id: e14972ead3154810a5941e511afc208c
 - name: cryoem.instruct-eric.eu
   auth:
     project_id: c7db08b907ef4f0fae73bdd6587bc79e
@@ -24,15 +21,9 @@ vos:
 - name: enmr.eu
   auth:
     project_id: b6b1c395b7da4e8aa1d0895bd695b0ba
-- name: eosc-synergy.eu
+- name: icecube
   auth:
-    project_id: 3b9754ad8c6046b4aec43ec21abe7d8c
-- name: lagoproject.net
-  auth:
-    project_id: 77c86367335f4e9cb1e9ccab72d24f0a
-- name: o3as.data.kit.edu
-  auth:
-    project_id: 352db003073549749351fad26cd55074
+    project_id: 36a6b6937b4d4d23a74842791d5c6e9a
 - name: opencoast.eosc-hub.eu
   auth:
     project_id: 4ebc1727dbed465c8ef72617a9075b4f
@@ -48,15 +39,21 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: 999f045cb1ff4684a15ebb338af69460
+- name: vo.ai4eosc.eu
+  auth:
+    project_id: f44e296a9ea441548456d25fb5b467c9
+- name: vo.imagine-ai.eu
+  auth:
+    project_id: 2f9d982c4a654c38aad616f5a1f7146d
 - name: vo.lifewatch.eu
   auth:
     project_id: 3c8d36c4136946238e82d995fd274d1c
 - name: /vo.lifewatch.eu/openbiomap
   auth:
     project_id: ac7bc26131d248ecb6add521e648c331
-- name: worsica.vo.incd.pt
+- name: vo.obsea.es
   auth:
-    project_id: 7bb9c2694f9040c68cd72cb994f5ce89
+    project_id: 9ce2e985504d44d5af102ad3b537ffad
 - name: ispravision.vo.egi.eu
   auth:
     project_id: ed9a5bb0f5a5444ba2ad5cd97072a189

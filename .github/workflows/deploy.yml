@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup python
         uses: actions/setup-python@v4
         with:
@@ -55,7 +55,7 @@ jobs:
           mkdir -p ~/.config/openstack
           touch ~/.config/openstack/secure.yaml
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.2.9
       - name: Terraform Format
@@ -68,25 +68,20 @@ jobs:
         run: |
           cd deploy
           terraform init
-      - name: Generate token for gettint git repo at VM
-        uses: tibdex/github-app-token@v1
-        id: generate-token
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Adjust cloud-init file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
         run: |
           cd deploy
-          sed -i -e "s/%TOKEN%/${{ steps.generate-token.outputs.token }}/" cloud-init.yaml
+          sed -i -e "s/%TOKEN%/${{ secrets.GITHUB_TOKEN }}/" cloud-init.yaml
           sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
           sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
           sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
           ANSIBLE_ENCODED_SECRETS="$(echo "$ANSIBLE_SECRETS" | base64 -w 0)"
           echo "::add-mask::$ANSIBLE_ENCODED_SECRETS"
           sed -i -e "s/%ANSIBLE_SECRETS%/$ANSIBLE_ENCODED_SECRETS/" cloud-init.yaml
+          sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)/" cloud-init.yaml
       - name: terraform plan
         id: plan
         if: github.event_name == 'pull_request'
@@ -95,7 +90,7 @@ jobs:
           terraform plan -no-color -var-file="$EGI_SITE.tfvars"
         continue-on-error: true
       - name: Update Pull Request
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
@@ -124,7 +119,33 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
       - name: Terraform Apply
+        id: terraform-apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           cd deploy
           terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
+      - name: Get VM ID
+        id: terraform-vm-id
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          cd deploy
+          terraform output -raw instance-id
+      - name: Get the status file from swift
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 20
+          retry_wait_seconds: 40
+          command: >
+            set -x &&
+            pushd deploy &&
+            openstack --os-cloud backend object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
+            openstack --os-cloud backend object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
+      - name: Look for errors
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          cd deploy
+          # show the status in the build log
+          cat "${{ steps.terraform-vm-id.outputs.stdout }}"
+          grep -v "error" "${{ steps.terraform-vm-id.outputs.stdout }}"

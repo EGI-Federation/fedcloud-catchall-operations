@@ -34,27 +34,51 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 
 # Attempt to generate the site configuration
 AUTO_CONFIG_PATH="$(mktemp -d)"
+
+# First get valid access token
 export CHECKIN_SECRETS_FILE="$CHECKIN_SECRETS_PATH/secrets.yaml"
-if VO_SECRETS_PATH="$AUTO_CONFIG_PATH/vos" config_generator.py > "$AUTO_CONFIG_PATH/site.yaml"; then
-    # this worked, let's update the env
-    export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
-    export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
+# TODO(enolfc): avoid creating new tokens for every provider
+export ACCESS_TOKEN_FILE="$AUTO_CONFIG_PATH/token.yaml"
+USE_ACCESS_TOKEN=0
+if token-generator; then
+    # TODO(enolfc): even if this belows fails, we should use access token as it will provide
+    # access to more projects
+    if SECRETS_FILE="$ACCESS_TOKEN_FILE" config-generator > "$AUTO_CONFIG_PATH/site.yaml"; then
+        # this worked, let's update the env
+        export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
+        export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
+        USE_ACCESS_TOKEN=1
+    fi
 fi
 
 # Any OS related parameter should be available as env variables
 if test "$CHECKIN_SECRETS_PATH" = ""; then
+    # Case 1: manual config
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                                 --middleware "$CLOUD_INFO_MIDDLEWARE" \
                                 --ignore-share-errors \
                                 --format glue21 > cloud-info.out
-else
+elif test "$USE_ACCESS_TOKEN" -eq 1; then
+    # Case 2: access token style
     cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
                                 --middleware "$CLOUD_INFO_MIDDLEWARE" \
                                 --ignore-share-errors \
-                                --auth-refresher oidcvorefresh \
-                                --oidc-credentials-path "$CHECKIN_SECRETS_PATH" \
-                                --oidc-token-endpoint "$CHECKIN_OIDC_TOKEN" \
-                                --oidc-scopes "openid email profile eduperson_entitlement" \
+                                --auth-refresher accesstoken \
+                                --format glue21 > cloud-info.out
+else
+    # Let's use the service account directly on the info provider
+    CHECKIN_DISCOVERY="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
+    CLIENT_ID="$(yq -r '.fedcloudops.client_id' < "$CHECKIN_SECRETS_FILE")"
+    CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' < "$CHECKIN_SECRETS_FILE")"
+    cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+                                --middleware "$CLOUD_INFO_MIDDLEWARE" \
+                                --ignore-share-errors \
+                                --os-auth-type v3oidcclientcredentials \
+				--os-discovery-endpoint "$CHECKIN_DISCOVERY" \
+				--os-client-id "$CLIENT_ID" \
+				--os-client-secret "$CLIENT_SECRET" \
+				--os-access-token-type access_token \
+				--os-openid-scope "openid profile eduperson_entitlement email" \
                                 --format glue21 > cloud-info.out
 fi
 
@@ -66,7 +90,7 @@ grep -q GLUE2ShareID cloud-info.out \
 ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
 
 printf '{"messages":[{"attributes":{},"data":"' > ams-payload
-grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | gzip | base64 -w 0 >> ams-payload
+grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | grep -v ": $" | gzip | base64 -w 0 >> ams-payload
 printf '"}]}' >> ams-payload
 
 curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload

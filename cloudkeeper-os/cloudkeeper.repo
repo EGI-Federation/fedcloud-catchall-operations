@@ -1,9 +1,0 @@
-# EGI Applications Database (http://appdb.egi.eu/)
-# EGI Community repository (http://repository.egi.eu/community/)
-# POA ID:1142
-# Created: 2022-03-30 15:04:59 EEST
-[cloudkeeper.os-sl-7-x86_64]
-name=Repository for cloudkeeper.os (o/s: sl7 arch: x86_64)
-baseurl=https://repository.egi.eu/community/software/cloudkeeper.os/0.9.x/releases/sl/7/x86_64/RPMS/
-enabled=1
-gpgcheck=0
