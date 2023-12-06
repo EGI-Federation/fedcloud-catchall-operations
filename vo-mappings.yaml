@@ -99,3 +99,4 @@ vos:
   waterwatch.c-scale.eu: "urn:mace:egi.eu:group:waterwatch.c-scale.eu:role=member#aai.egi.eu"
   worsica.vo.incd.pt: "urn:mace:egi.eu:group:worsica.vo.incd.pt:role=vm_operator#aai.egi.eu"
   ispravision.vo.egi.eu: "urn:mace:egi.eu:group:ispravision.vo.egi.eu:role=vm_operator#aai.egi.eu"
+  vo.radiotracers4psma.eu: "urn:mace:egi.eu:group:vo.radiotracers4psma.eu:role=vm_operator#aai.egi.eu"
