@@ -153,7 +153,8 @@ vos:
     auth: "{{ fedcloud_sa }}"
   wp9-pilot2.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
-
+  vo.radiotracers4psma.eu:
+    auth: "{{ fedcloud_sa }}"
   # Perun based
   aquamonitor.c-scale.eu:
     auth: "{{ fedcloud_sa }}"
