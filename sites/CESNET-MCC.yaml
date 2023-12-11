@@ -123,3 +123,6 @@ vos:
 - name: vo.envrihub.eu
   auth:
     project_id: 61d8e5a65aff45fabc41ae954e905d11
+- name: vo.radiotracers4psma.eu
+  auth:
+    project_id: c92b14a949664e74b1afdac69adc724a
