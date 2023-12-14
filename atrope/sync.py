@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 
 import logging
-import json
 import os
 import os.path
 import subprocess
 import sys
 import tempfile
 
-from oslo_config import cfg
 import requests
 import yaml
+from oslo_config import cfg
 
 # Configuraion
 CONF = cfg.CONF
@@ -159,7 +158,7 @@ def do_sync(sites_config):
                     "sync",
                 ]
                 logging.debug(f"Running {' '.join(cmd)}")
-                #subprocess.call(cmd)
+                subprocess.call(cmd)
 
 
 def load_sites():
