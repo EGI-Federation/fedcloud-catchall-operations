@@ -1,4 +1,4 @@
-FROM python:3.11-slim as build
+FROM python:3-slim as build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -19,7 +19,10 @@ COPY . .
 
 RUN pip install --no-cache-dir .
 
-FROM python:3.11-slim
+# The actual image
+FROM python:3-slim
+
+LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
