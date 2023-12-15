@@ -16,9 +16,6 @@ CONF = cfg.CONF
 CONF.register_opts(
     [
         cfg.StrOpt("sites_file", default="sites.yaml"),
-        cfg.IntOpt("atrope_uid", default=1999),
-        cfg.IntOpt("atrope_gid", default=1999),
-        cfg.StrOpt("atrope_image", default="enolfc/atrope"),
         cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("appdb_token"),
@@ -73,7 +70,7 @@ def fetch_site_info():
 def dump_atrope_config(site, share):
     config_template = """
 [DEFAULT]
-state_path= state/
+state_path = /atrope-state/
 
 [glance]
 auth_type = v3oidcclientcredentials
@@ -139,22 +136,14 @@ def do_sync(sites_config):
         for share in site["shares"]:
             logging.info(f"Configuring {share['VO']}")
             with tempfile.TemporaryDirectory() as tmpdirname:
-                os.chown(tmpdirname, CONF.sync.atrope_uid, CONF.sync.atrope_gid)
                 with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
                     f.write(dump_atrope_config(site, share))
                 with open(os.path.join(tmpdirname, "hepix.yaml"), "w+") as f:
                     f.write(dump_hepix_config(share))
                 cmd = [
-                    "docker",
-                    "run",
-                    "-v",
-                    f"{tmpdirname}:/atrope/conf",
-                    "-v",
-                    "/atrope-cache/state:/atrope/state",
-                    CONF.sync.atrope_image,
                     "atrope",
                     "--config-dir",
-                    "conf",
+                    tmpdirname,
                     "sync",
                 ]
                 logging.debug(f"Running {' '.join(cmd)}")
