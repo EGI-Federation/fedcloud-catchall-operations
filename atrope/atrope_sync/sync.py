@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import logging
 import os
 import os.path
@@ -67,7 +65,7 @@ def fetch_site_info():
     return data
 
 
-def dump_atrope_config(site, share):
+def dump_atrope_config(site, share, hepix_file):
     config_template = """
 [DEFAULT]
 state_path = /atrope-state/
@@ -92,7 +90,7 @@ dispatcher = glance
 formats = {formats}
 
 [sources]
-hepix_sources = /atrope/conf/hepix.yaml
+hepix_sources = {hepix_file}
     """
     formats = site.get("formats", CONF.sync.formats)
     return config_template.format(
@@ -103,6 +101,7 @@ hepix_sources = /atrope/conf/hepix.yaml
         discovery_endpoint=CONF.checkin.discovery_endpoint,
         project_id=share["projectID"],
         formats=",".join(formats),
+        hepix_file=hepix_file,
     )
 
 
@@ -136,9 +135,10 @@ def do_sync(sites_config):
         for share in site["shares"]:
             logging.info(f"Configuring {share['VO']}")
             with tempfile.TemporaryDirectory() as tmpdirname:
+                hepix_file = os.path.join(tmpdirname, "hepix.yaml")
                 with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
-                    f.write(dump_atrope_config(site, share))
-                with open(os.path.join(tmpdirname, "hepix.yaml"), "w+") as f:
+                    f.write(dump_atrope_config(site, share, hepix_file))
+                with open(hepix_file, "w+") as f:
                     f.write(dump_hepix_config(share))
                 cmd = [
                     "atrope",
@@ -158,7 +158,11 @@ def load_sites():
     return sites
 
 
-if __name__ == "__main__":
+def main():
     CONF(sys.argv[1:])
     logging.basicConfig(level=logging.DEBUG)
     do_sync(load_sites())
+
+
+if __name__ == "__main__":
+    main()
