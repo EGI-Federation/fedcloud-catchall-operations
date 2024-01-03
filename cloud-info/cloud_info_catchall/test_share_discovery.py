@@ -31,7 +31,7 @@ class ShareDiscoveryTest(unittest.TestCase):
             "name": "foo.eu",
             "VO": "foo",
         }
-        self.assertEqual(self.discoverer.get_project_vo(p), None)
+        self.assertEqual(self.discoverer.get_project_vos(p), None)
 
     def test_get_project_vo_egi_property(self):
         p = {
@@ -40,7 +40,7 @@ class ShareDiscoveryTest(unittest.TestCase):
             "VO": "bar",
             "egi.VO": "foo",
         }
-        self.assertEqual(self.discoverer.get_project_vo(p), "foo")
+        self.assertEqual(self.discoverer.get_project_vos(p), ["foo"])
 
     def test_get_project_vo_property(self):
         p = {
@@ -48,14 +48,22 @@ class ShareDiscoveryTest(unittest.TestCase):
             "name": "foo.eu",
             "VO": "bar",
         }
-        self.assertEqual(self.discoverer.get_project_vo(p), "bar")
+        self.assertEqual(self.discoverer.get_project_vos(p), ["bar"])
 
     def test_get_project_no_vo_property(self):
         p = {
             "enabled": True,
             "name": "foo.eu",
         }
-        self.assertEqual(self.discoverer.get_project_vo(p), None)
+        self.assertEqual(self.discoverer.get_project_vos(p), None)
+
+    def test_get_project_multiple_vo_property(self):
+        p = {
+            "enabled": True,
+            "name": "foo.eu",
+            "egi.VO": "foo,bar"
+        }
+        self.assertEqual(self.discoverer.get_project_vos(p), ["foo", "bar"])
 
     @patch("fedcloudclient.endpoint.get_projects_from_single_site")
     @patch("fedcloudclient.endpoint.retrieve_unscoped_token")
