@@ -58,11 +58,7 @@ class ShareDiscoveryTest(unittest.TestCase):
         self.assertEqual(self.discoverer.get_project_vos(p), [])
 
     def test_get_project_multiple_vo_property(self):
-        p = {
-            "enabled": True,
-            "name": "foo.eu",
-            "egi.VO": "foo,bar"
-        }
+        p = {"enabled": True, "name": "foo.eu", "egi.VO": "foo,bar"}
         self.assertEqual(self.discoverer.get_project_vos(p), ["foo", "bar"])
 
     @patch("fedcloudclient.endpoint.get_projects_from_single_site")
