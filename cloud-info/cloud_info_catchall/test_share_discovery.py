@@ -31,7 +31,7 @@ class ShareDiscoveryTest(unittest.TestCase):
             "name": "foo.eu",
             "VO": "foo",
         }
-        self.assertEqual(self.discoverer.get_project_vos(p), None)
+        self.assertEqual(self.discoverer.get_project_vos(p), [])
 
     def test_get_project_vo_egi_property(self):
         p = {
@@ -55,7 +55,7 @@ class ShareDiscoveryTest(unittest.TestCase):
             "enabled": True,
             "name": "foo.eu",
         }
-        self.assertEqual(self.discoverer.get_project_vos(p), None)
+        self.assertEqual(self.discoverer.get_project_vos(p), [])
 
     def test_get_project_multiple_vo_property(self):
         p = {

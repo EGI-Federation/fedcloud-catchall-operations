@@ -23,7 +23,7 @@ class ShareDiscovery:
             logging.warning(
                 f"Discarding project {project['name']} as it is not enabled"
             )
-            return None
+            return []
         vo = project.get("egi.VO", "")
         if not vo:
             vo = project.get("VO", "")
