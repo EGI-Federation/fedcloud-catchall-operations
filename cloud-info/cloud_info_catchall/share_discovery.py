@@ -24,13 +24,14 @@ class ShareDiscovery:
                 f"Discarding project {project['name']} as it is not enabled"
             )
             return []
-        vo = project.get("egi.VO", "")
+        vo = project.get("egi.VO", None)
         if not vo:
-            vo = project.get("VO", "")
+            vo = project.get("VO", None)
             if not vo:
                 logging.warning(
                     f"Discarding project {project['name']} as it does not have VO property"
                 )
+                return []
         return vo.split(",")
 
     def get_token_shares(self):
