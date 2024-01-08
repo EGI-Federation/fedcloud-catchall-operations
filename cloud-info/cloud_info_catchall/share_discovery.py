@@ -18,12 +18,12 @@ class ShareDiscovery:
     def build_share(self, project, access_token):
         return {"auth": {"project_id": project["id"]}}
 
-    def get_project_vo(self, project):
+    def get_project_vos(self, project):
         if not project.get("enabled", False):
             logging.warning(
                 f"Discarding project {project['name']} as it is not enabled"
             )
-            return None
+            return []
         vo = project.get("egi.VO", None)
         if not vo:
             vo = project.get("VO", None)
@@ -31,7 +31,8 @@ class ShareDiscovery:
                 logging.warning(
                     f"Discarding project {project['name']} as it does not have VO property"
                 )
-        return vo
+                return []
+        return vo.split(",")
 
     def get_token_shares(self):
         access_token = self.get_token()
@@ -47,10 +48,8 @@ class ShareDiscovery:
             return shares
         projects = fedcli.get_projects_from_single_site(self.auth_url, token)
         for p in projects:
-            vo = self.get_project_vo(p)
-            if not vo:
-                continue
-            shares[vo] = self.build_share(p, access_token)
+            for vo in self.get_project_vos(p):
+                shares[vo.strip()] = self.build_share(p, access_token)
         self.config_shares(shares, access_token)
         return shares
 
