@@ -132,7 +132,7 @@ jobs:
           terraform output -raw instance-id
       - name: Get the status file from swift
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: nick-fields/retry@v2
+        uses: nick-fields/retry@v3
         with:
           timeout_minutes: 10
           max_attempts: 20
