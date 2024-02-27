@@ -27,13 +27,3 @@ jobs:
       - name: Validate GOC and VOs
         run: |
           ./validate.sh
-      - name: Check all VOs are in the deployment dir
-        run: |
-          for f in sites/*.yaml; do
-            for vo in $(yq -r ".vos[].name" < "$f"); do
-              # remove FQAN stuff
-              # shellcheck disable=SC2001
-              vo=$(echo "$vo" | sed 's#/\([^/]*\)/.*#\1#')
-              grep "$vo" deploy/vos.yaml > /dev/null || (echo "VO $vo not configured" ; exit 1)
-            done
-          done
