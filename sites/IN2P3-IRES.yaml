@@ -5,9 +5,6 @@ vos:
 - name: belle
   auth:
     project_id: e5258170eee8429da316e6a710f6d185
-- name: benchmark.terradue.com
-  auth:
-    project_id: d579ada647314c91989daa63399fe2fa
 - name: bioisi
   auth:
     project_id: bf15d4331f3d4c3997e17c0740930e8c

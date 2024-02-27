@@ -69,9 +69,6 @@ vos:
 - name: vo.indigo-datacloud.eu
   auth:
     project_id: 25cb49baedbf40a194729ff6802c8491
-- name: vo.max-centre.eu
-  auth:
-    project_id: 50fc58ed66a14106b40b9c6d7d9af86c
 - name: vo.nextgeoss.eu
   auth:
     project_id: 081396a827c94f3da0c922cf6d8fb7f7
