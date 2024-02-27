@@ -2,9 +2,6 @@
 gocdb: CESGA
 endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
 vos:
-- name: benchmark.terradue.com
-  auth:
-    project_id: c948a24f5e564668af0e9a106e38a944
 - name: blazarmonitoring.asi.it
   auth:
     project_id: 835c2dd1be6f4e319dfce60b34c1b1c3

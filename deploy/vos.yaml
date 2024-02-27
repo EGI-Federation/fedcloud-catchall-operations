@@ -3,8 +3,6 @@ vos:
   # Co-manage service account
   EOServices-vo.indra.es:
     auth: "{{ fedcloud_sa }}"
-  benchmark.terradue.com:
-    auth: "{{ fedcloud_sa }}"
   biinsight.eosc-hub.eu:
     auth: "{{ fedcloud_sa }}"
   cesga.es:
