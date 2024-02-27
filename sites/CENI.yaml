@@ -5,3 +5,9 @@ vos:
 - name: ops 
   auth: 
     project_id: 90c0ce1b2f1545c0b9a05d9a8fd45102
+- name: vo.access.egi.eu
+  auth:
+    project_id: b106744c783543518f505dda45632697
+- name: vo.cnic.cn
+  auth:
+    project_id: 3105c59401794130821a68e219726ccc
