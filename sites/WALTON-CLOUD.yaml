@@ -8,3 +8,9 @@ vos:
 - name: vo.eurosea.marine.ie
   auth:
     project_id: 30e1e1ad790043108f18a627474296df
+- name: vo.access.egi.eu
+  auth:
+    project_id: 18f97f15a8374f5eb7e8cc0258eace99
+- name: vo.imagine-ai.eu
+  auth:
+    project_id: 08c98a7449444c7a8103eb7521b82dfa
