@@ -26,27 +26,15 @@ vos:
 - name: vo.access.egi.eu
   auth:
     project_id: 71dc9c3785cc4876bfb1a4bfc681e0f3
-- name: vo.matrycs.eu
-  auth:
-    project_id: 6c2453d04ee544868b70684928d96337
 - name: vo.bd4nrg.eu
   auth:
     project_id: 74128e581e6941ad91c7fce06f14e6c8
 - name: vo.oipub.com
   auth:
     project_id: e188494f39564812987a4ee5f58084a7
-- name: vo.e-rihs.eu
-  auth:
-    project_id: 6eb56eb83eb54aad9c3226cdeb716c8c
-- name: vo.beamide.com
-  auth:
-    project_id: 5139b731becd4f0b8fbf5fc19b909d58
 - name: vo.ai4eosc.eu
   auth:
     project_id: 4d40037774784f22907d537070e85f42
-- name: vo.latitudo40.com.eu
-  auth:
-    project_id: 8cab8753df654e92a763d756905715fd
 - name: vo.usegalaxy.eu
   auth:
     project_id: 7a23c4fa956a499c854eb215f3a95218
