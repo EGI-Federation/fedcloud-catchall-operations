@@ -23,4 +23,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Disabling these two for the moment, should be enabled later
           VALIDATE_CHECKOV: false
-          VALIDATE_PYLINT: false
+          VALIDATE_PYTHON_PYLINT: false
