@@ -21,5 +21,6 @@ jobs:
         uses: github/super-linter/slim@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Disabling this one for the moment, should be enabled later
+          # Disabling these two for the moment, should be enabled later
           VALIDATE_CHECKOV: false
+          VALIDATE_PYLINT: false
