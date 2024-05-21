@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir -r /cloud-info/requirements.txt
 RUN curl -Ls \
         https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
         | apt-key add - \
-    && echo 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
+    && echo 'deb https://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
         > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
     && apt-get install -y jq \
