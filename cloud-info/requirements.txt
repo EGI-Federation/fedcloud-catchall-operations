@@ -1,5 +1,6 @@
-# Cloud info version is 9d4c4c516b9311c77564444cb9ecbb059b7f2192
-git+https://github.com/EGI-Federation/cloud-info-provider.git@9d4c4c516b9311c77564444cb9ecbb059b7f2192
+# Cloud info version is 43cefc204b3e07211c6c37df2ee20eab845c3428
+# 43cefc204b3e07211c6c37df2ee20eab845c3428 includes json glue support
+git+https://github.com/EGI-Federation/cloud-info-provider.git@43cefc204b3e07211c6c37df2ee20eab845c3428
 git+https://github.com/ARGOeu/argo-ams-library@devel
 python-glanceclient
 python-novaclient
