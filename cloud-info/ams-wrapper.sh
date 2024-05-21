@@ -73,7 +73,7 @@ elif test "$USE_ACCESS_TOKEN" -eq 1; then
 			--middleware "$CLOUD_INFO_MIDDLEWARE" \
 			--ignore-share-errors \
 			--auth-refresher accesstoken \
-			--format glue21json > site.json
+			--format glue21json >site.json
 	fi
 else
 	# Let's use the service account directly on the info provider
