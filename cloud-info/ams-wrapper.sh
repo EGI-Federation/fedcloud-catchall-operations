@@ -67,6 +67,14 @@ elif test "$USE_ACCESS_TOKEN" -eq 1; then
 		--ignore-share-errors \
 		--auth-refresher accesstoken \
 		--format glue21 >cloud-info.out
+	# Produce the json output also
+	if test "$RCLONE_CONFIG_S3_TYPE" != ""; then
+		cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+			--middleware "$CLOUD_INFO_MIDDLEWARE" \
+			--ignore-share-errors \
+			--auth-refresher accesstoken \
+			--format glue21json > site.json
+	fi
 else
 	# Let's use the service account directly on the info provider
 	CHECKIN_DISCOVERY="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
@@ -99,5 +107,11 @@ grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | grep -v ": $" | gzip | base64 
 printf '"}]}' >>ams-payload
 
 curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
+
+if [ -f site.json ]; then
+	# Put this info into S3, assume the rclone env config has
+	# a provider named "s3"
+	rclone copy site.json "s3:$S3_BUCKET_NAME/$SITE_NAME"
+fi
 
 rm -rf "$VO_CONFIG_PATH"
