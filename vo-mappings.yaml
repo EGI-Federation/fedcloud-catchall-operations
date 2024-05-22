@@ -47,7 +47,6 @@ vos:
   vo.bd4nrg.eu: "urn:mace:egi.eu:group:vo.bd4nrg.eu:role=vm_operator#aai.egi.eu"
   vo.beamide.com: "urn:mace:egi.eu:group:vo.beamide.com:role=vm_operator#aai.egi.eu"
   vo.binare-oy.eu: "urn:mace:egi.eu:group:vo.binare-oy.eu:role=vm_operator#aai.egi.eu"
-  vo.carouseldancing.org: "urn:mace:egi.eu:group:vo.carouseldancing.org:role=vm_operator#aai.egi.eu"
   vo.cite.gr: "urn:mace:egi.eu:group:vo.cite.gr:role=vm_operator#aai.egi.eu"
   vo.clarin.eu: "urn:mace:egi.eu:group:vo.clarin.eu:role=vm_operator#aai.egi.eu"
   vo.complex-systems.eu: "urn:mace:egi.eu:group:vo.complex-systems.eu:role=vm_operator#aai.egi.eu"

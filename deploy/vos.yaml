@@ -65,8 +65,6 @@ vos:
     auth: "{{ fedcloud_sa }}"
   vo.builtrix.tech:
     auth: "{{ fedcloud_sa }}"
-  vo.carouseldancing.org:
-    auth: "{{ fedcloud_sa }}"
   vo.cite.gr:
     auth: "{{ fedcloud_sa }}"
   vo.decido-project.eu:
