@@ -100,8 +100,3 @@ class AccessTokenShareDiscovery(ShareDiscovery):
 
     def get_token(self):
         return self.secret["access_token"]
-
-    def build_share(self, project, access_token):
-        s = super().build_share(project, access_token)
-        s["auth"].update({"access_token": access_token})
-        return s

@@ -60,23 +60,8 @@ if test "$CHECKIN_SECRETS_PATH" = ""; then
 		--middleware "$CLOUD_INFO_MIDDLEWARE" \
 		--ignore-share-errors \
 		--format glue21 >cloud-info.out
-elif test "$USE_ACCESS_TOKEN" -eq 1; then
-	# Case 2: access token style
-	cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
-		--middleware "$CLOUD_INFO_MIDDLEWARE" \
-		--ignore-share-errors \
-		--auth-refresher accesstoken \
-		--format glue21 >cloud-info.out
-	# Produce the json output also
-	if test "$RCLONE_CONFIG_S3_TYPE" != ""; then
-		cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
-			--middleware "$CLOUD_INFO_MIDDLEWARE" \
-			--ignore-share-errors \
-			--auth-refresher accesstoken \
-			--format glue21json >site.json
-	fi
 else
-	# Let's use the service account directly on the info provider
+	# use service account for everyone
 	CHECKIN_DISCOVERY="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
 	CLIENT_ID="$(yq -r '.fedcloudops.client_id' <"$CHECKIN_SECRETS_FILE")"
 	CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' <"$CHECKIN_SECRETS_FILE")"
@@ -90,6 +75,14 @@ else
 		--os-access-token-type access_token \
 		--os-openid-scope "openid profile eduperson_entitlement email" \
 		--format glue21 >cloud-info.out
+	# Produce the json output also
+	if test "$RCLONE_CONFIG_S3_TYPE" != ""; then
+		cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+			--middleware "$CLOUD_INFO_MIDDLEWARE" \
+			--ignore-share-errors \
+			--auth-refresher accesstoken \
+			--format glue21json >site.json
+	fi
 fi
 
 # Fail if there are no shares
