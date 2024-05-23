@@ -34,7 +34,6 @@ cp secrets.yaml /etc/egi/vos/secrets.yaml
 # make sure the container user (999) can access the files
 chown -R 999:999 /etc/egi/
 
-
 GITHUB_COMMIT_URL="https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/commits/$COMMIT_SHA/pulls"
 
 # Find out PR we need to update

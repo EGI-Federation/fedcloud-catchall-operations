@@ -51,7 +51,6 @@ if token-generator; then
 	fi
 fi
 
-
 # Any OS related parameter should be available as env variables
 if test "$CHECKIN_SECRETS_PATH" = ""; then
 	# Case 1: manual config
@@ -62,8 +61,10 @@ if test "$CHECKIN_SECRETS_PATH" = ""; then
 else
 	# use service account for everyone
 	export OS_DISCOVERY_ENDPOINT="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
-	export OS_CLIENT_ID="$(yq -r '.fedcloudops.client_id' <"$CHECKIN_SECRETS_FILE")"
-	export OS_CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' <"$CHECKIN_SECRETS_FILE")"
+	OS_CLIENT_ID="$(yq -r '.fedcloudops.client_id' <"$CHECKIN_SECRETS_FILE")"
+	export OS_CLIENT_ID
+	OS_CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' <"$CHECKIN_SECRETS_FILE")"
+	export OS_CLIENT_SECRET
 	export OS_ACCESS_TOKEN_TYPE="access_token"
 	export OS_AUTH_TYPE="v3oidcclientcredentials"
 	export OS_OPENID_SCOPE="openid profile eduperson_entitlement email"
@@ -101,10 +102,14 @@ if [ -f site.json ]; then
 	# Put this info into S3, configure rclone config with
 	# a provider named "s3" using env variables
 	export RCLONE_CONFIG_S3_TYPE=s3
-	export RCLONE_CONFIG_S3_ACCESS_KEY_ID="$(yq -r '.s3.access_key_id' <"$CHECKIN_SECRETS_FILE")"
-	export RCLONE_CONFIG_S3_SECRET_ACCESS_KEY="$(yq -r '.s3.secret_access_key' <"$CHECKIN_SECRETS_FILE")"
-	export RCLONE_CONFIG_S3_ENDPOINT="$(yq -r '.s3.endpoint' <"$CHECKIN_SECRETS_FILE")"
-	export S3_BUCKET_NAME="$(yq -r '.s3.bucket' <"$CHECKIN_SECRETS_FILE")"
+	RCLONE_CONFIG_S3_ACCESS_KEY_ID="$(yq -r '.s3.access_key_id' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_ACCESS_KEY_ID
+	RCLONE_CONFIG_S3_SECRET_ACCESS_KEY="$(yq -r '.s3.secret_access_key' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_SECRET_ACCESS_KEY
+	RCLONE_CONFIG_S3_ENDPOINT="$(yq -r '.s3.endpoint' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_ENDPOINT
+	S3_BUCKET_NAME="$(yq -r '.s3.bucket' <"$CHECKIN_SECRETS_FILE")"
+	export S3_BUCKET_NAME
 	export RCLONE_CONFIG_S3_ACL=private
 	export RCLONE_CONFIG_S3_NO_CHECK_BUCKET=true
 	rclone copy site.json "s3:$S3_BUCKET_NAME/$SITE_NAME"
