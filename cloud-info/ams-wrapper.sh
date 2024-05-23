@@ -41,7 +41,6 @@ AUTO_CONFIG_PATH="$(mktemp -d)"
 export CHECKIN_SECRETS_FILE="$CHECKIN_SECRETS_PATH/secrets.yaml"
 # TODO(enolfc): avoid creating new tokens for every provider
 export ACCESS_TOKEN_FILE="$AUTO_CONFIG_PATH/token.yaml"
-USE_ACCESS_TOKEN=0
 if token-generator; then
 	# TODO(enolfc): even if this belows fails, we should use access token as it will provide
 	# access to more projects
@@ -49,9 +48,9 @@ if token-generator; then
 		# this worked, let's update the env
 		export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
 		export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
-		USE_ACCESS_TOKEN=1
 	fi
 fi
+
 
 # Any OS related parameter should be available as env variables
 if test "$CHECKIN_SECRETS_PATH" = ""; then
@@ -62,25 +61,22 @@ if test "$CHECKIN_SECRETS_PATH" = ""; then
 		--format glue21 >cloud-info.out
 else
 	# use service account for everyone
-	CHECKIN_DISCOVERY="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
-	CLIENT_ID="$(yq -r '.fedcloudops.client_id' <"$CHECKIN_SECRETS_FILE")"
-	CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' <"$CHECKIN_SECRETS_FILE")"
+	export OS_DISCOVERY_ENDPOINT="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
+	export OS_CLIENT_ID="$(yq -r '.fedcloudops.client_id' <"$CHECKIN_SECRETS_FILE")"
+	export OS_CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' <"$CHECKIN_SECRETS_FILE")"
+	export OS_ACCESS_TOKEN_TYPE="access_token"
+	export OS_AUTH_TYPE="v3oidcclientcredentials"
+	export OS_OPENID_SCOPE="openid profile eduperson_entitlement email"
 	cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
 		--middleware "$CLOUD_INFO_MIDDLEWARE" \
 		--ignore-share-errors \
-		--os-auth-type v3oidcclientcredentials \
-		--os-discovery-endpoint "$CHECKIN_DISCOVERY" \
-		--os-client-id "$CLIENT_ID" \
-		--os-client-secret "$CLIENT_SECRET" \
-		--os-access-token-type access_token \
-		--os-openid-scope "openid profile eduperson_entitlement email" \
 		--format glue21 >cloud-info.out
 	# Produce the json output also
-	if test "$RCLONE_CONFIG_S3_TYPE" != ""; then
+	RCLONE_CONFIG_S3="$(yq -r '.s3' <"$CHECKIN_SECRETS_FILE")"
+	if test "$RCLONE_CONFIG_S3" != "null"; then
 		cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
 			--middleware "$CLOUD_INFO_MIDDLEWARE" \
 			--ignore-share-errors \
-			--auth-refresher accesstoken \
 			--format glue21json >site.json
 	fi
 fi
@@ -102,8 +98,15 @@ printf '"}]}' >>ams-payload
 curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
 
 if [ -f site.json ]; then
-	# Put this info into S3, assume the rclone env config has
-	# a provider named "s3"
+	# Put this info into S3, configure rclone config with
+	# a provider named "s3" using env variables
+	export RCLONE_CONFIG_S3_TYPE=s3
+	export RCLONE_CONFIG_S3_ACCESS_KEY_ID="$(yq -r '.s3.access_key_id' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_SECRET_ACCESS_KEY="$(yq -r '.s3.secret_access_key' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_ENDPOINT="$(yq -r '.s3.endpoint' <"$CHECKIN_SECRETS_FILE")"
+	export S3_BUCKET_NAME="$(yq -r '.s3.bucket' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_ACL=private
+	export RCLONE_CONFIG_S3_NO_CHECK_BUCKET=true
 	rclone copy site.json "s3:$S3_BUCKET_NAME/$SITE_NAME"
 fi
 
