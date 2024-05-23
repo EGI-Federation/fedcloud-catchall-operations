@@ -99,18 +99,18 @@ class TokenGeneratorTest(unittest.TestCase):
     @patch("cloud_info_catchall.token_generator.valid_token")
     @patch("cloud_info_catchall.token_generator.get_access_token")
     def test_generate_tokens(self, m_get_access, m_valid_token):
-        tokens = {
-            "foo": {"client_id": "x", "client_secret": "y", "access_token": "abc"},
-            "bar": {"client_id": "y", "client_secret": "f", "access_token": "def"},
+        tokens = {"foo": {"access_token": "abc"}, "bar": {"access_token": "def"}}
+        secrets = {
+            "foo": {"client_id": "foo", "client_secret": "secfoo"},
+            "bar": {"client_id": "bar", "client_secret": "secbar"},
         }
-        secrets = {"foo": {}, "bar": {}}
         m_valid_token.side_effect = [True, False]
         m_get_access.return_value = "xyz"
         tg.generate_tokens(self.OIDC_CONFIG, "abc", tokens, 8, secrets)
         m_valid_token.assert_has_calls(
             [call("abc", self.OIDC_CONFIG, 8), call("def", self.OIDC_CONFIG, 8)]
         )
-        m_get_access.assert_called_with("https://example.com", "abc", {})
+        m_get_access.assert_called_with("https://example.com", "abc", secrets["bar"])
 
 
 if __name__ == "__main__":
