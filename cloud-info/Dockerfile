@@ -45,9 +45,17 @@ RUN mkdir /cloud-info \
 
 WORKDIR /cloud-info
 
+# All the python code from the build image above
 COPY --chown=python:python --from=build /cloud-info/venv ./venv
+# Add the scripts that call the cloud-info-provider as needed for the site
+# these create the configuration for the site by discovering the available
+# projects for the credentials and will send the output to the AMS queue and
+# upload to S3
 COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
 COPY publisher.sh /usr/local/bin/publisher.sh
+# These are sample configuration files for cloud-info-provider that can be used
+# if the container is used outside of the catchall-operations as described in
+# https://docs.egi.eu/providers/cloud-compute/openstack/cloud-info/#local-operations
 COPY openstack.rc /etc/cloud-info-provider/openstack.rc
 COPY openstack.yaml /etc/cloud-info-provider/openstack.yaml
 
