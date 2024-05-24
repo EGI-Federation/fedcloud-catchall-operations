@@ -23,13 +23,12 @@ easier to handle and queried can be used. Besides
 
 Start producing information using the GLUE JSON rendering, getting ready for
 its consumption by new tools to be developed that will eventually replace the
-AppDB IS. Publish this information into a S3 bucket with a directory per 
+AppDB IS. Publish this information into a S3 bucket with a directory per
 available site. For uploading the JSON objects use [rclone](https://rclone.org/)
 as this is a generic tool that can work with the potential S3 storage providers
 that we will use (CloudFlare/MinIO/Swift)
 
 Keep publishing the LDIF rendering through the AMS for the AppDB IS.
-
 
 ## Consequences
 
