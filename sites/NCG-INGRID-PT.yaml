@@ -14,9 +14,6 @@ vos:
 - name: dev.intertwin.eu
   auth:
     project_id: 7e08ed7db02847a1858ce8ed0f93be3c
-- name: ec-meloa.eu
-  auth:
-    project_id: 97095d3bc281493ebd1c108f2a031b0d
 - name: eosc-synergy.eu
   auth:
     project_id: ddf0c468c8af4e0bbb9808bfc0288381

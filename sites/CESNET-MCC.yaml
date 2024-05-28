@@ -87,9 +87,6 @@ vos:
 - name: waterwatch.c-scale.eu
   auth:
     project_id: acf5d12568914e65a80150efb087cbb8
-- name: vo.carouseldancing.org
-  auth:
-    project_id: 7ace5ca998b849619bd34e922fbd2cb7
 - name: vo.pangeo.eu
   auth:
     project_id: 05e0ff6e03774082aadacc75bfc1d783

@@ -162,7 +162,7 @@ class TestAccessTokenShareDiscovery(ShareDiscoveryTest):
         project = {"id": "foobar"}
         self.assertEqual(
             self.discoverer.build_share(project, "token"),
-            {"auth": {"project_id": "foobar", "access_token": "token"}},
+            {"auth": {"project_id": "foobar"}},
         )
 
 

@@ -49,6 +49,8 @@ def generate_shares(config, secrets):
             discoverer = RefresherShareDiscovery(config, secrets[s])
         elif "access_token" in secrets[s]:
             discoverer = AccessTokenShareDiscovery(config, secrets[s])
+        else:
+            continue
         token_shares = discoverer.get_token_shares()
         shares.update(token_shares)
     if not shares:
