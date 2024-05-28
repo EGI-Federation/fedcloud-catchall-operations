@@ -110,6 +110,8 @@ if [ -f site.json ]; then
 	export RCLONE_CONFIG_S3_ENDPOINT
 	S3_BUCKET_NAME="$(yq -r '.s3.bucket' <"$CHECKIN_SECRETS_FILE")"
 	export S3_BUCKET_NAME
+	RCLONE_CONFIG_S3_PROVIDER="$(yq -r '.s3.provider' <"$CHECKIN_SECRETS_FILE")"
+	export RCLONE_CONFIG_S3_PROVIDER
 	export RCLONE_CONFIG_S3_ACL=private
 	export RCLONE_CONFIG_S3_NO_CHECK_BUCKET=true
 	rclone copy site.json "s3:$S3_BUCKET_NAME/$SITE_NAME"
