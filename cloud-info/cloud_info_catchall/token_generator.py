@@ -71,6 +71,9 @@ def generate_tokens(oidc_config, scopes, tokens, token_ttl, secrets):
         # not our thing
         if not isinstance(secrets[s], dict):
             continue
+        if "client_id" not in secrets[s] or "client_secret" not in secrets[s]:
+            # not suitable for us
+            continue
         if "refresh_token" in secrets[s]:
             # ignore those that have refresh token
             continue
