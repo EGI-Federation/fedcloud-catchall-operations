@@ -2,9 +2,6 @@
 gocdb: CESGA
 endpoint: https://fedcloud-osservices.egi.cesga.es:5000/v3
 vos:
-- name: blazarmonitoring.asi.it
-  auth:
-    project_id: 835c2dd1be6f4e319dfce60b34c1b1c3
 - name: covid19.eosc-synergy.eu
   auth:
     project_id: 972298c557184a2192ebc861f3184da8
