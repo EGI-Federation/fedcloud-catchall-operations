@@ -17,6 +17,7 @@ jobs:
         image:
           - cloud-info
           - caso
+          - atrope
 
     steps:
       - name: Checkout

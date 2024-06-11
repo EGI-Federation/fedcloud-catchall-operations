@@ -1,0 +1,4 @@
+git+https://github.com/enolfc/atrope@catchall
+requests
+oslo.config
+PyYAML
