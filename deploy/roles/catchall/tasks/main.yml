@@ -37,8 +37,6 @@
         - /etc/egi/cloud-info
         - /var/lock/cloud-info
         - /var/log/cloud-info
-        state: directory
-        mode: "755"
     - name: Site specific config
       ansible.builtin.include_tasks: cloud-info.yml
       vars:
