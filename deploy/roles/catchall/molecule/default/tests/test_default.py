@@ -8,7 +8,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ).get_hosts("all")
 
 
-
 def test_site_files(host):
     endpoint_hash = hashlib.md5(b"https://example.com:5000/v3/").hexdigest()
     filename = "foo-bar-%s" % endpoint_hash
