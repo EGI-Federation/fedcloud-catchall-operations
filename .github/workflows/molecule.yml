@@ -16,7 +16,7 @@ jobs:
         run: |
           ls -ltra
           mkdir -p "${{ github.repository }}"
-          mv /deploy/roles/catchall/* "${{ github.repository }}"
+          mv deploy/roles/catchall/* "${{ github.repository }}"
 
       - name: Test
         uses: robertdebock/molecule-action@6.0.0
