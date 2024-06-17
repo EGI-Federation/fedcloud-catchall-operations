@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          path: "${{ github.repository }}"
 
       - name: Fake the ansible role is at the top dir
         run: |
