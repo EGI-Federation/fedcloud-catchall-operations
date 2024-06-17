@@ -40,14 +40,14 @@ write_files:
       SLACK_WEBHOOK_URL="%SLACK_WEBHOOK_URL%"
       COMMIT_SHA="%REF%"
       SHORT_COMMIT_SHA="%SHORT_REF%"
+      FEDCLOUD_LOCKER_TOKEN="%FEDCLOUD_LOCKER_TOKEN%"
 
       # get the repo code and untar at cwd
       curl -L -H "Accept: application/vnd.github.v3+raw" \
               "https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
               tar xz --strip=1
       cd deploy
-      echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
-      ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" \
+      ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" "$FEDCLOUD_LOCKER_TOKEN" \
                   "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
     path: /var/lib/cloud/scripts/per-boot/deploy.sh
     permissions: '0755'
