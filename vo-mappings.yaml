@@ -6,7 +6,6 @@ vos:
   bioisi: "urn:mace:egi.eu:group:bioisi:role=vm_operator#aai.egi.eu"
   biomed: "urn:mace:egi.eu:group:biomed:role=vm_operator#aai.egi.eu"
   /biomed/vip: "urn:mace:egi.eu:group:biomed:role=vm_operator#aai.egi.eu"
-  cesga: "urn:mace:egi.eu:group:cesga:role=vm_operator#aai.egi.eu"
   cesga.es: "urn:mace:egi.eu:group:cesga.es:role=vm_operator#aai.egi.eu"
   cloud.egi.eu: "urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
   cms: "urn:mace:egi.eu:group:cms:role=vm_operator#aai.egi.eu"
