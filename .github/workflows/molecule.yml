@@ -15,7 +15,8 @@ jobs:
       - name: Fake the ansible role is at the top dir
         run: |
           ls -ltra
-          mv deploy/roles/catchall/* .
+          mkdir -p "${{ github.repository }}"
+          mv /deploy/roles/catchall/* "${{ github.repository }}"
 
       - name: Test
         uses: robertdebock/molecule-action@6.0.0
