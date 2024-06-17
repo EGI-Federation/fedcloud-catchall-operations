@@ -1,0 +1,25 @@
+---
+name: Test role
+
+on: [push, pull_request]
+
+jobs:
+  molecule:
+    name: Runs molecule for the ansible role
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: "${{ github.repository }}"
+
+      - name: Fake the ansible role is at the top dir
+        run: |
+          mv deploy/roles/catchall/* .
+
+      - name: Test
+        uses: robertdebock/molecule-action@6.0.0
+        with:
+          image: "ubuntu"
+          tag: "latest"
