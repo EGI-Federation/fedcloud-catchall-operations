@@ -16,6 +16,7 @@ jobs:
 
       - name: Fake the ansible role is at the top dir
         run: |
+          ls -ltra
           mv deploy/roles/catchall/* .
 
       - name: Test
