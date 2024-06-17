@@ -9,8 +9,6 @@ COMMIT_SHA="$2"
 SHORT_SHA="$3"
 SLACK_WEBHOOK_URL="$4"
 
-ansible-galaxy install git+https://github.com/EGI-Federation/ansible-role-fedcloud-ops.git
-
 echo "cloud_info_image: \"ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA\"" >>extra-vars.yaml
 
 # Configure!

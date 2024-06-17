@@ -1,0 +1,27 @@
+---
+- name: VO directory
+  ansible.builtin.file:
+    path: "/etc/egi/vos/{{ item.key }}"
+    state: directory
+    mode: "700"
+
+- name: "VO auth: client id"
+  ansible.builtin.copy:
+    content: "{{ item.value.auth.client_id }}"
+    dest: "/etc/egi/vos/{{ item.key }}/client_id"
+    mode: "600"
+  when: item.value.auth is defined
+
+- name: "VO auth: client secret"
+  ansible.builtin.copy:
+    content: "{{ item.value.auth.client_secret }}"
+    dest: "/etc/egi/vos/{{ item.key }}/client_secret"
+    mode: "600"
+  when: item.value.auth is defined
+
+- name: "VO auth: refresh token"
+  ansible.builtin.copy:
+    content: "{{ item.value.auth.refresh_token }}"
+    dest: "/etc/egi/vos/{{ item.key }}/refresh_token"
+    mode: "600"
+  when: item.value.auth is defined

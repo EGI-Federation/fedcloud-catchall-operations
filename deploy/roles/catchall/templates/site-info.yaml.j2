@@ -1,0 +1,11 @@
+site:
+  name: {{ site.gocdb }}
+
+compute:
+  shares:
+{% for vo in site.vos %}
+{% if vo.name in vos %}
+    {{ vo.name }}:
+      {{ vo | default({}) | to_nice_yaml(indent=2) | indent(6) }}
+{% endif %}
+{% endfor %}
