@@ -2,9 +2,9 @@
 - name: Converge
   hosts: all
   tasks:
-    - name: "Include ansible-role-fedcloud-ops"
+    - name: "Include catchall role"
       ansible.builtin.include_role:
-        name: "ansible-role-fedcloud-ops"
+        name: "catchall"
       vars:
         sites:
           - endpoint: https://example.com:5000/v3/
