@@ -16,7 +16,9 @@ jobs:
         run: |
           ls -ltra
           mkdir -p "${{ github.repository }}"
+          pwd
           mv deploy/roles/catchall/* "${{ github.repository }}"
+          ls "${{ github.repository }}"
           ls -l /github/workspace/EGI-Federation/fedcloud-catchall-operations/molecule/default/roles || echo "NOP"
           ls -l /github/home/.cache/molecule/fedcloud-catchall-operations/default/roles || echo "NOP"
           ls -l /github/workspace/EGI-Federation || echo "NOP"
