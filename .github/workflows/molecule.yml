@@ -17,6 +17,14 @@ jobs:
           ls -ltra
           mkdir -p "${{ github.repository }}"
           mv deploy/roles/catchall/* "${{ github.repository }}"
+          ls -l /github/workspace/EGI-Federation/fedcloud-catchall-operations/molecule/default/roles || echo "NOP"
+          ls -l /github/home/.cache/molecule/fedcloud-catchall-operations/default/roles || echo "NOP"
+          ls -l /github/workspace/EGI-Federation || echo "NOP"
+          ls -l /github/home/.ansible/roles || echo "NOP"
+          ls -l /usr/share/ansible/roles || echo "NOP"
+          ls -l /etc/ansible/roles || echo "NOP"
+          ls -l /github/workspace/EGI-Federation || echo "NOP"
+          ls -l /github/workspace/EGI-Federation/fedcloud-catchall-operations/molecule/default || echo "NOP"
 
       - name: Test
         uses: robertdebock/molecule-action@6.0.0
