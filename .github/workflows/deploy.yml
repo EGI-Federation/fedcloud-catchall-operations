@@ -30,7 +30,6 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
         run: |
-          set -x
           # using parametric scopes to only have access to cloud.egi.eu VO
           SCOPE="openid%20email%20profile%20voperson_id"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
@@ -55,8 +54,9 @@ jobs:
           sed -i -e "s/deploy_secret/$DEPLOY_OS_TOKEN/" clouds.yaml
           mkdir -p ~/.config/openstack
           touch ~/.config/openstack/secure.yaml
-          FEDCLOUD_LOCKER_TOKEN="$(fedcloud secret locker --oidc-access-token "$OIDC_TOKEN" \
-                                   create --ttl 1h --num-uses 2)"
+          FEDCLOUD_LOCKER_TOKEN="$(fedcloud secret locker create \
+                                   --oidc-access-token "$OIDC_TOKEN" \
+                                   --ttl 1h --num-uses 2)"
           fedcloud secret put deploy "data=$ANSIBLE_SECRETS"
           echo "::add-mask::$FEDCLOUD_LOCKER_TOKEN"
           echo "FEDCLOUD_LOCKER_TOKEN=$FEDCLOUD_LOCKER_TOKEN" >> "$GITHUB_ENV"
