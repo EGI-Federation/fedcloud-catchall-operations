@@ -16,6 +16,6 @@ jobs:
         uses: gofrolist/molecule-action@v2
         with:
           molecule_command: test
-          molecule_working_dir: "deploy/roles"
+          molecule_working_dir: "deploy/roles/catchall"
         env:
           ANSIBLE_FORCE_COLOR: '1'
