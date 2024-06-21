@@ -21,8 +21,6 @@ python3 -m venv "$PWD/.venv"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
 	deploy data >secrets.yaml
 
-ansible-galaxy install git+https://github.com/EGI-Federation/ansible-role-fedcloud-ops.git
-
 echo "cloud_info_image: \"ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA\"" >>extra-vars.yaml
 
 # Configure!
