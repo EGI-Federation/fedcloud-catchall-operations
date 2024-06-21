@@ -1,0 +1,26 @@
+---
+name: Test role
+
+on: [push, pull_request]
+
+jobs:
+  molecule:
+    name: Runs molecule for the ansible role
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '>=3.9'
+      - name: Install dependencies
+        run: |
+          pip install molecule molecule-plugins[docker] pytest pytest-testinfra
+      - name: Test Ansible Bootstrap
+        run: |
+          cd deploy/roles/catchall
+          molecule test
+        env:
+          PY_COLORS: 1

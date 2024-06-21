@@ -1,0 +1,28 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include catchall role"
+      ansible.builtin.include_role:
+        name: "catchall"
+      vars:
+        sites:
+          - endpoint: https://example.com:5000/v3/
+            gocdb: foo.bar
+            vos:
+              - auth:
+                  project_id: a123456
+                name: sample_vo
+              - auth:
+                  project_id: b987659
+                name: vo.example.com
+          - endpoint: https://site.org:5000/v3/
+            gocdb: bar.foo
+            region: region1
+            vos:
+              - auth:
+                  project_id: a123456
+                name: sample_vo
+              - auth:
+                  project_id: b987659
+                name: vo.example.com
