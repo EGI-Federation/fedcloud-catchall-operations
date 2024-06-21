@@ -12,27 +12,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Fake the ansible role is at the top dir
-        run: |
-          ls -ltra
-          mkdir -p "${{ github.repository }}"
-          pwd
-          #mv deploy/roles/catchall/* "${{ github.repository }}"
-          ls "${{ github.repository }}"
-          echo "THIS"
-          #ls -l /home/runner/work/fedcloud-catchall-operations/fedcloud-catchall-operations/EGI-Federation
-          echo "THAT"
-          ls -l /github/workspace/EGI-Federation/fedcloud-catchall-operations/molecule/default/roles || echo "NOP"
-          ls -l /github/home/.cache/molecule/fedcloud-catchall-operations/default/roles || echo "NOP"
-          ls -l /github/workspace/EGI-Federation || echo "NOP"
-          ls -l /github/home/.ansible/roles || echo "NOP"
-          ls -l /usr/share/ansible/roles || echo "NOP"
-          ls -l /etc/ansible/roles || echo "NOP"
-          ls -l /github/workspace/EGI-Federation || echo "NOP"
-          ls -l /github/workspace/EGI-Federation/fedcloud-catchall-operations/molecule/default || echo "NOP"
-
-      - name: Test
-        uses: robertdebock/molecule-action@6.0.0
+      - name: Test the role
+        uses: gofrolist/molecule-action@v2
         with:
-          image: "ubuntu"
-          tag: "latest"
+          molecule_command: test
+          molecule_working_dir: "${{ github.repository }}/deploy"
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
