@@ -15,11 +15,11 @@ SHORT_SHA="$4"
 SLACK_WEBHOOK_URL="$5"
 
 # create a virtual env for fedcloudclient
-python3 -m venv $PWD/.venv
-$PWD/.venv/bin/pip install fedcloudclient
+python3 -m venv "$PWD/.venv"
+"$PWD/.venv/bin/pip" install fedcloudclient
 
-$PWD/.venv/bin/fedcloud secret get --locker-token $FEDCLOUD_SECRET_LOCKER \
-	deploy data > secrets.yaml
+"$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
+	deploy data >secrets.yaml
 
 echo "cloud_info_image: \"ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA\"" >>extra-vars.yaml
 
