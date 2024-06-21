@@ -151,8 +151,8 @@ jobs:
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
                                                              --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
-          echo "::add-mask::$BACKEND_TOKEN"
-          echo "BACKEND_TOKEN=$BACKEND_TOKEN" >> "$GITHUB_ENV"
+          echo "::add-mask::$BACKEND_OS_TOKEN"
+          echo "BACKEND_OS_TOKEN=$BACKEND_OS_TOKEN" >> "$GITHUB_ENV"
           sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
           mkdir -p ~/.config/openstack
           touch ~/.config/openstack/secure.yaml
@@ -165,8 +165,8 @@ jobs:
           retry_wait_seconds: 40
           command: >
             pushd deploy &&
-            openstack --os-cloud backend --os-token "$BACKEND_TOKEN" object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
-            openstack --os-cloud backend --os-token "$BACKEND_TOKEN" object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
+            openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
+            openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
