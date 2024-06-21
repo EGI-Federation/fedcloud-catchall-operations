@@ -151,7 +151,6 @@ jobs:
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
                                                              --site "$BACKEND_SITE" --vo "$BACKEND_VO" -j | jq -r '.[0].Result.id')"
-          echo "::add-mask::$BACKEND_OS_TOKEN"
           sed -i -e "s/backend_secret/$BACKEND_OS_TOKEN/" clouds.yaml
           mkdir -p ~/.config/openstack
           touch ~/.config/openstack/secure.yaml
