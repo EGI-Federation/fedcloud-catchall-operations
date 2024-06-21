@@ -11,11 +11,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Test the role
-        uses: gofrolist/molecule-action@v2
-        with:
-          molecule_command: test
-          molecule_working_dir: "deploy/roles/catchall"
+      - name: Set up Python
+        uses: actions/setup-python@v2
+          with:
+            python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          pip install molecule molecule-plugins[docker] pytest pytest-testinfra
+      - name: Test Ansible Bootstrap
+        run: |
+          cd deploy/roles/catchall
+          molecule test
         env:
-          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: 1
