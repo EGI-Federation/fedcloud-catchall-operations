@@ -1,13 +1,25 @@
 #!/bin/sh
 # Configure current host with ansible
-# Expects as arguments the OAUTH_TOKEN, the COMMIT_SHA and the SLACK_WEBHOOK_URL
-
+# Expects as arguments:
+# - a GitHub OAUTH_TOKEN to update the PR
+# - the COMMIT_SHA
+# - a locker for fedcloud secret to obtain the secrets
+# - the SHORT_SHA used for pulling the docker image to use
+# - a SLACK_WEBHOOK_URL to report on the status
 set -e
 
 OAUTH_TOKEN="$1"
 COMMIT_SHA="$2"
-SHORT_SHA="$3"
-SLACK_WEBHOOK_URL="$4"
+FEDCLOUD_SECRET_LOCKER="$3"
+SHORT_SHA="$4"
+SLACK_WEBHOOK_URL="$5"
+
+# create a virtual env for fedcloudclient
+python3 -m venv "$PWD/.venv"
+"$PWD/.venv/bin/pip" install fedcloudclient
+
+"$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
+	deploy data >secrets.yaml
 
 ansible-galaxy install git+https://github.com/EGI-Federation/ansible-role-fedcloud-ops.git
 
