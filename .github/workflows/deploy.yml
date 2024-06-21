@@ -164,6 +164,7 @@ jobs:
           command: >
             set -x &&
             pushd deploy &&
+            cat clouds.yaml &&
             openstack --os-cloud backend object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
             openstack --os-cloud backend object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
