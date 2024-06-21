@@ -17,10 +17,10 @@ jobs:
           ls -ltra
           mkdir -p "${{ github.repository }}"
           pwd
-          mv deploy/roles/catchall/* "${{ github.repository }}"
+          #mv deploy/roles/catchall/* "${{ github.repository }}"
           ls "${{ github.repository }}"
           echo "THIS"
-          ls -l /home/runner/work/fedcloud-catchall-operations/fedcloud-catchall-operations/EGI-Federation
+          #ls -l /home/runner/work/fedcloud-catchall-operations/fedcloud-catchall-operations/EGI-Federation
           echo "THAT"
           ls -l /github/workspace/EGI-Federation/fedcloud-catchall-operations/molecule/default/roles || echo "NOP"
           ls -l /github/home/.cache/molecule/fedcloud-catchall-operations/default/roles || echo "NOP"
