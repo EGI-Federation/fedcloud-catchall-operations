@@ -5,8 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: pycontribs/ubuntu:latest
-    pre_build_image: true
+    image: ubuntu:latest
 lint: ansible-lint --exclude .github/
 provisioner:
   name: ansible
