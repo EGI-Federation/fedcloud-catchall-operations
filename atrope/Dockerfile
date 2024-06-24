@@ -49,6 +49,5 @@ COPY --chown=python:python --from=build /atrope/venv ./venv
 
 USER 1999
 
-
 ENV PATH="/atrope/venv/bin:$PATH"
 CMD ["sites-sync"]
