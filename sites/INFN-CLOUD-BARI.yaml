@@ -2,6 +2,11 @@
 gocdb: INFN-CLOUD-BARI
 endpoint: https://keystone.recas.ba.infn.it/v3
 protocol: openid
+images:
+  sync: true
+  format:
+    - qcow2
+    - raw
 vos:
 - name: ops
   auth:
