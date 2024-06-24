@@ -1,0 +1,26 @@
+---
+- name: Cloud-info config directory
+  ansible.builtin.template:
+    src: site-info.yaml.j2
+    dest: /etc/egi/cloud-info/{{ filename }}.yaml
+    mode: "600"
+
+- name: Cloud info env
+  ansible.builtin.template:
+    src: cloud-info.env.j2
+    dest: /etc/egi/cloud-info/{{ filename }}.env
+    mode: "600"
+
+- name: Cloud info cron
+  ansible.builtin.cron:
+    name: cloud-info-provider {{ site.gocdb }}
+    weekday: "{{ cloud_info_cron.weekday }}"
+    minute: "{{ cloud_info_cron.minute }}"
+    hour: "{{ cloud_info_cron.hour }}"
+    user: root
+    job: >
+      flock -n -w {{ cloud_info_cron.timeout }} /var/lock/cloud-info/{{ filename }}
+      docker run --rm -v /etc/egi:/etc/egi:ro
+      --env-file /etc/egi/cloud-info/{{ filename }}.env
+      {{ cloud_info_image }} >> /var/log/cloud-info/{{ filename }}.log 2>&1
+    cron_file: "cloud-info-{{ filename }}"
