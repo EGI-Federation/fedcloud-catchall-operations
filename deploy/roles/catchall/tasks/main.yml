@@ -1,0 +1,47 @@
+---
+- name: Ensure cron is available
+  ansible.builtin.apt:
+    name: cron
+    state: present
+    update_cache: true
+
+- name: Install docker
+  ansible.builtin.include_tasks: docker.yml
+  # this is only executed if explicity requested
+  tags: ['never', 'docker']
+
+- name: Load site configuration
+  ansible.builtin.include_vars:
+    file: "{{ item }}"
+    name: "{{ 'site_incl_vars_' ~ item | basename | splitext | first }}"
+  with_fileglob:
+    - "{{ site_config_dir }}/*.yaml"
+
+- name: Set site configuration variable
+  ansible.builtin.set_fact:
+    sites: "{{ sites | default([]) + [lookup('vars', item)] }}"
+  loop: "{{ query('varnames', '^site_incl_vars_(.*)$') }}"
+
+- name: EGI configuration
+  block:
+    - name: Create directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "755"
+        owner: 1999
+        group: 1999
+      loop: 
+        - /etc/egi 
+        - /etc/egi/vos
+        - /etc/egi/cloud-info
+        - /var/lock/cloud-info
+        - /var/log/cloud-info
+    - name: Site specific config
+      ansible.builtin.include_tasks: cloud-info.yml
+      vars:
+        site: "{{ item }}"
+        filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
+      with_items:
+        - "{{ sites }}"
+      when: sites is iterable
