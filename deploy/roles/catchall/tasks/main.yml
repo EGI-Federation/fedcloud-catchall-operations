@@ -22,26 +22,22 @@
     sites: "{{ sites | default([]) + [lookup('vars', item)] }}"
   loop: "{{ query('varnames', '^site_incl_vars_(.*)$') }}"
 
-- name: EGI configuration
-  block:
-    - name: Create directories
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: directory
-        mode: "755"
-        owner: 1999
-        group: 1999
-      loop: 
-        - /etc/egi 
-        - /etc/egi/vos
-        - /etc/egi/cloud-info
-        - /var/lock/cloud-info
-        - /var/log/cloud-info
-    - name: Site specific config
-      ansible.builtin.include_tasks: cloud-info.yml
-      vars:
-        site: "{{ item }}"
-        filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
-      with_items:
-        - "{{ sites }}"
-      when: sites is iterable
+- name: EGI configuration directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "755"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}" 
+  loop: 
+    - /etc/egi 
+    - /etc/egi/vos
+
+- name: Site specific config
+  ansible.builtin.include_tasks: cloud-info.yml
+  vars:
+    site: "{{ item }}"
+    filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
+  with_items:
+    - "{{ sites }}"
+  when: sites is iterable

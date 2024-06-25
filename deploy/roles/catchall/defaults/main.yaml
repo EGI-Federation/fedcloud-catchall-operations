@@ -12,6 +12,9 @@ cloud_info_image: egifedcloud/ops-cloud-info:latest
 # site configuration location
 site_config_dir: sites
 
+# default user for the containers
+egi_user: "1999"
+
 # No site information as default
 sites: []
 
@@ -20,3 +23,9 @@ cloud_info_cron:
   hour: "*"
   weekday: "*"
   timeout: "600"
+
+image_sync_cron:
+  minute: "5"
+  hour: "*/3"
+  weekday: "*"
+  timeout: "9000" # 2.5 hours
