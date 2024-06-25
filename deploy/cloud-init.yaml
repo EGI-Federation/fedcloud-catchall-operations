@@ -24,7 +24,7 @@ packages:
   - jq
   - python3-openstackclient
   - python3-pip
-  - python3.10-venv
+  - python3-venv
   - retry
 
 write_files:
