@@ -1,3 +1,4 @@
+import glob
 import logging
 import os
 import os.path
@@ -13,7 +14,7 @@ from oslo_config import cfg
 CONF = cfg.CONF
 CONF.register_opts(
     [
-        cfg.StrOpt("sites_file", default="sites.yaml"),
+        cfg.StrOpt("site_config_dir", default="."),
         cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("appdb_token"),
@@ -128,9 +129,13 @@ def do_sync(sites_config):
         site_name = site["site"]["name"]
         # filter out those sites that are not part of the centralised ops
         if site_name not in sites_config:
-            logging.debug(f"Discarding site {site_name}.")
+            logging.debug(f"Discarding site {site_name}, not in config.")
             continue
-        site.update(sites_config[site_name])
+        site_image_config = sites_config[site_name].get("images", {})
+        if not site_image_config.get("sync", False):
+            logging.debug(f"Discarding site {site_name}, no sync set.")
+            continue
+        site.update(site_image_config)
         logging.info(f"Configuring site {site_name}")
         for share in site["shares"]:
             logging.info(f"Configuring {share['VO']}")
@@ -152,9 +157,10 @@ def do_sync(sites_config):
 
 def load_sites():
     sites = {}
-    if os.path.exists(CONF.sync.sites_file):
-        with open(CONF.sync.sites_file, "r") as f:
-            sites = yaml.safe_load(f.read())
+    for site_file in glob.iglob("*.yaml", root_dir=CONF.sync.site_config_dir):
+        with open(os.path.join(CONF.sync.site_config_dir, site_file), "r") as f:
+            site = yaml.safe_load(f.read())
+            sites[site["gocdb"]] = site
     return sites
 
 
