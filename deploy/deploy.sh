@@ -21,12 +21,16 @@ python3 -m venv "$PWD/.venv"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
 	deploy data >secrets.yaml
 
-echo "cloud_info_image: \"ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA\"" >>extra-vars.yaml
+cat >>deploy-vars.yaml <<EOF
+cloud_info_image: "ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA"
+site_config_dir: "$(readlink -f ../sites)"
+EOF
 
 # Configure!
 if ansible-playbook -i inventory.yaml \
 	--extra-vars @secrets.yaml \
 	--extra-vars @extra-vars.yaml \
+        --tags "docker,cloud-info" \
 	playbook.yaml >ansible.log 2>&1; then
 	status_summary="success"
 	color="#6DBF59"
