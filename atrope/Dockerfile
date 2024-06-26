@@ -37,7 +37,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       gnupg2 qemu-utils \
+       gnupg2 qemu-utils curl \
+    && curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
+	| apt-key add - \
+    && echo "deb https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
+    && apt-get update \
+    && apt-get install -y ca-policy-egi-core \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /atrope
