@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "atrope_catchall"
+name = "image_sync"
 version = "0.0.1"
 description = "Sync images with atrope"
 authors = [
@@ -17,7 +17,7 @@ classifiers = [
 requires-python = ">=3.10"
 
 [project.scripts]
-sites-sync = "atrope_sync.sync:main"
+image-sync = "image_sync.sync:main"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
