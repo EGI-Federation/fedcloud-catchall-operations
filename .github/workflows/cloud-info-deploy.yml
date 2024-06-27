@@ -7,7 +7,7 @@ on:
       - main
   pull_request:
     paths:
-      - "deploy/**"
+      - "/cloud-info/deploy/**"
 
 jobs:
   terraform:
@@ -38,7 +38,7 @@ jobs:
                             -d "grant_type=refresh_token&client_id=token-portal&scope=$SCOPE&refresh_token=$REFRESH_TOKEN" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
-          cd deploy
+          cd cloud-info/deploy
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
@@ -67,18 +67,18 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: |
-          cd deploy
+          cd cloud-info/deploy
           terraform fmt -check
       - name: Terraform init
         id: init
         run: |
-          cd deploy
+          cd cloud-info/deploy
           terraform init
       - name: Adjust cloud-init file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          cd deploy
+          cd cloud-info/deploy
           sed -i -e "s/%TOKEN%/${{ secrets.GITHUB_TOKEN }}/" cloud-init.yaml
           sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
           sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
@@ -89,7 +89,7 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: |
-          cd deploy
+          cd cloud-info/deploy
           terraform plan -no-color -var-file="$EGI_SITE.tfvars"
         continue-on-error: true
       - name: Update Pull Request
@@ -125,13 +125,13 @@ jobs:
         id: terraform-apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd deploy
+          cd cloud-info/deploy
           terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
       - name: Get VM ID
         id: terraform-vm-id
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd deploy
+          cd cloud-info/deploy
           terraform output -raw instance-id
       - name: Re-configure providers access
         env:
@@ -145,7 +145,7 @@ jobs:
                             -d "grant_type=refresh_token&refresh_token=$REFRESH_TOKEN&client_id=token-portal&scope=$SCOPE" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
-          cd deploy
+          cd cloud-info/deploy
           git checkout -- clouds.yaml
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
@@ -164,13 +164,13 @@ jobs:
           max_attempts: 20
           retry_wait_seconds: 40
           command: >
-            pushd deploy &&
+            pushd cloud-info/deploy &&
             openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
             openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd deploy
+          cd cloud-info/deploy
           # show the status in the build log
           cat "${{ steps.terraform-vm-id.outputs.stdout }}"
           grep -v "error" "${{ steps.terraform-vm-id.outputs.stdout }}"
