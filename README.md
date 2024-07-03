@@ -49,8 +49,7 @@ generated in this repository.
 
 Deployment is managed on a separate private repository that includes several
 secrets. Deployment is done with ansible using a
-[dedicated role](https://github.com/EGI-Federation/ansible-role-fedcloud-ops)
-with:
+[dedicated role](./deploy/roles/catchall) with:
 
 ```sh
 ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml
