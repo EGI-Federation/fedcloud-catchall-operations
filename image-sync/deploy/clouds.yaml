@@ -4,7 +4,7 @@ deploy_token: &dt "deploy_secret"
 
 clouds:
   backend:
-    site: NCG-INGRID-PT
+    site: IISAS-FedCloud 
     vo: cloud.egi.eu
     auth_type: token
     auth:
@@ -12,7 +12,7 @@ clouds:
       token: *bt
       project_id: 6b042927bcfa466cb9eb56d3ea679987
   deploy:
-    site: NCG-INGRID-PT
+    site: IISAS-FedCloud 
     vo: cloud.egi.eu
     auth_type: token
     auth:
