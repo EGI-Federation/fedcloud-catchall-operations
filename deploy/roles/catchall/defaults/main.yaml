@@ -4,7 +4,7 @@ ams_host: msg.argo.grnet.gr
 ams_token: secret
 
 # check-in endpoint
-checkin_token_endpoint: "https://aai.egi.eu/oidc/token"
+checkin_token_endpoint: "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token"
 
 # docker image for the cloud info provider
 cloud_info_image: egifedcloud/ops-cloud-info:latest

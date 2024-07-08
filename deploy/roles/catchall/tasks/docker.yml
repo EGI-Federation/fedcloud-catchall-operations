@@ -35,6 +35,8 @@
     path: /etc/docker
     state: directory
     mode: "775"
+  notify:
+   - Restart docker
 
 - name: Configure docker
   ansible.builtin.copy:
@@ -51,9 +53,5 @@
       }
     dest: /etc/docker/daemon.json
     mode: "660"
-
-- name: Restart docker
-  ansible.builtin.systemd:
-    name: docker
-    state: restarted
-    daemon_reload: true
+  notify:
+   - Restart docker
