@@ -26,7 +26,7 @@
     hour: "{{ image_sync_cron.hour }}"
     user: root
     job: >
-      flock -n -w {{ image_sync.timeout }} /var/lock/sync
+      flock -n -w {{ image_sync_cron.timeout }} /var/lock/sync
       docker run --rm -v /etc/egi:/etc/egi:ro
       -v {{ site_config_dir }}:/sites:ro
       {{ image_sync_image }} sites-sync
