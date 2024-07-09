@@ -18,10 +18,11 @@ SLACK_WEBHOOK_URL="$5"
 python3 -m venv "$PWD/.venv"
 "$PWD/.venv/bin/pip" install fedcloudclient
 
+TMP_SECRETS="$(mktemp)"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
-	deploy data >secrets.yaml
+	deploy data >"$TMP_SECRETS" && mv "$TMP_SECRETS" secrets.yaml
 
-cat >>deploy-vars.yaml <<EOF
+cat >>extra-vars.yaml <<EOF
 cloud_info_image: "ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA"
 site_config_dir: "$(readlink -f ../sites)"
 EOF
