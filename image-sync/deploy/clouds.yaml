@@ -8,7 +8,7 @@ clouds:
     vo: cloud.egi.eu
     auth_type: token
     auth:
-      auth_url: https://stratus.ncg.ingrid.pt:5000/v3
+      auth_url: https://cloud.ui.savba.sk:5000/v3/ 
       token: *bt
       project_id: 6b042927bcfa466cb9eb56d3ea679987
   deploy:
@@ -16,6 +16,6 @@ clouds:
     vo: cloud.egi.eu
     auth_type: token
     auth:
-      auth_url: https://stratus.ncg.ingrid.pt:5000/v3
+      auth_url: https://cloud.ui.savba.sk:5000/v3/
       token: *dt
       project_id: 6b042927bcfa466cb9eb56d3ea679987
