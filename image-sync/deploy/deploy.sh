@@ -24,7 +24,7 @@ TMP_SECRETS="$(mktemp)"
 
 cat >>extra-vars.yaml <<EOF
 cloud_info_image: "ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA"
-site_config_dir: "$(readlink -f ../sites)"
+site_config_dir: "$(readlink -f ../../sites)"
 EOF
 
 # Configure!
