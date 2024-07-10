@@ -12,6 +12,7 @@ cloud_info_image: egifedcloud/ops-cloud-info:latest
 
 # site configuration location
 site_config_dir: sites
+site_config_mountpoint: /sites
 
 # default user for the containers
 egi_user: "1999"
