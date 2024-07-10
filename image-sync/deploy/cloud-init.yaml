@@ -1,5 +1,19 @@
 #cloud-config
 ---
+disk_setup:
+  ephemeral0:
+    table_type: 'mbr'
+    layout: true
+    overwrite: false
+fs_setup:
+  - label: ephemeral0
+    filesystem: ext4
+    device: ephemeral0
+    partition: any
+    overwrite: false
+mounts:
+  - [ ephemeral0, /var/cache/image-sync ]
+
 users:
   - name: egi
     gecos: EGI
