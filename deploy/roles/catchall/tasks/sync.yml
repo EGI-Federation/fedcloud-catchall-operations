@@ -1,0 +1,35 @@
+---
+- name: Sync dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "755"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
+  loop:
+    - /etc/egi/image_sync
+    - /var/cache/image_sync
+
+- name: sync configuration
+  ansible.builtin.template:
+    src: sync.conf.j2
+    dest: /etc/egi/image_sync/sync.conf
+    mode: "600"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
+
+- name: Image sync cron
+  ansible.builtin.cron:
+    name: image sync
+    weekday: "{{ image_sync_cron.weekday }}"
+    minute: "{{ image_sync_cron.minute }}"
+    hour: "{{ image_sync_cron.hour }}"
+    user: root
+    job: >
+      flock -n -w {{ image_sync_cron.timeout }} /var/lock/sync
+      docker run --rm -v /etc/egi:/etc/egi:ro
+      -v {{ site_config_dir }}:{{ site_config_mountpoint }}:ro
+      -v /var/cache/image_sync:/atrope-state
+      {{ image_sync_image }} sites-sync
+      --config-dir /etc/egi/image_sync >> /var/log/sync.log 2>&1
+    cron_file: "egi-image-sync"

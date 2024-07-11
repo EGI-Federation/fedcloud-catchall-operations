@@ -1,0 +1,17 @@
+---
+name: 'Deploy'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "deploy/**"
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy.yml
+    with:
+      dir: "deploy/cloud-info"
+      tags: "deploy/cloud-info"
