@@ -36,6 +36,7 @@ write_files:
       COMMIT_SHA="%REF%"
       SHORT_COMMIT_SHA="%SHORT_REF%"
       FEDCLOUD_LOCKER_TOKEN="%FEDCLOUD_LOCKER_TOKEN%"
+      TAGS="%TAGS%"
 
       # get the repo code and untar at cwd
       curl -L -H "Accept: application/vnd.github.v3+raw" \
@@ -43,7 +44,7 @@ write_files:
               tar xz --strip=1
       cd deploy
       ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" "$FEDCLOUD_LOCKER_TOKEN" \
-                  "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
+                  "$TAGS" "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
     path: /var/lib/cloud/scripts/per-boot/deploy.sh
     permissions: '0755'
   - content: |
