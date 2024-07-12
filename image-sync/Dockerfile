@@ -2,15 +2,9 @@ FROM python:3-slim AS build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-               build-essential gcc git curl gnupg2 \
-    && curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
-	| apt-key add - \
-    && echo "deb https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
-    && apt-get update \
-    && apt-get install -y ca-policy-egi-core \
+               build-essential gcc git \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /image-sync
@@ -20,8 +14,7 @@ ENV PATH="/image-sync/venv/bin:$PATH"
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt \
-    && cat /etc/grid-security/certificates/*.pem >> "$(/image-sync/venv/bin/python -m requests.certs)"
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
@@ -37,7 +30,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       gnupg2 qemu-utils \
+       gnupg2 qemu-utils curl \
+    && curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
+	| apt-key add - \
+    && echo "deb https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
+    && apt-get update \
+    && apt-get install -y ca-policy-egi-core \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /image-sync
@@ -46,6 +44,8 @@ RUN groupadd -g 1999 python \
     && useradd -r -u 1999 -g python python
 
 COPY --chown=python:python --from=build /image-sync/venv ./venv
+
+RUN cat /etc/grid-security/certificates/*.pem >> "$(/image-sync/venv/bin/python -m requests.certs)"
 
 USER 1999
 
