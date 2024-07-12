@@ -10,4 +10,4 @@ fs_setup:
     partition: any
     overwrite: false
 mounts:
-  - [ /deb/sdb, /var/cache/image-sync ]
+  - [ /dev/sdb, /var/cache/image-sync ]
