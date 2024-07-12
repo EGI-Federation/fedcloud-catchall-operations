@@ -41,6 +41,7 @@ jobs:
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
           cd "${{ inputs.dir }}"
+          cp ../clouds.yaml .
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
@@ -150,7 +151,7 @@ jobs:
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
           cd "${{ inputs.dir }}"
-          git checkout -- clouds.yaml
+          cp ../clouds.yaml .
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
