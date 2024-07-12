@@ -1,14 +1,13 @@
 # Disk layout
 disk_setup:
-  ephemeral0:
+  /dev/sdb:
     table_type: 'mbr'
     layout: true
     overwrite: false
 fs_setup:
-  - label: ephemeral0
-    filesystem: ext4
-    device: ephemeral0
+  - filesystem: ext4
+    device: /dev/sdb
     partition: any
     overwrite: false
 mounts:
-  - [ ephemeral0, /var/cache/image-sync ]
+  - [ /dev/sdb, /var/cache/image-sync ]
