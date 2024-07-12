@@ -13,5 +13,7 @@ jobs:
   deploy:
     uses: ./.github/workflows/deploy.yml
     with:
-      dir: "deploy/cloud-info"
-      tags: "deploy/cloud-info"
+      dir: "deploy/image-sync"
+      tags: "docker,image-sync"
+    secrets: inherit
+
