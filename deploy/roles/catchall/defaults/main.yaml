@@ -9,6 +9,8 @@ appdb_token: secret
 # check-in endpoint
 checkin:
   token_endpoint: "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token"
+  client_id: id
+  client_secret: secret
 
 # docker image for the cloud info provider
 cloud_info_image: egifedcloud/ops-cloud-info:latest
