@@ -16,6 +16,7 @@ def test_site_files(host):
     assert not host.file("/etc/egi/cloud-info/%s.env" % filename).contains("OS_REGION")
     assert host.file("/etc/egi/cloud-info/%s.env" % filename).exists
     assert host.file("/etc/cron.d/cloud-info-%s" % filename).exists
+    assert host.file("/etc/cron.d/egi-image-sync").exists
 
 
 def test_site_files_region(host):
