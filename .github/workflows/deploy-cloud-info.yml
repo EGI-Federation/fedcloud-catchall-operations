@@ -13,6 +13,5 @@ jobs:
   deploy:
     uses: ./.github/workflows/deploy.yml
     with:
-      #dir: "deploy/cloud-info"
-      dir: "foo/cloud-info"
+      dir: "deploy/cloud-info"
       tags: "cloud-info,docker"
