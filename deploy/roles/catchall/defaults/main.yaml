@@ -3,6 +3,9 @@ ams_project: egi_cloud_info
 ams_host: msg.argo.grnet.gr
 ams_token: secret
 
+# AppDB details
+appdb_token: secret
+
 # check-in endpoint
 checkin:
   token_endpoint: "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token"

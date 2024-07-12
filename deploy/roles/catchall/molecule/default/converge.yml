@@ -9,6 +9,8 @@
         sites:
           - endpoint: https://example.com:5000/v3/
             gocdb: foo.bar
+            images:
+              sync: true
             vos:
               - auth:
                   project_id: a123456
