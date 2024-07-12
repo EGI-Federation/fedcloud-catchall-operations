@@ -1,12 +1,12 @@
 # Disk layout
 disk_setup:
-  sdb:
+  /dev/sdb:
     table_type: 'mbr'
     layout: true
     overwrite: false
 fs_setup:
   - filesystem: ext4
-    device: sdb
+    device: /dev/sdb
     partition: any
     overwrite: false
 mounts:
