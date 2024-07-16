@@ -1,12 +1,6 @@
-FROM python:3-slim AS build
+FROM python:3 AS build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# hadolint ignore=DL3008
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-               build-essential gcc git \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /image-sync
 
