@@ -10,8 +10,9 @@ Accepted
 
 EGI provides an image repository (AppDB) for users to share VM images and VOs to
 add them to a list of images to be available at the sites supporting the VO.
-This has been managed with site-level although the uploading of images is for
-most sites a user-level operation that does not need any special privileges.
+This has been managed with the installation and configuration of specific tools at
+site-level although the uploading of images is for most sites a user-level operation
+that does not need any special privileges.
 
 The main software product for this is
 [cloudkeeper](https://github.com/the-cloudkeeper-project/cloudkeeper), which
