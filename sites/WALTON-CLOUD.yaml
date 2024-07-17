@@ -1,11 +1,6 @@
 ---
 gocdb: WALTON-CLOUD 
 endpoint: https://horizon.waltoncloud.eu:5000/v3
-images:
-  sync: true
-  formats:
-    - qcow2
-    - raw
 vos:
 - name: ops
   auth:
