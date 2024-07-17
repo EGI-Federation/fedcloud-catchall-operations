@@ -1,4 +1,4 @@
-FROM python:3 as build
+FROM python:3 AS build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

@@ -4,6 +4,7 @@
 # - a GitHub OAUTH_TOKEN to update the PR
 # - the COMMIT_SHA
 # - a locker for fedcloud secret to obtain the secrets
+# - tags for the ansible configuration
 # - the SHORT_SHA used for pulling the docker image to use
 # - a SLACK_WEBHOOK_URL to report on the status
 set -e
@@ -11,22 +12,29 @@ set -e
 OAUTH_TOKEN="$1"
 COMMIT_SHA="$2"
 FEDCLOUD_SECRET_LOCKER="$3"
-SHORT_SHA="$4"
-SLACK_WEBHOOK_URL="$5"
+TAGS="$4"
+SHORT_SHA="$5"
+SLACK_WEBHOOK_URL="$6"
 
 # create a virtual env for fedcloudclient
 python3 -m venv "$PWD/.venv"
 "$PWD/.venv/bin/pip" install fedcloudclient
 
+TMP_SECRETS="$(mktemp)"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
-	deploy data >secrets.yaml
+	deploy data >"$TMP_SECRETS" && mv "$TMP_SECRETS" secrets.yaml
 
-echo "cloud_info_image: \"ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA\"" >>extra-vars.yaml
+cat >>extra-vars.yaml <<EOF
+cloud_info_image: "ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA"
+image_sync_image: "ghcr.io/egi-federation/fedcloud-image-sync:sha-$SHORT_SHA"
+site_config_dir: "$(readlink -f ../sites)"
+EOF
 
 # Configure!
 if ansible-playbook -i inventory.yaml \
 	--extra-vars @secrets.yaml \
 	--extra-vars @extra-vars.yaml \
+	--tags "$TAGS" \
 	playbook.yaml >ansible.log 2>&1; then
 	status_summary="success"
 	color="#6DBF59"
@@ -91,7 +99,7 @@ cat >slack_body.json <<EOF
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "fedcloud-catchall-operations deployment was completed for <$comment_url| PR \`#$ISSUE_NUMBER\`> "
+            "text": "fedcloud-catchall deployment was completed for <$comment_url| PR \`#$ISSUE_NUMBER\`> "
           }
         }
       ]

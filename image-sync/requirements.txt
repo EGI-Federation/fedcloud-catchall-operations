@@ -1,0 +1,4 @@
+git+https://github.com/EGI-Federation/atrope@catchall
+requests
+oslo.config
+PyYAML

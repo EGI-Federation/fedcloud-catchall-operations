@@ -1,13 +1,15 @@
 ---
-name: 'Deploy'
+name: Deploy
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    paths:
-      - "deploy/**"
+  workflow_call:
+    inputs:
+      dir:
+        required: true
+        type: string
+      tags:
+        required: true
+        type: string
 
 jobs:
   terraform:
@@ -38,7 +40,8 @@ jobs:
                             -d "grant_type=refresh_token&client_id=token-portal&scope=$SCOPE&refresh_token=$REFRESH_TOKEN" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
-          cd deploy
+          cd "${{ inputs.dir }}"
+          cp ../clouds.yaml .
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           EGI_SITE="$(yq -r .clouds.deploy.site clouds.yaml)"
@@ -67,19 +70,21 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
           terraform fmt -check
       - name: Terraform init
         id: init
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
           terraform init
       - name: Adjust cloud-init file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
+          cat ../cloud-init.yaml extra-cloud-init.yaml > cloud-init.yaml
           sed -i -e "s/%TOKEN%/${{ secrets.GITHUB_TOKEN }}/" cloud-init.yaml
+          sed -i -e "s/%TAGS%/${{ inputs.tags }}/" cloud-init.yaml
           sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
           sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
           sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
@@ -89,7 +94,7 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
           terraform plan -no-color -var-file="$EGI_SITE.tfvars"
         continue-on-error: true
       - name: Update Pull Request
@@ -125,13 +130,13 @@ jobs:
         id: terraform-apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
           terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
       - name: Get VM ID
         id: terraform-vm-id
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
           terraform output -raw instance-id
       - name: Re-configure providers access
         env:
@@ -145,8 +150,8 @@ jobs:
                             -d "grant_type=refresh_token&refresh_token=$REFRESH_TOKEN&client_id=token-portal&scope=$SCOPE" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
-          cd deploy
-          git checkout -- clouds.yaml
+          cd "${{ inputs.dir }}"
+          cp ../clouds.yaml .
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
           BACKEND_OS_TOKEN="$(fedcloud openstack token issue --oidc-access-token "$OIDC_TOKEN" \
@@ -164,13 +169,13 @@ jobs:
           max_attempts: 20
           retry_wait_seconds: 40
           command: >
-            pushd deploy &&
+            pushd "${{ inputs.dir }}" &&
             openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
             openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd deploy
+          cd "${{ inputs.dir }}"
           # show the status in the build log
           cat "${{ steps.terraform-vm-id.outputs.stdout }}"
           grep -v "error" "${{ steps.terraform-vm-id.outputs.stdout }}"

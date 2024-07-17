@@ -3,14 +3,25 @@ ams_project: egi_cloud_info
 ams_host: msg.argo.grnet.gr
 ams_token: secret
 
+# AppDB details
+appdb_token: secret
+
 # check-in endpoint
-checkin_token_endpoint: "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token"
+checkin:
+  token_endpoint: "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token"
+  client_id: id
+  client_secret: secret
 
 # docker image for the cloud info provider
 cloud_info_image: egifedcloud/ops-cloud-info:latest
 
 # site configuration location
 site_config_dir: sites
+site_config_mountpoint: /sites
+
+# default user for the containers
+egi_user: "1999"
+egi_group: "1999"
 
 # No site information as default
 sites: []
@@ -20,3 +31,11 @@ cloud_info_cron:
   hour: "*"
   weekday: "*"
   timeout: "600"
+
+image_sync_image: egifedcloud/ops-image-sync:latest
+
+image_sync_cron:
+  minute: "5"
+  hour: "*/3"
+  weekday: "*"
+  timeout: "9000" # 2.5 hours

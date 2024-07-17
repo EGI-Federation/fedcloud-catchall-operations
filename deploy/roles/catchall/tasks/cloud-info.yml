@@ -1,4 +1,18 @@
 ---
+- name: Cloud-info dirs
+  ansible.builtin.file:
+    path: "{{ dir }}"
+    state: directory
+    mode: "755"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
+  loop:
+    - /etc/egi/cloud-info
+    - /var/lock/cloud-info
+    - /var/log/cloud-info
+  loop_control:
+    loop_var: dir
+
 - name: Cloud-info config directory
   ansible.builtin.template:
     src: site-info.yaml.j2

@@ -1,0 +1,19 @@
+---
+name: 'Deploy image sync'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "deploy/**"
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy.yml
+    with:
+      dir: "deploy/image-sync"
+      tags: "docker,image-sync"
+    secrets: inherit
+

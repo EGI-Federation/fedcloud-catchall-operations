@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "image_sync"
+version = "0.0.1"
+description = "Sync images with atrope"
+authors = [
+  { name = "Enol Fernandez", email = "enol.fernandez@egi.eu" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.10"
+
+[project.scripts]
+image-sync = "image_sync.sync:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
