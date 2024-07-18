@@ -61,9 +61,9 @@ if test "$CHECKIN_SECRETS_PATH" = ""; then
 else
 	# use service account for everyone
 	export OS_DISCOVERY_ENDPOINT="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
-	OS_CLIENT_ID="$(yq -r '.fedcloudops.client_id' <"$CHECKIN_SECRETS_FILE")"
+	OS_CLIENT_ID="$(yq -r '.checkin.client_id' <"$CHECKIN_SECRETS_FILE")"
 	export OS_CLIENT_ID
-	OS_CLIENT_SECRET="$(yq -r '.fedcloudops.client_secret' <"$CHECKIN_SECRETS_FILE")"
+	OS_CLIENT_SECRET="$(yq -r '.checkin.client_secret' <"$CHECKIN_SECRETS_FILE")"
 	export OS_CLIENT_SECRET
 	export OS_ACCESS_TOKEN_TYPE="access_token"
 	export OS_AUTH_TYPE="v3oidcclientcredentials"
