@@ -1,6 +1,11 @@
 ---
 gocdb: GRNET-OPENSTACK
 endpoint: https://keystone-louros.cloud.grnet.gr:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
 - name: ops
   auth:
