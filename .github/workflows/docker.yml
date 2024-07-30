@@ -17,6 +17,7 @@ jobs:
         image:
           - cloud-info
           - caso
+          - image-sync
 
     steps:
       - name: Checkout
