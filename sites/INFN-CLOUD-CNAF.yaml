@@ -15,9 +15,6 @@ vos:
 - name: ops
   auth:
     project_id: 8b6a8afe225344dea808ec17a26de56d
-- name: vo.i-nergy.eu
-  auth:
-    project_id: ce2be245c0a24b52a0d31ede99c0bd63
 - name: vo.projectescape.eu
   auth:
     project_id: 1f3ff0902d554384a5af936e6643695f
