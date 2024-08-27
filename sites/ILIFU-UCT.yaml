@@ -1,15 +1,17 @@
 gocdb: ILIFU-UCT
 endpoint: https://openstack.ilifu.ac.za:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
 - name: ops
   auth:
-    project_id: 668927725bfa4b87a8f02a214095f34d
+    project_id: a58fbeafef824d3ebf1bef56c09dabdc
 - name: vo.access.egi.eu
   auth:
-    project_id: a8c0add4584e4230832f84adb0539809
+    project_id: 538c9d147eef45f0ae3489ff84820ff2
 - name: vo.mightee.idia.za
   auth:
-    project_id: d35b3b03f8ee41e3bc1bfbf212fee346
-- name: eval.c-scale.eu
-  auth:
-    project_id: 36a68426b1a2415380ed62745bc7ba6c
+    project_id: 3121e1c5bd6249e0b6ff5dfbda1952fa
