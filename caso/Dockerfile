@@ -31,7 +31,9 @@ RUN for f in /etc/grid-security/certificates/*.pem ; do \
 # Version 3.0.0 is broken in the dates management
 ARG CASO_VERSION=4.2.0
 
-RUN pip install --no-cache-dir git+https://github.com/IFCA/caso.git@$CASO_VERSION
+# Pydantic v2 will fail
+RUN pip install --no-cache-dir git+https://github.com/IFCA/caso.git@$CASO_VERSION \
+	pydantic~=1.10
 
 COPY caso.conf /etc/caso/caso.conf
 COPY voms.json /etc/caso/voms.json
