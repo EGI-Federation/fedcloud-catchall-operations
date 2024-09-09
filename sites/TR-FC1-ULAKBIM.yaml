@@ -32,3 +32,6 @@ vos:
 - name: vo.imagine-ai.eu
   auth:
     project_id: 3c1f7074ad974024849cfd01a4b3858d
+- name: vo.usegalaxy.eu
+  auth:
+    project_id: 5eef96ac9de4417aa50395a12d793b48
