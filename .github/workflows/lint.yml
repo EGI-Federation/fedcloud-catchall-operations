@@ -18,9 +18,13 @@ jobs:
 
       # Runs the Super-Linter action
       - name: Run Super-Linter
-        uses: github/super-linter/slim@v6
+        uses: github/super-linter/slim@v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Disabling these two for the moment, should be enabled later
           VALIDATE_CHECKOV: false
           VALIDATE_PYTHON_PYLINT: false
+          # Black is good enough for us
+          VALIDATE_PYTHON_PYINK: false
+          # Disabling this file as it gets confused
+          FILTER_REGEX_EXCLUDE: ".*.env.j2"

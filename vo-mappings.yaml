@@ -12,7 +12,7 @@ vos:
   covid19.eosc-synergy.eu: "urn:mace:egi.eu:group:covid19.eosc-synergy.eu:role=vm_operator#aai.egi.eu"
   cos4cloud-eosc.eu: "urn:mace:egi.eu:group:cos4cloud-eosc.eu:role=vm_operator#aai.egi.eu"
   cryoem.instruct-eric.eu: "urn:mace:egi.eu:group:cryoem.instruct-eric.eu:role=vm_operator#aai.egi.eu"
-  culturalheritage.vo.egi.eu: "urn:mace:egi.eu:group:culturalheritage.vo.egi.eu:CH-cloud_operators:role=member#aai.egi.eu"  
+  culturalheritage.vo.egi.eu: "urn:mace:egi.eu:group:culturalheritage.vo.egi.eu:CH-cloud_operators:role=member#aai.egi.eu"
   d4science.org: "urn:mace:egi.eu:group:d4science.org:role=vm_operator#aai.egi.eu"
   demo.fedcloud.egi.eu: "urn:mace:egi.eu:group:demo.fedcloud.egi.eu:vm_operator:role=member#aai.egi.eu"
   drihm.eu: "urn:mace:egi.eu:group:drihm.eu:role=vm_operator#aai.egi.eu"
