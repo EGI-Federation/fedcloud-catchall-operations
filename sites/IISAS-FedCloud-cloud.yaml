@@ -2,39 +2,39 @@
 gocdb: IISAS-FedCloud
 endpoint: https://cloud.ui.savba.sk:5000/v3/
 vos:
-- name: cloud.egi.eu
-  auth:
-    project_id: 982ce52d45fe4e33a1c952ab9484c711
-- name: covid19.eosc-synergy.eu
-  auth:
-    project_id: a22bbffb007745b2934bf308b0a4d186
-- name: eosc-synergy.eu
-  auth:
-    project_id: 51f736d36ce34b9ebdf196cfcabd24ee
-- name: mswss.ui.savba.sk
-  auth:
-    project_id: a3684e7440aa42f287cf5e9e85ea4cae
-- name: mteam.data.kit.edu
-  auth:
-    project_id: 071a2c4b52494bccbc3606d59d0e6951
-- name: ops
-  auth:
-    project_id: 06f5a36f70684fd7b27518625458b69d
-- name: training.egi.eu
-  auth:
-    project_id: ba233ccdb3a84ecb961ad340f4b34369
-- name: vo.access.egi.eu
-  auth:
-    project_id: 71dc9c3785cc4876bfb1a4bfc681e0f3
-- name: vo.bd4nrg.eu
-  auth:
-    project_id: 74128e581e6941ad91c7fce06f14e6c8
-- name: vo.oipub.com
-  auth:
-    project_id: e188494f39564812987a4ee5f58084a7
-- name: vo.ai4eosc.eu
-  auth:
-    project_id: 4d40037774784f22907d537070e85f42
-- name: vo.usegalaxy.eu
-  auth:
-    project_id: 7a23c4fa956a499c854eb215f3a95218
+  - name: cloud.egi.eu
+    auth:
+      project_id: 982ce52d45fe4e33a1c952ab9484c711
+  - name: covid19.eosc-synergy.eu
+    auth:
+      project_id: a22bbffb007745b2934bf308b0a4d186
+  - name: eosc-synergy.eu
+    auth:
+      project_id: 51f736d36ce34b9ebdf196cfcabd24ee
+  - name: mswss.ui.savba.sk
+    auth:
+      project_id: a3684e7440aa42f287cf5e9e85ea4cae
+  - name: mteam.data.kit.edu
+    auth:
+      project_id: 071a2c4b52494bccbc3606d59d0e6951
+  - name: ops
+    auth:
+      project_id: 06f5a36f70684fd7b27518625458b69d
+  - name: training.egi.eu
+    auth:
+      project_id: ba233ccdb3a84ecb961ad340f4b34369
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 71dc9c3785cc4876bfb1a4bfc681e0f3
+  - name: vo.bd4nrg.eu
+    auth:
+      project_id: 74128e581e6941ad91c7fce06f14e6c8
+  - name: vo.oipub.com
+    auth:
+      project_id: e188494f39564812987a4ee5f58084a7
+  - name: vo.ai4eosc.eu
+    auth:
+      project_id: 4d40037774784f22907d537070e85f42
+  - name: vo.usegalaxy.eu
+    auth:
+      project_id: 7a23c4fa956a499c854eb215f3a95218

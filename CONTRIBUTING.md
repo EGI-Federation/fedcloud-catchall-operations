@@ -23,7 +23,7 @@ Before proposing a contribution via pull request, ideally there is an open
 issue describing the need for your contribution (refer to this issue number
 when you submit the pull request). We have a 3 steps process for contributions.
 
-1. Fork the project if you have not, and commit changes to a git branch
+1. Fork the project if you have not, and commit changes to a Git branch
 1. Create a GitHub Pull Request for your change, following the instructions
    in the pull request template.
 1. Perform a [Code Review](#code-review-process) with the maintainers on the
@@ -51,7 +51,7 @@ follows:
 1. If a maintainer has feedback or questions on your changes then they will set
    `request changes` in the review and provide an explanation.
 
-## Using git
+## Using Git
 
 For collaboration purposes, it is best if you create a GitHub account and fork
 the repository to your own account. Once you do this you will be able to push
@@ -60,7 +60,7 @@ be easier to send pull requests.
 
 ### Branches and Commits
 
-You should submit your patch as a git branch named after the GitHub issue, such
+You should submit your patch as a Git branch named after the GitHub issue, such
 as `#3`\. This is called a _topic branch_ and allows users to associate a
 branch of code with the issue.
 

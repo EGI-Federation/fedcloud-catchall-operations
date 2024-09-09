@@ -2,12 +2,12 @@
 gocdb: SCAI
 endpoint: https://cloud.scai.fraunhofer.de:5000/v3
 vos:
-- name: ops
-  auth:
-    project_id: 7884889abbe44c43b331027fc2f39b75
-- name: vo.access.egi.eu
-  auth:
-    project_id: d12c055894f245b28c75c95e4ca78407
-- name: vo.ebrain-health.eu
-  auth:
-    project_id: 4733227537724f7aade971aedefb015a
+  - name: ops
+    auth:
+      project_id: 7884889abbe44c43b331027fc2f39b75
+  - name: vo.access.egi.eu
+    auth:
+      project_id: d12c055894f245b28c75c95e4ca78407
+  - name: vo.ebrain-health.eu
+    auth:
+      project_id: 4733227537724f7aade971aedefb015a

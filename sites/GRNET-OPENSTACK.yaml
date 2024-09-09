@@ -7,6 +7,6 @@ images:
     - qcow2
     - raw
 vos:
-- name: ops
-  auth:
-    project_id: fd88c4b7bf9242fdbde17b484ccdb032
+  - name: ops
+    auth:
+      project_id: fd88c4b7bf9242fdbde17b484ccdb032

@@ -36,7 +36,7 @@
     state: directory
     mode: "775"
   notify:
-   - Restart docker
+    - Restart docker
 
 - name: Configure docker
   ansible.builtin.copy:
@@ -54,4 +54,4 @@
     dest: /etc/docker/daemon.json
     mode: "660"
   notify:
-   - Restart docker
+    - Restart docker

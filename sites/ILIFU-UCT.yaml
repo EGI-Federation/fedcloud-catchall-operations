@@ -6,12 +6,12 @@ images:
     - qcow2
     - raw
 vos:
-- name: ops
-  auth:
-    project_id: a58fbeafef824d3ebf1bef56c09dabdc
-- name: vo.access.egi.eu
-  auth:
-    project_id: 538c9d147eef45f0ae3489ff84820ff2
-- name: vo.mightee.idia.za
-  auth:
-    project_id: 3121e1c5bd6249e0b6ff5dfbda1952fa
+  - name: ops
+    auth:
+      project_id: a58fbeafef824d3ebf1bef56c09dabdc
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 538c9d147eef45f0ae3489ff84820ff2
+  - name: vo.mightee.idia.za
+    auth:
+      project_id: 3121e1c5bd6249e0b6ff5dfbda1952fa

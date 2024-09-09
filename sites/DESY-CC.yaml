@@ -2,18 +2,18 @@
 gocdb: DESY-CC
 endpoint: https://ccmi-api.desy.de:5000/v3
 vos:
-- name: fedcloud.egi.eu
-  auth:
-    project_id: 84ef898d6bdc4d01aaabdf1dda2ca791
-- name: vo.panosc.eu
-  auth:
-    project_id: ac06d127fc14463c9bd283f08e731eb2
-- name: vo.cite.gr
-  auth:
-    project_id: cf702115862145869d78aadab4021f81
-- name: vo.openrdm.eu
-  auth:
-    project_id: 270eaf591c4b489a8f6dc1400fe2ed3c
-- name: peachnote.com
-  auth:
-    project_id: 27f37f6027eb490f9d4994b57e08054e
+  - name: fedcloud.egi.eu
+    auth:
+      project_id: 84ef898d6bdc4d01aaabdf1dda2ca791
+  - name: vo.panosc.eu
+    auth:
+      project_id: ac06d127fc14463c9bd283f08e731eb2
+  - name: vo.cite.gr
+    auth:
+      project_id: cf702115862145869d78aadab4021f81
+  - name: vo.openrdm.eu
+    auth:
+      project_id: 270eaf591c4b489a8f6dc1400fe2ed3c
+  - name: peachnote.com
+    auth:
+      project_id: 27f37f6027eb490f9d4994b57e08054e
