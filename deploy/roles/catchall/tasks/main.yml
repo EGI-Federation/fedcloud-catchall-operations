@@ -12,7 +12,7 @@
     apply:
       tags: "docker"
   # this is only executed if explicity requested
-  tags: ['never', 'docker']
+  tags: ["never", "docker"]
 
 - name: Load site configuration
   tags: ["cloud-info", "image-sync"]
@@ -52,7 +52,6 @@
   with_items:
     - "{{ sites }}"
   when: sites is iterable
-
 
 - name: Image sync config
   tags: ["image-sync"]

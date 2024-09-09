@@ -1,7 +1,10 @@
 ---
-gocdb: ELKH-CLOUD 
+gocdb: ELKH-CLOUD
 endpoint: https://sztaki.science-cloud.hu:5000/v3
 vos:
-- name: ops
-  auth:
-    project_id: 6141a6ee30004094b4e9e53913a8e399 
+  - name: ops
+    auth:
+      project_id: 6141a6ee30004094b4e9e53913a8e399
+  - name: vo.ai4publicpolicy.eu
+    auth:
+      project_id: e3a1a579887d4fc8b840a0d13188f0ea

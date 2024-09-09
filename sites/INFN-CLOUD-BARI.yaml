@@ -3,21 +3,21 @@ gocdb: INFN-CLOUD-BARI
 endpoint: https://keystone.recas.ba.infn.it/v3
 protocol: openid
 vos:
-- name: ops
-  auth:
-    project_id: 690609ffff9a42ed96b42b4b745b9e5d
-- name: vo.emso-eric.eu
-  auth:
-    project_id: 18ef543d904b441cbb9c5f2302dbd154
-- name: vo.decido-project.eu
-  auth:
-    project_id: 9ca3e35cbd1b4b3f8c7676908dc10b78
-- name: vo.usegalaxy.eu
-  auth:
-    project_id: b82b6407118642d0af8ae32235ba974e
-- name: vo.nbis.se
-  auth:
-    project_id: 779d51b021904fe990913cc0bf738031
-- name: vo.binare-oy.eu
-  auth:
-    project_id: f08cb68480de4ac38dbe3cf63e42bf38
+  - name: ops
+    auth:
+      project_id: 690609ffff9a42ed96b42b4b745b9e5d
+  - name: vo.emso-eric.eu
+    auth:
+      project_id: 18ef543d904b441cbb9c5f2302dbd154
+  - name: vo.decido-project.eu
+    auth:
+      project_id: 9ca3e35cbd1b4b3f8c7676908dc10b78
+  - name: vo.usegalaxy.eu
+    auth:
+      project_id: b82b6407118642d0af8ae32235ba974e
+  - name: vo.nbis.se
+    auth:
+      project_id: 779d51b021904fe990913cc0bf738031
+  - name: vo.binare-oy.eu
+    auth:
+      project_id: f08cb68480de4ac38dbe3cf63e42bf38

@@ -2,18 +2,18 @@
 gocdb: CYFRONET-CLOUD
 endpoint: https://panel.cloud.cyfronet.pl:5000/v3/
 vos:
-- name: culturalheritage.vo.egi.eu
-  auth:
-    project_id: 0a9d5dd734854a15a4b5d1c8a21772bc
-- name: dteam
-  auth:
-    project_id: 9b40bb40431c4f4180c280b6675f9bb9
-- name: fedcloud.egi.eu
-  auth:
-    project_id: 1295728b1ce747fb96c043c6e254ad6f
-- name: ops
-  auth:
-    project_id: c030e7317150482d920717888e82ce5f
-- name: vo.access.egi.eu
-  auth:
-    project_id: 7635176e4f9b4cb4b3f4192a5bf901a3
+  - name: culturalheritage.vo.egi.eu
+    auth:
+      project_id: 0a9d5dd734854a15a4b5d1c8a21772bc
+  - name: dteam
+    auth:
+      project_id: 9b40bb40431c4f4180c280b6675f9bb9
+  - name: fedcloud.egi.eu
+    auth:
+      project_id: 1295728b1ce747fb96c043c6e254ad6f
+  - name: ops
+    auth:
+      project_id: c030e7317150482d920717888e82ce5f
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 7635176e4f9b4cb4b3f4192a5bf901a3

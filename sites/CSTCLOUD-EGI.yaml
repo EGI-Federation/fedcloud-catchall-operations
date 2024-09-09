@@ -2,22 +2,21 @@
 gocdb: CSTCLOUD-EGI
 endpoint: https://federation.cstcloud.cn:5000/v3
 vos:
-- name: ops 
-  auth: 
-    project_id: 6788216d161747d085ec60cacb6f8543
-- name: vo.access.egi.eu
-  auth:
-    project_id: 16d983af7ac84860acbddbc7e395a3fd
-- name: vo.cnic.cn
-  auth:
-    project_id: a46c8e0acd9e4a01ad413f5654d7aae9
-- name: enmr.eu
-  auth:
-    project_id: ddf1ddbcdfaf4e42b722719b964b5fab
-- name: eiscat.se
-  auth:
-    project_id: be43e5f92b3e49c387a5b00549938770
-- name: fedcloud.egi.eu
-  auth:
-    project_id: b33f036b6a584c4d844df5a505f53d16
-    
+  - name: ops
+    auth:
+      project_id: 6788216d161747d085ec60cacb6f8543
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 16d983af7ac84860acbddbc7e395a3fd
+  - name: vo.cnic.cn
+    auth:
+      project_id: a46c8e0acd9e4a01ad413f5654d7aae9
+  - name: enmr.eu
+    auth:
+      project_id: ddf1ddbcdfaf4e42b722719b964b5fab
+  - name: eiscat.se
+    auth:
+      project_id: be43e5f92b3e49c387a5b00549938770
+  - name: fedcloud.egi.eu
+    auth:
+      project_id: b33f036b6a584c4d844df5a505f53d16

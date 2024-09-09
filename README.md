@@ -43,7 +43,7 @@ generated in this repository.
 
 ## Deployment
 
-Deployment is managed with GitHub actions, there is a VM for the
+Deployment is managed with GitHub Actions, there is a VM for the
 cloud-info-provider and one VM for the image sync. Check the [deploy](./deploy)
 directory for details. Configuration is done with ansible using a
 [dedicated role](./deploy/roles/catchall):
