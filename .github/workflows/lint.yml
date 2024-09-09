@@ -27,4 +27,4 @@ jobs:
           # Black is good enough for us
           VALIDATE_PYTHON_PYINK: false
           # Disabling this file as it gets confused
-          FILTER_REGEX_EXCLUDE: "*.env.j2"
+          FILTER_REGEX_EXCLUDE: ".*.env.j2"
