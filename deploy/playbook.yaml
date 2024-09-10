@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   roles:
-    - role: "grycap.motley-cue"
+    - role: "grycap.motley_cue"
       vars:
         ssh_oidc_other_vos_name: cloud.egi.eu
         ssh_oidc_other_vos_role: auditor
