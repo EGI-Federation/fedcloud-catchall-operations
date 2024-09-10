@@ -73,3 +73,13 @@ write_files:
     encoding: base64
     path: /etc/openstack/clouds.yaml
     permissions: "0644"
+  - content: |
+      # Created by cloud-init
+      #
+      # 1. Access is restricted to members of the vo.cloud.egi.eu VO with the auditor role
+      #    urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu
+      #
+      # 2. Once logged in, they have unrestricted sudo power:
+      %egi-eu_cloud-egi-eu ALL=(ALL) NOPASSWD:ALL
+    path: /etc/sudoers.d/motley
+    permissions: "0644"

@@ -2,6 +2,10 @@
 - hosts: all
   become: true
   roles:
+    - role: "grycap.motley-cue"
+      vars:
+        ssh_oidc_other_vos_name: cloud.egi.eu
+        ssh_oidc_other_vos_role: auditor
     - role: catchall
       vars:
         site_config_dir: ../sites/

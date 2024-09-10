@@ -30,6 +30,9 @@ image_sync_image: "ghcr.io/egi-federation/fedcloud-image-sync:sha-$SHORT_SHA"
 site_config_dir: "$(readlink -f ../sites)"
 EOF
 
+# install Ansible dependencies
+ansible-galaxy role install -r galaxy-requirements.yaml
+
 # Configure!
 if ansible-playbook -i inventory.yaml \
 	--extra-vars @secrets.yaml \
