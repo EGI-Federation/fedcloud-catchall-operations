@@ -82,4 +82,4 @@ write_files:
       # 2. Once logged in, they have unrestricted sudo power:
       %egi-eu_cloud-egi-eu ALL=(ALL) NOPASSWD:ALL
     path: /etc/sudoers.d/motley
-    permissions: '0644'
+    permissions: "0644"
