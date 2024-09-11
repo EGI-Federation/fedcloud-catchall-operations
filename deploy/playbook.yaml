@@ -6,6 +6,8 @@
       vars:
         ssh_oidc_other_vos_name: cloud.egi.eu
         ssh_oidc_other_vos_role: auditor
+      tags:
+        - always
     - role: catchall
       vars:
         site_config_dir: ../sites/
