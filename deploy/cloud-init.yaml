@@ -19,6 +19,10 @@ packages:
   - python3-venv
   - retry
 
+snap:
+  commands:
+    0: snap install yq
+
 write_files:
   - content: |
       #!/bin/sh
