@@ -48,7 +48,7 @@ ansible-galaxy role install -r galaxy-requirements.yaml
 if ansible-playbook -i inventory.yaml \
 	--extra-vars @secrets.yaml \
 	--extra-vars @extra-vars.yaml \
-	--extra-vars ACCESS_TOKEN="$ACCESS_TOKEN" \
+	--extra-vars ACCESS_TOKEN=$ACCESS_TOKEN \
 	--tags "$TAGS" \
 	playbook.yaml >ansible.log 2>&1; then
 	status_summary="success"
