@@ -35,8 +35,8 @@ CLIENT_ID=$(yq -r '.fedcloudops.client_id' secrets.yaml)
 CLIENT_SECRET=$(yq -r '.fedcloudops.client_secret' secrets.yaml)
 SCOPE="openid%20email%20profile%20voperson_id%20eduperson_entitlement"
 ACCESS_TOKEN=$(curl --request POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
-  --data "grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&scope=$SCOPE" \
-  | jq -r ".access_token")
+	--data "grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&scope=$SCOPE" |
+	jq -r ".access_token")
 
 # use pip-installed Ansible (apt version is too old)
 pip install ansible
