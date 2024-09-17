@@ -30,6 +30,17 @@ image_sync_image: "ghcr.io/egi-federation/fedcloud-image-sync:sha-$SHORT_SHA"
 site_config_dir: "$(readlink -f ../sites)"
 EOF
 
+# get access token for motley-cue
+CLIENT_ID=$(yq -r '.fedcloudops.client_id' secrets.yaml)
+CLIENT_SECRET=$(yq -r '.fedcloudops.client_secret' secrets.yaml)
+SCOPE="openid%20email%20profile%20voperson_id%20eduperson_entitlement"
+ACCESS_TOKEN=$(curl --request POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
+	--data "grant_type=client_credentials&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&scope=$SCOPE" |
+	jq -r ".access_token")
+
+# use pip-installed Ansible (apt version is too old)
+pip install ansible
+
 # install Ansible dependencies
 ansible-galaxy role install -r galaxy-requirements.yaml
 
@@ -37,6 +48,7 @@ ansible-galaxy role install -r galaxy-requirements.yaml
 if ansible-playbook -i inventory.yaml \
 	--extra-vars @secrets.yaml \
 	--extra-vars @extra-vars.yaml \
+	--extra-vars ACCESS_TOKEN="$ACCESS_TOKEN" \
 	--tags "$TAGS" \
 	playbook.yaml >ansible.log 2>&1; then
 	status_summary="success"
