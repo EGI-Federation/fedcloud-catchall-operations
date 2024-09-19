@@ -65,7 +65,7 @@ def get_fallback_mapping(site_config):
     mapping = {}
     if not site_config:
         return mapping
-    with open(self.site_config, "r") as f:
+    with open(site_config, "r") as f:
         cloud_info_config = yaml.load(f.read(), Loader=yaml.SafeLoader)
         shares = cloud_info_config.get("compute", {}).get("shares", {})
         for share in shares.values():
