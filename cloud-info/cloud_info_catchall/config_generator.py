@@ -75,6 +75,7 @@ def main():
         "site_name": os.environ["SITE_NAME"],
         "token_url": os.environ.get("TOKEN_URL", ""),
         "vo_dir": os.environ.get("VO_SECRETS_PATH", ""),
+        "site_config": os.environ.get("CLOUD_INFO_CONFIG", ""),
     }
     secrets = read_secrets(secrets_file)
     shares_config = generate_shares_config(config, secrets)

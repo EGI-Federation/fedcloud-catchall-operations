@@ -14,9 +14,28 @@ class ShareDiscovery:
         self.identity_provider = config["identity_provider"]
         self.protocol = config["protocol"]
         self.secret = secret
+        self.site_config = config.get("site_config", None)
+        self._site_mapping = {}
+
+    def get_site_mapping(self):
+        if self._site_mapping:
+            return self._site_mapping
+        if not self.site_config:
+            return {}
+        with open(self.site_config, "r") as f:
+            cloud_info_config = yaml.load(f.read(), Loader=yaml.SafeLoader)
+            shares = cloud_info_config["compute"]["shares"]
+            for share in shares.values():
+                project = share.get("auth", {}).get("project_id", None)
+                if project:
+                    self._site_mapping[project] = share.get("name", None)
+        return self._site_mapping
 
     def build_share(self, project, access_token):
         return {"auth": {"project_id": project["id"]}}
+
+    def site_config_vo(self, project):
+        return self.get_site_mapping().get(project["id"], None)
 
     def get_project_vos(self, project):
         if not project.get("enabled", False):
@@ -29,9 +48,14 @@ class ShareDiscovery:
             vo = project.get("VO", None)
             if not vo:
                 logging.warning(
-                    f"Discarding project {project['name']} as it does not have VO property"
+                    f"Project {project['name']} as it does not have VO property"
                 )
-                return []
+                vo = self.site_config_vo(project)
+                if not vo:
+                    logging.warning(
+                        f"Discarding project {project['name']} as it's not known"
+                    )
+                    return []
         return vo.split(",")
 
     def get_token_shares(self):
