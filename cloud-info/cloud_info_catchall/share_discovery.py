@@ -49,7 +49,7 @@ class ShareDiscovery:
             vo = project.get("VO", None)
             if not vo:
                 logging.warning(
-                    f"Project {project['name']} as it does not have VO property"
+                    f"Project {project['name']} does not have VO property"
                 )
                 vo = self.site_config_vo(project)
                 if not vo:
