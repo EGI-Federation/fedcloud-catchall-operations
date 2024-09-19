@@ -6,6 +6,7 @@ import os
 
 import fedcloudclient.endpoint as fedcli
 from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
+import yaml
 
 
 class ShareDiscovery:
