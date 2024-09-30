@@ -1,0 +1,4 @@
+---
+gocdb: CESNET-MCCG2
+endpoint: https://identity.brno.openstack.cloud.e-infra.cz/v3
+vos: []
