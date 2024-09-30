@@ -14,6 +14,7 @@ class ShareDiscovery:
         self.identity_provider = config["identity_provider"]
         self.protocol = config["protocol"]
         self.secret = secret
+        self.vo_fallback = config.get("vo_fallback", {})
 
     def build_share(self, project, access_token):
         return {"auth": {"project_id": project["id"]}}
@@ -28,10 +29,13 @@ class ShareDiscovery:
         if not vo:
             vo = project.get("VO", None)
             if not vo:
-                logging.warning(
-                    f"Discarding project {project['name']} as it does not have VO property"
-                )
-                return []
+                logging.warning(f"Project {project['name']} does not have VO property")
+                vo = self.vo_fallback.get(project.get("id", None), None)
+                if not vo:
+                    logging.warning(
+                        f"Discarding project {project['name']} as it's not known"
+                    )
+                    return []
         return vo.split(",")
 
     def get_token_shares(self):

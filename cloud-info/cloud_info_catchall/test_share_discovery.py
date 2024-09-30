@@ -19,6 +19,7 @@ class ShareDiscoveryTest(unittest.TestCase):
         "protocol": "oidc",
         "token_url": "https://aai.egi.eu",
         "vo_dir": "vo",
+        "vo_fallback": {"123": "cloud.egi.eu"},
     }
     SECRET = {"foo": "bar"}
 
@@ -56,6 +57,14 @@ class ShareDiscoveryTest(unittest.TestCase):
             "name": "foo.eu",
         }
         self.assertEqual(self.discoverer.get_project_vos(p), [])
+
+    def test_get_project_no_vo_property_fallback(self):
+        p = {
+            "enabled": True,
+            "name": "baz",
+            "id": "123",
+        }
+        self.assertEqual(self.discoverer.get_project_vos(p), ["cloud.egi.eu"])
 
     def test_get_project_multiple_vo_property(self):
         p = {"enabled": True, "name": "foo.eu", "egi.VO": "foo,bar"}

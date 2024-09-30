@@ -13,12 +13,15 @@ users:
 
 packages:
   - git
-  - ansible
   - jq
   - python3-openstackclient
   - python3-pip
-  - python3.10-venv
+  - python3-venv
   - retry
+
+snap:
+  commands:
+    0: snap install yq
 
 write_files:
   - content: |
