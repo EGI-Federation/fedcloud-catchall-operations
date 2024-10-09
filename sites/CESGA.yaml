@@ -29,9 +29,6 @@ vos:
   - name: ops
     auth:
       project_id: 707711a8c2154caab35fa9ccdf38434a
-  - name: vo.access.egi.eu
-    auth:
-      project_id: 3a8e9d966e644405bf19b536adf7743d
   - name: vo.clarin.eu
     auth:
       project_id: f5575c54231747109d6b2466334085bb
