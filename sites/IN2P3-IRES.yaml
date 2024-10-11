@@ -5,6 +5,9 @@ vos:
   - name: belle
     auth:
       project_id: e5258170eee8429da316e6a710f6d185
+  - name: benchmark.terradue.com
+    auth:
+      project_id: d579ada647314c91989daa63399fe2fa
   - name: bioisi
     auth:
       project_id: bf15d4331f3d4c3997e17c0740930e8c
@@ -20,21 +23,36 @@ vos:
   - name: fedcloud.egi.eu
     auth:
       project_id: a5eb30bba2c2497b90645fb199e34b39
+  - name: lagoproject.net
+    auth:
+      project_id: bae9cee37c434aaa8548994f070521a3
   - name: med.semmelweis-univ.hu
     auth:
       project_id: 8bea7dbd202f4cbcafb7e00334f320f2
   - name: ops
     auth:
       project_id: 929ff81c495b4cafb02fa1b8eef032c8
+  - name: saps-vo.i3m.upv.es
+    auth:
+      project_id: 96709738ce5a4439a0e14a77db9d3882
   - name: vo.access.egi.eu
     auth:
       project_id: 7a91022b9ae74ed9ac1a574972a79499
   - name: vo.elixir-europe.org
     auth:
       project_id: 2dfd063612f14a84989496e1a8ac080e
-  - name: vo.emphasisproject.eu
+  - name: vo.eries.eu
     auth:
-      project_id: 3232754379c3469c9e8dbe8f403a8835
+      project_id: 2dc049b22ab64e72a93f45ae7f4f8a06
+  - name: vo.eosc-siesta.eu
+    auth:
+      project_id: 4640e8afd9114fcb8dfc98afe517789f
+  - name: vo.instruct.eu
+    auth:
+      project_id: e459576d88a141e9b5ffd52b2f4abcf4
+  - name: vo.lethe-project.eu
+    auth:
+      project_id: f064d2b5f42a4704958f3bfbff7404bd
   - name: vo.europlanet-vespa.eu
     auth:
       project_id: c8005e7c85ca4929bde70882ae1ec137
@@ -44,12 +62,6 @@ vos:
   - name: vo.operas-eu.org
     auth:
       project_id: bc4fed7e87514dd884924c77cad714bc
-  - name: vo.lethe-project.eu
-    auth:
-      project_id: f064d2b5f42a4704958f3bfbff7404bd
-  - name: saps-vo.i3m.upv.es
-    auth:
-      project_id: 96709738ce5a4439a0e14a77db9d3882
   - name: vo.pithia.eu
     auth:
       project_id: 7408db293bcd473a98e44924263f1190
