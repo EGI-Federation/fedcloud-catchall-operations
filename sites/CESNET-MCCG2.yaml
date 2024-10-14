@@ -1,4 +1,11 @@
 ---
 gocdb: CESNET-MCCG2
 endpoint: https://identity.brno.openstack.cloud.e-infra.cz/v3
-vos: []
+images:
+  sync: true
+  formats:
+    - raw
+vos:
+  - name: egi-ops
+    auth:
+      project_id: 43fd41d7035d46528d5e9b7fb6cbc68a
