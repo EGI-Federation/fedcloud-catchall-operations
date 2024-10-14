@@ -6,6 +6,6 @@ images:
   formats:
     - raw
 vos:
-  - name: egi-ops
+  - name: ops
     auth:
       project_id: 43fd41d7035d46528d5e9b7fb6cbc68a
