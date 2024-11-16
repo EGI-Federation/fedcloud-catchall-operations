@@ -1,6 +1,8 @@
 ---
 gocdb: BIFI
 endpoint: https://colossus.cesar.unizar.es:5000/v3
+images:
+  sync: true
 vos:
   - name: ops
     auth:
