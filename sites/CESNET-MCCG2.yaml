@@ -12,3 +12,6 @@ vos:
   - name: dteam
     auth:
       project_id: 2dcdbe7cc967467d81ea45fe143968e7
+  - name: envri-vre
+    auth:
+      project_id: 1561ad2c9e974ae9840d413b4bdea699
