@@ -9,9 +9,6 @@ vos:
   - name: ops
     auth:
       project_id: 396c67a5f5bf4188b601927dbe51f386
-  - name: dteam
-    auth:
-      project_id: 2dcdbe7cc967467d81ea45fe143968e7
   - name: envri-vre
     auth:
       project_id: 1561ad2c9e974ae9840d413b4bdea699
