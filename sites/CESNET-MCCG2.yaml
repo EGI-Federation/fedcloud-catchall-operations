@@ -12,3 +12,6 @@ vos:
   - name: envri-vre
     auth:
       project_id: 1561ad2c9e974ae9840d413b4bdea699
+  - name: biomed
+    auth:
+      project_id: 42d7c31f28874fa0b85d23c969134a1d
