@@ -65,7 +65,7 @@ done
 # check that the VO mappings are up to date according to ops portal
 for vo in $(yq -r '.vos | keys[]' <vo-mappings.yaml | cut -f2 -d"/" | sed "s/^VO=//"); do
 	if ! grep -q "^$vo\$" "$VO_LIST"; then
-		line="$(grep -n $vo vo-mappings.yaml | head -1 | cut -f1 -d:)"
+		line="$(grep -n "$vo" vo-mappings.yaml | head -1 | cut -f1 -d:)"
 		echo "::error file=vo-mappings.yaml line=$line title=VO not in ops portal::VO $vo not found in ops portal"
 		exit_value=1
 	fi
