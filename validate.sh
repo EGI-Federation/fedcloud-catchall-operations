@@ -11,7 +11,7 @@ curl --silent "http://cclavoisier01.in2p3.fr:8080/lavoisier/VoList?accept=json" 
 
 # Get fedcloudclient sites
 FEDCLOUD_CLI_SITES=$(mktemp)
-curl "https://raw.githubusercontent.com/tdviet/fedcloudclient/master/config/sites.yaml" \
+curl --silent "https://raw.githubusercontent.com/tdviet/fedcloudclient/master/config/sites.yaml" \
 	>"$FEDCLOUD_CLI_SITES"
 
 # Temp file for nova endpoint
