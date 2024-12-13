@@ -14,9 +14,6 @@ vos:
   - name: dteam
     auth:
       project_id: 2490c27604904357b9e50c5e77aaeedf
-  - name: fedcloud.egi.eu
-    auth:
-      project_id: a5eb30bba2c2497b90645fb199e34b39
   - name: lagoproject.net
     auth:
       project_id: bae9cee37c434aaa8548994f070521a3
