@@ -11,9 +11,6 @@ vos:
   - name: enmr.eu
     auth:
       project_id: 261e58163d204beb8d6ee82cca385771
-  - name: fedcloud.egi.eu
-    auth:
-      project_id: c2ffb5336de9467c8a588038e2c06750
   - name: fusion
     auth:
       project_id: 0606cbf2743c4bbc8680227247f4d616

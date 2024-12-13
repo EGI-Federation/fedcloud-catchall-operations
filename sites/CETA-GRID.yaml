@@ -11,9 +11,6 @@ vos:
   - name: eosc-synergy.eu
     auth:
       project_id: 8e0f99db8b7845d38512f0ddce9049e3
-  - name: fedcloud.egi.eu
-    auth:
-      project_id: 8ad2ac56f33540cdbfbd45ad5095d924
   - name: lagoproject.net
     auth:
       project_id: 3afddede673548a99dc5c2e819baf5a8

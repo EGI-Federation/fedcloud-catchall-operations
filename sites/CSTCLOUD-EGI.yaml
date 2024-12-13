@@ -17,6 +17,3 @@ vos:
   - name: eiscat.se
     auth:
       project_id: be43e5f92b3e49c387a5b00549938770
-  - name: fedcloud.egi.eu
-    auth:
-      project_id: b33f036b6a584c4d844df5a505f53d16

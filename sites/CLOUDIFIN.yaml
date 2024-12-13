@@ -5,9 +5,6 @@ vos:
   - name: dteam
     auth:
       project_id: f726c16f3e2346bf891021c89b4dc58d
-  - name: fedcloud.egi.eu
-    auth:
-      project_id: 245cdfdce0c84227b9b60d247618f635
   - name: ops
     auth:
       project_id: 21440821c8904e5b8ce5ec101a1ca879
