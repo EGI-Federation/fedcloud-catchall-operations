@@ -8,3 +8,6 @@ vos:
   - name: ops
     auth:
       project_id: 21440821c8904e5b8ce5ec101a1ca879
+  - name: vo.access.egi.eu
+    auth:
+      project_id: b77f9852f917497994edd5b7507bdce9
