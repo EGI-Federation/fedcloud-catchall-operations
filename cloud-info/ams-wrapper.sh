@@ -9,31 +9,6 @@ GOCDB_ID=$(python -c "from __future__ import print_function; \
                                                 '$GOCDB_SERVICE_TYPE',
                                                 timeout=60)['gocdb_id'], end='')")
 
-if test "$AMS_TOKEN_FILE" != ""; then
-	AMS_TOKEN=$(cat "$AMS_TOKEN_FILE")
-elif test "$HOSTCERT" != "" -a "$HOSTKEY" != ""; then
-	AMS_TOKEN=$(python -c "from argo_ams_library import ArgoMessagingService; \
-			   ams = ArgoMessagingService(endpoint='$AMS_HOST', \
-                                                      project='$AMS_PROJECT', \
-                                                      cert='$HOSTCERT', \
-                                                      key='$HOSTKEY'); \
-                           print(ams.token)")
-fi
-
-if test "$SITE_NAME" = ""; then
-	SITE_NAME="$(yq -r .site.name "$CLOUD_INFO_CONFIG" | tr "." "-")"
-fi
-
-SITE_TOPIC=$(echo "$SITE_NAME" | tr "." "-")
-AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
-
-# exit if TOPIC is not available.
-curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_TOKEN" >/dev/null 2>&1 ||
-	(
-		echo "Topic $AMS_TOPIC is not avaiable, aborting!"
-		false
-	)
-
 # Attempt to generate the site configuration
 AUTO_CONFIG_PATH="$(mktemp -d)"
 
@@ -73,13 +48,10 @@ else
 		--ignore-share-errors \
 		--format glue21 >cloud-info.out
 	# Produce the json output also
-	RCLONE_CONFIG_S3="$(yq -r '.s3' <"$CHECKIN_SECRETS_FILE")"
-	if test "$RCLONE_CONFIG_S3" != "null"; then
-		cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
-			--middleware "$CLOUD_INFO_MIDDLEWARE" \
-			--ignore-share-errors \
-			--format glue21json >site.json
-	fi
+	cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+		--middleware "$CLOUD_INFO_MIDDLEWARE" \
+		--ignore-share-errors \
+		--format glue21json >site.json
 fi
 
 # Fail if there are no shares
@@ -89,15 +61,37 @@ grep -q GLUE2ShareID cloud-info.out ||
 		false
 	)
 
-# Publishing on our own as message is too large for some providers
-ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
+# Publish to AMS
+if test "$AMS_TOKEN_FILE" != ""; then
+	AMS_TOKEN=$(cat "$AMS_TOKEN_FILE")
+elif test "$HOSTCERT" != "" -a "$HOSTKEY" != ""; then
+	AMS_TOKEN=$(python -c "from argo_ams_library import ArgoMessagingService; \
+			   ams = ArgoMessagingService(endpoint='$AMS_HOST', \
+						      project='$AMS_PROJECT', \
+						      cert='$HOSTCERT', \
+						      key='$HOSTKEY'); \
+			   print(ams.token)")
+fi
 
-printf '{"messages":[{"attributes":{},"data":"' >ams-payload
-grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | grep -v ": $" | gzip | base64 -w 0 >>ams-payload
-printf '"}]}' >>ams-payload
+if test "$SITE_NAME" = ""; then
+	SITE_NAME="$(yq -r .site.name "$CLOUD_INFO_CONFIG" | tr "." "-")"
+fi
+SITE_TOPIC=$(echo "$SITE_NAME" | tr "." "-")
+AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
+curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_TOKEN" >/dev/null 2>&1 &&
+	(
+		# Publishing on AMS on our own to ensure message fits
 
-curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
+		ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
 
+		printf '{"messages":[{"attributes":{},"data":"' >ams-payload
+		grep -v "UNKNOWN" cloud-info.out | grep -v "^#" | grep -v ": $" | gzip | base64 -w 0 >>ams-payload
+		printf '"}]}' >>ams-payload
+
+		curl -X POST "$ARGO_URL" -H "content-type: application/json" -d @ams-payload
+	)
+
+# Publish to object
 if [ -f site.json ]; then
 	# Put this info into S3, configure rclone config with
 	# a provider named "s3" using env variables
