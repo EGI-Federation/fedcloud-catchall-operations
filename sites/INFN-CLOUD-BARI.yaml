@@ -21,3 +21,6 @@ vos:
   - name: vo.binare-oy.eu
     auth:
       project_id: f08cb68480de4ac38dbe3cf63e42bf38
+  - name: vo.seadatanet.org
+    auth:
+      project_id: d0b2e9a73cd042c49d5d1c3a3cfe55d0

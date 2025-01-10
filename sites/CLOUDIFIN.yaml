@@ -5,9 +5,9 @@ vos:
   - name: dteam
     auth:
       project_id: f726c16f3e2346bf891021c89b4dc58d
+  - name: enmr.eu
+    auth:
+      project_id: 8a1b196acaa84927b8a33676f7f3be06
   - name: ops
     auth:
       project_id: 21440821c8904e5b8ce5ec101a1ca879
-  - name: vo.access.egi.eu
-    auth:
-      project_id: b77f9852f917497994edd5b7507bdce9
