@@ -5,6 +5,9 @@ vos:
   - name: biomed
     auth:
       project_id: eca73ad6a84d4c0088063505c36349ab
+  - name: chipster.csc.fi
+    auth:
+      project_id: 2ce965f162c9434cb21ac25f3b05bd9f
   - name: covid19.eosc-synergy.eu
     auth:
       project_id: 192e87f713474117a2a22704ac4da1a2

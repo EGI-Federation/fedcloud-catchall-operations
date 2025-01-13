@@ -26,3 +26,9 @@ vos:
   - name: vo.aneris.eu
     auth:
       project_id: ec4d71d1142b46a39f7cf704d79219c5
+  - name: vo.obsea.es
+    auth:
+      project_id: 277dd78e3b3b4c8caf93ad42fddaec38
+  - name: benchmark.terradue.com
+    auth:
+      project_id: 5fe3458a96084df893200e92bdb33213
