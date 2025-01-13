@@ -1,6 +1,11 @@
 ---
 gocdb: fedcloud.srce.hr
 endpoint: https://cloud.cro-ngi.hr:5000/v3/
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: ops
     auth:
