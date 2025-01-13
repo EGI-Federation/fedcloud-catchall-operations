@@ -92,28 +92,24 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 	)
 
 # Publish to object
-if test  ! -s cloud-info.json; then
-	config_ready=true
-	for v in SWIFT_SITE_NAME \
-		 SWIFT_VO_NAME \
-		 SWIFT_BUCKET_NAME ; do
-		test -v $v || config_ready=false
-	done
-	if $config_ready ; then
-		export OIDC_ACCESS_TOKEN=$(yq .token < "$ACCESS_TOKEN_FILE")
-		export OIDC_ACCESS_TOKEN=$(true)
-		export EGI_SITE_NAME="$SWIFT_SITE_NAME"
+if test  -s cloud-info.json; then
+	if test "$SWIFT_SITE_NAME" != ""; then
+		OIDC_ACCESS_TOKEN=$(yq -r '.checkin.access_token' < "$ACCESS_TOKEN_FILE")
+		export OIDC_ACCESS_TOKEN
 		export EGI_VO="$SWIFT_VO_NAME"
+		SWIFT_URL=$(fedcloud openstack \
+				--site "$SWIFT_SITE_NAME" \
+				catalog show swift -f json | \
+				jq -r '(.endpoints[] | select(.interface=="public")).url')
 		export RCLONE_CONFIG_REMOTE_TYPE="swift"
 		export RCLONE_CONFIG_REMOTE_ENV_AUTH="false"
-		export RCLONE_CONFIG_REMOTE_STORAGE_URL=$(fedcloud openstack \
-							  catalog show swift -f json | \
-							  jq -r '(.endpoints[] | select(.interface=="public")).url')
-		eval "$(fedcloud site env)"
+		export RCLONE_CONFIG_REMOTE_STORAGE_URL="$SWIFT_URL"
+		eval "$(fedcloud site env --site "$SWIFT_SITE_NAME")"
 		export RCLONE_CONFIG_REMOTE_AUTH_URL="$OS_AUTH_URL"
-		export RCLONE_CONFIG_REMOTE_AUTH_TOKEN=$(fedcloud openstack token issue -c id -f value)
-		rclone mkdir "remote:$RCLONE_BUCKET_NAME"
-		rclone copy cloud-info.json "remote:$RCLONE_BUCKET_NAME/$SITE_NAME"
+		OS_AUTH_TOKEN=$(fedcloud openstack --site "$SWIFT_SITE_NAME" token issue -c id -f value)
+		export RCLONE_CONFIG_REMOTE_AUTH_TOKEN="$OS_AUTH_TOKEN"
+		rclone mkdir "remote:$SWIFT_CONTAINER_NAME"
+		rclone copy cloud-info.json "remote:$SWIFT_CONTAINER_NAME/$SITE_NAME"
 	else
 		echo "Not uploading to swift"
 	fi
