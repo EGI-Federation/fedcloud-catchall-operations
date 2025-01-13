@@ -51,7 +51,7 @@ else
 	cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
 		--middleware "$CLOUD_INFO_MIDDLEWARE" \
 		--ignore-share-errors \
-		--format glue21json >site.json
+		--format glue21json >cloud-info.json
 fi
 
 # Fail if there are no shares
@@ -92,23 +92,31 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 	)
 
 # Publish to object
-if [ -f site.json ]; then
-	# Put this info into S3, configure rclone config with
-	# a provider named "s3" using env variables
-	export RCLONE_CONFIG_S3_TYPE=s3
-	RCLONE_CONFIG_S3_ACCESS_KEY_ID="$(yq -r '.s3.access_key_id' <"$CHECKIN_SECRETS_FILE")"
-	export RCLONE_CONFIG_S3_ACCESS_KEY_ID
-	RCLONE_CONFIG_S3_SECRET_ACCESS_KEY="$(yq -r '.s3.secret_access_key' <"$CHECKIN_SECRETS_FILE")"
-	export RCLONE_CONFIG_S3_SECRET_ACCESS_KEY
-	RCLONE_CONFIG_S3_ENDPOINT="$(yq -r '.s3.endpoint' <"$CHECKIN_SECRETS_FILE")"
-	export RCLONE_CONFIG_S3_ENDPOINT
-	S3_BUCKET_NAME="$(yq -r '.s3.bucket' <"$CHECKIN_SECRETS_FILE")"
-	export S3_BUCKET_NAME
-	RCLONE_CONFIG_S3_PROVIDER="$(yq -r '.s3.provider' <"$CHECKIN_SECRETS_FILE")"
-	export RCLONE_CONFIG_S3_PROVIDER
-	export RCLONE_CONFIG_S3_ACL=private
-	export RCLONE_CONFIG_S3_NO_CHECK_BUCKET=true
-	rclone copy site.json "s3:$S3_BUCKET_NAME/$SITE_NAME"
+if test  ! -s cloud-info.json; then
+	config_ready=true
+	for v in SWIFT_SITE_NAME \
+		 SWIFT_VO_NAME \
+		 SWIFT_BUCKET_NAME ; do
+		test -v $v || config_ready=false
+	done
+	if $config_ready ; then
+		export OIDC_ACCESS_TOKEN=$(yq .token < "$ACCESS_TOKEN_FILE")
+		export OIDC_ACCESS_TOKEN=$(true)
+		export EGI_SITE_NAME="$SWIFT_SITE_NAME"
+		export EGI_VO="$SWIFT_VO_NAME"
+		export RCLONE_CONFIG_REMOTE_TYPE="swift"
+		export RCLONE_CONFIG_REMOTE_ENV_AUTH="false"
+		export RCLONE_CONFIG_REMOTE_STORAGE_URL=$(fedcloud openstack \
+							  catalog show swift -f json | \
+							  jq -r '(.endpoints[] | select(.interface=="public")).url')
+		eval "$(fedcloud site env)"
+		export RCLONE_CONFIG_REMOTE_AUTH_URL="$OS_AUTH_URL"
+		export RCLONE_CONFIG_REMOTE_AUTH_TOKEN=$(fedcloud openstack token issue -c id -f value)
+		rclone mkdir "remote:$RCLONE_BUCKET_NAME"
+		rclone copy cloud-info.json "remote:$RCLONE_BUCKET_NAME/$SITE_NAME"
+	else
+		echo "Not uploading to swift"
+	fi
 fi
 
 rm -rf "$VO_CONFIG_PATH"
