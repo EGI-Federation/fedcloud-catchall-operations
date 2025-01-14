@@ -82,8 +82,7 @@ def fetch_site_info_cloud_info():
     logging.debug("Fetching site info from cloud-info")
     sites = []
     # 1 - Get all sites listing
-    r = httpx.get(CONF.sync.cloud_info_url,
-                  headers={"Accept": "application/json")
+    r = httpx.get(CONF.sync.cloud_info_url, headers={"Accept": "application/json"})
     r.raise_for_status()
     # 2 - Go one by one getting the shares
     for file in r.json():
