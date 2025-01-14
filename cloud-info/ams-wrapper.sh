@@ -80,8 +80,7 @@ SITE_TOPIC=$(echo "$SITE_NAME" | tr "." "-")
 AMS_TOPIC="SITE_${SITE_TOPIC}_ENDPOINT_${GOCDB_ID}"
 curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_TOKEN" >/dev/null 2>&1 &&
 	(
-		# Publishing on AMS on our own to ensure message fits
-
+		# Publishing to AMS on our own to ensure message fits
 		ARGO_URL="https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC:publish?key=$AMS_TOKEN"
 
 		printf '{"messages":[{"attributes":{},"data":"' >ams-payload
@@ -110,8 +109,6 @@ if test -s cloud-info.json; then
 		export RCLONE_CONFIG_REMOTE_AUTH_TOKEN="$OS_AUTH_TOKEN"
 		rclone mkdir "remote:$SWIFT_CONTAINER_NAME"
 		rclone copy cloud-info.json "remote:$SWIFT_CONTAINER_NAME/$SITE_NAME"
-	else
-		echo "Not uploading to swift"
 	fi
 fi
 
