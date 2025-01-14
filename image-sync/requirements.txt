@@ -1,4 +1,4 @@
 git+https://github.com/EGI-Federation/atrope@catchall
-requests
+httpx
 oslo.config
 PyYAML

@@ -6,7 +6,7 @@ import subprocess
 import sys
 import tempfile
 
-import requests
+import httpx
 import yaml
 from oslo_config import cfg
 
@@ -15,6 +15,10 @@ CONF = cfg.CONF
 CONF.register_opts(
     [
         cfg.StrOpt("site_config_dir", default="."),
+        cfg.StrOpt(
+            "cloud_info_url",
+            default="https://stratus-stor.ncg.ingrid.pt:8080/swift/v1/AUTH_bd5a81e1670b48f18af33b05512a9d77/cloud-info/",
+        ),
         cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("appdb_token"),
@@ -38,7 +42,15 @@ CONF.register_opts(
 )
 
 
-def fetch_site_info():
+def get_share_vo(share, site_info):
+    for policy in site_info["MappingPolicy"]:
+        for assoc, share_id in policy["Associations"].items():
+            if assoc == "Share" and share_id == share["ID"]:
+                return policy["Rule"][0].removeprefix("VO:")
+    return ""
+
+
+def fetch_site_info_appdb():
     logging.debug("Fetching site info from AppDB")
     query = """
         {
@@ -58,12 +70,52 @@ def fetch_site_info():
         }
     """
     params = {"query": query}
-    r = requests.get(
+    r = httpx.get(
         CONF.sync.graphql_url, params=params, headers={"accept": "application/json"}
     )
     r.raise_for_status()
     data = r.json()["data"]["siteCloudComputingEndpoints"]["items"]
     return data
+
+
+def fetch_site_info_cloud_info():
+    logging.debug("Fetching site info from cloud-info")
+    sites = []
+    # 1 - Get all sites listing
+    r = httpx.get(CONF.sync.cloud_info_url,
+                  headers={"Accept": "application/json")
+    r.raise_for_status()
+    # 2 - Go one by one getting the shares
+    for file in r.json():
+        try:
+            r = httpx.get(os.path.join(CONF.sync.cloud_info_url, file["name"]))
+            r.raise_for_status()
+        except httpx.HTTPError as e:
+            logging.warning(f"Exception while trying to get {file['name']}: {e}")
+            continue
+        full_site = r.json()
+        for assoc in full_site["CloudComputingService"][0]["Associations"]:
+            # NOTE: this should change in the cloud-info-provider
+            if "AdminDomain" in assoc:
+                site = assoc["AdminDomain"][0]
+        shares = []
+        # NOTE: This should change in the cloud info provider
+        for share in full_site["Share"][0]:
+            shares.append(
+                {"projectID": share["ProjectID"], "VO": get_share_vo(share, full_site)}
+            )
+        sites.append(
+            {
+                "site": {"name": site},
+                "endpointURL": full_site["CloudComputingEndpoint"][0]["URL"],
+                "shares": shares,
+            }
+        )
+    return sites
+
+
+def fetch_site_infoinfo():
+    return fetch_site_info_cloud_info()
 
 
 def dump_atrope_config(site, share, hepix_file):
