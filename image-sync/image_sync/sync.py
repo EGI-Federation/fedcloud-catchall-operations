@@ -17,7 +17,8 @@ CONF.register_opts(
         cfg.StrOpt("site_config_dir", default="."),
         cfg.StrOpt(
             "cloud_info_url",
-            default="https://stratus-stor.ncg.ingrid.pt:8080/swift/v1/AUTH_bd5a81e1670b48f18af33b05512a9d77/cloud-info/",
+            default=("https://stratus-stor.ncg.ingrid.pt:8080/swift/"
+                     "v1/AUTH_bd5a81e1670b48f18af33b05512a9d77/cloud-info/"),
         ),
         cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
         cfg.ListOpt("formats", default=[]),
@@ -113,7 +114,7 @@ def fetch_site_info_cloud_info():
     return sites
 
 
-def fetch_site_infoinfo():
+def fetch_site_info():
     return fetch_site_info_cloud_info()
 
 
