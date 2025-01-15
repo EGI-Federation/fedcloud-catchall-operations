@@ -96,15 +96,15 @@ def fetch_site_info_cloud_info():
             logging.warning(f"Exception while trying to get {file['name']}: {e}")
             continue
         full_site = r.json()
-        for assoc in full_site["CloudComputingService"][0]["Associations"]:
-            # NOTE: this should change in the cloud-info-provider
-            # See https://github.com/EGI-Federation/cloud-info-provider/pull/275
-            if "AdminDomain" in assoc:
-                site = assoc["AdminDomain"][0]
+        admin_domain = full_site["CloudComputingService"][0]["Associations"].get(
+            "AdminDomain", None
+        )
+        if not admin_domain:
+            continue
+        # Some associations are a list, other directly strings, cloud-info should harmonise
+        site = admin_domain[0]
         shares = []
-        # NOTE: This should change in the cloud info provider
-        # See https://github.com/EGI-Federation/cloud-info-provider/pull/275
-        for share in full_site["Share"][0]:
+        for share in full_site["Share"]:
             shares.append(
                 {"projectID": share["ProjectID"], "VO": get_share_vo(share, full_site)}
             )
