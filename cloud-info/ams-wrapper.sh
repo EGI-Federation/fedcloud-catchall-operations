@@ -22,7 +22,8 @@ if token-generator; then
 	if SECRETS_FILE="$ACCESS_TOKEN_FILE" config-generator >"$AUTO_CONFIG_PATH/site.yaml"; then
 		# this worked, let's update the env
 		export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
-		export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
+		# Do not use the generated config file
+		# export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
 	fi
 fi
 
