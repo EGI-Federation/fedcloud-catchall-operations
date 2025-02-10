@@ -83,6 +83,7 @@ vos:
   vo.pithia.eu: "urn:mace:egi.eu:group:vo.pithia.eu:role=vm_operator#aai.egi.eu"
   vo.plocan.eu: "urn:mace:egi.eu:group:vo.plocan.eu:role=vm_operator#aai.egi.eu"
   vo.projectescape.eu: "urn:mace:egi.eu:group:vo.projectescape.eu:role=vm_operator#aai.egi.eu"
+  vo.protocoast.egi.eu: "urn:mace:egi.eu:group:vo.protocoast.egi.eu:CP-cloud_operator:role=member#aai.egi.eu"
   vo.stars4all.eu: "urn:mace:egi.eu:group:vo.stars4all.eu:role=vm_operator#aai.egi.eu"
   vo.thepund.it: "urn:mace:egi.eu:group:vo.thepund.it:role=vm_operator#aai.egi.eu"
   vo.usegalaxy.eu: "urn:mace:egi.eu:group:vo.usegalaxy.eu:vm_operator:role=member#aai.egi.eu"
