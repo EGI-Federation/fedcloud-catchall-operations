@@ -15,3 +15,9 @@ vos:
   - name: biomed
     auth:
       project_id: 42d7c31f28874fa0b85d23c969134a1d
+  - name: demo.fedcloud.egi.eu
+    auth:
+      project_id: 9a830ea94e5944f3ab3da2e637e1bf74
+  - name: vo.eurobioimaging.eu
+    auth:
+      project_id: 29aba2b4d6c04bcfb268b161ad97a483
