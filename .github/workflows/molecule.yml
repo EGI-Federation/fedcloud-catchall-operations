@@ -24,3 +24,4 @@ jobs:
           molecule test
         env:
           PY_COLORS: 1
+          ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:${GITHUB_WORKSPACE}/deploy/roles
