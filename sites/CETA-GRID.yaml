@@ -32,3 +32,6 @@ vos:
   - name: mswss.ui.savba.sk
     auth:
       project_id: a9236c4cdd9f49ffa9663b4678132080
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 0bf521d5253c4b38a36afffef956b499
