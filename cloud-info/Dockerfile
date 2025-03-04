@@ -10,12 +10,17 @@ RUN curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGrid
     && apt-get install -y ca-policy-egi-core \
     && rm -rf /var/lib/apt/lists/*
 
+# Fedcloud client is pinning dependencies strictly so it does not play
+# very well with the rest of the available venv. Installing on its own
+RUN python -m venv /fedcloud && \
+    /fedcloud/bin/pip install --no-cache-dir fedcloudclient
+
 WORKDIR /cloud-info
+
+COPY requirements.txt .
 
 RUN python -m venv /cloud-info/venv
 ENV PATH="/cloud-info/venv/bin:$PATH"
-
-COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(python -m requests.certs)"
@@ -37,7 +42,6 @@ RUN apt-get update \
        jq rclone \
     && rm -rf /var/lib/apt/lists/*
 
-
 RUN mkdir /cloud-info \
     && groupadd -g 1999 python \
     && useradd -r -u 1999 -g python python \
@@ -47,6 +51,7 @@ WORKDIR /cloud-info
 
 # All the python code from the build image above
 COPY --chown=python:python --from=build /cloud-info/venv ./venv
+COPY --chown=python:python --from=build /fedcloud /fedcloud
 # Add the scripts that call the cloud-info-provider as needed for the site
 # these create the configuration for the site by discovering the available
 # projects for the credentials and will send the output to the AMS queue and

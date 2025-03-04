@@ -1,10 +1,12 @@
 ---
 gocdb: fedcloud.srce.hr
 endpoint: https://cloud.cro-ngi.hr:5000/v3/
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
-  - name: dteam
-    auth:
-      project_id: 8fbe7b83bfa7420ea75bbceb761ad079
   - name: ops
     auth:
-      project_id: 949f4fe468164de9a8afdf03e70a6fc0
+      project_id: 9096589743e441478fae998b23e0f80b

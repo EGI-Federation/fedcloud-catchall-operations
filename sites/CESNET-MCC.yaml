@@ -51,9 +51,6 @@ vos:
   - name: vo.clarin.eu
     auth:
       project_id: 5fc606127d2d4499b959ff79219c7144
-  - name: vo.elixir-europe.org
-    auth:
-      project_id: 90f5ae8fb33e45888be97f152bc2f67b
   - name: vo.emphasisproject.eu
     auth:
       project_id: b953842bf4204dc98054f6c3ae581cb5
@@ -87,9 +84,6 @@ vos:
   - name: vo.pangeo.eu
     auth:
       project_id: 05e0ff6e03774082aadacc75bfc1d783
-  - name: vo.environmental.egi.eu
-    auth:
-      project_id: 29e6fbf618984a0c98ffcdf0222ad815
   - name: vo.eoscfuture-sp.panosc.eu
     auth:
       project_id: c91eeff7bf7845bc901b319512f2ebdb

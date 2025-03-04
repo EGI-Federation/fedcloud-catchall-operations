@@ -29,9 +29,6 @@ vos:
   - name: vo.access.egi.eu
     auth:
       project_id: 7a91022b9ae74ed9ac1a574972a79499
-  - name: vo.elixir-europe.org
-    auth:
-      project_id: 2dfd063612f14a84989496e1a8ac080e
   - name: vo.eries.eu
     auth:
       project_id: 2dc049b22ab64e72a93f45ae7f4f8a06
