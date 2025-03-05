@@ -87,9 +87,6 @@ vos:
   - name: vo.eoscfuture-sp.panosc.eu
     auth:
       project_id: c91eeff7bf7845bc901b319512f2ebdb
-  - name: vo.inactive-sarscov2.eu
-    auth:
-      project_id: 0df0a85cfe8e47d38ce9142858845800
   - name: eval.c-scale.eu
     auth:
       project_id: d6283bc95d5c4296abb799596867818c

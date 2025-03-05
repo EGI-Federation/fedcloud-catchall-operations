@@ -59,7 +59,6 @@ vos:
   vo.eurosea.marine.ie: "urn:mace:egi.eu:group:vo.eurosea.marine.ie:role=member#aai.egi.eu"
   vo.geoss.eu: "urn:mace:egi.eu:group:vo.geoss.eu:role=vm_operator#aai.egi.eu"
   vo.imagine-ai.eu: "urn:mace:egi.eu: group:vo.imagine-ai.eu:role=vm_operator#aai.egi.eu"
-  vo.inactive-sarscov2.eu: "urn:mace:egi.eu:group:vo.inactive-sarscov2.eu:role=vm_operator#aai.egi.eu"
   vo.indigo-datacloud.eu: "urn:mace:egi.eu:group:vo.indigo-datacloud.eu:role=vm_operator#aai.egi.eu"
   vo.inteligg.com: "urn:mace:egi.eu:group:vo.inteligg.com:role=vm_operator#aai.egi.eu"
   vo.latitudo40.com.eu: "urn:mace:egi.eu:group:vo.latitudo40.com.eu:role=vm_operator#aai.egi.eu"
