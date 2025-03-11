@@ -2,9 +2,6 @@
 gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
 vos:
-  - name: cos4cloud-eosc.eu
-    auth:
-      project_id: c614975f1176494eaf6d6c389e1f3e2c
   - name: cryoem.instruct-eric.eu
     auth:
       project_id: c7db08b907ef4f0fae73bdd6587bc79e
@@ -54,9 +51,6 @@ vos:
   - name: vo.obsea.es
     auth:
       project_id: 9ce2e985504d44d5af102ad3b537ffad
-  - name: ispravision.vo.egi.eu
-    auth:
-      project_id: ed9a5bb0f5a5444ba2ad5cd97072a189
   - name: vo.digitbrain.eu
     auth:
       project_id: 3eff18b8a237407ea2ed56aa9cb5d07c
