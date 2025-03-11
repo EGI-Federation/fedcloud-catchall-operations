@@ -87,9 +87,6 @@ vos:
   - name: vo.eoscfuture-sp.panosc.eu
     auth:
       project_id: c91eeff7bf7845bc901b319512f2ebdb
-  - name: eval.c-scale.eu
-    auth:
-      project_id: d6283bc95d5c4296abb799596867818c
   - name: /vo.pangeo.eu/swift
     auth:
       project_id: 57102d3e06b7476088fe4924370ae170
