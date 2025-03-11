@@ -78,18 +78,12 @@ vos:
   - name: university.eosc-synergy.eu
     auth:
       project_id: a478488b79df46c4a086ecb7a321b038
-  - name: waterwatch.c-scale.eu
-    auth:
-      project_id: acf5d12568914e65a80150efb087cbb8
   - name: vo.pangeo.eu
     auth:
       project_id: 05e0ff6e03774082aadacc75bfc1d783
   - name: vo.eoscfuture-sp.panosc.eu
     auth:
       project_id: c91eeff7bf7845bc901b319512f2ebdb
-  - name: eval.c-scale.eu
-    auth:
-      project_id: d6283bc95d5c4296abb799596867818c
   - name: /vo.pangeo.eu/swift
     auth:
       project_id: 57102d3e06b7476088fe4924370ae170
