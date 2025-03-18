@@ -13,5 +13,5 @@
         site_config_dir: ../sites/
         swift:
           site: NCG-INGRID-PT
-          vo: vo.access.egi.eu
+          vo: cloud.egi.eu
           container: cloud-info

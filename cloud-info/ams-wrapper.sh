@@ -94,7 +94,7 @@ curl -f "https://$AMS_HOST/v1/projects/$AMS_PROJECT/topics/$AMS_TOPIC?key=$AMS_T
 # Publish to object
 if test -s cloud-info.json; then
 	if test "$SWIFT_SITE_NAME" != ""; then
-		OIDC_ACCESS_TOKEN=$(yq -r '.checkin.access_token' <"$ACCESS_TOKEN_FILE")
+		OIDC_ACCESS_TOKEN=$(yq -r '.cloud-sa.access_token' <"$ACCESS_TOKEN_FILE")
 		export OIDC_ACCESS_TOKEN
 		export EGI_VO="$SWIFT_VO_NAME"
 		SWIFT_URL=$(/fedcloud/bin/fedcloud openstack \
