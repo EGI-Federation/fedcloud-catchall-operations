@@ -63,3 +63,6 @@ vos:
   - name: vo.pangeo.eu-swift
     auth:
       project_id: dbec8bc99a474772a703a0513af98c91
+  - name: pr.test
+    auth:
+      project_id: e5bd39140c1e8b2e8f0a3e0e5f5d8e8f
