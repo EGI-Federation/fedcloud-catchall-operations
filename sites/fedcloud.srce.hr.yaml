@@ -10,3 +10,6 @@ vos:
   - name: ops
     auth:
       project_id: c99c8b38569546008104fbaa12fe3aa9
+  - name: vo.epos-eric.eu
+    auth:
+      project_id: 44a3a5f9c2f44940acc98a8aee3875ba
