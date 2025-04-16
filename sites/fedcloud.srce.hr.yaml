@@ -13,3 +13,6 @@ vos:
   - name: vo.epos-eric.eu
     auth:
       project_id: 44a3a5f9c2f44940acc98a8aee3875ba
+  - name: cloud.egi.eu
+    auth:
+      project_id: 258f0bdb2c4c4dba9eb3b96823e20b09
