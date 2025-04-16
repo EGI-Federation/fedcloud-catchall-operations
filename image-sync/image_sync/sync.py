@@ -15,13 +15,7 @@ CONF = cfg.CONF
 CONF.register_opts(
     [
         cfg.StrOpt("site_config_dir", default="."),
-        cfg.StrOpt(
-            "cloud_info_url",
-            default=(
-                "https://stratus-stor.ncg.ingrid.pt:8080/swift/"
-                "v1/AUTH_bd5a81e1670b48f18af33b05512a9d77/cloud-info/"
-            ),
-        ),
+        cfg.StrOpt("cloud_info_url", default="https://is.cloud.egi.eu"),
         cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("appdb_token"),
@@ -43,14 +37,6 @@ CONF.register_opts(
     ],
     group="checkin",
 )
-
-
-def get_share_vo(share, site_info):
-    for policy in site_info["MappingPolicy"]:
-        for assoc, share_id in policy["Associations"].items():
-            if assoc == "Share" and share_id == share["ID"]:
-                return policy["Rule"][0].removeprefix("VO:")
-    return ""
 
 
 def fetch_site_info_appdb():
@@ -85,33 +71,28 @@ def fetch_site_info_cloud_info():
     logging.debug("Fetching site info from cloud-info")
     sites = []
     # 1 - Get all sites listing
-    r = httpx.get(CONF.sync.cloud_info_url, headers={"Accept": "application/json"})
+    r = httpx.get(
+        os.path.join(CONF.sync.cloud_info_url, "sites/"),
+        headers={"Accept": "application/json"},
+    )
     r.raise_for_status()
     # 2 - Go one by one getting the shares
-    for file in r.json():
+    for site in r.json():
         try:
-            r = httpx.get(os.path.join(CONF.sync.cloud_info_url, file["name"]))
+            r = httpx.get(
+                os.path.join(CONF.sync.cloud_info_url, f"site/{site['id']}/projects")
+            )
             r.raise_for_status()
         except httpx.HTTPError as e:
-            logging.warning(f"Exception while trying to get {file['name']}: {e}")
-            continue
-        full_site = r.json()
-        admin_domain = full_site["CloudComputingService"][0]["Associations"].get(
-            "AdminDomain", None
-        )
-        if not admin_domain:
-            continue
-        # Some associations are a list, other directly strings, cloud-info should harmonise
-        site = admin_domain[0]
-        shares = []
-        for share in full_site["Share"]:
-            shares.append(
-                {"projectID": share["ProjectID"], "VO": get_share_vo(share, full_site)}
+            logging.warning(
+                f"Exception while trying to get info from {site['name']}: {e}"
             )
+            continue
+        shares = [dict(projectID=proj["id"], VO=proj["name"]) for proj in r.json()]
         sites.append(
             {
-                "site": {"name": site},
-                "endpointURL": full_site["CloudComputingEndpoint"][0]["URL"],
+                "site": {"name": site["name"]},
+                "endpointURL": site["url"],
                 "shares": shares,
             }
         )
