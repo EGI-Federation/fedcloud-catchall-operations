@@ -80,7 +80,7 @@ def fetch_site_info_cloud_info():
     for site in r.json():
         try:
             r = httpx.get(
-                os.path.join(CONF.sync.cloud_info_url, f"site/{site['id']}/projects")
+                os.path.join(CONF.sync.cloud_info_url, f"site/{site['name']}/projects")
             )
             r.raise_for_status()
         except httpx.HTTPError as e:
