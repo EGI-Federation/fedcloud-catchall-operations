@@ -19,7 +19,6 @@ vos:
   eiscat.se: "urn:mace:egi.eu:group:eiscat.se:role=vm_operator#aai.egi.eu"
   enmr.eu: "urn:mace:egi.eu:group:enmr.eu:role=vm_operator#aai.egi.eu"
   eosc-synergy.eu: "urn:mace:egi.eu:group:eosc-synergy.eu:role=vm_operator#aai.egi.eu"
-  fermi-lat.infn.it: "urn:mace:egi.eu:group:fermi-lat.infn.it:role=vm_operator#aai.egi.eu"
   fusion: "urn:mace:egi.eu:group:fusion:role=vm_operator#aai.egi.eu"
   icecube: "urn:mace:egi.eu:group:icecube:role=vm_operator#aai.egi.eu"
   lagoproject.net: "urn:mace:egi.eu:group:lagoproject.net:role=member#aai.egi.eu"
