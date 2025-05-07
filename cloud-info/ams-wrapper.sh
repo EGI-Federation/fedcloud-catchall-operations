@@ -49,10 +49,9 @@ else
 		--ignore-share-errors \
 		--format glue21 >cloud-info.out
 	# Produce the json output also
-	cloud-info-provider-service --yaml-file "$CLOUD_INFO_CONFIG" \
+	/cloud-info-json/bin/cloud-info-provider-service \
 		--middleware "$CLOUD_INFO_MIDDLEWARE" \
-		--ignore-share-errors \
-		--format glue21json >cloud-info.json
+		--format glue21json $SITE_CONFIG >cloud-info.json
 fi
 
 # Fail if there are no shares
