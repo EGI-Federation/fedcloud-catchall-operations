@@ -8,7 +8,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
     && apt-get -qy install --fix-missing --no-install-recommends curl \
-    && curl https://dl.igtf.net/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 | apt-key add - \
+    && curl https://dl.igtf.net/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 | apt-key add - \
     && echo 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
              > /etc/apt/sources.list.d/cas.list \
     && apt-get update \
