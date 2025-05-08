@@ -51,7 +51,7 @@ else
 	# Produce the json output also
 	/cloud-info-json/bin/cloud-info-provider-service \
 		--middleware "$CLOUD_INFO_MIDDLEWARE" \
-		--format glue21json $SITE_CONFIG >cloud-info.json
+		--format glue21json "$SITE_CONFIG" >cloud-info.json
 fi
 
 # Fail if there are no shares
