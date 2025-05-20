@@ -1,0 +1,61 @@
+---
+- name: Ensure cron is available
+  tags: ["cloud-info", "image-sync"]
+  ansible.builtin.apt:
+    name: cron
+    state: present
+    update_cache: true
+
+- name: Install docker
+  ansible.builtin.include_tasks:
+    file: docker.yml
+    apply:
+      tags: "docker"
+  # this is only executed if explicity requested
+  tags: ["never", "docker"]
+
+- name: Load site configuration
+  tags: ["cloud-info", "image-sync"]
+  ansible.builtin.include_vars:
+    file: "{{ item }}"
+    name: "{{ 'site_incl_vars_' ~ item | basename | splitext | first }}"
+  with_fileglob:
+    - "{{ site_config_dir }}/*.yaml"
+
+- name: Set site configuration variable
+  tags: ["cloud-info", "image-sync"]
+  ansible.builtin.set_fact:
+    sites: "{{ sites | default([]) + [lookup('vars', item)] }}"
+  loop: "{{ query('varnames', '^site_incl_vars_(.*)$') }}"
+
+- name: EGI configuration directories
+  tags: ["cloud-info", "image-sync"]
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "755"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
+  loop:
+    - /etc/egi
+    - /etc/egi/vos
+
+- name: Site specific config
+  tags: ["cloud-info"]
+  ansible.builtin.include_tasks:
+    file: cloud-info.yml
+    apply:
+      tags: "cloud-info"
+  vars:
+    site: "{{ item }}"
+    filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
+  with_items:
+    - "{{ sites }}"
+  when: sites is iterable
+
+- name: Image sync config
+  tags: ["image-sync"]
+  ansible.builtin.include_tasks:
+    file: sync.yml
+    apply:
+      tags: "image-sync"

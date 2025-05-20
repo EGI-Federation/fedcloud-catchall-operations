@@ -10,19 +10,18 @@ users:
     ssh_import_id:
       - gh:enolfc
       - gh:gwarf
-      - gh:CatalinCondurache
-
-apt:
-  sources:
-    ansible-ppa.list:
-      source: "deb http://ppa.launchpad.net/ansible/ansible/ubuntu xenial main"
-      # this is not a secret
-      keyid: 6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367 # gitleaks:allow
 
 packages:
   - git
-  - ansible
   - jq
+  - python3-openstackclient
+  - python3-pip
+  - python3-venv
+  - retry
+
+snap:
+  commands:
+    0: snap install yq
 
 write_files:
   - content: |
@@ -32,21 +31,58 @@ write_files:
       mkdir -p /var/tmp/egi
       cd /var/tmp/egi || exit
 
+      systemctl start notify
+
       # Valid GitHub token to access the repo
       OAUTH_TOKEN="%TOKEN%"
       SLACK_WEBHOOK_URL="%SLACK_WEBHOOK_URL%"
       COMMIT_SHA="%REF%"
       SHORT_COMMIT_SHA="%SHORT_REF%"
+      FEDCLOUD_LOCKER_TOKEN="%FEDCLOUD_LOCKER_TOKEN%"
+      TAGS="%TAGS%"
 
-      # get the repo code and untar at cwd, this may fail if the token expired (e.g. VM rebooted)
-      # still the deploy should be-executed just in case something is missing, so adding a true
-      # at the end
-      curl -L -H "Authorization: token $OAUTH_TOKEN" \
-              -H "Accept: application/vnd.github.v3+raw" \
+      # get the repo code and untar at cwd
+      curl -L -H "Accept: application/vnd.github.v3+raw" \
               "https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/tarball/$COMMIT_SHA" | \
-              tar xz --strip=1 || true
+              tar xz --strip=1
       cd deploy
-      echo "%ANSIBLE_SECRETS%" | base64 -d > ./secrets.yaml
-      ./deploy.sh $OAUTH_TOKEN $COMMIT_SHA $SHORT_COMMIT_SHA $SLACK_WEBHOOK_URL
+      ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" "$FEDCLOUD_LOCKER_TOKEN" \
+                  "$TAGS" "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
     path: /var/lib/cloud/scripts/per-boot/deploy.sh
-    permissions: '0755'
+    permissions: "0755"
+  - content: |
+      #!/bin/sh
+
+      mkdir -p /var/tmp/egi
+      VM_ID="$(cloud-init query instance_id)"
+
+      cloud-init status --wait -l > "/var/tmp/egi/$VM_ID"
+      # try 10 times, otherwise just die
+      retry -t 10 -d 90 -- openstack --os-cloud backend object create \
+            --name "$VM_ID" fedcloud-catchall "/var/tmp/egi/$VM_ID"
+    path: /usr/local/bin/notify.sh
+    permissions: "0755"
+  - content: |
+      [Unit]
+      Description=Notify the github action
+
+      [Service]
+      ExecStart=/usr/local/bin/notify.sh
+
+      [Install]
+      WantedBy=multi-user.target
+    path: /etc/systemd/system/notify.service
+  - content: "%CLOUDS_YAML%"
+    encoding: base64
+    path: /etc/openstack/clouds.yaml
+    permissions: "0644"
+  - content: |
+      # Created by cloud-init
+      #
+      # 1. Access is restricted to members of the vo.cloud.egi.eu VO with the auditor role
+      #    urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu
+      #
+      # 2. Once logged in, they have unrestricted sudo power:
+      %egi-eu_cloud-egi-eu ALL=(ALL) NOPASSWD:ALL
+    path: /etc/sudoers.d/motley
+    permissions: "0644"

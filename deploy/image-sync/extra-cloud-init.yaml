@@ -1,0 +1,13 @@
+# Disk layout
+disk_setup:
+  /dev/sdb:
+    table_type: "mbr"
+    layout: true
+    overwrite: false
+fs_setup:
+  - filesystem: ext4
+    device: /dev/sdb
+    partition: any
+    overwrite: false
+mounts:
+  - [/dev/sdb, /var/cache/image-sync]

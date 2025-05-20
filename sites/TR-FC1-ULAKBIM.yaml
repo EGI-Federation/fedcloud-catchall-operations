@@ -2,36 +2,33 @@
 gocdb: TR-FC1-ULAKBIM
 endpoint: https://bulut.truba.gov.tr:5000/v3
 vos:
-- name: dteam
-  auth:
-    project_id: 208e4da6c3c249cdab269cb5b645cceb
-- name: eiscat.se
-  auth:
-    project_id: 4b607492b48c4d9c9942ca243ae16a58
-- name: enmr.eu
-  auth:
-    project_id: 261e58163d204beb8d6ee82cca385771
-- name: fedcloud.egi.eu
-  auth:
-    project_id: c2ffb5336de9467c8a588038e2c06750
-- name: fusion
-  auth:
-    project_id: 0606cbf2743c4bbc8680227247f4d616
-- name: ops
-  auth:
-    project_id: 64abd71f8a1e42b6a3be1d1a172d96b6
-- name: vo.access.egi.eu
-  auth:
-    project_id: 2fa316a05d364de9b5a55ac78a45f8bf
-- name: vo.agiliacenter.com
-  auth:
-    project_id: 4d155cb4af3f46af89c56fd91d9387f0
-- name: vo.enes.org
-  auth:
-    project_id: a59bd0a9ed754941962846c4a081d6ca
-- name: vo.nbis.se
-  auth:
-    project_id: b0159e11cb4b470eba90d113593e90c9
-- name: vo.imagine-ai.eu
-  auth:
-    project_id: 3c1f7074ad974024849cfd01a4b3858d
+  - name: dteam
+    auth:
+      project_id: 208e4da6c3c249cdab269cb5b645cceb
+  - name: eiscat.se
+    auth:
+      project_id: 4b607492b48c4d9c9942ca243ae16a58
+  - name: enmr.eu
+    auth:
+      project_id: 261e58163d204beb8d6ee82cca385771
+  - name: fusion
+    auth:
+      project_id: 0606cbf2743c4bbc8680227247f4d616
+  - name: ops
+    auth:
+      project_id: 64abd71f8a1e42b6a3be1d1a172d96b6
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 2fa316a05d364de9b5a55ac78a45f8bf
+  - name: vo.enes.org
+    auth:
+      project_id: a59bd0a9ed754941962846c4a081d6ca
+  - name: vo.nbis.se
+    auth:
+      project_id: b0159e11cb4b470eba90d113593e90c9
+  - name: vo.imagine-ai.eu
+    auth:
+      project_id: 3c1f7074ad974024849cfd01a4b3858d
+  - name: vo.usegalaxy.eu
+    auth:
+      project_id: 5eef96ac9de4417aa50395a12d793b48

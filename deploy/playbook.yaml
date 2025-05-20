@@ -2,8 +2,16 @@
 - hosts: all
   become: true
   roles:
-    - role: ansible-role-fedcloud-ops
-      tags: ["all", "docker"]
+    - role: "grycap.motley_cue"
+      vars:
+        ssh_oidc_other_vos_name: cloud.egi.eu
+        ssh_oidc_other_vos_role: auditor
+      tags:
+        - always
+    - role: catchall
       vars:
         site_config_dir: ../sites/
-        checkin_token_endpoint: https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token
+        swift:
+          site: NCG-INGRID-PT
+          vo: cloud.egi.eu
+          container: cloud-info

@@ -11,6 +11,16 @@ its configuration with a format as follows:
 ```yaml
 gocdb: <name in gocdb of the site>
 endpoint: <keystone endpoint of the site>
+# optional: use central image sync
+images:
+  # true, get sync, false do not
+  sync: true
+  # a list of supported formats of the site can be specified
+  # if not available, no conversion will be done, so whatever format
+  # is available in AppDB will be used
+  formats:
+    - qcow2
+    - raw
 # optionally specify a protocol for the Keystone V3 federation API
 protocol: openid | oidc (default is openid)
 # optionally specify a region name if using different regions
@@ -26,20 +36,6 @@ vos:
     publicNetwork: <name of the public network>
 ```
 
-## Generating configurations
-
-The mapping configuration of the VOs supported at each site can be easily
-generated with the `generate-config.py` utility (requires `pyyaml`). It takes as
-parameter the YAML file describing the site and will dump the requested
-keystone, caso or cloudkeeper-os json config:
-
-```shell
-python generate-config.py --config-type keystone sites/SITE.yaml
-```
-
-This mapping file should work for most cases. If you have special requirements
-open an issue so we can tune the generation to meet your needs!
-
 ## Docker containers
 
 Components are run as docker containers, which if not available upstream, are
@@ -47,10 +43,10 @@ generated in this repository.
 
 ## Deployment
 
-Deployment is managed on a separate private repository that includes several
-secrets. Deployment is done with ansible using a
-[dedicated role](https://github.com/EGI-Federation/ansible-role-fedcloud-ops)
-with:
+Deployment is managed with GitHub Actions, there is a VM for the
+cloud-info-provider and one VM for the image sync. Check the [deploy](./deploy)
+directory for details. Configuration is done with ansible using a
+[dedicated role](./deploy/roles/catchall):
 
 ```sh
 ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml
@@ -61,5 +57,5 @@ where:
 - `inventory.yaml` contains the ansible inventory with the host to configure
 - `secrets.yaml` contains the credentials for every configured VO and a valid
   token for the AMS
-- `playbook.yaml` is an ansible playbook that just uses the
-  `fedcloud-catchall-ops` role to configure the host
+- `playbook.yaml` is an ansible playbook that just uses the `catchall` role to
+  configure the host

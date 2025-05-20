@@ -1,0 +1,68 @@
+---
+gocdb: CESNET-MCCG2
+endpoint: https://identity.brno.openstack.cloud.e-infra.cz/v3
+images:
+  sync: true
+  formats:
+    - raw
+vos:
+  - name: ops
+    auth:
+      project_id: 396c67a5f5bf4188b601927dbe51f386
+  - name: envri-vre
+    auth:
+      project_id: 1561ad2c9e974ae9840d413b4bdea699
+  - name: biomed
+    auth:
+      project_id: 42d7c31f28874fa0b85d23c969134a1d
+  - name: demo.fedcloud.egi.eu
+    auth:
+      project_id: 9a830ea94e5944f3ab3da2e637e1bf74
+  - name: vo.eurobioimaging.eu
+    auth:
+      project_id: 29aba2b4d6c04bcfb268b161ad97a483
+  - name: focal.egi.eu
+    auth:
+      project_id: b228d0f786bc46c08cf77ba7de43af14
+  - name: icecube
+    auth:
+      project_id: 35cbf36c486d43c99ddccf722345cccf
+  - name: training.egi.eu
+    auth:
+      project_id: 10875a29940b4d1bb5c0542a1dce294f
+  - name: umsa.cerit-sc.cz
+    auth:
+      project_id: 9970ece99e544735a58c760c7f201e9b
+  - name: vip
+    auth:
+      project_id: 1716740aee1e47f6860e1d7bb116d70f
+  - name: vo.emphasisproject.eu
+    auth:
+      project_id: 2c16102643644e33884ec8570348b2b7
+  - name: vo.envrihub.eu
+    auth:
+      project_id: 3d04a85d8b1243d0b44c5acfabf27e91
+  - name: vo.geoss.eu
+    auth:
+      project_id: a9d7382329184f60bb19f4b51608569a
+  - name: vo.neurodesk.eu
+    auth:
+      project_id: 2b6deff67bc54986b8a3b0a71d59e452
+  - name: vo.nextgeoss.eu
+    auth:
+      project_id: b748c5f23def404b89c9bcc4c847faa1
+  - name: vo.notebooks.egi.eu
+    auth:
+      project_id: 022a85c953a946b9b8c7c4d1ef59fd08
+  - name: vo.pangeo.eu
+    auth:
+      project_id: 018313f0144a4b1697669b4b7d5c8368
+  - name: vo.pangeo.eu-escience
+    auth:
+      project_id: 25f5aa2c69e140e1be947381b9c119bc
+  - name: vo.pangeo.eu-swift
+    auth:
+      project_id: dbec8bc99a474772a703a0513af98c91
+  - name: vo.enes.org
+    auth:
+      project_id: db4f6691a81f49d0a8dda59b26259b5b

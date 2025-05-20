@@ -1,0 +1,14 @@
+# Cloud info version is 6fbbf1c24bd32c21d5b8de783d7face6c6c5987e
+# 6fbbf1c24bd32c21d5b8de783d7face6c6c5987e includes json glue support and fixes for it
+git+https://github.com/EGI-Federation/cloud-info-provider.git@6fbbf1c24bd32c21d5b8de783d7face6c6c5987e
+git+https://github.com/ARGOeu/argo-ams-library@devel
+python-glanceclient
+python-novaclient
+python-keystoneclient
+keystoneauth1
+yq
+fedcloudclient
+PyJWT
+responses
+
+

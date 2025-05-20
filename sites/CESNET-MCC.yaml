@@ -2,124 +2,103 @@
 gocdb: CESNET-MCC
 endpoint: https://identity.cloud.muni.cz/v3
 vos:
-- name: biomed
-  auth:
-    project_id: eca73ad6a84d4c0088063505c36349ab
-- name: chipster.csc.fi
-  auth:
-    project_id: 2ce965f162c9434cb21ac25f3b05bd9f
-- name: covid19.eosc-synergy.eu
-  auth:
-    project_id: 192e87f713474117a2a22704ac4da1a2
-- name: cryoem.instruct-eric.eu
-  auth:
-    project_id: d0ebf0fad0a04be19f93fdf794469544
-- name: demo.fedcloud.egi.eu
-  auth:
-    project_id: 10b972eed97940089b234f6257d7db72
-- name: drihm.eu
-  auth:
-    project_id: 4216152b63f34cc28401bb9bbd40b0bf
-- name: dteam
-  auth:
-    project_id: 0aa5b696969c42988b18beda3f85b885
-#Not an EGI VO
-#- name: egi-services
-#  auth:
-#    project_id: 723f0655bb484ea892249ac7183c9581
-- name: enmr.eu
-  auth:
-    project_id: 8f4f75b011fe44ef99105a32817d2fc0
-- name: eosc-synergy.eu
-  auth:
-    project_id: d85ca93c937a4a97adf134ec2593296d
-- name: fusion
-  auth:
-    project_id: 426b25102bdb49b8b6969cef5aabaecf
-- name: ops
-  auth:
-    project_id: 73ee46f9a64243d2955ecb07e4f28289
-- name: peachnote.com
-  auth:
-    project_id: bf5fbc4e22164e4d8a464e9c97706830
-- name: training.egi.eu
-  auth:
-    project_id: eae2aa7f26334104906106bca4b82ae3
-- name: umsa.cerit-sc.cz
-  auth:
-    project_id: 10e31299a9b548fdbe36e4dbe571168e
-- name: /biomed/vip
-  auth:
-    project_id: 721251d671ea4268876043a9474ba3de
-- name: vo.clarin.eu
-  auth:
-    project_id: 5fc606127d2d4499b959ff79219c7144
-- name: vo.elixir-europe.org
-  auth:
-    project_id: 90f5ae8fb33e45888be97f152bc2f67b
-- name: vo.emphasisproject.eu
-  auth:
-    project_id: b953842bf4204dc98054f6c3ae581cb5
-- name: vo.europlanet-vespa.eu
-  auth:
-    project_id: 89140661b6be4ef281ab7a67d4c83e0c
-- name: vo.geoss.eu
-  auth:
-    project_id: 24869cfe0e094f59a3110429e068eef2
-- name: vo.indigo-datacloud.eu
-  auth:
-    project_id: 25cb49baedbf40a194729ff6802c8491
-- name: vo.max-centre.eu
-  auth:
-    project_id: 50fc58ed66a14106b40b9c6d7d9af86c
-- name: vo.nextgeoss.eu
-  auth:
-    project_id: 081396a827c94f3da0c922cf6d8fb7f7
-- name: vo.notebooks.egi.eu
-  auth:
-    project_id: 28b74c3073a74b34a729cbf9777e7344
-- name: vo.panosc.eu
-  auth:
-    project_id: d868dfd63a674d94bbd9d9b7b54443e3
-- name: icecube
-  auth:
-    project_id: 14c82a422b094c32b4858ce959fa1a0d
-- name: university.eosc-synergy.eu
-  auth:
-    project_id: a478488b79df46c4a086ecb7a321b038
-- name: waterwatch.c-scale.eu
-  auth:
-    project_id: acf5d12568914e65a80150efb087cbb8
-- name: vo.carouseldancing.org
-  auth:
-    project_id: 7ace5ca998b849619bd34e922fbd2cb7
-- name: vo.pangeo.eu
-  auth:
-    project_id: 05e0ff6e03774082aadacc75bfc1d783
-- name: vo.neanias.eu
-  auth:
-    project_id: bc7b84252d3c4a42a6d1d346865a7631
-- name: vo.environmental.egi.eu
-  auth:
-    project_id: 29e6fbf618984a0c98ffcdf0222ad815
-- name: vo.eoscfuture-sp.panosc.eu
-  auth:
-    project_id: c91eeff7bf7845bc901b319512f2ebdb
-- name: vo.inactive-sarscov2.eu
-  auth:
-    project_id: 0df0a85cfe8e47d38ce9142858845800
-- name: eval.c-scale.eu
-  auth:
-    project_id: d6283bc95d5c4296abb799596867818c
-- name: in-sar-cubes.c-scale.eu
-  auth:
-    project_id: b28570e8eca54db3b837b85a4f27932f
-- name: /vo.pangeo.eu/swift
-  auth:
-    project_id: 57102d3e06b7476088fe4924370ae170
-- name: /vo.pangeo.eu/escience
-  auth:
-    project_id: 5e5a45e153d3424997fda0c4fd21a21f
-- name: vo.thepund.it
-  auth:
-    project_id: a0faee5136134d1ab1e62385c3e45c75
+  - name: biomed
+    auth:
+      project_id: eca73ad6a84d4c0088063505c36349ab
+  - name: covid19.eosc-synergy.eu
+    auth:
+      project_id: 192e87f713474117a2a22704ac4da1a2
+  - name: cryoem.instruct-eric.eu
+    auth:
+      project_id: d0ebf0fad0a04be19f93fdf794469544
+  - name: demo.fedcloud.egi.eu
+    auth:
+      project_id: 10b972eed97940089b234f6257d7db72
+  - name: drihm.eu
+    auth:
+      project_id: 4216152b63f34cc28401bb9bbd40b0bf
+  - name: dteam
+    auth:
+      project_id: 0aa5b696969c42988b18beda3f85b885
+  #Not an EGI VO
+  #- name: egi-services
+  #  auth:
+  #    project_id: 723f0655bb484ea892249ac7183c9581
+  - name: enmr.eu
+    auth:
+      project_id: 8f4f75b011fe44ef99105a32817d2fc0
+  - name: eosc-synergy.eu
+    auth:
+      project_id: d85ca93c937a4a97adf134ec2593296d
+  - name: fusion
+    auth:
+      project_id: 426b25102bdb49b8b6969cef5aabaecf
+  - name: ops
+    auth:
+      project_id: 73ee46f9a64243d2955ecb07e4f28289
+  - name: peachnote.com
+    auth:
+      project_id: bf5fbc4e22164e4d8a464e9c97706830
+  - name: training.egi.eu
+    auth:
+      project_id: eae2aa7f26334104906106bca4b82ae3
+  - name: umsa.cerit-sc.cz
+    auth:
+      project_id: 10e31299a9b548fdbe36e4dbe571168e
+  - name: /biomed/vip
+    auth:
+      project_id: 721251d671ea4268876043a9474ba3de
+  - name: vo.clarin.eu
+    auth:
+      project_id: 5fc606127d2d4499b959ff79219c7144
+  - name: vo.emphasisproject.eu
+    auth:
+      project_id: b953842bf4204dc98054f6c3ae581cb5
+  - name: vo.europlanet-vespa.eu
+    auth:
+      project_id: 89140661b6be4ef281ab7a67d4c83e0c
+  - name: vo.geoss.eu
+    auth:
+      project_id: 24869cfe0e094f59a3110429e068eef2
+  - name: vo.indigo-datacloud.eu
+    auth:
+      project_id: 25cb49baedbf40a194729ff6802c8491
+  - name: vo.nextgeoss.eu
+    auth:
+      project_id: 081396a827c94f3da0c922cf6d8fb7f7
+  - name: vo.notebooks.egi.eu
+    auth:
+      project_id: 28b74c3073a74b34a729cbf9777e7344
+  - name: vo.panosc.eu
+    auth:
+      project_id: d868dfd63a674d94bbd9d9b7b54443e3
+  - name: icecube
+    auth:
+      project_id: 14c82a422b094c32b4858ce959fa1a0d
+  - name: university.eosc-synergy.eu
+    auth:
+      project_id: a478488b79df46c4a086ecb7a321b038
+  - name: vo.pangeo.eu
+    auth:
+      project_id: 05e0ff6e03774082aadacc75bfc1d783
+  - name: vo.eoscfuture-sp.panosc.eu
+    auth:
+      project_id: c91eeff7bf7845bc901b319512f2ebdb
+  - name: /vo.pangeo.eu/swift
+    auth:
+      project_id: 57102d3e06b7476088fe4924370ae170
+  - name: /vo.pangeo.eu/escience
+    auth:
+      project_id: 5e5a45e153d3424997fda0c4fd21a21f
+  - name: vo.thepund.it
+    auth:
+      project_id: a0faee5136134d1ab1e62385c3e45c75
+  - name: vo.enes.org
+    auth:
+      project_id: 786566209a7444f89a561172fa28e117
+  - name: vo.envrihub.eu
+    auth:
+      project_id: 61d8e5a65aff45fabc41ae954e905d11
+  - name: vo.radiotracers4psma.eu
+    auth:
+      project_id: c92b14a949664e74b1afdac69adc724a

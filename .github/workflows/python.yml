@@ -1,0 +1,24 @@
+name: Python testing
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  test:
+    name: test python code
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test cloud-info-generator
+        run: |
+          cd cloud-info
+          pip install -r requirements.txt
+          pip install .
+          cd cloud_info_catchall
+          python3 -m unittest
