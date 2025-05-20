@@ -19,6 +19,12 @@
     dest: /etc/egi/cloud-info/{{ filename }}.yaml
     mode: "600"
 
+- name: Site config file
+  ansible.builtin.template:
+    src: site-config.yaml.j2
+    dest: /etc/egi/cloud-info/site-{{ filename }}.yaml
+    mode: "600"
+
 - name: Cloud info env
   ansible.builtin.template:
     src: cloud-info.env.j2

@@ -3,7 +3,7 @@ FROM python:3 AS build
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
-RUN curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3 \
+RUN curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 \
 	| apt-key add - \
     && echo "deb https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
     && apt-get update \
@@ -29,6 +29,12 @@ COPY . .
 
 RUN pip install --no-cache-dir .
 
+# A second cloud-info-provider!
+RUN python -m venv /cloud-info-json \
+    && /cloud-info-json/bin/pip install --no-cache-dir \
+         git+https://github.com/EGI-Federation/cloud-info-provider.git@641c3661fe55d14846573f88198f892ba0d03094 \
+    && cat /etc/grid-security/certificates/*.pem >> "$(python -m requests.certs)"
+
 # The actual image
 FROM python:3
 
@@ -52,6 +58,8 @@ WORKDIR /cloud-info
 # All the python code from the build image above
 COPY --chown=python:python --from=build /cloud-info/venv ./venv
 COPY --chown=python:python --from=build /fedcloud /fedcloud
+COPY --chown=python:python --from=build /cloud-info-json /cloud-info-json
+
 # Add the scripts that call the cloud-info-provider as needed for the site
 # these create the configuration for the site by discovering the available
 # projects for the credentials and will send the output to the AMS queue and
