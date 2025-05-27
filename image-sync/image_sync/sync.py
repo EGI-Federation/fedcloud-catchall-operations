@@ -16,7 +16,6 @@ CONF.register_opts(
     [
         cfg.StrOpt("site_config_dir", default="."),
         cfg.StrOpt("cloud_info_url", default="https://is.cloud.egi.eu"),
-        cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("appdb_token"),
     ],
@@ -37,34 +36,6 @@ CONF.register_opts(
     ],
     group="checkin",
 )
-
-
-def fetch_site_info_appdb():
-    logging.debug("Fetching site info from AppDB")
-    query = """
-        {
-            siteCloudComputingEndpoints{
-              items{
-                endpointURL
-                site {
-                  name
-                }
-                shares: shareList {
-                  VO
-                  entityCreationTime
-                  projectID
-                }
-              }
-            }
-        }
-    """
-    params = {"query": query}
-    r = httpx.get(
-        CONF.sync.graphql_url, params=params, headers={"accept": "application/json"}
-    )
-    r.raise_for_status()
-    data = r.json()["data"]["siteCloudComputingEndpoints"]["items"]
-    return data
 
 
 def fetch_site_info_cloud_info():
