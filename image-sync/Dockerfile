@@ -36,7 +36,7 @@ RUN apt-get update \
 WORKDIR /image-sync
 
 RUN groupadd -g 1999 python \
-    && useradd -r -u 1999 -g python python
+    && useradd -m -r -u 1999 -g python python
 
 COPY --chown=python:python --from=build /image-sync/venv ./venv
 
