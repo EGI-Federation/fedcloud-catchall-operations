@@ -9,7 +9,6 @@ vos:
   cesga.es: "urn:mace:egi.eu:group:cesga.es:role=vm_operator#aai.egi.eu"
   cloud.egi.eu: "urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
   cms: "urn:mace:egi.eu:group:cms:role=vm_operator#aai.egi.eu"
-  covid19.eosc-synergy.eu: "urn:mace:egi.eu:group:covid19.eosc-synergy.eu:role=vm_operator#aai.egi.eu"
   cryoem.instruct-eric.eu: "urn:mace:egi.eu:group:cryoem.instruct-eric.eu:role=vm_operator#aai.egi.eu"
   culturalheritage.vo.egi.eu: "urn:mace:egi.eu:group:culturalheritage.vo.egi.eu:CH-cloud_operators:role=member#aai.egi.eu"
   d4science.org: "urn:mace:egi.eu:group:d4science.org:role=vm_operator#aai.egi.eu"

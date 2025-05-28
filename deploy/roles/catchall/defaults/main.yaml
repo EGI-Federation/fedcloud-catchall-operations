@@ -38,6 +38,12 @@ cloud_info_cron:
   weekday: "*"
   timeout: "600"
 
+# registry configuration
+registry:
+  user: user
+  password: password
+  project: project
+
 image_sync_image: egifedcloud/ops-image-sync:latest
 
 image_sync_cron:
