@@ -1,6 +1,6 @@
 ---
 gocdb: WALTON-CLOUD
-endpoint: https://horizon.waltoncloud.eu:5000/v3
+endpoint: https://egi.waltoncloud.eu:5000/v3
 images:
   sync: true
   formats:
