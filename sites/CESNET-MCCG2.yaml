@@ -66,3 +66,6 @@ vos:
   - name: vo.enes.org
     auth:
       project_id: db4f6691a81f49d0a8dda59b26259b5b
+  - name: vo.radiotracers4psma.eu
+    auth:
+      project_id: 80faf6c9ec064bdf9e1c6f0cbfa763ff
