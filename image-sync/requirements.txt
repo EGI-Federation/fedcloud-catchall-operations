@@ -1,5 +1,5 @@
-# First implementation of harbor integration: d2c67ca2938ad5499f0f8716450b74964f2360db
-git+https://github.com/EGI-Federation/atrope@d2c67ca2938ad5499f0f8716450b74964f2360db
+# Atrope with proper metadata for images: d7469313b8c6d9566ea055ba285f7b7a85ec76de
+git+https://github.com/EGI-Federation/atrope@d7469313b8c6d9566ea055ba285f7b7a85ec76de
 httpx
 oslo.config
 PyYAML
