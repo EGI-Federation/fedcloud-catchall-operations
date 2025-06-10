@@ -9,13 +9,13 @@ images:
 vos:
   - name: ops
     auth:
-      project_id: 786ae008b6694cfca45e04001fe2054c
+      project_id: 453e75c9b43c4d64818cff5ee66b2241
   - name: vo.eurosea.marine.ie
     auth:
-      project_id: 30e1e1ad790043108f18a627474296df
+      project_id: e324f1d37433449d94abafc1df46828f
   - name: vo.access.egi.eu
     auth:
-      project_id: 18f97f15a8374f5eb7e8cc0258eace99
+      project_id: f09171e2a6b94634a95956532c51b985
   - name: vo.imagine-ai.eu
     auth:
-      project_id: 08c98a7449444c7a8103eb7521b82dfa
+      project_id: f0e338d86f8146e1b3e7126a31aa34b3
