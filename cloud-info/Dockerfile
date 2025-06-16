@@ -32,7 +32,7 @@ RUN pip install --no-cache-dir .
 # A second cloud-info-provider!
 RUN python -m venv /cloud-info-json \
     && /cloud-info-json/bin/pip install --no-cache-dir \
-         git+https://github.com/EGI-Federation/cloud-info-provider.git@e728a9d177dbc386dd3911faf9e755393b16b9fd \
+         git+https://github.com/EGI-Federation/cloud-info-provider.git@88c3a14d1e11c1adf9a03c85679cdcc8e3a2ede1 \
     && cat /etc/grid-security/certificates/*.pem >> "$(/cloud-info-json/bin/python -m requests.certs)"
 
 # The actual image
