@@ -1,6 +1,10 @@
 ---
 gocdb: TR-FC1-ULAKBIM
 endpoint: https://bulut.truba.gov.tr:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
 vos:
   - name: dteam
     auth:
