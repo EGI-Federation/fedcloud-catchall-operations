@@ -97,6 +97,7 @@ project_id = {project_id}
 access_token_type = access_token
 formats = {formats}
 vo_map = {vo_map_file}
+tag = atrope-catchall
 
 [dispatchers]
 dispatcher = glance
