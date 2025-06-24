@@ -1,13 +1,14 @@
 ---
 gocdb: IISAS-FedCloud
 endpoint: https://cloud.ui.savba.sk:5000/v3/
+images:
+  sync: true
+  formats:
+    - raw
 vos:
   - name: cloud.egi.eu
     auth:
       project_id: 982ce52d45fe4e33a1c952ab9484c711
-  - name: covid19.eosc-synergy.eu
-    auth:
-      project_id: a22bbffb007745b2934bf308b0a4d186
   - name: eosc-synergy.eu
     auth:
       project_id: 51f736d36ce34b9ebdf196cfcabd24ee
@@ -29,9 +30,6 @@ vos:
   - name: vo.ai4eosc.eu
     auth:
       project_id: 4d40037774784f22907d537070e85f42
-  - name: vo.bd4nrg.eu
-    auth:
-      project_id: 74128e581e6941ad91c7fce06f14e6c8
   - name: vo.eosc-siesta.eu
     auth:
       project_id: 51e0cec60ffa49038f494c7e6ec6fb97
@@ -41,3 +39,9 @@ vos:
   - name: vo.usegalaxy.eu
     auth:
       project_id: 7a23c4fa956a499c854eb215f3a95218
+  - name: eosc-beyond.eu
+    auth:
+      project_id: ea4f6084f9a74329bd77e466136fd079
+  - name: vo.seadatanet.org
+    auth:
+      project_id: 50130e5d3d124a05b00b245790d1f081
