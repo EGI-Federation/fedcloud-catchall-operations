@@ -1,4 +1,5 @@
-git+https://github.com/EGI-Federation/atrope@catchall
+# Atrope with proper metadata for images: d7469313b8c6d9566ea055ba285f7b7a85ec76de
+git+https://github.com/EGI-Federation/atrope@d7469313b8c6d9566ea055ba285f7b7a85ec76de
 httpx
 oslo.config
 PyYAML

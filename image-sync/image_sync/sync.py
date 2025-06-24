@@ -16,9 +16,13 @@ CONF.register_opts(
     [
         cfg.StrOpt("site_config_dir", default="."),
         cfg.StrOpt("cloud_info_url", default="https://is.cloud.egi.eu"),
-        cfg.StrOpt("graphql_url", default="https://is.appdb.egi.eu/graphql"),
+        cfg.StrOpt("registry_api_url", default="https://registry.egi.eu/api/v2.0"),
+        cfg.StrOpt("registry_host", default="registry.egi.eu"),
+        cfg.StrOpt("registry_project", default="egi_vm_images"),
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("appdb_token"),
+        cfg.StrOpt("registry_user"),
+        cfg.StrOpt("registry_password"),
     ],
     group="sync",
 )
@@ -37,34 +41,6 @@ CONF.register_opts(
     ],
     group="checkin",
 )
-
-
-def fetch_site_info_appdb():
-    logging.debug("Fetching site info from AppDB")
-    query = """
-        {
-            siteCloudComputingEndpoints{
-              items{
-                endpointURL
-                site {
-                  name
-                }
-                shares: shareList {
-                  VO
-                  entityCreationTime
-                  projectID
-                }
-              }
-            }
-        }
-    """
-    params = {"query": query}
-    r = httpx.get(
-        CONF.sync.graphql_url, params=params, headers={"accept": "application/json"}
-    )
-    r.raise_for_status()
-    data = r.json()["data"]["siteCloudComputingEndpoints"]["items"]
-    return data
 
 
 def fetch_site_info_cloud_info():
@@ -88,7 +64,7 @@ def fetch_site_info_cloud_info():
                 f"Exception while trying to get info from {site['name']}: {e}"
             )
             continue
-        shares = [dict(projectID=proj["id"], VO=proj["name"]) for proj in r.json()]
+        shares = {proj["name"]: {"project_id": proj["id"]} for proj in r.json()}
         sites.append(
             {
                 "site": {"name": site["name"]},
@@ -103,7 +79,7 @@ def fetch_site_info():
     return fetch_site_info_cloud_info()
 
 
-def dump_atrope_config(site, share, hepix_file):
+def dump_atrope_config(site, ops_project_id, sources_file, vo_map_file):
     config_template = """
 [DEFAULT]
 state_path = /atrope-state/
@@ -120,6 +96,7 @@ discovery_endpoint = {discovery_endpoint}
 project_id = {project_id}
 access_token_type = access_token
 formats = {formats}
+vo_map = {vo_map_file}
 
 [dispatchers]
 dispatcher = glance
@@ -128,7 +105,7 @@ dispatcher = glance
 formats = {formats}
 
 [sources]
-hepix_sources = {hepix_file}
+image_sources = {sources_file}
     """
     formats = site.get("formats", CONF.sync.formats)
     return config_template.format(
@@ -137,27 +114,29 @@ hepix_sources = {hepix_file}
         client_secret=CONF.checkin.client_secret,
         scopes=CONF.checkin.scopes,
         discovery_endpoint=CONF.checkin.discovery_endpoint,
-        project_id=share["projectID"],
+        project_id=ops_project_id,
         formats=",".join(formats),
-        hepix_file=hepix_file,
+        sources_file=sources_file,
+        vo_map_file=vo_map_file,
     )
 
 
-def dump_hepix_config(share):
-    hepix = {
-        share["VO"]: {
+def dump_sources_config(vo_list):
+    harbor = {
+        CONF.sync.registry_project: {
             "enabled": True,
-            "endorser": {
-                "ca": "/DC=ORG/DC=SEE-GRID/CN=SEE-GRID CA 2013",
-                "dn": "/DC=EU/DC=EGI/C=NL/O=Hosts/O=EGI.eu/CN=appdb.egi.eu",
-            },
-            "prefix": "EGI ",
-            "project": share["projectID"],
-            "token": CONF.sync.appdb_token,
-            "url": f"https://vmcaster.appdb.egi.eu/store/vo/{share['VO']}/image.list",
+            "vos": vo_list,
+            "type": "harbor",
+            "api_url": CONF.sync.registry_api_url,
+            "prefix": "registry.egi.eu ",
+            "project": CONF.sync.registry_project,
+            "registry_host": CONF.sync.registry_host,
+            "auth_user": CONF.sync.registry_user,
+            "auth_password": CONF.sync.registry_password,
+            "tag_pattern": "^[^-]*$",
         }
     }
-    return yaml.dump(hepix)
+    return yaml.dump(harbor)
 
 
 def do_sync(sites_config):
@@ -174,22 +153,27 @@ def do_sync(sites_config):
             continue
         site.update(site_image_config)
         logging.info(f"Configuring site {site_name}")
-        for share in site["shares"]:
-            logging.info(f"Configuring {share['VO']}")
-            with tempfile.TemporaryDirectory() as tmpdirname:
-                hepix_file = os.path.join(tmpdirname, "hepix.yaml")
-                with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
-                    f.write(dump_atrope_config(site, share, hepix_file))
-                with open(hepix_file, "w+") as f:
-                    f.write(dump_hepix_config(share))
-                cmd = [
-                    "atrope",
-                    "--config-dir",
-                    tmpdirname,
-                    "sync",
-                ]
-                logging.debug(f"Running {' '.join(cmd)}")
-                subprocess.call(cmd)
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            sources_file = os.path.join(tmpdirname, "sources.yaml")
+            vo_map_file = os.path.join(tmpdirname, "vo-map.yaml")
+            vo_list = list(site["shares"].keys())
+            ops_project_id = site["shares"]["ops"]["project_id"]
+            with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
+                f.write(
+                    dump_atrope_config(site, ops_project_id, sources_file, vo_map_file)
+                )
+            with open(sources_file, "w+") as f:
+                f.write(dump_sources_config(vo_list))
+            with open(vo_map_file, "w+") as f:
+                f.write(yaml.dump(site["shares"]))
+            cmd = [
+                "atrope",
+                "--config-dir",
+                tmpdirname,
+                "sync",
+            ]
+            logging.debug(f"Running {' '.join(cmd)}")
+            subprocess.call(cmd)
 
 
 def load_sites():
