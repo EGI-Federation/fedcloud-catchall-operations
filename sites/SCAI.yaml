@@ -1,6 +1,11 @@
 ---
 gocdb: SCAI
 endpoint: https://cloud.scai.fraunhofer.de:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: ops
     auth:

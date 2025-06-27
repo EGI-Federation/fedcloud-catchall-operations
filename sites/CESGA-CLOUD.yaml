@@ -1,6 +1,11 @@
 ---
 gocdb: CESGA-CLOUD
 endpoint: https://cloud.srv.cesga.es:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: ops
     auth:

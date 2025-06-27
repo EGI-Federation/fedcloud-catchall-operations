@@ -1,6 +1,11 @@
 ---
 gocdb: UA-BITP
 endpoint: https://openstack.bitp.kiev.ua:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: dteam
     auth:

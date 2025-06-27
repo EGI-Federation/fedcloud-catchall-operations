@@ -1,6 +1,11 @@
 ---
 gocdb: IN2P3-IRES
 endpoint: https://sbgcloud.in2p3.fr:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: belle
     auth:

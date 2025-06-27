@@ -2,6 +2,11 @@
 gocdb: INFN-CLOUD-CNAF
 endpoint: https://cloud-api-pub.cr.cnaf.infn.it:5000/v3
 region: sdds
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: dteam
     auth:

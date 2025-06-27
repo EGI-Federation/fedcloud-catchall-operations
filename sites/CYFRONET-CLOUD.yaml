@@ -1,6 +1,11 @@
 ---
 gocdb: CYFRONET-CLOUD
 endpoint: https://panel.cloud.cyfronet.pl:5000/v3/
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: culturalheritage.vo.egi.eu
     auth:

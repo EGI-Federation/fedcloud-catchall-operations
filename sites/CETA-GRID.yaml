@@ -1,6 +1,11 @@
 ---
 gocdb: CETA-GRID
 endpoint: https://controller.ceta-ciemat.es:5000/v3/
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: covid19.eosc-synergy.eu
     auth:
