@@ -1,6 +1,11 @@
 ---
 gocdb: IFCA-LCG2
 endpoint: https://api.cloud.ifca.es:5000/v3/
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: cryoem.instruct-eric.eu
     auth:

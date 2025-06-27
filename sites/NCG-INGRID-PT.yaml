@@ -1,6 +1,11 @@
 ---
 gocdb: NCG-INGRID-PT
 endpoint: https://stratus.ncg.ingrid.pt:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: aquamonitor.c-scale.eu
     auth:
