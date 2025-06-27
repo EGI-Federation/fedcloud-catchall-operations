@@ -1,5 +1,6 @@
-# Atrope with proper metadata for images: d7469313b8c6d9566ea055ba285f7b7a85ec76de
-git+https://github.com/EGI-Federation/atrope@d7469313b8c6d9566ea055ba285f7b7a85ec76de
+# Atrope with openstacksdk:
+# https://github.com/EGI-Federation/atrope/commit/2c9b2fba74ed1c4e1f21bada335bf1823395971c
+git+https://github.com/EGI-Federation/atrope@2c9b2fba74ed1c4e1f21bada335bf1823395971c
 httpx
 oslo.config
 PyYAML
