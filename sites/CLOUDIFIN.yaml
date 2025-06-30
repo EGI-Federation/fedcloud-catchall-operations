@@ -1,6 +1,11 @@
 ---
 gocdb: CLOUDIFIN
 endpoint: https://cloud-ctrl.nipne.ro:443/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: dteam
     auth:
