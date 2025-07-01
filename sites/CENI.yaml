@@ -1,6 +1,11 @@
 ---
 gocdb: CENI
 endpoint: https://openstack.ceni.org.cn:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
 vos:
   - name: ops
     auth:
