@@ -1,14 +1,7 @@
 ---
 gocdb: INFN-CLOUD-CNAF
 endpoint: https://cloud-api-pub.cr.cnaf.infn.it:5000/v3
-region: sdds
 vos:
-  - name: dteam
-    auth:
-      project_id: a8af02aad2894e9e8b5d4775c9736b8a
   - name: ops
     auth:
       project_id: 8b6a8afe225344dea808ec17a26de56d
-  - name: vo.projectescape.eu
-    auth:
-      project_id: 1f3ff0902d554384a5af936e6643695f
