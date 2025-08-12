@@ -17,7 +17,6 @@ import httpx
 import yaml
 from oslo_config import cfg
 
-
 # Configuraion
 CONF = cfg.CONF
 CONF.register_opts(
@@ -30,9 +29,6 @@ CONF.register_opts(
         cfg.ListOpt("formats", default=[]),
         cfg.StrOpt("registry_user"),
         cfg.StrOpt("registry_password"),
-        cfg.StrOpt(
-            "registry_project_map", default="/image-sync/registry-projects.yaml"
-        ),
     ],
     group="sync",
 )
@@ -74,7 +70,6 @@ def fetch_harbor_projects():
             break
         projects.extend(data)
         next_url = r.links.get("next", {}).get("url", None)
-        print(next_url)
         params = {}
         page += 1
 
