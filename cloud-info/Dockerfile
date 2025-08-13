@@ -3,9 +3,12 @@ FROM python:3 AS build
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008
-RUN curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 \
-	| apt-key add - \
-    && echo "deb https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       gnupg2 curl \
+    && curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 \
+	| gpg --dearmor  -o /etc/apt/keyrings/eugridpma.gpg  \
+    && echo "deb [signed-by=/etc/apt/keyrings/eugridpma.gpg] https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
     && apt-get update \
     && apt-get install -y ca-policy-egi-core \
     && rm -rf /var/lib/apt/lists/*
