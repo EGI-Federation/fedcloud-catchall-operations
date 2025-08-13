@@ -75,7 +75,9 @@ def fetch_harbor_projects():
 
     # FIXME: we may want to include some metadata in harbor instead of just
     #        matching names. For now this should work
-    return [p.get("name") for p in projects]
+    project_names = [p.get("name") for p in projects]
+    logging.debug(f'Obtained {", ".join(project_names)} from Harbor')
+    return project_names
 
 
 def fetch_site_info_cloud_info():
