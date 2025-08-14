@@ -1,6 +1,6 @@
 # Atrope with openstacksdk and multiple harbor projects
-# https://github.com/EGI-Federation/atrope/commit/5bb5e2aa53edd4b6cca1cce052d289bdba316e56
-git+https://github.com/EGI-Federation/atrope@5bb5e2aa53edd4b6cca1cce052d289bdba316e56
+# https://github.com/EGI-Federation/atrope/commit/718d9840c0f4ca0c78bf543125c6999b2ee8ebf5
+git+https://github.com/EGI-Federation/atrope@718d9840c0f4ca0c78bf543125c6999b2ee8ebf5
 httpx
 oslo.config
 PyYAML
