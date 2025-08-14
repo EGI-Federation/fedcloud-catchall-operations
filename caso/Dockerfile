@@ -7,10 +7,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # We do need install recommends for the CAs
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
-    && apt-get -qy install --fix-missing --no-install-recommends curl \
-    && curl https://dl.igtf.net/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 | apt-key add - \
-    && echo 'deb http://repository.egi.eu/sw/production/cas/1/current egi-igtf core' \
-             > /etc/apt/sources.list.d/cas.list \
+    && apt-get -qy install --fix-missing --no-install-recommends gnupg curl \
+    && curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 \
+	| gpg --dearmor  -o /etc/apt/keyrings/eugridpma.gpg  \
+    && echo "deb [signed-by=/etc/apt/keyrings/eugridpma.gpg] https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" \
+             > /etc/apt/sources.list.d/igtf.list \
     && apt-get update \
     && apt-get -qy install --fix-missing fetch-crl \
     && apt-get -qy install --fix-missing ca-policy-egi-core \
