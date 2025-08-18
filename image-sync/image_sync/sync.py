@@ -180,7 +180,7 @@ def dump_sources_config(site_vo_list, harbor_projects):
     # specific VOs use their own project
     for project in filter(lambda x: x in site_vo_list, harbor_projects):
         harbor[project] = {
-            "vos": project,
+            "vos": [project],
             "type": "harbor",
             "project": project,
         }
