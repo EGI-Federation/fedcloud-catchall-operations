@@ -1,6 +1,10 @@
 ---
 gocdb: CESNET-MCC
 endpoint: https://identity.cloud.muni.cz/v3
+images:
+  sync: true
+  formats:
+    - raw
 vos:
   - name: biomed
     auth:
