@@ -6,3 +6,11 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+  # python deps
+  - package-ecosystem: "pip"
+    directories:
+      - "/image-sync"
+      - "/cloud-info"
+    # Check for updates once a week
+    schedule:
+      interval: "weekly"
