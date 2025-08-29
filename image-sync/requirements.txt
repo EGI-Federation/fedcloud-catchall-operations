@@ -1,6 +1,6 @@
 # Atrope with openstacksdk and multiple harbor projects
 # https://github.com/EGI-Federation/atrope/tree/2.0.0
 git+https://github.com/EGI-Federation/atrope@2.0.0
-httpx
-oslo.config
-PyYAML
+httpx==0.28.1
+oslo.config==10.0.0
+PyYAML==6.0.2
