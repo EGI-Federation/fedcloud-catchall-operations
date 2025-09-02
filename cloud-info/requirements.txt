@@ -6,7 +6,6 @@ python-novaclient==18.11.0
 python-keystoneclient==5.7.0
 keystoneauth1==5.12.0
 yq==3.4.3
-fedcloudclient==1.4.0
 PyJWT==2.10.1
 responses==0.25.8
 
