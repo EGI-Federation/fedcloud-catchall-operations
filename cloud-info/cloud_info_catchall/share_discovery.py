@@ -1,11 +1,13 @@
-"""Discover projects for cloud-info-povider and generate configuration
-"""
+"""Discover projects for cloud-info-povider and generate configuration"""
 
 import logging
 import os
 
-import fedcloudclient.endpoint as fedcli
-from cloud_info_provider.auth_refreshers.oidc_refresh import OidcRefreshToken
+from keystoneauth1 import session
+from keystoneauth1.exceptions.base import ClientException
+from keystoneauth1.identity.v3.oidc import OidcAccessToken
+from keystoneclient.v3 import client
+from keystoneclient.v3.auth import AuthManager
 
 
 class ShareDiscovery:
@@ -44,17 +46,24 @@ class ShareDiscovery:
         # exchange access_token for Keystone token
         shares = {}
         try:
-            token = fedcli.retrieve_unscoped_token(
-                self.auth_url, access_token, self.protocol
+            sess = session.Session(
+                auth=OidcAccessToken(
+                    auth_url=self.auth_url,
+                    identity_provider="egi.eu",
+                    protocol=self.protocol,
+                    access_token=access_token,
+                )
             )
-        except fedcli.TokenException:
+            ks = client.Client(session=sess, endpoint_override=self.auth_url)
+            ks.include_metadata = False
+            for p in AuthManager(ks).projects():
+                proj_dict = p.to_dict()
+                for vo in self.get_project_vos(proj_dict):
+                    shares[vo.strip()] = self.build_share(proj_dict, access_token)
+            self.config_shares(shares, access_token)
+        except ClientException:
             # this check-in account does not have access to the site, ignore
-            return shares
-        projects = fedcli.get_projects_from_single_site(self.auth_url, token)
-        for p in projects:
-            for vo in self.get_project_vos(p):
-                shares[vo.strip()] = self.build_share(p, access_token)
-        self.config_shares(shares, access_token)
+            pass
         return shares
 
     def config_shares(self, shares, access_token):
@@ -75,19 +84,25 @@ class RefresherShareDiscovery(ShareDiscovery):
         self.vo_dir = config["vo_dir"]
 
     def get_token(self):
-        # fake the options for refreshing
-        # avoids code duplication but not very clean
-        class Opt:
-            timeout = 10
-
-        refresher = OidcRefreshToken(Opt)
-        return refresher._refresh_token(
+        refresh_data = {
+            "grant_type": "refresh_token",
+            "refresh_token": self.secret.get("refresh_token", None),
+            "scope": "openid email profile voperson_id eduperson_entitlement",
+        }
+        auth = None
+        if self.secret.get("client_secret", None):
+            refresh_data["client_secret"] = self.secret.get("client_secret")
+            auth = (client_id, client_secret)
+        r = requests.post(
             self.token_url,
-            self.secret.get("client_id", None),
-            self.secret.get("client_secret", None),
-            self.secret.get("refresh_token", None),
-            "openid email profile voperson_id eduperson_entitlement",
+            auth=auth,
+            data=refresh_data,
+            timeout=10,
         )
+        if r.status_code != requests.codes["ok"]:
+            msg = "Unable to get token, request returned %s" % r.text
+            raise Exception(msg)
+        return r.json()["access_token"]
 
     def config_shares(self, shares, access_token):
         # create the directory structure for the cloud-info-provider

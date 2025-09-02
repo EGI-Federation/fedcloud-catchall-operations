@@ -1,4 +1,4 @@
-""" Tests for the config generator """
+"""Tests for the config generator"""
 
 import unittest
 from collections import defaultdict

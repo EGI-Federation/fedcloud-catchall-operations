@@ -1,4 +1,4 @@
-""" Tests for the Share discovery """
+"""Tests for the Share discovery"""
 
 import unittest
 from unittest.mock import MagicMock, call, mock_open, patch
@@ -8,7 +8,7 @@ from cloud_info_catchall.share_discovery import (
     RefresherShareDiscovery,
     ShareDiscovery,
 )
-from fedcloudclient.endpoint import TokenException
+from keystoneauth1.exceptions.base import ClientException
 
 
 class ShareDiscoveryTest(unittest.TestCase):
@@ -109,7 +109,7 @@ class ShareDiscoveryTest(unittest.TestCase):
     def test_failed_token_shares(self, m_fedcli_token):
         m_get_token = MagicMock()
         self.discoverer.get_token = m_get_token
-        m_fedcli_token.side_effect = TokenException()
+        m_fedcli_token.side_effect = ClientException()
         s = self.discoverer.get_token_shares()
         m_fedcli_token.assert_called_with(
             "https://openstack.org", m_get_token.return_value, "oidc"
