@@ -3,12 +3,12 @@
 import logging
 import os
 
+import requests
 from keystoneauth1 import session
 from keystoneauth1.exceptions.base import ClientException
 from keystoneauth1.identity.v3.oidc import OidcAccessToken
 from keystoneclient.v3 import client
 from keystoneclient.v3.auth import AuthManager
-import requests
 
 
 class ShareDiscovery:

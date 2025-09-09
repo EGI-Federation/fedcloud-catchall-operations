@@ -3,13 +3,13 @@
 import unittest
 from unittest.mock import MagicMock, call, mock_open, patch
 
+import responses
 from cloud_info_catchall.share_discovery import (
     AccessTokenShareDiscovery,
     RefresherShareDiscovery,
     ShareDiscovery,
 )
 from keystoneauth1.exceptions.base import ClientException
-import responses
 from responses import matchers
 
 
