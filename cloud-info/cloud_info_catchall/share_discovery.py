@@ -42,7 +42,6 @@ class ShareDiscovery:
 
     def get_token_shares(self):
         access_token = self.get_token()
-        # rely on fedcloudclient for getting token
         # exchange access_token for Keystone token
         shares = {}
         try:
