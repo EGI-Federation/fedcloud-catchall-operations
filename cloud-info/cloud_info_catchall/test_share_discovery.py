@@ -9,6 +9,8 @@ from cloud_info_catchall.share_discovery import (
     ShareDiscovery,
 )
 from keystoneauth1.exceptions.base import ClientException
+import responses
+from responses import matchers
 
 
 class ShareDiscoveryTest(unittest.TestCase):
@@ -72,24 +74,38 @@ class ShareDiscoveryTest(unittest.TestCase):
 
     @patch("keystoneclient.v3.auth.AuthManager.projects")
     def test_token_shares(self, m_auth_manager):
+        class mock_p:
+            def __init__(self, d):
+                self.d = d
+
+            def to_dict(self):
+                return self.d
+
         m_get_token = MagicMock()
         self.discoverer.get_token = m_get_token
-        #m_proj.to_dict.return_value = [
-        #    {
-        #        "VO": "foobar.eu",
-        #        "id": "id1",
-        #        "name": "enabled foobar VO",
-        #        "enabled": True,
-        #    },
-        #    {"VO": "disabled.eu", "id": "id2", "name": "disabled VO", "enabled": False},
-        #    {"id": "id3", "name": "not VO project", "enabled": True},
-        #]
+        m_build_share = MagicMock()
+        self.discoverer.build_share = m_build_share
+        m_auth_manager.return_value = [
+            mock_p(
+                {
+                    "VO": "foobar.eu",
+                    "id": "id1",
+                    "name": "enabled foobar VO",
+                    "enabled": True,
+                }
+            ),
+            mock_p(
+                {
+                    "VO": "disabled.eu",
+                    "id": "id2",
+                    "name": "disabled VO",
+                    "enabled": False,
+                }
+            ),
+            mock_p({"id": "id3", "name": "not VO project", "enabled": True}),
+        ]
         s = self.discoverer.get_token_shares()
-        #m_fedcli_token.assert_called_with(
-            "https://openstack.org", m_get_token.return_value, "oidc"
-        )
         m_get_token.assert_called_with()
-        #m_proj.assert_called_with("https://openstack.org", m_fedcli_token.return_value)
         m_build_share.assert_called_with(
             {
                 "VO": "foobar.eu",
@@ -102,15 +118,12 @@ class ShareDiscoveryTest(unittest.TestCase):
         # return only the enabled with VO
         self.assertEqual(s, {"foobar.eu": m_build_share.return_value})
 
-    @patch("fedcloudclient.endpoint.retrieve_unscoped_token")
-    def test_failed_token_shares(self, m_fedcli_token):
+    @patch("keystoneclient.v3.auth.AuthManager.projects")
+    def test_failed_token_shares(self, m_projects):
         m_get_token = MagicMock()
         self.discoverer.get_token = m_get_token
-        m_fedcli_token.side_effect = ClientException()
+        m_projects.side_effect = ClientException()
         s = self.discoverer.get_token_shares()
-        m_fedcli_token.assert_called_with(
-            "https://openstack.org", m_get_token.return_value, "oidc"
-        )
         self.assertEqual(s, {})
 
     def test_build_share(self):
@@ -125,19 +138,24 @@ class TestRefresherShareDiscovery(ShareDiscoveryTest):
     SECRET = {"client_id": "id", "client_secret": "secret", "refresh_token": "token"}
     DISCOVERER_CLASS = RefresherShareDiscovery
 
-    @patch(
-        "cloud_info_provider.auth_refreshers.oidc_refresh.OidcRefreshToken._refresh_token"
-    )
-    def test_token_refresh(self, m):
-        t = self.discoverer.get_token()
-        m.assert_called_with(
+    @responses.activate
+    def test_token_refresh(self):
+        responses.post(
             "https://aai.egi.eu",
-            "id",
-            "secret",
-            "token",
-            "openid email profile voperson_id eduperson_entitlement",
+            match=[
+                matchers.urlencoded_params_matcher(
+                    {
+                        "grant_type": "refresh_token",
+                        "refresh_token": "token",
+                        "scope": "openid email profile voperson_id eduperson_entitlement",
+                        "client_secret": "secret",
+                    },
+                )
+            ],
+            json={"access_token": "foo"},
         )
-        self.assertEqual(t, m.return_value)
+        t = self.discoverer.get_token()
+        self.assertEqual(t, "foo")
 
     @patch("os.makedirs")
     def config_shares(self, m_makedirs):

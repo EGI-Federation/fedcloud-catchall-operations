@@ -8,6 +8,7 @@ from keystoneauth1.exceptions.base import ClientException
 from keystoneauth1.identity.v3.oidc import OidcAccessToken
 from keystoneclient.v3 import client
 from keystoneclient.v3.auth import AuthManager
+import requests
 
 
 class ShareDiscovery:
@@ -91,7 +92,7 @@ class RefresherShareDiscovery(ShareDiscovery):
         auth = None
         if self.secret.get("client_secret", None):
             refresh_data["client_secret"] = self.secret.get("client_secret")
-            auth = (client_id, client_secret)
+            auth = (self.secret["client_id"], self.secret["client_secret"])
         r = requests.post(
             self.token_url,
             auth=auth,
