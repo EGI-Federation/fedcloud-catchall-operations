@@ -29,3 +29,6 @@ vos:
   - name: vo.seadatanet.org
     auth:
       project_id: d0b2e9a73cd042c49d5d1c3a3cfe55d0
+  - name: vo.geo-planetary.eu
+    auth:
+      project_id: c19ac33074ee416f8884aa1f48026db4
