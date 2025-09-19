@@ -32,12 +32,6 @@ COPY . .
 
 RUN pip install --no-cache-dir .
 
-# A second cloud-info-provider!
-RUN python -m venv /cloud-info-json \
-    && /cloud-info-json/bin/pip install --no-cache-dir \
-         git+https://github.com/EGI-Federation/cloud-info-provider.git@88c3a14d1e11c1adf9a03c85679cdcc8e3a2ede1 \
-    && cat /etc/grid-security/certificates/*.pem >> "$(/cloud-info-json/bin/python -m requests.certs)"
-
 # The actual image
 FROM python:3
 
@@ -61,13 +55,10 @@ WORKDIR /cloud-info
 # All the python code from the build image above
 COPY --chown=python:python --from=build /cloud-info/venv ./venv
 COPY --chown=python:python --from=build /fedcloud /fedcloud
-COPY --chown=python:python --from=build /cloud-info-json /cloud-info-json
 
 # Add the scripts that call the cloud-info-provider as needed for the site
 # these create the configuration for the site by discovering the available
-# projects for the credentials and will send the output to the AMS queue and
-# upload to S3
-COPY ams-wrapper.sh /usr/local/bin/ams-wrapper.sh
+# projects for the credentials and will upload the output to S3
 COPY publisher.sh /usr/local/bin/publisher.sh
 # These are sample configuration files for cloud-info-provider that can be used
 # if the container is used outside of the catchall-operations as described in
