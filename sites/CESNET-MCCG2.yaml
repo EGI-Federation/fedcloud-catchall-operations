@@ -69,3 +69,6 @@ vos:
   - name: vo.radiotracers4psma.eu
     auth:
       project_id: 80faf6c9ec064bdf9e1c6f0cbfa763ff
+  - name: vo.eosc-data-commons.eu
+    auth:
+      project_id: 5c338f6614704093991f9b6e17f54f90
