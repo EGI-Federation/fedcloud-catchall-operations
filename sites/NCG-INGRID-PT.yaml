@@ -1,6 +1,6 @@
 ---
 gocdb: NCG-INGRID-PT
-endpoint: https://stratus.ncg.ingrid.pt:5000/v3
+endpoint: https://stratus.a.acnca.pt:5000/v3
 images:
   sync: true
   formats:
