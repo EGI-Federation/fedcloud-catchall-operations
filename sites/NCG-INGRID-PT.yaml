@@ -1,6 +1,6 @@
 ---
 gocdb: NCG-INGRID-PT
-endpoint: https://stratus.ncg.ingrid.pt:5000/v3
+endpoint: https://stratus.a.acnca.pt:5000/v3
 images:
   sync: true
   formats:
@@ -15,7 +15,7 @@ vos:
       project_id: fa764d911b1d4e5eab8e51a186d813ee
   - name: cloud.egi.eu
     auth:
-      project_id: 6b042927bcfa466cb9eb56d3ea679987
+      project_id: da96bf6ef8d249b98ea7239d4d39bfd9
   - name: dev.intertwin.eu
     auth:
       project_id: 7e08ed7db02847a1858ce8ed0f93be3c
@@ -30,7 +30,7 @@ vos:
       project_id: bd5a81e1670b48f18af33b05512a9d77
   - name: training.egi.eu
     auth:
-      project_id: e51b8a89b30945adbf52a5d568912e4c
+      project_id: dcfe0d8381bd4a34ad7d9d426566ebb5
   - name: vo.access.egi.eu
     auth:
       project_id: bd5a81e1670b48f18af33b05512a9d77
