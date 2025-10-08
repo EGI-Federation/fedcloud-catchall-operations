@@ -19,8 +19,6 @@ resource "openstack_compute_volume_attach_v2" "attached" {
   volume_id   = openstack_blockstorage_volume_v3.image-cache.id
 }
 
-
-
 output "instance-id" {
   value = openstack_compute_instance_v2.image-sync.id
 }

@@ -8,14 +8,14 @@ clouds:
     vo: cloud.egi.eu
     auth_type: token
     auth:
-      auth_url: https://stratus.ncg.ingrid.pt:5000/v3
+      auth_url: https://stratus.a.acnca.pt:5000
       token: *bt
-      project_id: 6b042927bcfa466cb9eb56d3ea679987
+      project_id: da96bf6ef8d249b98ea7239d4d39bfd9
   deploy:
     site: NCG-INGRID-PT
     vo: cloud.egi.eu
     auth_type: token
     auth:
-      auth_url: https://stratus.ncg.ingrid.pt:5000/v3
+      auth_url: https://stratus.a.acnca.pt:5000
       token: *dt
-      project_id: 6b042927bcfa466cb9eb56d3ea679987
+      project_id: da96bf6ef8d249b98ea7239d4d39bfd9
