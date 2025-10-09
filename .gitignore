@@ -3,3 +3,5 @@ secrets.yaml
 .venv
 __pycache__
 deploy/.terraform*
+*.egg-info
+build
