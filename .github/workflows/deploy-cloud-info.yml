@@ -12,6 +12,7 @@ on:
 jobs:
   deploy:
     uses: ./.github/workflows/deploy.yml
+    environment: cloud-info
     with:
       dir: "deploy/cloud-info"
       tags: "cloud-info,docker"
