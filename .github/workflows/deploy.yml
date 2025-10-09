@@ -36,6 +36,8 @@ jobs:
           SCOPE="openid%20email%20profile%20voperson_id"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=member#aai.egi.eu"
+          SCOPE="$SCOPE%20entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
+          SCOPE="$SCOPE%20entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=member#aai.egi.eu"
           OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
                             -d "grant_type=refresh_token&client_id=token-portal&scope=$SCOPE&refresh_token=$REFRESH_TOKEN" \
                           | jq -r ".access_token")
