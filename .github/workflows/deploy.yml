@@ -19,7 +19,8 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    environment: {{ input.env }}
+    environment: 
+      name: ${{ input.env }}
     env:
       TF_VAR_flavor_id: ${{ vars.TF_VAR_FLAVOR_ID }}
       TF_VAR_image_id: ${{ vars.TF_VAR_IMAGE_ID }}
