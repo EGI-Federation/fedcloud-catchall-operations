@@ -103,7 +103,6 @@ jobs:
           sed -i -e "s/%FEDCLOUD_LOCKER_TOKEN%/$FEDCLOUD_LOCKER_TOKEN/" cloud-init.yaml
           sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)/" cloud-init.yaml
       - name: terraform plan
-        env:
         id: plan
         if: github.event_name == 'pull_request'
         run: |
