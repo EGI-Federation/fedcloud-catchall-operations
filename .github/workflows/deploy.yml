@@ -18,7 +18,7 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: ${{ inputs.env }}
     env:
       TF_VAR_flavor_id: ${{ vars.TF_VAR_FLAVOR_ID }}
@@ -184,9 +184,13 @@ jobs:
           max_attempts: 20
           retry_wait_seconds: 40
           command: >
-            pushd "${{ inputs.dir }}" &&
-            openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
-            openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
+            pushd "${{ inputs.dir }}" \
+              && openstack --os-cloud backend
+                --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall
+                 "${{ steps.terraform-vm-id.outputs.stdout }}" \
+              && openstack --os-cloud backend \
+                --os-token "$BACKEND_OS_TOKEN" object delete \
+                fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
