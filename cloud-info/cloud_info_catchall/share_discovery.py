@@ -87,7 +87,7 @@ class RefresherShareDiscovery(ShareDiscovery):
         refresh_data = {
             "grant_type": "refresh_token",
             "refresh_token": self.secret.get("refresh_token", None),
-            "scope": "openid email profile voperson_id eduperson_entitlement",
+            "scope": "openid email profile voperson_id eduperson_entitlement entitlements",
         }
         auth = None
         if self.secret.get("client_secret", None):
