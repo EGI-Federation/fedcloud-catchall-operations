@@ -10,11 +10,20 @@ on:
       tags:
         required: true
         type: string
+      env:
+        required: true
+        type: string
 
 jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.env }}
+    env:
+      TF_VAR_flavor_id: ${{ vars.TF_VAR_FLAVOR_ID }}
+      TF_VAR_image_id: ${{ vars.TF_VAR_IMAGE_ID }}
+      TF_VAR_net_id: ${{ vars.TF_VAR_NET_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -29,15 +38,18 @@ jobs:
           pip install simplejson yq fedcloudclient
       - name: Configure providers access
         env:
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
         run: |
           # using parametric scopes to only have access to cloud.egi.eu VO
           SCOPE="openid%20email%20profile%20voperson_id"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=member#aai.egi.eu"
+          SCOPE="$SCOPE%20entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
+          SCOPE="$SCOPE%20entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=member#aai.egi.eu"
           OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
-                            -d "grant_type=refresh_token&client_id=token-portal&scope=$SCOPE&refresh_token=$REFRESH_TOKEN" \
+                            -d "grant_type=client_credentials&client_id=$CLIENT_ID&scope=$SCOPE&client_secret=$CLIENT_SECRET" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
           cd "${{ inputs.dir }}"
@@ -95,7 +107,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           cd "${{ inputs.dir }}"
-          terraform plan -no-color -var-file="$EGI_SITE.tfvars"
+          terraform plan -no-color
         continue-on-error: true
       - name: Update Pull Request
         uses: actions/github-script@v8
@@ -131,7 +143,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           cd "${{ inputs.dir }}"
-          terraform apply -auto-approve -var-file="$EGI_SITE.tfvars"
+          terraform apply -auto-approve
       - name: Get VM ID
         id: terraform-vm-id
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -140,14 +152,17 @@ jobs:
           terraform output -raw instance-id
       - name: Re-configure providers access
         env:
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         run: |
           # using parametric scopes to only have access to cloud.egi.eu VO
           SCOPE="openid%20email%20profile%20voperson_id"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
           SCOPE="$SCOPE%20eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=member#aai.egi.eu"
+          SCOPE="$SCOPE%20entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=vm_operator#aai.egi.eu"
+          SCOPE="$SCOPE%20entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=member#aai.egi.eu"
           OIDC_TOKEN=$(curl -X POST "https://aai.egi.eu/auth/realms/egi/protocol/openid-connect/token" \
-                            -d "grant_type=refresh_token&refresh_token=$REFRESH_TOKEN&client_id=token-portal&scope=$SCOPE" \
+                            -d "grant_type=client_credentials&client_id=$CLIENT_ID&scope=$SCOPE&client_secret=$CLIENT_SECRET" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
           cd "${{ inputs.dir }}"
@@ -169,9 +184,13 @@ jobs:
           max_attempts: 20
           retry_wait_seconds: 40
           command: >
-            pushd "${{ inputs.dir }}" &&
-            openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}" &&
-            openstack --os-cloud backend --os-token "$BACKEND_OS_TOKEN" object delete fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
+            pushd "${{ inputs.dir }}" \
+              && openstack --os-cloud backend
+                --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall
+                 "${{ steps.terraform-vm-id.outputs.stdout }}" \
+              && openstack --os-cloud backend \
+                --os-token "$BACKEND_OS_TOKEN" object delete \
+                fedcloud-catchall "${{ steps.terraform-vm-id.outputs.stdout }}"
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |

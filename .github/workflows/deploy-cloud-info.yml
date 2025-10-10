@@ -15,4 +15,5 @@ jobs:
     with:
       dir: "deploy/cloud-info"
       tags: "cloud-info,docker"
+      env: "cloud-info"
     secrets: inherit

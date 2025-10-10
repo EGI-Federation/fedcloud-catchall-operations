@@ -15,4 +15,5 @@ jobs:
     with:
       dir: "deploy/image-sync"
       tags: "docker,image-sync"
+      env: "image-sync"
     secrets: inherit
