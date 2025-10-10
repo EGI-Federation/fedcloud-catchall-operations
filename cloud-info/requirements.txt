@@ -1,4 +1,4 @@
-cloud-info-provider==1.0.1
+cloud-info-provider==1.0.2
 python-glanceclient==4.10.0
 python-novaclient==18.11.0
 python-keystoneclient==5.7.0
