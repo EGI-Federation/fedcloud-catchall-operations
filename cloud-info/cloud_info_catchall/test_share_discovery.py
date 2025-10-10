@@ -147,7 +147,7 @@ class TestRefresherShareDiscovery(ShareDiscoveryTest):
                     {
                         "grant_type": "refresh_token",
                         "refresh_token": "token",
-                        "scope": "openid email profile voperson_id eduperson_entitlement",
+                        "scope": "openid email profile voperson_id eduperson_entitlement entitlements",
                         "client_secret": "secret",
                     },
                 )
