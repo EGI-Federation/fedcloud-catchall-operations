@@ -39,7 +39,7 @@ CONF.register_opts(
     [
         cfg.StrOpt("client_id"),
         cfg.StrOpt("client_secret"),
-        cfg.StrOpt("scopes", default="openid profile eduperson_entitlement email"),
+        cfg.StrOpt("scopes", default="openid profile eduperson_entitlement entitlements email"),
         cfg.StrOpt(
             "discovery_endpoint",
             default="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration",

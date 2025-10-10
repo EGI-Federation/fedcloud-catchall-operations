@@ -21,7 +21,7 @@ import yaml
 # Default OIDC URL for Check-in
 CHECKIN_OIDC_URL = "https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
 # Default list of scopes
-CHECKIN_SCOPES = "openid profile eduperson_entitlement email"
+CHECKIN_SCOPES = "openid profile eduperson_entitlement entitlements email"
 # Default access token TTL: 20 minutes
 ACCESS_TOKEN_TTL = 20 * 60
 
