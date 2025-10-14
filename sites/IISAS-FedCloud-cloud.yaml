@@ -33,9 +33,6 @@ vos:
   - name: vo.eosc-siesta.eu
     auth:
       project_id: 51e0cec60ffa49038f494c7e6ec6fb97
-  - name: vo.oipub.com
-    auth:
-      project_id: e188494f39564812987a4ee5f58084a7
   - name: vo.usegalaxy.eu
     auth:
       project_id: 7a23c4fa956a499c854eb215f3a95218
