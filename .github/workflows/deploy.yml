@@ -185,8 +185,8 @@ jobs:
           retry_wait_seconds: 40
           command: >
             pushd "${{ inputs.dir }}" \
-              && openstack --os-cloud backend
-                --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall
+              && openstack --os-cloud backend \
+                --os-token "$BACKEND_OS_TOKEN" object save fedcloud-catchall \
                  "${{ steps.terraform-vm-id.outputs.stdout }}" \
               && openstack --os-cloud backend \
                 --os-token "$BACKEND_OS_TOKEN" object delete \
