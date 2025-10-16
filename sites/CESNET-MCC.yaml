@@ -9,9 +9,6 @@ vos:
   - name: biomed
     auth:
       project_id: eca73ad6a84d4c0088063505c36349ab
-  - name: covid19.eosc-synergy.eu
-    auth:
-      project_id: 192e87f713474117a2a22704ac4da1a2
   - name: cryoem.instruct-eric.eu
     auth:
       project_id: d0ebf0fad0a04be19f93fdf794469544
@@ -52,9 +49,6 @@ vos:
   - name: /biomed/vip
     auth:
       project_id: 721251d671ea4268876043a9474ba3de
-  - name: vo.clarin.eu
-    auth:
-      project_id: 5fc606127d2d4499b959ff79219c7144
   - name: vo.emphasisproject.eu
     auth:
       project_id: b953842bf4204dc98054f6c3ae581cb5
@@ -64,9 +58,6 @@ vos:
   - name: vo.geoss.eu
     auth:
       project_id: 24869cfe0e094f59a3110429e068eef2
-  - name: vo.indigo-datacloud.eu
-    auth:
-      project_id: 25cb49baedbf40a194729ff6802c8491
   - name: vo.nextgeoss.eu
     auth:
       project_id: 081396a827c94f3da0c922cf6d8fb7f7

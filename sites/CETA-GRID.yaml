@@ -7,9 +7,6 @@ images:
     - qcow2
     - raw
 vos:
-  - name: covid19.eosc-synergy.eu
-    auth:
-      project_id: 4eda27e5514c496b9878e2b87a7c8515
   - name: dteam
     auth:
       project_id: 470c60ff781949be87ec17e0d3e208d9
