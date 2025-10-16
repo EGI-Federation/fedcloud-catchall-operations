@@ -31,7 +31,7 @@ OS_CLIENT_SECRET="$(yq -r '.checkin.client_secret' <"$CHECKIN_SECRETS_FILE")"
 export OS_CLIENT_SECRET
 export OS_ACCESS_TOKEN_TYPE="access_token"
 export OS_AUTH_TYPE="v3oidcclientcredentials"
-export OS_OPENID_SCOPE="openid profile eduperson_entitlement email"
+export OS_OPENID_SCOPE="openid profile eduperson_entitlement email entitlements"
 cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
 	--format glue21json "$SITE_CONFIG" >cloud-info.json
