@@ -22,9 +22,6 @@ vos:
   - name: lagoproject.net
     auth:
       project_id: bae9cee37c434aaa8548994f070521a3
-  - name: med.semmelweis-univ.hu
-    auth:
-      project_id: 8bea7dbd202f4cbcafb7e00334f320f2
   - name: ops
     auth:
       project_id: 929ff81c495b4cafb02fa1b8eef032c8

@@ -56,6 +56,3 @@ vos:
   - name: vo.obsea.es
     auth:
       project_id: 9ce2e985504d44d5af102ad3b537ffad
-  - name: vo.digitbrain.eu
-    auth:
-      project_id: 3eff18b8a237407ea2ed56aa9cb5d07c
