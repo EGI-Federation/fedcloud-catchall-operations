@@ -20,8 +20,6 @@ token-generator
 SECRETS_FILE="$ACCESS_TOKEN_FILE" config-generator >"$AUTO_CONFIG_PATH/site.yaml"
 # this worked, let's update the env
 export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
-# Do not use the generated config file
-# export CLOUD_INFO_CONFIG="$AUTO_CONFIG_PATH/site.yaml"
 
 # use service account for everyone
 export OS_DISCOVERY_ENDPOINT="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
@@ -34,10 +32,10 @@ export OS_AUTH_TYPE="v3oidcclientcredentials"
 export OS_OPENID_SCOPE="openid profile eduperson_entitlement email entitlements"
 cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
-	--format glue21json "$SITE_CONFIG" >cloud-info.json
+	--format glue21json "$SITE_CONFIG" >"$SITE_INFO_FILE"
 
 # Publish to object
-if test -s cloud-info.json; then
+if test -s "$SITE_INFO_FILE"; then
 	if test "$SWIFT_SITE_NAME" != ""; then
 		OIDC_ACCESS_TOKEN=$(yq -r '."cloud-sa".access_token' <"$ACCESS_TOKEN_FILE")
 		export OIDC_ACCESS_TOKEN
@@ -55,9 +53,7 @@ if test -s cloud-info.json; then
 			--site "$SWIFT_SITE_NAME" token issue -c id -f value)
 		export RCLONE_CONFIG_REMOTE_AUTH_TOKEN="$OS_AUTH_TOKEN"
 		rclone mkdir "remote:$SWIFT_CONTAINER_NAME"
-		rclone copy cloud-info.json "remote:$SWIFT_CONTAINER_NAME/$SITE_NAME"
+		rclone copy "$SITE_INFO_FILE" "remote:$SWIFT_CONTAINER_NAME"
 		echo "Upload completed!"
 	fi
 fi
-
-rm -rf "$VO_CONFIG_PATH"
