@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       # Check yaml files comply to schema
       - name: Check YAML schema
         run: |
