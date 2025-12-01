@@ -1,6 +1,6 @@
 ---
 gocdb: fedcloud.srce.hr
-endpoint: https://faust.srce.hr:5000/v3/
+endpoint: https://faust.srce.hr:5000/v3
 images:
   sync: true
   formats:
