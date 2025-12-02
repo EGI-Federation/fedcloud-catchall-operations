@@ -1,0 +1,15 @@
+---
+gocdb: fedcloud.srce.hr
+endpoint: https://faust.srce.hr:5000/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
+vos:
+  - name: ops
+    auth:
+      project_id: 45d0f030ddca401e8b1a713360505ac7
+  - name: vo.cessda.eduteams.org
+    auth:
+      project_id: 525e72bbead74b4d9a203499ae7fa15e
