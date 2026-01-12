@@ -2,7 +2,7 @@ cloud-info-provider==1.0.2
 python-glanceclient==4.10.0
 python-novaclient==18.11.0
 python-keystoneclient==5.7.0
-python-openstackclient==8.2.0
+python-openstackclient==8.3.0
 keystoneauth1==5.12.0
 yq==3.4.3
 PyJWT==2.10.1
