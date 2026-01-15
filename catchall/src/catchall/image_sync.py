@@ -5,9 +5,7 @@ Creates the proper configuration files for atrope and runs it to get images
 synced in the EGI Fedcloud
 """
 
-import glob
 import logging
-import os
 import os.path
 import subprocess
 import sys
@@ -17,12 +15,12 @@ import httpx
 import yaml
 from oslo_config import cfg
 
-# Configuraion
+from catchall.discovery import fetch_site_info, load_sites
+
+# Registry configuration
 CONF = cfg.CONF
 CONF.register_opts(
     [
-        cfg.StrOpt("site_config_dir", default="."),
-        cfg.StrOpt("cloud_info_url", default="https://is.cloud.egi.eu"),
         cfg.StrOpt("registry_base_url", default="https://registry.egi.eu"),
         cfg.StrOpt("registry_host", default="registry.egi.eu"),
         cfg.StrOpt("registry_project", default="egi_vm_images"),
@@ -34,7 +32,6 @@ CONF.register_opts(
 )
 
 # Check-in config
-checkin_grp = cfg.OptGroup("checkin")
 CONF.register_opts(
     [
         cfg.StrOpt("client_id"),
@@ -50,8 +47,11 @@ CONF.register_opts(
     group="checkin",
 )
 
-
+# Harbor interaction
 def fetch_harbor_projects():
+    if not (CONF.sync.registry_user and CONF.sync.registry_password):
+        raise  ValueError("Missing credentials for registry")
+
     auth = httpx.BasicAuth(
         username=CONF.sync.registry_user, password=CONF.sync.registry_password
     )
@@ -62,7 +62,10 @@ def fetch_harbor_projects():
     next_url = "/api/v2.0/projects"
     params = dict(page=page, page_size=10)
 
+    last_url = ""
     while next_url:
+        if last_url == next_url:
+            break
         url = f"{CONF.sync.registry_base_url}{next_url}"
         logging.debug(f"Fetching page {page} from {url}")
         r = client.get(url, params=params)
@@ -71,6 +74,7 @@ def fetch_harbor_projects():
         if not data:
             break
         projects.extend(data)
+        last_url = next_url
         next_url = r.links.get("next", {}).get("url", None)
         params = {}
         page += 1
@@ -80,42 +84,6 @@ def fetch_harbor_projects():
     project_names = [p.get("name") for p in projects]
     logging.debug(f'Obtained {", ".join(project_names)} from Harbor')
     return project_names
-
-
-def fetch_site_info_cloud_info():
-    logging.debug("Fetching site info from cloud-info")
-    sites = []
-    # 1 - Get all sites listing
-    r = httpx.get(
-        os.path.join(CONF.sync.cloud_info_url, "sites/"),
-        headers={"Accept": "application/json"},
-    )
-    r.raise_for_status()
-    # 2 - Go one by one getting the shares
-    for site in r.json():
-        try:
-            r = httpx.get(
-                os.path.join(CONF.sync.cloud_info_url, f"site/{site['name']}/projects")
-            )
-            r.raise_for_status()
-        except httpx.HTTPError as e:
-            logging.warning(
-                f"Exception while trying to get info from {site['name']}: {e}"
-            )
-            continue
-        shares = {proj["name"]: {"project_id": proj["id"]} for proj in r.json()}
-        sites.append(
-            {
-                "site": {"name": site["name"]},
-                "endpointURL": site["url"],
-                "shares": shares,
-            }
-        )
-    return sites
-
-
-def fetch_site_info():
-    return fetch_site_info_cloud_info()
 
 
 def dump_atrope_config(site, ops_project_id, sources_file, vo_map_file):
@@ -224,15 +192,6 @@ def do_sync(sites_config, harbor_projects):
             ]
             logging.debug(f"Running {' '.join(cmd)}")
             subprocess.call(cmd)
-
-
-def load_sites():
-    sites = {}
-    for site_file in glob.iglob("*.yaml", root_dir=CONF.sync.site_config_dir):
-        with open(os.path.join(CONF.sync.site_config_dir, site_file), "r") as f:
-            site = yaml.safe_load(f.read())
-            sites[site["gocdb"]] = site
-    return sites
 
 
 def main():

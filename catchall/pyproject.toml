@@ -1,0 +1,31 @@
+[project]
+name = "catchall"
+version = "0.1.0"
+description = "Tools to deal with the configuration of the catch-all components"
+readme = "README.md"
+authors = [
+    { name = "Enol Fernández", email = "enol.fernandez@egi.eu" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.14"
+dependencies = [
+    "atrope",
+    "httpx>=0.28.1",
+    "oslo-config>=10.2.0",
+    "pyyaml>=6.0.3",
+]
+
+[project.scripts]
+catchall = "catchall:main"
+image-sync = "catchall.image_sync:main"
+
+[build-system]
+requires = ["uv_build>=0.9.14,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }

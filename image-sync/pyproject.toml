@@ -21,4 +21,3 @@ image-sync = "image_sync.sync:main"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
-

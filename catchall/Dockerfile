@@ -1,20 +1,3 @@
-FROM python:3 AS build
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-WORKDIR /image-sync
-
-RUN python -m venv /image-sync/venv
-ENV PATH="/image-sync/venv/bin:$PATH"
-
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-RUN pip install --no-cache-dir .
-
 # The actual image
 FROM python:3-slim
 
@@ -25,7 +8,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       gnupg2 qemu-utils curl \
+       gnupg2 qemu-utils curl git \
     && curl -s https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-4 \
 	| gpg --dearmor  -o /etc/apt/keyrings/eugridpma.gpg  \
     && echo "deb [signed-by=/etc/apt/keyrings/eugridpma.gpg] https://repository.egi.eu/sw/production/cas/1/current egi-igtf core" > /etc/apt/sources.list.d/igtf.list \
@@ -35,14 +18,18 @@ RUN apt-get update \
 
 WORKDIR /image-sync
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
 RUN groupadd -g 1999 python \
-    && useradd -m -r -u 1999 -g python python
-
-COPY --chown=python:python --from=build /image-sync/venv ./venv
-
-RUN cat /etc/grid-security/certificates/*.pem >> "$(/image-sync/venv/bin/python -m requests.certs)"
+    && useradd -m -r -u 1999 -g python python \
+    && chown python:python /image-sync
 
 USER 1999
 
-ENV PATH="/image-sync/venv/bin:$PATH"
-CMD ["image-sync"]
+COPY --chown=python:python . /image-sync
+
+RUN uv sync --locked
+
+RUN cat /etc/grid-security/certificates/*.pem >> "$(uv run python -m requests.certs)"
+
+CMD ["uv", "run", "image-sync"]
