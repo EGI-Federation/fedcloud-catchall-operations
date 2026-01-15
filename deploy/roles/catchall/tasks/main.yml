@@ -31,14 +31,19 @@
 - name: EGI configuration directories
   tags: ["cloud-info", "image-sync"]
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "/etc/egi"
     state: directory
     mode: "755"
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
-  loop:
-    - /etc/egi
-    - /etc/egi/vos
+
+- name: Build global configuration file
+  ansible.builtin.template:
+    src: catchall.conf.j2
+    dest: /etc/egi/catchall.conf
+    mode: "600"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
 
 - name: Site specific config
   tags: ["cloud-info"]
