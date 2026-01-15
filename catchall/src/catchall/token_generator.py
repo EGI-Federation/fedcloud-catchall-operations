@@ -12,32 +12,14 @@ import calendar
 import json
 import logging
 import os
+import sys
 from datetime import datetime, timezone
 
+import httpx
 import jwt
-import httpx 
-
-import sys
-
 from oslo_config import cfg
 
-# Check-in config
-CONF = cfg.CONF
-CONF.register_opts(
-    [
-        cfg.StrOpt("client_id"),
-        cfg.StrOpt("client_secret"),
-        cfg.StrOpt(
-            "scopes", default="openid profile eduperson_entitlement entitlements email"
-        ),
-        cfg.StrOpt(
-            "discovery_endpoint",
-            default="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration",
-        ),
-	cfg.IntOpt("access_token_ttl", default=20*60),
-    ],
-    group="checkin",
-)
+from catchall.config import CONF
 
 
 def valid_token(token, oidc_config, min_time):
@@ -86,13 +68,15 @@ def check_token(token_file, oidc_config, ttl):
 
 
 def main():
-    logging.basicConfig() 
-    CONF.register_cli_opt(cfg.StrOpt('access_token_file', positional=True))
+    logging.basicConfig()
+    CONF.register_cli_opt(cfg.StrOpt("access_token_file", positional=True))
     CONF(sys.argv[1:])
 
     oidc_config = httpx.get(CONF.checkin.discovery_endpoint).json()
 
-    if not check_token(CONF.access_token_file, oidc_config, CONF.checkin.access_token_ttl):
+    if not check_token(
+        CONF.access_token_file, oidc_config, CONF.checkin.access_token_ttl
+    ):
         logging.info("Token needs refreshing")
         with open(CONF.access_token_file, "w+") as f:
             new_token = generate_token(oidc_config)

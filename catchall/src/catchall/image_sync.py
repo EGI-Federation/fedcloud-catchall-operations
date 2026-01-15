@@ -13,24 +13,9 @@ import tempfile
 
 import httpx
 import yaml
+
+from catchall.config import CONF
 from catchall.discovery import fetch_site_info, load_sites
-from oslo_config import cfg
-
-
-# Registry configuration
-CONF = cfg.CONF
-CONF.register_opts(
-    [
-        cfg.StrOpt("registry_base_url", default="https://registry.egi.eu"),
-        cfg.StrOpt("registry_host", default="registry.egi.eu"),
-        cfg.StrOpt("registry_project", default="egi_vm_images"),
-        cfg.ListOpt("formats", default=[]),
-        cfg.StrOpt("registry_user"),
-        cfg.StrOpt("registry_password"),
-    ],
-    group="sync",
-)
-
 
 
 # Harbor interaction

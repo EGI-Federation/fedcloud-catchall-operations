@@ -8,17 +8,8 @@ import os.path
 
 import httpx
 import yaml
-from oslo_config import cfg
 
-# Configuration
-CONF = cfg.CONF
-CONF.register_opts(
-    [
-        cfg.StrOpt("site_config_dir", default="."),
-        cfg.StrOpt("cloud_info_url", default="https://is.cloud.egi.eu"),
-    ],
-    group="discovery",
-)
+from catchall.config import CONF
 
 
 def fetch_site_info():
