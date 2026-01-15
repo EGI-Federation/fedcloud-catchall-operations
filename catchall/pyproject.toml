@@ -14,13 +14,22 @@ classifiers = [
 requires-python = ">=3.14"
 dependencies = [
     "atrope",
+    "cloud-info-provider==1.0.2",
     "httpx>=0.28.1",
+    "keystoneauth1>=5.12.0",
     "oslo-config>=10.2.0",
+    "pyjwt>=2.10.1",
+    "python-glanceclient>=4.10.0",
+    "python-keystoneclient>=5.7.0",
+    "python-novaclient>=18.11.0",
+    "python-openstackclient>=8.3.0",
     "pyyaml>=6.0.3",
+    "yq>=3.4.3",
 ]
 
 [project.scripts]
 catchall = "catchall:main"
+token-generator = "catchall.token_generator:main"
 image-sync = "catchall.image_sync:main"
 
 [build-system]

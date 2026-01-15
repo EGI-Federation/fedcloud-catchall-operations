@@ -67,10 +67,6 @@ else
 	header="Failed deployment :boom:"
 fi
 
-# This is a temporary way to get the auto discovery working while we transition for all sites
-# copy the secrets to the /etc/egi/vos dir which is readable from the containers
-cp secrets.yaml /etc/egi/vos/secrets.yaml
-
 # make sure the container user (1999) can access the files
 chown -R 1999:1999 /etc/egi/
 

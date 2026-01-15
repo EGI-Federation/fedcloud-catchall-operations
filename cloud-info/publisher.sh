@@ -6,20 +6,7 @@ set -e
 # We deal with OpenStack, no need to have anything else
 CLOUD_INFO_MIDDLEWARE=openstack
 
-# Attempt to generate the site configuration
-AUTO_CONFIG_PATH="$(mktemp -d)"
-
-# First get valid access token
 export CHECKIN_SECRETS_FILE="$CHECKIN_SECRETS_PATH/secrets.yaml"
-# TODO(enolfc): avoid creating new tokens for every provider
-export ACCESS_TOKEN_FILE="$AUTO_CONFIG_PATH/token.yaml"
-
-token-generator
-# TODO(enolfc): even if this belows fails, we should use access token as it will provide
-# access to more projects
-SECRETS_FILE="$ACCESS_TOKEN_FILE" config-generator >"$AUTO_CONFIG_PATH/site.yaml"
-# this worked, let's update the env
-export CHECKIN_SECRETS_PATH="$AUTO_CONFIG_PATH/vos"
 
 # use service account for everyone
 export OS_DISCOVERY_ENDPOINT="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration"
@@ -37,7 +24,9 @@ cloud-info-provider-service \
 # Publish to object
 if test -s "$SITE_INFO_FILE"; then
 	if test "$SWIFT_SITE_NAME" != ""; then
-		OIDC_ACCESS_TOKEN=$(yq -r '."cloud-sa".access_token' <"$ACCESS_TOKEN_FILE")
+		ACCESS_TOKEN_FILE="$(mktemp)"
+		token-generator $ACCESS_TOKEN_FILE
+		OIDC_ACCESS_TOKEN=$(cat "$ACCESS_TOKEN_FILE")
 		export OIDC_ACCESS_TOKEN
 		export EGI_VO="$SWIFT_VO_NAME"
 		SWIFT_URL=$(/fedcloud/bin/fedcloud openstack \

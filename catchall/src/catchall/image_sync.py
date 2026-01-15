@@ -13,9 +13,9 @@ import tempfile
 
 import httpx
 import yaml
+from catchall.discovery import fetch_site_info, load_sites
 from oslo_config import cfg
 
-from catchall.discovery import fetch_site_info, load_sites
 
 # Registry configuration
 CONF = cfg.CONF
@@ -31,26 +31,12 @@ CONF.register_opts(
     group="sync",
 )
 
-# Check-in config
-CONF.register_opts(
-    [
-        cfg.StrOpt("client_id"),
-        cfg.StrOpt("client_secret"),
-        cfg.StrOpt(
-            "scopes", default="openid profile eduperson_entitlement entitlements email"
-        ),
-        cfg.StrOpt(
-            "discovery_endpoint",
-            default="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration",
-        ),
-    ],
-    group="checkin",
-)
+
 
 # Harbor interaction
 def fetch_harbor_projects():
     if not (CONF.sync.registry_user and CONF.sync.registry_password):
-        raise  ValueError("Missing credentials for registry")
+        raise ValueError("Missing credentials for registry")
 
     auth = httpx.BasicAuth(
         username=CONF.sync.registry_user, password=CONF.sync.registry_password
