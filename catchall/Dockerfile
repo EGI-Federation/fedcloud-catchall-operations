@@ -32,7 +32,6 @@ RUN python -m venv /catchall/venv  \
     && /catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/catchall/venv/bin/python -m requests.certs)"
 
-
 COPY . /catchall
 RUN /catchall/venv/bin/pip install --no-cache-dir .
 
