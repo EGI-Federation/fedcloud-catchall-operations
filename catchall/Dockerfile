@@ -62,10 +62,6 @@ WORKDIR /catchall
 COPY --chown=python:python --from=build /catchall/venv ./venv
 COPY --chown=python:python --from=build /fedcloud /fedcloud
 
-# All the python code from the build image above
-COPY --chown=python:python --from=build /cloud-info/venv ./venv
-COPY --chown=python:python --from=build /fedcloud /fedcloud
-
 # Add the script that call the cloud-info-provider as needed for the site
 # these create the configuration for the site by discovering the available
 # projects for the credentials and will upload the output to S3
