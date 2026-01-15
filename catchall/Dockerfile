@@ -14,6 +14,12 @@ RUN apt-get update \
     && apt-get install -y ca-policy-egi-core \
     && rm -rf /var/lib/apt/lists/*
 
+
+# Fedcloud client is pinning dependencies strictly so it does not play
+# very well with the rest of the available venv. Installing on its own
+RUN python -m venv /fedcloud && \
+    /fedcloud/bin/pip install --no-cache-dir fedcloudclient
+
 WORKDIR /catchall
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -25,6 +31,7 @@ RUN uv pip compile pyproject.toml -o requirements.txt
 RUN python -m venv /catchall/venv  \
     && /catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/catchall/venv/bin/python -m requests.certs)"
+
 
 COPY . /catchall
 RUN /catchall/venv/bin/pip install --no-cache-dir .
