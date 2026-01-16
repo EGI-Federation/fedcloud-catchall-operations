@@ -38,6 +38,7 @@
     group: "{{ egi_group }}"
 
 - name: Build global configuration file
+  tags: ["cloud-info", "image-sync"]
   ansible.builtin.template:
     src: catchall.conf.j2
     dest: /etc/egi/catchall.conf
