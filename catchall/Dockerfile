@@ -3,6 +3,8 @@
 ##################################################
 FROM python:3 AS build
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # hadolint ignore=DL3015, DL3008
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -24,7 +26,7 @@ WORKDIR /catchall
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml uv.lock /catchall
+COPY pyproject.toml uv.lock /catchall/
 
 RUN uv pip compile pyproject.toml -o requirements.txt
 

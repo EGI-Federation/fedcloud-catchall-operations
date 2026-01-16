@@ -13,7 +13,6 @@ import tempfile
 
 import httpx
 import yaml
-
 from catchall.config import CONF
 from catchall.discovery import fetch_site_info, load_sites
 

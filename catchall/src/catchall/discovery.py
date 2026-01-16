@@ -8,7 +8,6 @@ import os.path
 
 import httpx
 import yaml
-
 from catchall.config import CONF
 
 

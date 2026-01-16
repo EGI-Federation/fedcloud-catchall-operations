@@ -8,8 +8,9 @@ CLOUD_INFO_MIDDLEWARE=openstack
 
 # use service account for everyone
 ACCESS_TOKEN_FILE="$(mktemp)"
-token-generator --config-dir /etc/egi $ACCESS_TOKEN_FILE
-export OS_ACCESS_TOKEN=$(cat "$ACCESS_TOKEN_FILE")
+token-generator --config-dir /etc/egi "$ACCESS_TOKEN_FILE"
+OS_ACCESS_TOKEN="$(cat "$ACCESS_TOKEN_FILE")"
+export OS_ACCESS_TOKEN
 export OS_AUTH_TYPE="v3oidcaccesstoken"
 cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
@@ -18,7 +19,7 @@ cloud-info-provider-service \
 # Publish to object
 if test -s "$SITE_INFO_FILE"; then
 	if test "$SWIFT_SITE_NAME" != ""; then
-		token-generator --config-dir /etc/egi $ACCESS_TOKEN_FILE
+		token-generator --config-dir /etc/egi "$ACCESS_TOKEN_FILE"
 		OIDC_ACCESS_TOKEN=$(cat "$ACCESS_TOKEN_FILE")
 		export OIDC_ACCESS_TOKEN
 		export EGI_VO="$SWIFT_VO_NAME"

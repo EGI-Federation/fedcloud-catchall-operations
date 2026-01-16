@@ -17,9 +17,8 @@ from datetime import datetime, timezone
 
 import httpx
 import jwt
-from oslo_config import cfg
-
 from catchall.config import CONF
+from oslo_config import cfg
 
 
 def valid_token(token, oidc_config, min_time):
