@@ -11,14 +11,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - name: Set up Python
+      - name: "Set up Python"
         uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
-      - name: Test cloud-info-generator
+          python-version-file: ".catchall/python-version"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+      - name: Install the project
+        run:
+          cd catchall
+          uv sync --locked
+      - name: Run tests
         run: |
-          cd cloud-info
-          pip install -r requirements.txt
-          pip install .
-          cd cloud_info_catchall
-          python3 -m unittest
+          cd catchall/src/catchall
+          uv run python -m unittest

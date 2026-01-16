@@ -12,13 +12,6 @@ jobs:
     name: Build and push images
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        image:
-          - cloud-info
-          - caso
-          - catchall
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,7 +19,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/egi-federation/fedcloud-${{ matrix.image }}
+          images: ghcr.io/egi-federation/fedcloud-catchall
           tags: |
             type=sha
       - name: Set up QEMU
@@ -46,5 +39,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
-          context: ${{ matrix.image }}
-          file: ${{ matrix.image }}/Dockerfile
+          context: catchall
+          file: catchall/Dockerfile
