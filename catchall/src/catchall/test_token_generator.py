@@ -108,8 +108,8 @@ class TokenGeneratorTest(unittest.TestCase):
         self._assert_valid_token_test(m_header, m_decode, m_alg)
         m_calendar.assert_not_called()
 
-    @patch("cloud_info_catchall.token_generator.valid_token")
-    @patch("cloud_info_catchall.token_generator.get_access_token")
+    @patch("catchall.token_generator.valid_token")
+    @patch("catchall.token_generator.get_access_token")
     def test_generate_tokens(self, m_get_access, m_valid_token):
         tokens = {"foo": {"access_token": "abc"}, "bar": {"access_token": "def"}}
         secrets = {
