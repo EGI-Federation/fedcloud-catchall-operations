@@ -4,9 +4,9 @@ import unittest
 from unittest.mock import call, patch
 
 import cloud_info_catchall.token_generator as tg
+import httpx
 import jwt
-import responses
-from responses import matchers
+import respx
 
 
 class TokenGeneratorTest(unittest.TestCase):
@@ -15,33 +15,45 @@ class TokenGeneratorTest(unittest.TestCase):
         "token_endpoint": "https://example.com",
     }
 
-    @responses.activate
+    @respx.mock
     def test_get_access_token(self):
         token_url = "https://example.com"
         scopes = "a b c"
         secret = {"client_id": "id", "client_secret": "secret"}
-        responses.post(
-            token_url,
-            json={"access_token": "foo"},
-            match=[
-                matchers.urlencoded_params_matcher(
-                    {
-                        "grant_type": "client_credentials",
-                        "client_id": "id",
-                        "client_secret": "secret",
-                        "scope": "a b c",
-                    }
-                )
-            ],
+
+        route = respx.post(token_url).mock(
+            return_value=httpx.Response(
+                200,
+                json={"access_token": "foo"},
+            )
         )
-        self.assertEqual(tg.get_access_token(token_url, scopes, secret), "foo")
+
+        token = tg.get_access_token(token_url, scopes, secret)
+
+        self.assertEqual(token, "foo")
+        self.assertTrue(route.called)
+
+        request = route.calls[0].request
+        self.assertEqual(
+            request.content.decode(),
+            "grant_type=client_credentials"
+            "&client_id=id"
+            "&client_secret=secret"
+            "&scope=a+b+c",
+        )
 
     def test_valid_token_no_token(self):
         self.assertEqual(tg.valid_token(None, None, None), False)
 
-    @responses.activate
+    @respx.mock
     def _inner_test_valid_token(self, ttl, result):
-        responses.get("https://example.com", json={"keys": [{"kid": "123"}]})
+        respx.get("https://example.com").mock(
+            return_value=httpx.Response(
+                200,
+                json={"keys": [{"kid": "123"}]},
+            )
+        )
+
         self.assertEqual(tg.valid_token("foo", self.OIDC_CONFIG, ttl), result)
 
     def _setup_valid_token_test(self, m_header, m_decode, m_calendar):

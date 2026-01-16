@@ -24,6 +24,7 @@ dependencies = [
     "python-novaclient>=18.11.0",
     "python-openstackclient>=8.3.0",
     "pyyaml>=6.0.3",
+    "respx>=0.22.0",
 ]
 
 [project.scripts]
