@@ -1,7 +1,7 @@
 """Tests for the config generator"""
 
 import unittest
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
 
 import catchall.token_generator as tg
 import httpx
