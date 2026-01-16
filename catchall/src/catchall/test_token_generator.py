@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import call, patch
 
-import cloud_info_catchall.token_generator as tg
+import catchall.token_generator as tg
 import httpx
 import jwt
 import respx
