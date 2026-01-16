@@ -54,7 +54,7 @@ RUN apt-get update \
 
 RUN mkdir /catchall \
     && groupadd -g 1999 python \
-    && useradd -r -u 1999 -g python python \
+    && useradd -m -r -u 1999 -g python python \
     && chown -R python:python /catchall
 
 WORKDIR /catchall
