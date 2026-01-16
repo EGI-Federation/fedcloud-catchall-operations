@@ -60,6 +60,7 @@ def check_token(token_file, oidc_config, ttl):
         token = ""
         with open(token_file, "r") as f:
             token = f.read().strip()
+        print(token)
         if valid_token(token, oidc_config, ttl):
             logging.warning("Token is still valid, not refreshing")
             return True

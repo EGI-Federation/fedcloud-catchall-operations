@@ -69,6 +69,7 @@ source = { editable = "." }
 dependencies = [
     { name = "atrope" },
     { name = "cloud-info-provider" },
+    { name = "fixtures" },
     { name = "httpx" },
     { name = "keystoneauth1" },
     { name = "oslo-config" },
@@ -79,12 +80,14 @@ dependencies = [
     { name = "python-openstackclient" },
     { name = "pyyaml" },
     { name = "respx" },
+    { name = "testtools" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.0.0" },
     { name = "cloud-info-provider", specifier = "==1.0.2" },
+    { name = "fixtures", specifier = ">=4.2.8" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "keystoneauth1", specifier = ">=5.12.0" },
     { name = "oslo-config", specifier = ">=10.2.0" },
@@ -95,6 +98,7 @@ requires-dist = [
     { name = "python-openstackclient", specifier = ">=8.3.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.22.0" },
+    { name = "testtools", specifier = ">=2.8.2" },
 ]
 
 [[package]]
@@ -329,6 +333,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e7/c8/301ff89746e76745b937606df4753c032787c59ecb37dd4d4250bddc8929/dogpile_cache-1.5.0.tar.gz", hash = "sha256:849c5573c9a38f155cd4173103c702b637ede0361c12e864876877d0cd125eec", size = 947962, upload-time = "2025-10-11T17:35:36.898Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/dc/80/12235e5b75bb2c586733280854f131b86051e0bbdfb55349ff70d0f72cf9/dogpile_cache-1.5.0-py3-none-any.whl", hash = "sha256:dc7b47d37844db15e8fdc0243c1b58857a2ddc52a5118237a97127bac200e18d", size = 64447, upload-time = "2025-10-11T17:35:38.573Z" },
+]
+
+[[package]]
+name = "fixtures"
+version = "4.2.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/5a/2c/0fdd4dea1d1ef071213a691e1c458070f105c8bc3e351a5e4e8baae8e790/fixtures-4.2.8.tar.gz", hash = "sha256:ea146564a6666106c481f7c35f97a4d65485c84b0cc86a507597164b6cc0d849", size = 46738, upload-time = "2025-12-23T21:52:38.779Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d6/50/24c4f31fd165969b85ceb2fbed5c2d785f64430aacc5b03f2c6dc9225479/fixtures-4.2.8-py3-none-any.whl", hash = "sha256:5f20487f2c085574b3a1389a3066a53926cf4896cdaa4e47a35167fcc8eefb1f", size = 40392, upload-time = "2025-12-23T21:52:36.936Z" },
 ]
 
 [[package]]
@@ -1215,6 +1228,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/96/5b/496f8abebd10c3301129abba7ddafd46c71d799a70c44ab080323987c4c9/stevedore-5.6.0.tar.gz", hash = "sha256:f22d15c6ead40c5bbfa9ca54aa7e7b4a07d59b36ae03ed12ced1a54cf0b51945", size = 516074, upload-time = "2025-11-20T10:06:07.264Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f4/40/8561ce06dc46fd17242c7724ab25b257a2ac1b35f4ebf551b40ce6105cfa/stevedore-5.6.0-py3-none-any.whl", hash = "sha256:4a36dccefd7aeea0c70135526cecb7766c4c84c473b1af68db23d541b6dc1820", size = 54428, upload-time = "2025-11-20T10:06:05.946Z" },
+]
+
+[[package]]
+name = "testtools"
+version = "2.8.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ac/9c/a7470014e8e27bd147731f7aa108cb5d1b0609e0a257a49d6ebef2927bc9/testtools-2.8.2.tar.gz", hash = "sha256:b5c73332456ff54152062d47a58bc4f15f8e23514afec4e84775af124fb7db43", size = 206889, upload-time = "2025-12-19T21:34:32.679Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9c/12/5afdbb8094291849b5b8e660e5a0f4da6b7ae211b7374875aff8910339f7/testtools-2.8.2-py3-none-any.whl", hash = "sha256:5d963003d3d46fde12d02f9447e1b756718f3c777477904fdd279487f7623fbb", size = 96012, upload-time = "2025-12-19T21:34:31.053Z" },
 ]
 
 [[package]]
