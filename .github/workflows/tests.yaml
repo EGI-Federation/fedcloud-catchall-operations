@@ -29,6 +29,7 @@ jobs:
           uv sync --locked --all-groups
       - name: Run tests
         run: |
+          cd src/fedcloud_catchall
           uv run python -m unittest
       # Validation
       - name: Validate GOC and VOs
