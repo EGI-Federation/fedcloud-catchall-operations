@@ -16,7 +16,7 @@ def fetch_site_info():
     sites = []
     # 1 - Get all sites listing
     r = httpx.get(
-        os.path.join(CONF.discovery.cloud_info_url, "sites/"),
+        os.path.join(CONF.discovery.fedcloud_info_system_url, "sites/"),
         headers={"Accept": "application/json"},
     )
     r.raise_for_status()

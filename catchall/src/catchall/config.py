@@ -9,7 +9,7 @@ CONF = cfg.CONF
 CONF.register_opts(
     [
         cfg.StrOpt("site_config_dir", default="."),
-        cfg.StrOpt("cloud_info_url", default="https://is.cloud.egi.eu"),
+        cfg.StrOpt("fedcloud_info_system_url", default="https://is.cloud.egi.eu"),
     ],
     group="discovery",
 )
