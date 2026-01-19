@@ -40,6 +40,7 @@ vos:
   vo.decido-project.eu: "urn:mace:egi.eu:group:vo.decido-project.eu:role=vm_operator#aai.egi.eu"
   vo.deltares.nl: "urn:mace:egi.eu:group:vo.deltares.nl:role=vm_operator#aai.egi.eu"
   vo.ebrain-health.eu: "urn:mace:egi.eu:group:vo.ebrain-health.eu:role=vm_operator#aai.egi.eu"
+  vo.eosc-data-commons.eu: "urn:mace:egi.eu:group:vo.eosc-data-commons.eu:role=vm_operator#aai.egi.eu"
   vo.eoscfuture-sp.panosc.eu: "urn:mace:egi.eu:group:vo.eoscfuture-sp.panosc.eu:role=vm_operator#aai.egi.eu"
   vo.emphasisproject.eu: "urn:mace:egi.eu:group:vo.emphasisproject.eu:role=vm_operator#aai.egi.eu"
   vo.emso-eric.eu: "urn:mace:egi.eu:group:vo.emso-eric.eu:role=vm_operator#aai.egi.eu"
