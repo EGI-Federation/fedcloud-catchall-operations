@@ -7,16 +7,8 @@
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
   loop:
-    - /etc/egi/image-sync
+    - /etc/egi/
     - /var/cache/image-sync
-
-- name: sync configuration
-  ansible.builtin.template:
-    src: sync.conf.j2
-    dest: /etc/egi/image-sync/sync.conf
-    mode: "600"
-    owner: "{{ egi_user }}"
-    group: "{{ egi_group }}"
 
 - name: Image sync cron
   ansible.builtin.cron:
@@ -31,5 +23,5 @@
       -v {{ site_config_dir }}:{{ site_config_mountpoint }}:ro
       -v /var/cache/image-sync:/atrope-state
       {{ image_sync_image }} image-sync
-      --config-dir /etc/egi/image-sync >> /var/log/sync.log 2>&1
+      --config-dir /etc/egi >> /var/log/sync.log 2>&1
     cron_file: "egi-image-sync"

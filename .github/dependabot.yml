@@ -5,12 +5,10 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   # python deps
-  - package-ecosystem: "pip"
-    directories:
-      - "/image-sync"
-      - "/cloud-info"
+  - package-ecosystem: "uv"
+    directory: "/"
     # Check for updates once a week
     schedule:
       interval: "weekly"
