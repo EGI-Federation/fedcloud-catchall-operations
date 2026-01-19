@@ -34,7 +34,7 @@ RUN python -m venv /fedcloud_catchall/venv  \
     && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
 
-COPY . /fedcloud_catchall
+COPY src/ /fedcloud_catchall/src
 RUN /fedcloud_catchall/venv/bin/pip install --no-cache-dir .
 
 ##################################################
