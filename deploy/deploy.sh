@@ -25,7 +25,7 @@ TMP_SECRETS="$(mktemp)"
 	deploy data >"$TMP_SECRETS" && mv "$TMP_SECRETS" secrets.yaml
 
 cat >>extra-vars.yaml <<EOF
-cloud_info_image: "ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA"
+cloud_info_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
 image_sync_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
 site_config_dir: "$(readlink -f ../sites)"
 EOF
