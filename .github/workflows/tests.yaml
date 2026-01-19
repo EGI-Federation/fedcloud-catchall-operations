@@ -31,7 +31,6 @@ jobs:
         run: |
           uv run python -m unittest
       # Validation
-      - name: Install requirements
       - name: Validate GOC and VOs
         run: |
           alias yq="uv run yq"
