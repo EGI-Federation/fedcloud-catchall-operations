@@ -33,3 +33,6 @@ vos:
   - name: vo.protocoast.eu
     auth:
       project_id: 0739ad38c6f54d15afed73a509ede172
+  - name: vo.eosc-data-commons.eu
+    auth:
+      project_id: ddd598f2b38b4d6cbe32cb05d7f80682
