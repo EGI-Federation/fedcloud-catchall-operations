@@ -32,7 +32,6 @@ CONF.register_opts(
 
 
 # Registry configuration
-CONF = cfg.CONF
 CONF.register_opts(
     [
         cfg.StrOpt("registry_base_url", default="https://registry.egi.eu"),
