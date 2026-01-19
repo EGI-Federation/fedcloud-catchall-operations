@@ -1,47 +1,61 @@
 """Tests for the config generator"""
 
 import unittest
-from unittest.mock import call, patch
+from unittest.mock import mock_open, patch
 
-import cloud_info_catchall.token_generator as tg
+import fedcloud_catchall.token_generator as tg
+import httpx
 import jwt
-import responses
-from responses import matchers
+import respx
+import testtools
+from oslo_config import fixture
 
 
-class TokenGeneratorTest(unittest.TestCase):
+class TokenGeneratorTest(testtools.TestCase):
     OIDC_CONFIG = {
         "jwks_uri": "https://example.com",
         "token_endpoint": "https://example.com",
     }
 
-    @responses.activate
+    def setUp(self):
+        super().setUp()
+        self.conf = self.useFixture(fixture.Config()).conf
+
+    @respx.mock
     def test_get_access_token(self):
-        token_url = "https://example.com"
-        scopes = "a b c"
-        secret = {"client_id": "id", "client_secret": "secret"}
-        responses.post(
-            token_url,
-            json={"access_token": "foo"},
-            match=[
-                matchers.urlencoded_params_matcher(
-                    {
-                        "grant_type": "client_credentials",
-                        "client_id": "id",
-                        "client_secret": "secret",
-                        "scope": "a b c",
-                    }
-                )
-            ],
+        self.conf.set_override("scopes", "a b c", group="checkin")
+        self.conf.set_override("client_id", "id", group="checkin")
+        self.conf.set_override("client_secret", "secret", group="checkin")
+        route = respx.post(self.OIDC_CONFIG["token_endpoint"]).mock(
+            return_value=httpx.Response(
+                200,
+                json={"access_token": "foo"},
+            )
         )
-        self.assertEqual(tg.get_access_token(token_url, scopes, secret), "foo")
+        token = tg.generate_token(self.OIDC_CONFIG)
+        self.assertEqual(token, "foo")
+        self.assertTrue(route.called)
+        request = route.calls[0].request
+        self.assertEqual(
+            request.content.decode(),
+            "grant_type=client_credentials"
+            "&client_id=id"
+            "&client_secret=secret"
+            "&scope=a+b+c",
+        )
 
     def test_valid_token_no_token(self):
         self.assertEqual(tg.valid_token(None, None, None), False)
 
-    @responses.activate
+    @respx.mock
     def _inner_test_valid_token(self, ttl, result):
-        responses.get("https://example.com", json={"keys": [{"kid": "123"}]})
+        respx.get("https://example.com").mock(
+            return_value=httpx.Response(
+                200,
+                json={"keys": [{"kid": "123"}]},
+            )
+        )
+
         self.assertEqual(tg.valid_token("foo", self.OIDC_CONFIG, ttl), result)
 
     def _setup_valid_token_test(self, m_header, m_decode, m_calendar):
@@ -96,21 +110,15 @@ class TokenGeneratorTest(unittest.TestCase):
         self._assert_valid_token_test(m_header, m_decode, m_alg)
         m_calendar.assert_not_called()
 
-    @patch("cloud_info_catchall.token_generator.valid_token")
-    @patch("cloud_info_catchall.token_generator.get_access_token")
-    def test_generate_tokens(self, m_get_access, m_valid_token):
-        tokens = {"foo": {"access_token": "abc"}, "bar": {"access_token": "def"}}
-        secrets = {
-            "foo": {"client_id": "foo", "client_secret": "secfoo"},
-            "bar": {"client_id": "bar", "client_secret": "secbar"},
-        }
-        m_valid_token.side_effect = [True, False]
-        m_get_access.return_value = "xyz"
-        tg.generate_tokens(self.OIDC_CONFIG, "abc", tokens, 8, secrets)
-        m_valid_token.assert_has_calls(
-            [call("abc", self.OIDC_CONFIG, 8), call("def", self.OIDC_CONFIG, 8)]
-        )
-        m_get_access.assert_called_with("https://example.com", "abc", secrets["bar"])
+    @patch("fedcloud_catchall.token_generator.valid_token")
+    @patch("os.path.exists")
+    def test_check_token(self, m_exists, m_valid_token):
+        m_valid_token.return_value = True
+        m_exists.return_value = True
+        with patch("builtins.open", mock_open(read_data="data")):
+            tg.check_token("foo", self.OIDC_CONFIG, 23)
+            m_valid_token.assert_called_with("data", self.OIDC_CONFIG, 23)
+            m_exists.assert_called_with("foo")
 
 
 if __name__ == "__main__":
