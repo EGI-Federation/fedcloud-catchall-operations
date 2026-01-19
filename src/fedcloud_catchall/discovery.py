@@ -8,7 +8,7 @@ import os.path
 
 import httpx
 import yaml
-from catchall.config import CONF
+from fedcloud_catchall.config import CONF
 
 
 def fetch_site_info():

@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 
 import httpx
 import jwt
-from catchall.config import CONF
+from fedcloud_catchall.config import CONF
 from oslo_config import cfg
 
 

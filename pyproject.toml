@@ -1,5 +1,5 @@
 [project]
-name = "catchall"
+name = "fedcloud_catchall"
 version = "0.1.0"
 description = "Tools to deal with the configuration of the catch-all components"
 readme = "README.md"
@@ -30,9 +30,8 @@ dependencies = [
 ]
 
 [project.scripts]
-catchall = "catchall:main"
-token-generator = "catchall.token_generator:main"
-image-sync = "catchall.image_sync:main"
+token-generator = "fedcloud_catchall.token_generator:main"
+image-sync = "fedcloud_catchall.image_sync:main"
 
 [build-system]
 requires = ["uv_build>=0.9.14,<0.10.0"]
@@ -40,3 +39,9 @@ build-backend = "uv_build"
 
 [tool.uv.sources]
 atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }
+
+[dependency-groups]
+validate = [
+    "pyyaml>=6.0.3",
+    "yq>=3.4.3",
+]

@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import mock_open, patch
 
-import catchall.token_generator as tg
+import fedcloud_catchall.token_generator as tg
 import httpx
 import jwt
 import respx
@@ -110,7 +110,7 @@ class TokenGeneratorTest(testtools.TestCase):
         self._assert_valid_token_test(m_header, m_decode, m_alg)
         m_calendar.assert_not_called()
 
-    @patch("catchall.token_generator.valid_token")
+    @patch("fedcloud_catchall.token_generator.valid_token")
     @patch("os.path.exists")
     def test_check_token(self, m_exists, m_valid_token):
         m_valid_token.return_value = True

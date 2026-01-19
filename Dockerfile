@@ -22,20 +22,20 @@ RUN apt-get update \
 RUN python -m venv /fedcloud && \
     /fedcloud/bin/pip install --no-cache-dir fedcloudclient
 
-WORKDIR /catchall
+WORKDIR /fedcloud_catchall
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml uv.lock /catchall/
+COPY pyproject.toml uv.lock /fedcloud_catchall/
 
 RUN uv pip compile pyproject.toml -o requirements.txt
 
-RUN python -m venv /catchall/venv  \
-    && /catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
-    && cat /etc/grid-security/certificates/*.pem >> "$(/catchall/venv/bin/python -m requests.certs)"
+RUN python -m venv /fedcloud_catchall/venv  \
+    && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
+    && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
 
-COPY . /catchall
-RUN /catchall/venv/bin/pip install --no-cache-dir .
+COPY . /fedcloud_catchall
+RUN /fedcloud_catchall/venv/bin/pip install --no-cache-dir .
 
 ##################################################
 # Stage 2 - take venv and install needed packages
@@ -52,15 +52,15 @@ RUN apt-get update \
        jq rclone qemu-utils \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /catchall \
+RUN mkdir /fedcloud_catchall \
     && groupadd -g 1999 python \
     && useradd -m -r -u 1999 -g python python \
-    && chown -R python:python /catchall
+    && chown -R python:python /fedcloud_catchall
 
-WORKDIR /catchall
+WORKDIR /fedcloud_catchall
 
 # All the python code from the build image above
-COPY --chown=python:python --from=build /catchall/venv ./venv
+COPY --chown=python:python --from=build /fedcloud_catchall/venv ./venv
 COPY --chown=python:python --from=build /fedcloud /fedcloud
 
 # Add the script that call the cloud-info-provider as needed for the site
@@ -68,6 +68,6 @@ COPY --chown=python:python --from=build /fedcloud /fedcloud
 # projects for the credentials and will upload the output to S3
 COPY publisher.sh /usr/local/bin/publisher.sh
 
-ENV PATH="/catchall/venv/bin:$PATH"
+ENV PATH="/fedcloud_catchall/venv/bin:$PATH"
 
 USER 1999
