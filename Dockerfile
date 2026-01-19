@@ -26,7 +26,7 @@ WORKDIR /fedcloud_catchall
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml uv.lock /fedcloud_catchall/
+COPY README.md pyproject.toml uv.lock /fedcloud_catchall/
 
 RUN uv pip compile pyproject.toml -o requirements.txt
 
