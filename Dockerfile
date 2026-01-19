@@ -16,7 +16,6 @@ RUN apt-get update \
     && apt-get install -y ca-policy-egi-core \
     && rm -rf /var/lib/apt/lists/*
 
-
 # Fedcloud client is pinning dependencies strictly so it does not play
 # very well with the rest of the available venv. Installing on its own
 RUN python -m venv /fedcloud && \
