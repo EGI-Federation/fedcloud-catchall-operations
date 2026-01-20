@@ -25,8 +25,8 @@ TMP_SECRETS="$(mktemp)"
 	deploy data >"$TMP_SECRETS" && mv "$TMP_SECRETS" secrets.yaml
 
 cat >>extra-vars.yaml <<EOF
-cloud_info_image: "ghcr.io/egi-federation/fedcloud-cloud-info:sha-$SHORT_SHA"
-image_sync_image: "ghcr.io/egi-federation/fedcloud-image-sync:sha-$SHORT_SHA"
+cloud_info_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
+image_sync_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
 site_config_dir: "$(readlink -f ../sites)"
 EOF
 
@@ -66,10 +66,6 @@ else
 	color="#EA4F47"
 	header="Failed deployment :boom:"
 fi
-
-# This is a temporary way to get the auto discovery working while we transition for all sites
-# copy the secrets to the /etc/egi/vos dir which is readable from the containers
-cp secrets.yaml /etc/egi/vos/secrets.yaml
 
 # make sure the container user (1999) can access the files
 chown -R 1999:1999 /etc/egi/

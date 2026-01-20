@@ -36,7 +36,7 @@ registry:
   password: password
   project: project
 
-image_sync_image: egifedcloud/ops-image-sync:latest
+image_sync_image: ghcr.io/egi-federation/fedcloud-catchall:latest
 
 image_sync_cron:
   minute: "5"

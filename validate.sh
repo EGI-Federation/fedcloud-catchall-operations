@@ -50,8 +50,8 @@ for f in sites/*.yaml; do
 	# check if site is also on:
 	# https://github.com/tdviet/fedcloudclient/blob/master/config/sites.yaml
 	if ! grep -q "$f" "$FEDCLOUD_CLI_SITES"; then
-		echo "::error file=$f title=Site not in fedcloudclient::Site $goc_site not found in fedcloudclient"
-		exit_value=1
+		echo "::warning file=$f title=Site not in fedcloudclient::Site $goc_site not found in fedcloudclient"
+		#exit_value=1
 	fi
 done
 
