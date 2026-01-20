@@ -25,7 +25,7 @@ def fetch_site_info():
         try:
             r = httpx.get(
                 os.path.join(
-                    CONF.discovery.cloud_info_url, f"site/{site['name']}/projects"
+                    CONF.discovery.fedcloud_info_system_url, f"site/{site['name']}/projects"
                 )
             )
             r.raise_for_status()
