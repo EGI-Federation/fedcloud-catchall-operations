@@ -43,3 +43,11 @@ image_sync_cron:
   hour: "*/3"
   weekday: "*"
   timeout: "9000" # 2.5 hours
+
+accounting_image: ghcr.io/egi-federation/fedcloud-catchall:latest
+
+accounting_cron:
+  minute: "5"
+  hour: "*/3"
+  weekday: "*"
+  timeout: "9000" # 2.5 hours
