@@ -76,8 +76,11 @@ def run_caso(sites_config):
             continue
         accounting_config = sites_config[site_name].get("accounting", {})
         if not accounting_config.get("enabled", False):
-            logging.debug(f"Discarding site {site_name}, accounting not enabled.")
-            continue
+            if CONF.accounting.force_run:
+                logging.info(f"Force run the extraction of records for {site_name}.")
+            else:
+                logging.debug(f"Discarding site {site_name}, accounting not enabled.")
+                continue
         site.update(accounting_config)
         site_dir = os.path.join(CONF.accounting.spool_dir, site_name)
         os.makedirs(site_dir, exist_ok=True)

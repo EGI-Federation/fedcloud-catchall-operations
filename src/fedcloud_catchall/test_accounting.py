@@ -2,7 +2,7 @@
 
 import datetime
 import json
-from unittest.mock import mock_open, patch
+from unittest.mock import call, mock_open, patch
 
 import fedcloud_catchall.accounting as acc
 import testtools
@@ -94,7 +94,7 @@ class TestDiscovery(testtools.TestCase):
             m_open.assert_any_call("/bar/mapping.json", "w+")
             m_open.assert_any_call("/bar/caso.conf", "w+")
         m_mkdirs.assert_called_once_with("/foo/CENI", exist_ok=True)
-        m_subp.assert_called_once_with(
+        caso_cmd_call = call(
             [
                 "caso-extract",
                 "--config-dir",
@@ -103,6 +103,7 @@ class TestDiscovery(testtools.TestCase):
                 "/bar/mapping.json",
             ]
         )
+        m_subp.assert_has_calls([caso_cmd_call, caso_cmd_call])
 
     @patch("fedcloud_catchall.discovery.fetch_site_info")
     @patch("os.makedirs")
@@ -123,7 +124,7 @@ class TestDiscovery(testtools.TestCase):
             m_open.assert_any_call("/baz/mapping.json", "w+")
             m_open.assert_any_call("/baz/caso.conf", "w+")
         m_mkdirs.assert_called_once_with("/foo/CENI", exist_ok=True)
-        m_subp.assert_called_once_with(
+        caso_cmd_call = call(
             [
                 "caso-extract",
                 "--config-dir",
@@ -134,3 +135,4 @@ class TestDiscovery(testtools.TestCase):
                 "2025-12-31T00:00:00",
             ]
         )
+        m_subp.assert_has_calls([caso_cmd_call, caso_cmd_call])
