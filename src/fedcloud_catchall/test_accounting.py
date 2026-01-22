@@ -4,10 +4,9 @@ import datetime
 import json
 from unittest.mock import mock_open, patch
 
+import fedcloud_catchall.accounting as acc
 import testtools
 from oslo_config import fixture
-
-import fedcloud_catchall.accounting as acc
 
 sample_config = """
 [DEFAULT]
@@ -111,28 +110,26 @@ class TestDiscovery(testtools.TestCase):
     @patch("os.path.exists")
     @patch("subprocess.call")
     @patch(f"{acc.__name__}.datetime", wraps=datetime)
-    def test_run_caso_one_site(
+    def test_run_caso_one_site_date(
         self, m_date, m_subp, m_exists, m_temp, m_mkdirs, m_fetch
     ):
         self.conf.set_override("spool_dir", "/foo", group="accounting")
         m_fetch.return_value = [sample_site]
-        m_temp.return_value.__enter__.return_value = "/bar"
+        m_temp.return_value.__enter__.return_value = "/baz"
         m_exists.return_value = False
         m_date.datetime.now.return_value = datetime.datetime(2026, 1, 1)
-        # other calls to datetime functions will be forwarded to original datetime
         with patch("builtins.open", mock_open()) as m_open:
-            m_date.return_value = "aaa"
             acc.run_caso({"CENI": {"accounting": {"enabled": True}}})
-            m_open.assert_any_call("/bar/mapping.json", "w+")
-            m_open.assert_any_call("/bar/caso.conf", "w+")
+            m_open.assert_any_call("/baz/mapping.json", "w+")
+            m_open.assert_any_call("/baz/caso.conf", "w+")
         m_mkdirs.assert_called_once_with("/foo/CENI", exist_ok=True)
         m_subp.assert_called_once_with(
             [
                 "caso-extract",
                 "--config-dir",
-                "/bar",
+                "/baz",
                 "--mapping_file",
-                "/bar/mapping.json",
+                "/baz/mapping.json",
                 "--extract-from",
                 "2025-12-31T00:00:00",
             ]

@@ -29,7 +29,7 @@ jobs:
           uv sync --locked --all-groups
       - name: Run tests
         run: |
-	  uv run py.test --cov=fedcloud_catchall --cov-report=xml --cov-report=term-missing src/fedcloud_catchall/
+          uv run py.test --cov=fedcloud_catchall --cov-report=xml --cov-report=term-missing src/fedcloud_catchall/
       # Validation
       - name: Validate GOC and VOs
         run: |

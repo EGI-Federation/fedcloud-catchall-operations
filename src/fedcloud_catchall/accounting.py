@@ -14,7 +14,6 @@ import sys
 import tempfile
 
 from dateutil import tz
-
 from fedcloud_catchall.config import CONF
 from fedcloud_catchall.discovery import fetch_site_info, load_sites
 
@@ -81,14 +80,12 @@ def run_caso(sites_config):
             continue
         site.update(accounting_config)
         site_dir = os.path.join(CONF.accounting.spool_dir, site_name)
-        print(site_dir)
         os.makedirs(site_dir, exist_ok=True)
         logging.info(f"Configuring site {site_name}")
         # running caso for each project independently so we can control the "lastrun"
         for project in site["projects"]:
             with tempfile.TemporaryDirectory() as tmpdirname:
                 vo_map_file = os.path.join(tmpdirname, "mapping.json")
-                print(vo_map_file)
                 with open(vo_map_file, "w+") as f:
                     f.write(vo_map(site))
                 with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
@@ -107,7 +104,6 @@ def run_caso(sites_config):
                         days=1
                     )
                     cmd.extend(["--extract-from", yesterday.isoformat()])
-                    print(cmd)
                 logging.debug(f"Running {' '.join(cmd)}")
                 subprocess.call(cmd)
 
