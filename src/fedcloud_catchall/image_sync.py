@@ -13,6 +13,7 @@ import tempfile
 
 import httpx
 import yaml
+
 from fedcloud_catchall.config import CONF
 from fedcloud_catchall.discovery import fetch_site_info, load_sites
 
@@ -87,7 +88,7 @@ image_sources = {sources_file}
     """
     formats = site.get("formats", CONF.sync.formats)
     return config_template.format(
-        auth_url=site["endpointURL"],
+        auth_url=site["url"],
         client_id=CONF.checkin.client_id,
         client_secret=CONF.checkin.client_secret,
         scopes=CONF.checkin.scopes,
@@ -130,7 +131,7 @@ def dump_sources_config(site_vo_list, harbor_projects):
 def do_sync(sites_config, harbor_projects):
     sites_info = fetch_site_info()
     for site in sites_info:
-        site_name = site["site"]["name"]
+        site_name = site["name"]
         # filter out those sites that are not part of the centralised ops
         if site_name not in sites_config:
             logging.debug(f"Discarding site {site_name}, not in config.")
@@ -145,7 +146,7 @@ def do_sync(sites_config, harbor_projects):
             sources_file = os.path.join(tmpdirname, "sources.yaml")
             vo_map_file = os.path.join(tmpdirname, "vo-map.yaml")
             site_vo_list = list(site["shares"].keys())
-            ops_project_id = site["shares"]["ops"]["project_id"]
+            ops_project_id = site["shares"]["ops"]["id"]
             with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
                 f.write(
                     dump_atrope_config(site, ops_project_id, sources_file, vo_map_file)
