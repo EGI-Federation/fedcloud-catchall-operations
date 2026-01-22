@@ -43,3 +43,12 @@ CONF.register_opts(
     ],
     group="sync",
 )
+
+
+# Accounting configuration
+CONF.register_opts(
+    [
+        cfg.StrOpt("spool_dir", default="/var/spool/egi"),
+    ],
+    group="accounting",
+)
