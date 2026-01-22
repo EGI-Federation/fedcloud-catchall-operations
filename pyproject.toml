@@ -41,6 +41,10 @@ build-backend = "uv_build"
 atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }
 
 [dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+]
 validate = [
     "pyyaml>=6.0.3",
     "yq>=3.4.3",
