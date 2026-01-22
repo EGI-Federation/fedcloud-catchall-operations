@@ -16,6 +16,7 @@ dependencies = [
     "atrope",
     "caso",
     "cloud-info-provider==1.0.2",
+    "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
     "keystoneauth1>=5.12.0",
@@ -35,6 +36,7 @@ dependencies = [
 token-generator = "fedcloud_catchall.token_generator:main"
 image-sync = "fedcloud_catchall.image_sync:main"
 accounting = "fedcloud_catchall.accounting:main"
+record-cleaner = "fedcloud_catchall.record_cleaner:main"
 
 [build-system]
 requires = ["uv_build>=0.9.14,<0.10.0"]

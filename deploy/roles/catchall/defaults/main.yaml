@@ -51,3 +51,9 @@ accounting_cron:
   hour: "*/3"
   weekday: "*"
   timeout: "9000" # 2.5 hours
+
+record_cleaner_cron:
+  minute: "9"
+  hour: "2"
+  weekday: "5"
+  timeout: "9000" # 2.5 hours
