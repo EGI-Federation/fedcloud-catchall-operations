@@ -48,7 +48,7 @@ accounting_image: ghcr.io/egi-federation/fedcloud-catchall:latest
 
 accounting_cron:
   minute: "5"
-  hour: "*/3"
+  hour: "*/5"
   weekday: "*"
   timeout: "9000" # 2.5 hours
 
