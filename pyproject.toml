@@ -14,12 +14,15 @@ classifiers = [
 requires-python = ">=3.14"
 dependencies = [
     "atrope",
+    "caso",
     "cloud-info-provider==1.0.2",
+    "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
     "keystoneauth1>=5.12.0",
-    "oslo-config>=10.2.0",
+    "oslo-config>=9.8.0",
     "pyjwt>=2.10.1",
+    "python-dateutil>=2.9.0.post0",
     "python-glanceclient>=4.10.0",
     "python-keystoneclient>=5.7.0",
     "python-novaclient>=18.11.0",
@@ -32,6 +35,8 @@ dependencies = [
 [project.scripts]
 token-generator = "fedcloud_catchall.token_generator:main"
 image-sync = "fedcloud_catchall.image_sync:main"
+accounting = "fedcloud_catchall.accounting:main"
+record-cleaner = "fedcloud_catchall.record_cleaner:main"
 
 [build-system]
 requires = ["uv_build>=0.9.14,<0.10.0"]
@@ -39,8 +44,13 @@ build-backend = "uv_build"
 
 [tool.uv.sources]
 atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }
+caso = { git = "https://github.com/IFCA-Advanced-Computing/caso", rev = "1584f0b3823cc1ee31d1338944e44a36b114a5ee" }
 
 [dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+]
 validate = [
     "pyyaml>=6.0.3",
     "yq>=3.4.3",
