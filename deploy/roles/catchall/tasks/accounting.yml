@@ -31,7 +31,7 @@
     hour: "{{ record_cleaner_cron.hour }}"
     user: root
     job: >
-      flock -n -w {{ accounting_cron.timeout }} /var/lock/sync
+      flock -n -w {{ record_cleaner_cron.timeout }} /var/lock/sync
       docker run --rm -v /etc/egi:/etc/egi:ro
       -v {{ site_config_dir }}:{{ site_config_mountpoint }}:ro
       -v /var/spool/egi:/var/spool/egi
