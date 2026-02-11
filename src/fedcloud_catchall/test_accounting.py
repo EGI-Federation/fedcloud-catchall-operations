@@ -65,21 +65,21 @@ class TestDiscovery(testtools.TestCase):
         self.conf.set_override("client_secret", "secret", group="checkin")
         assert acc.caso_config(sample_site, "foo", "/var", "egi.eu:VO") == sample_config
 
-    @patch("fedcloud_catchall.discovery.fetch_site_info")
+    @patch("fedcloud_catchall.accounting.fetch_site_info")
     @patch("os.makedirs")
     def test_run_caso_no_sites(self, m_mkdirs, m_fetch):
         m_fetch.return_value = [sample_site]
         acc.run_caso({})
         m_mkdirs.assert_not_called()
 
-    @patch("fedcloud_catchall.discovery.fetch_site_info")
+    @patch("fedcloud_catchall.accounting.fetch_site_info")
     @patch("os.makedirs")
     def test_run_caso_no_sites_enables(self, m_mkdirs, m_fetch):
         m_fetch.return_value = [sample_site]
         acc.run_caso({"CENI": {"accounting": {"enabled": False}}})
         m_mkdirs.assert_not_called()
 
-    @patch("fedcloud_catchall.discovery.fetch_site_info")
+    @patch("fedcloud_catchall.accounting.fetch_site_info")
     @patch("os.makedirs")
     @patch("tempfile.TemporaryDirectory")
     @patch("os.path.exists")
@@ -105,7 +105,7 @@ class TestDiscovery(testtools.TestCase):
         )
         m_subp.assert_has_calls([caso_cmd_call, caso_cmd_call])
 
-    @patch("fedcloud_catchall.discovery.fetch_site_info")
+    @patch("fedcloud_catchall.accounting.fetch_site_info")
     @patch("os.makedirs")
     @patch("tempfile.TemporaryDirectory")
     @patch("os.path.exists")
