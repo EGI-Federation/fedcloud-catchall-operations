@@ -6,7 +6,7 @@ exit_value=0
 
 # Get all VOs names
 VO_LIST=$(mktemp)
-curl --silent "https://lavoisier-prod.dyn.cloud.e-infra.cz/lavoisier/VoList?accept=json" | \
+curl --silent "https://lavoisier-prod.dyn.cloud.e-infra.cz/lavoisier/VoList?accept=json" |
 	jq -r ".data[].name" >"$VO_LIST"
 
 # Get fedcloudclient sites
