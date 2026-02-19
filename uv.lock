@@ -1495,7 +1495,7 @@ wheels = [
 
 [[package]]
 name = "python-openstackclient"
-version = "8.3.0"
+version = "9.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cliff" },
@@ -1510,9 +1510,9 @@ dependencies = [
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/26/b5/79ea3fa081717d0e2d6413431e76d902b9515e4a7dba72b036966bad71a0/python_openstackclient-8.3.0.tar.gz", hash = "sha256:cc7b32e45f0b8eed9215e0218aea02526619a5e7b0682b2781769134afd76ff8", size = 941302, upload-time = "2026-01-08T13:36:27.815Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6e/6e/7c48e37608b4af54a5e8471ccf33ae93cee10360c2e37601c860d0f6e5ee/python_openstackclient-9.0.0.tar.gz", hash = "sha256:8cdca0a274ef5e423f31a07c7117432e4ce5b72d95e3eba5b06e1c831eb3018e", size = 944832, upload-time = "2026-02-17T14:50:19.069Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a0/97/1a0ae958dfe6bf82ec4e251067dda0280e51a5c4bc69346d8b5c13f8abc6/python_openstackclient-8.3.0-py3-none-any.whl", hash = "sha256:4fb4cb4bf1259fc1682016c2bb910451aabcb77ec119142ec2ae06a2257867e6", size = 1100657, upload-time = "2026-01-08T13:36:25.959Z" },
+    { url = "https://files.pythonhosted.org/packages/04/b5/ff19564aed5dcf772a791d3eca641f2bc09d66afb50d2e3dc82709189605/python_openstackclient-9.0.0-py3-none-any.whl", hash = "sha256:a22e27fcd8e375accb00ce3627183465f4ac171a721ea8a822ee0954978a3c7f", size = 1102900, upload-time = "2026-02-17T14:50:17.685Z" },
 ]
 
 [[package]]
@@ -1749,11 +1749,11 @@ wheels = [
 
 [[package]]
 name = "testtools"
-version = "2.8.2"
+version = "2.8.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ac/9c/a7470014e8e27bd147731f7aa108cb5d1b0609e0a257a49d6ebef2927bc9/testtools-2.8.2.tar.gz", hash = "sha256:b5c73332456ff54152062d47a58bc4f15f8e23514afec4e84775af124fb7db43", size = 206889, upload-time = "2025-12-19T21:34:32.679Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/99/0b/ad30e356512d59a924f932e927ae79f9fbcd87367567fc18a422e2ba1b70/testtools-2.8.3.tar.gz", hash = "sha256:3b54b543a7583a35f65538b1d36a327fc34943a26bb839bcbe4b2c5e085aa939", size = 215317, upload-time = "2026-02-17T15:17:03.283Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9c/12/5afdbb8094291849b5b8e660e5a0f4da6b7ae211b7374875aff8910339f7/testtools-2.8.2-py3-none-any.whl", hash = "sha256:5d963003d3d46fde12d02f9447e1b756718f3c777477904fdd279487f7623fbb", size = 96012, upload-time = "2025-12-19T21:34:31.053Z" },
+    { url = "https://files.pythonhosted.org/packages/50/55/af1a927cb562abd88dca959d7ec1273088c779e11adab1d44e8744ff11d7/testtools-2.8.3-py3-none-any.whl", hash = "sha256:45f6b79d04d24a9698112bb648a2baf5c96afc0dc88d49b505e0bbc559f32123", size = 105582, upload-time = "2026-02-17T15:17:00.841Z" },
 ]
 
 [[package]]
