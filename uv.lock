@@ -1476,7 +1476,7 @@ wheels = [
 
 [[package]]
 name = "python-novaclient"
-version = "18.11.0"
+version = "18.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
@@ -1488,9 +1488,9 @@ dependencies = [
     { name = "prettytable" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5c/8a/ac14136fe0a549416b69e6111d6e45c7d821508037922baefa2d54b661f0/python_novaclient-18.11.0.tar.gz", hash = "sha256:0a31ae20779d4cd171bb29c1fe4e6b22b9c7d97c79670db5149bbdfac03f57dc", size = 340209, upload-time = "2025-09-01T13:31:59.62Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/bb/e0/69ae17e322d3f03ae05633e7155388286ddfde528b6bf6d73df18162256a/python_novaclient-18.12.0.tar.gz", hash = "sha256:ead3db2a3dd43a89bb5a56f62f87362a76e7ef9c01938699ff6c1a060f0e9eab", size = 340638, upload-time = "2026-02-24T14:35:33.499Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/1f/f944e5f61083af25176b46296522085b0faa17381d0251fd9c0f9f6288d0/python_novaclient-18.11.0-py3-none-any.whl", hash = "sha256:fc4ce032a6ce0fb911f4c640d260318d770ee171eedce7c12f887307fc24dc0c", size = 335871, upload-time = "2025-09-01T13:31:57.87Z" },
+    { url = "https://files.pythonhosted.org/packages/d6/ca/01037283efdf27d521b39cab1debb4857bf0a78e80f3ff40f9c91985d8e2/python_novaclient-18.12.0-py3-none-any.whl", hash = "sha256:ca70deb5f6b89c36a44df5abf62c67f41b2d35a1f906d3feba1716c1f056d26f", size = 336041, upload-time = "2026-02-24T14:35:31.976Z" },
 ]
 
 [[package]]
