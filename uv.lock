@@ -508,11 +508,11 @@ validate = [
 
 [[package]]
 name = "fixtures"
-version = "4.2.8"
+version = "4.3.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/5a/2c/0fdd4dea1d1ef071213a691e1c458070f105c8bc3e351a5e4e8baae8e790/fixtures-4.2.8.tar.gz", hash = "sha256:ea146564a6666106c481f7c35f97a4d65485c84b0cc86a507597164b6cc0d849", size = 46738, upload-time = "2025-12-23T21:52:38.779Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ab/f5/4dbf6053895931a5110a38d7ebacecce41683cb9f01377ba8cc0254d1bc8/fixtures-4.3.1.tar.gz", hash = "sha256:88cdf089784b84f931a1e32ad3492c4ae707f862459be22020e9ffe4aa1e5823", size = 46858, upload-time = "2026-02-23T12:47:57.105Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d6/50/24c4f31fd165969b85ceb2fbed5c2d785f64430aacc5b03f2c6dc9225479/fixtures-4.2.8-py3-none-any.whl", hash = "sha256:5f20487f2c085574b3a1389a3066a53926cf4896cdaa4e47a35167fcc8eefb1f", size = 40392, upload-time = "2025-12-23T21:52:36.936Z" },
+    { url = "https://files.pythonhosted.org/packages/c4/0e/ce58447f5b1e929d52f8c9326430622e8b9e7220d59e6178614f75211493/fixtures-4.3.1-py3-none-any.whl", hash = "sha256:bf381ea4d20e795598a281c5c344b446382ced4b61859cdece66c102f0140c06", size = 40695, upload-time = "2026-02-23T12:47:55.865Z" },
 ]
 
 [[package]]
@@ -687,7 +687,7 @@ wheels = [
 
 [[package]]
 name = "keystoneauth1"
-version = "5.13.0"
+version = "5.13.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
@@ -697,9 +697,9 @@ dependencies = [
     { name = "stevedore" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e5/2b/5a08163c8e878811f11dc8c78c041c2384cd424c71f75fb7a6b19969047f/keystoneauth1-5.13.0.tar.gz", hash = "sha256:57c9ca407207899b50d8ff1ca8abb4a4e7427461bfc1877eb8519c3989ce63ec", size = 288721, upload-time = "2026-01-19T10:47:02.467Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f3/bc/d99872ca0bc8bf5f248b50e3d7386dedec5278f8dd989a2a981d329a8069/keystoneauth1-5.13.1.tar.gz", hash = "sha256:e011e47ac3f3c671ffae33505c095548650cc19dab7f6af3b2ea5bd18c98f0c9", size = 288548, upload-time = "2026-02-20T15:16:47.478Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dd/99/76476a1057b349c860bae72e45d6ef438feb877c84ee7d565faf464e54c3/keystoneauth1-5.13.0-py3-none-any.whl", hash = "sha256:5ab81412eb0923ceb9c602cc3decce514b399523cb83d16b409ed3b0f9b03d41", size = 343585, upload-time = "2026-01-19T10:47:00.762Z" },
+    { url = "https://files.pythonhosted.org/packages/96/68/ff03933cff7568277e2d55cb33aeb60a5c2d77bd88b0ea139244079df638/keystoneauth1-5.13.1-py3-none-any.whl", hash = "sha256:6e6d0296bc341e5f9a08e985f7083206c93a4ffd999933c2d1b7e1c833c2e501", size = 343539, upload-time = "2026-02-20T15:16:45.873Z" },
 ]
 
 [[package]]
@@ -1476,7 +1476,7 @@ wheels = [
 
 [[package]]
 name = "python-novaclient"
-version = "18.11.0"
+version = "18.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
@@ -1488,9 +1488,9 @@ dependencies = [
     { name = "prettytable" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5c/8a/ac14136fe0a549416b69e6111d6e45c7d821508037922baefa2d54b661f0/python_novaclient-18.11.0.tar.gz", hash = "sha256:0a31ae20779d4cd171bb29c1fe4e6b22b9c7d97c79670db5149bbdfac03f57dc", size = 340209, upload-time = "2025-09-01T13:31:59.62Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/bb/e0/69ae17e322d3f03ae05633e7155388286ddfde528b6bf6d73df18162256a/python_novaclient-18.12.0.tar.gz", hash = "sha256:ead3db2a3dd43a89bb5a56f62f87362a76e7ef9c01938699ff6c1a060f0e9eab", size = 340638, upload-time = "2026-02-24T14:35:33.499Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/1f/f944e5f61083af25176b46296522085b0faa17381d0251fd9c0f9f6288d0/python_novaclient-18.11.0-py3-none-any.whl", hash = "sha256:fc4ce032a6ce0fb911f4c640d260318d770ee171eedce7c12f887307fc24dc0c", size = 335871, upload-time = "2025-09-01T13:31:57.87Z" },
+    { url = "https://files.pythonhosted.org/packages/d6/ca/01037283efdf27d521b39cab1debb4857bf0a78e80f3ff40f9c91985d8e2/python_novaclient-18.12.0-py3-none-any.whl", hash = "sha256:ca70deb5f6b89c36a44df5abf62c67f41b2d35a1f906d3feba1716c1f056d26f", size = 336041, upload-time = "2026-02-24T14:35:31.976Z" },
 ]
 
 [[package]]
@@ -1749,11 +1749,11 @@ wheels = [
 
 [[package]]
 name = "testtools"
-version = "2.8.3"
+version = "2.8.4"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/99/0b/ad30e356512d59a924f932e927ae79f9fbcd87367567fc18a422e2ba1b70/testtools-2.8.3.tar.gz", hash = "sha256:3b54b543a7583a35f65538b1d36a327fc34943a26bb839bcbe4b2c5e085aa939", size = 215317, upload-time = "2026-02-17T15:17:03.283Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/af/5c/ab3068990dc51fe26b1d3d76146f2b9cebaa36de855ea37e5780fd2d22c7/testtools-2.8.4.tar.gz", hash = "sha256:76c32db2f52c4dcd539e2fbf31686ca1f9c2f5626726c8844dff7893e7122e3f", size = 219143, upload-time = "2026-02-19T11:34:17.409Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/50/55/af1a927cb562abd88dca959d7ec1273088c779e11adab1d44e8744ff11d7/testtools-2.8.3-py3-none-any.whl", hash = "sha256:45f6b79d04d24a9698112bb648a2baf5c96afc0dc88d49b505e0bbc559f32123", size = 105582, upload-time = "2026-02-17T15:17:00.841Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/6f/5a8175192a50b60162996fa8b6eed82044c832b28bcea55dd26007d08e2d/testtools-2.8.4-py3-none-any.whl", hash = "sha256:af9a23c5a05397ae270695c9650a485f67b9af81390b30f52cd93b2f10f68c98", size = 109854, upload-time = "2026-02-19T11:34:15.962Z" },
 ]
 
 [[package]]
