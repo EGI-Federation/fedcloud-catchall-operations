@@ -1431,7 +1431,7 @@ wheels = [
 
 [[package]]
 name = "python-keystoneclient"
-version = "5.7.0"
+version = "5.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "debtcollector" },
@@ -1445,9 +1445,9 @@ dependencies = [
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/29/3775d7a722924a72208753a8aa5ddb0a58de24f5a5dd287cc9a0f66038e4/python_keystoneclient-5.7.0.tar.gz", hash = "sha256:8ce7bf1c8cddca6d7140fc76918b44eddf1d64040a60cb8ff7059136104d4ceb", size = 322387, upload-time = "2025-08-28T09:50:01.249Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/97/ef/c8c68219a2bf9f296ad18cb0b9804c45adfdceee72d51684225488746262/python_keystoneclient-5.8.0.tar.gz", hash = "sha256:3ca87c67c404298ce862310b569f545a58acf75cd5685094c82f35320b3a355d", size = 322844, upload-time = "2026-02-27T15:36:24.33Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/90/d1/eb39a6e544f5f789fd44c09274a8b1b08a86e3e7ac0e016d07ceb94c0b42/python_keystoneclient-5.7.0-py3-none-any.whl", hash = "sha256:2ec19994ba8b8b16fe6cf4ac45c3f2180a22e203d1b3aa977a34a0160caae0b6", size = 397216, upload-time = "2025-08-28T09:49:59.798Z" },
+    { url = "https://files.pythonhosted.org/packages/be/35/483db648710bd0aeefd505db288490c229fef0e1fb7b78d8f277e2dc375b/python_keystoneclient-5.8.0-py3-none-any.whl", hash = "sha256:0cc96cc719bbd8b1ca8fda71e38017dba3e87ebe3b479fcc9261a67e30b21b85", size = 397325, upload-time = "2026-02-27T15:36:23.21Z" },
 ]
 
 [[package]]
