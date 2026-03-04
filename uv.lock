@@ -1411,7 +1411,7 @@ wheels = [
 
 [[package]]
 name = "python-glanceclient"
-version = "4.10.0"
+version = "4.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "keystoneauth1" },
@@ -1424,9 +1424,9 @@ dependencies = [
     { name = "warlock" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fc/96/e0e2ea7258cb3825be4aa0c19372a182b5c17788660d9985090fe81f6ae5/python_glanceclient-4.10.0.tar.gz", hash = "sha256:ff6c2d42a1767c5cfa3cd1d22a3732d38ab113d471ad22c4ee64a1bd3941b103", size = 210540, upload-time = "2025-08-28T09:55:37.701Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ac/5d/71731cf4f9225594442bc08ee438e7534d2e50344ecca4972385a9ea9e39/python_glanceclient-4.11.0.tar.gz", hash = "sha256:5ce2118bfe7462934805916617e537bc5b00fd4cab3fb7bb88a4f9253970562d", size = 210930, upload-time = "2026-02-27T15:45:06.891Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0e/44/0d1b00f298ddd04d3467a1d84deb4890ff41a0c9038537de7930e8ceab9b/python_glanceclient-4.10.0-py3-none-any.whl", hash = "sha256:286f2fac1dcbdfcde8781b3fb41ec61608a15b7b6c154d049e75ab84395f796a", size = 208707, upload-time = "2025-08-28T09:55:36.568Z" },
+    { url = "https://files.pythonhosted.org/packages/37/a3/683cb59ed2ec1bd35255fd76dffc12be0529b24e6f3723ff017dafefe3ad/python_glanceclient-4.11.0-py3-none-any.whl", hash = "sha256:43b49eb6f501fe1e91afeba6fad908444712a5e8ccf6bce333b754a0d7950e31", size = 208816, upload-time = "2026-02-27T15:45:05.769Z" },
 ]
 
 [[package]]
