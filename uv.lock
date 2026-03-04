@@ -1749,11 +1749,11 @@ wheels = [
 
 [[package]]
 name = "testtools"
-version = "2.8.4"
+version = "2.8.5"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/af/5c/ab3068990dc51fe26b1d3d76146f2b9cebaa36de855ea37e5780fd2d22c7/testtools-2.8.4.tar.gz", hash = "sha256:76c32db2f52c4dcd539e2fbf31686ca1f9c2f5626726c8844dff7893e7122e3f", size = 219143, upload-time = "2026-02-19T11:34:17.409Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/97/d0/e7a37e196235f2d438114359c041a614d6c8ea59dc839375faf518564c66/testtools-2.8.5.tar.gz", hash = "sha256:f6026ad7b97c66bca87c29058ec10237bd24709643cbfe59c27eff973d33ac0c", size = 219116, upload-time = "2026-02-28T11:36:11.934Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7e/6f/5a8175192a50b60162996fa8b6eed82044c832b28bcea55dd26007d08e2d/testtools-2.8.4-py3-none-any.whl", hash = "sha256:af9a23c5a05397ae270695c9650a485f67b9af81390b30f52cd93b2f10f68c98", size = 109854, upload-time = "2026-02-19T11:34:15.962Z" },
+    { url = "https://files.pythonhosted.org/packages/33/5b/d1f8ec4c9f8353dd00bcb0d73917f017bb3818c98a818a1e837c4a69b858/testtools-2.8.5-py3-none-any.whl", hash = "sha256:786603cdc4967304622e10a0d5a75ef077356de8efca5bf0e7116222afecfffc", size = 109826, upload-time = "2026-02-28T11:36:08.988Z" },
 ]
 
 [[package]]
