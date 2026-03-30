@@ -127,6 +127,15 @@ def dump_sources_config(site_vo_list, harbor_projects):
     return yaml.dump(harbor)
 
 
+def dump_vo_map(site):
+    shares = site.get("shares")
+    for name, vo in shares.items():
+        project_id = vo.get("id")
+        if project_id:
+            vo["project_id"] = project_id
+    return yaml.dump(shares)
+
+
 def do_sync(sites_config, harbor_projects):
     sites_info = fetch_site_info()
     for site in sites_info:
@@ -153,7 +162,7 @@ def do_sync(sites_config, harbor_projects):
             with open(sources_file, "w+") as f:
                 f.write(dump_sources_config(site_vo_list, harbor_projects))
             with open(vo_map_file, "w+") as f:
-                f.write(yaml.dump(site["shares"]))
+                f.write(dump_vo_map(site))
             cmd = [
                 "atrope",
                 "--config-dir",
