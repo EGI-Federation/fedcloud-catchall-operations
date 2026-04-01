@@ -31,6 +31,7 @@ dependencies = [
     "pyyaml>=6.0.3",
     "respx>=0.22.0",
     "testtools>=2.8.2",
+    "yq>=3.4.3",
 ]
 
 [project.scripts]

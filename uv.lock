@@ -489,6 +489,7 @@ dependencies = [
     { name = "pyyaml" },
     { name = "respx" },
     { name = "testtools" },
+    { name = "yq" },
 ]
 
 [package.dev-dependencies]
@@ -521,6 +522,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.22.0" },
     { name = "testtools", specifier = ">=2.8.2" },
+    { name = "yq", specifier = ">=3.4.3" },
 ]
 
 [package.metadata.requires-dev]
