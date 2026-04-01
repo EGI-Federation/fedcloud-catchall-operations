@@ -47,9 +47,9 @@ class TestCloudConfig(testtools.TestCase):
                 "password": "1234",
             }
         }
+        m_decode.return_value = {"sub": "user@egi.eu"}
         with patch("builtins.open", mock_open(read_data=app_cred_site)):
-            m_decode.return_value = {"sub": "user@egi.eu"}
-            r = secretize("foo", "bar")
+            r = secretize("site_config_file", "the_access_token")
         assert r == {
             "gocdb": "TEST",
             "endpoint": "https://example.com:5000/v3",
@@ -66,7 +66,7 @@ class TestCloudConfig(testtools.TestCase):
             ],
         }
         m_hvac.assert_called_once()
-        m_client.auth.jwt.jwt_login.assert_called_once()
+        m_client.auth.jwt.jwt_login.assert_called_with(role='', jwt='the_access_token')
         m_client.secrets.kv.v1.read_secret.assert_called_with(
             path="users/user@egi.eu/cloudmon/example.com/ops",
             mount_point="/secrets/",
@@ -74,7 +74,7 @@ class TestCloudConfig(testtools.TestCase):
 
     def test_secretize_regular_site(self):
         with patch("builtins.open", mock_open(read_data=regular_site)):
-            r = secretize("foo", "bar")
+            r = secretize("site_config_file", "the_access_token")
         assert r == {
             "gocdb": "TEST",
             "endpoint": "https://example.com:5000/v3",
