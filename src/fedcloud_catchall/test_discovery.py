@@ -2,11 +2,12 @@
 
 import unittest
 
-import fedcloud_catchall.discovery as disco
 import httpx
 import respx
 import testtools
 from oslo_config import fixture
+
+from . import discovery as disco
 
 
 class TestDiscovery(testtools.TestCase):

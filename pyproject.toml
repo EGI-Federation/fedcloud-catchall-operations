@@ -15,10 +15,11 @@ requires-python = ">=3.14"
 dependencies = [
     "atrope",
     "caso",
-    "cloud-info-provider==1.0.2",
+    "cloud-info-provider==1.1.0",
     "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
+    "hvac>=2.4.0",
     "keystoneauth1>=5.12.0",
     "oslo-config>=9.8.0",
     "pyjwt>=2.10.1",
@@ -30,6 +31,7 @@ dependencies = [
     "pyyaml>=6.0.3",
     "respx>=0.22.0",
     "testtools>=2.8.2",
+    "yq>=3.4.3",
 ]
 
 [project.scripts]
@@ -37,6 +39,7 @@ token-generator = "fedcloud_catchall.token_generator:main"
 image-sync = "fedcloud_catchall.image_sync:main"
 accounting = "fedcloud_catchall.accounting:main"
 record-cleaner = "fedcloud_catchall.record_cleaner:main"
+cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
 requires = ["uv_build>=0.9.14,<0.12.0"]

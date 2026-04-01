@@ -14,12 +14,13 @@ import sys
 import tempfile
 
 from dateutil import tz
-from fedcloud_catchall.config import CONF
-from fedcloud_catchall.discovery import fetch_site_info, load_sites
+
+from .config import CONF
+from .discovery import fetch_site_info, load_sites
 
 config_template = """
 [DEFAULT]
-extractor = nova, cinder, neutron
+extractor = {extractor}
 site_name = {site_name}
 service_name = {service_name}
 projects = {project_id}
@@ -43,7 +44,7 @@ access_token_type = access_token
 output_path = {ssmdir}"""
 
 
-def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO"):
+def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO", extractor="nova"):
     return config_template.format(
         site_name=site["name"],
         service_name=site["hostname"],
@@ -55,6 +56,7 @@ def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO"):
         project_id=project_id,
         vo_property=vo_property,
         spooldir=site_dir,
+        extractor=extractor,
         ssmdir=os.path.join(site_dir, "outgoing"),
     )
 

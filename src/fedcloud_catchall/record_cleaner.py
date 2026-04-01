@@ -11,7 +11,8 @@ import logging
 import sys
 
 from dirq.QueueSimple import QueueSimple
-from fedcloud_catchall.config import CONF
+
+from .config import CONF
 
 
 def remove_records(site_dir):

@@ -1,0 +1,16 @@
+---
+gocdb: CREODIAS
+endpoint: https://keystone.cloudferro.com:5000/v3
+auth: v3applicationcredential
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
+vos:
+  - name: ops
+    auth:
+      region: "WAW4-1"
+  - name: vo.eosc-data-commons.eu
+    auth:
+      region: "WAW4-1"

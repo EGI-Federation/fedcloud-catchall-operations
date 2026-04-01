@@ -13,8 +13,9 @@ import tempfile
 
 import httpx
 import yaml
-from fedcloud_catchall.config import CONF
-from fedcloud_catchall.discovery import fetch_site_info, load_sites
+
+from .config import CONF
+from .discovery import fetch_site_info, load_sites
 
 
 # Harbor interaction
