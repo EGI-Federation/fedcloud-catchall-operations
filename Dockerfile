@@ -27,11 +27,17 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY README.md pyproject.toml uv.lock /fedcloud_catchall/
 
-RUN uv pip compile pyproject.toml -o requirements.txt
-
-RUN python -m venv /fedcloud_catchall/venv  \
+RUN uv pip compile pyproject.toml -o requirements.txt \
+    && uv pip compile pyproject.toml --group ssm -o requirements-ssm.txt \
+    && python -m venv /fedcloud_catchall/venv  \
     && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
+    && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements-ssm.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
+
+RUN git clone https://github.com/apel/ssm.git /tmp/ssm \
+    && cd /tmp/ssm \
+    && git checkout 4.0.0-1 \
+    && /fedcloud_catchall/venv/bin/python setup.py install
 
 COPY src/ /fedcloud_catchall/src
 RUN /fedcloud_catchall/venv/bin/pip install --no-cache-dir .
