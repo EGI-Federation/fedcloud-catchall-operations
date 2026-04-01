@@ -9,7 +9,7 @@ from .cloud_info_config import secretize
 
 app_cred_site = """
 ---
-gocdb: TEST 
+gocdb: TEST
 endpoint: https://example.com:5000/v3
 auth: v3applicationcredential
 vos:
@@ -20,7 +20,7 @@ vos:
 
 regular_site = """
 ---
-gocdb: TEST 
+gocdb: TEST
 endpoint: https://example.com:5000/v3
 vos:
   - name: ops

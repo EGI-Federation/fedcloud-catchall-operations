@@ -14,11 +14,11 @@ export OS_ACCESS_TOKEN
 export OS_AUTH_TYPE="v3oidcaccesstoken"
 
 # Reconfigure if needed for application credentials
-AUTH=$(yq .auth < "$SITE_CONFIG")
+AUTH=$(yq .auth <"$SITE_CONFIG")
 if test "$AUTH" != "null"; then
 	NEW_SITE_CONFIG=$(mktemp)
 	export OS_AUTH_TYPE="$AUTH"
-	cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG"> "$NEW_SITE_CONFIG"
+	cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG">"$NEW_SITE_CONFIG"
 	SITE_CONFIG="$NEW_SITE_CONFIG"
 fi
 

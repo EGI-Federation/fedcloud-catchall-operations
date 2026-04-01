@@ -30,12 +30,16 @@ def secretize(site_config_file: str, access_token: str):
 
     client = hvac.Client(url=VAULT_URL)
     client.auth.jwt.jwt_login(role="", jwt=access_token)
-    for vo in site_config.get("vos"):
+    for vo in site_config.get("vos", {}):
         keystone_host = urlparse(site_config.get("endpoint", "")).netloc.split(":", 1)[
             0
         ]
         secret_path = os.path.join(
-            "users", payload.get("sub", ""), "cloudmon", keystone_host, vo.get("name")
+            "users",
+            payload.get("sub", ""),
+            "cloudmon",
+            keystone_host,
+            vo.get("name", ""),
         )
         try:
             appcred_args = client.secrets.kv.v1.read_secret(
