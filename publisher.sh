@@ -24,7 +24,7 @@ if test "$AUTH" != "null"; then
 	SITE_CONFIG="$NEW_SITE_CONFIG"
 fi
 
-OS_AUTH_TYPE="$AUTH" cloud-info-provider-service \
+OS_AUTH_TYPE="$SITE_AUTH" cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
 	--format glue21json "$SITE_CONFIG" >"$SITE_INFO_FILE"
 
