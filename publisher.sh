@@ -8,11 +8,21 @@ CLOUD_INFO_MIDDLEWARE=openstack
 
 # use service account for everyone
 ACCESS_TOKEN_FILE="$(mktemp)"
-token-generator --config-dir /etc/egi "$ACCESS_TOKEN_FILE"
+token-generator --config-dir "$EGI_CONFIG_DIR" "$ACCESS_TOKEN_FILE"
 OS_ACCESS_TOKEN="$(cat "$ACCESS_TOKEN_FILE")"
 export OS_ACCESS_TOKEN
 export OS_AUTH_TYPE="v3oidcaccesstoken"
-cloud-info-provider-service \
+
+# Reconfigure if needed for application credentials
+AUTH=$(yq .auth < "$SITE_CONFIG")
+if test "$AUTH" != "null"; then
+	NEW_SITE_CONFIG=$(mktemp)
+	export OS_AUTH_TYPE="$AUTH"
+	cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG"> "$NEW_SITE_CONFIG"
+	SITE_CONFIG="$NEW_SITE_CONFIG"
+fi
+
+cloud-info-provider-service --debug \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
 	--format glue21json "$SITE_CONFIG" >"$SITE_INFO_FILE"
 
@@ -40,3 +50,4 @@ if test -s "$SITE_INFO_FILE"; then
 		echo "Upload completed!"
 	fi
 fi
+
