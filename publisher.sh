@@ -11,18 +11,20 @@ ACCESS_TOKEN_FILE="$(mktemp)"
 token-generator --config-dir "$EGI_CONFIG_DIR" "$ACCESS_TOKEN_FILE"
 OS_ACCESS_TOKEN="$(cat "$ACCESS_TOKEN_FILE")"
 export OS_ACCESS_TOKEN
-export OS_AUTH_TYPE="v3oidcaccesstoken"
+
+# Default auth
+SITE_AUTH="v3oidcaccesstoken"
+AUTH=$(yq -r .auth <"$SITE_CONFIG")
 
 # Reconfigure if needed for application credentials
-AUTH=$(yq .auth <"$SITE_CONFIG")
 if test "$AUTH" != "null"; then
+	SITE_AUTH="$AUTH"
 	NEW_SITE_CONFIG=$(mktemp)
-	export OS_AUTH_TYPE="$AUTH"
 	cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG" >"$NEW_SITE_CONFIG"
 	SITE_CONFIG="$NEW_SITE_CONFIG"
 fi
 
-cloud-info-provider-service --debug \
+OS_AUTH_TYPE="$AUTH" cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
 	--format glue21json "$SITE_CONFIG" >"$SITE_INFO_FILE"
 
