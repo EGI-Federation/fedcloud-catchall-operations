@@ -508,11 +508,11 @@ validate = [
 
 [[package]]
 name = "fixtures"
-version = "4.3.1"
+version = "4.3.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ab/f5/4dbf6053895931a5110a38d7ebacecce41683cb9f01377ba8cc0254d1bc8/fixtures-4.3.1.tar.gz", hash = "sha256:88cdf089784b84f931a1e32ad3492c4ae707f862459be22020e9ffe4aa1e5823", size = 46858, upload-time = "2026-02-23T12:47:57.105Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/79/fc/da17efe78bb35b945441170363328ad11d953d69e6273bceb668b1d68c34/fixtures-4.3.2.tar.gz", hash = "sha256:b7db64014732513f23d12b0c49ae527ba0c0c1f2667ec97d9136d67157ebce5d", size = 47173, upload-time = "2026-03-25T17:25:40.51Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c4/0e/ce58447f5b1e929d52f8c9326430622e8b9e7220d59e6178614f75211493/fixtures-4.3.1-py3-none-any.whl", hash = "sha256:bf381ea4d20e795598a281c5c344b446382ced4b61859cdece66c102f0140c06", size = 40695, upload-time = "2026-02-23T12:47:55.865Z" },
+    { url = "https://files.pythonhosted.org/packages/de/58/b7efb4b7c01cefd47efb53e50c7f1eb2cdc4aff3d98268bdc46c7f628f2c/fixtures-4.3.2-py3-none-any.whl", hash = "sha256:c71ad55a9139bd20b3265c1d44c1a67fefb9efdddd79614096f538de63fbf4d8", size = 41625, upload-time = "2026-03-25T17:25:38.898Z" },
 ]
 
 [[package]]
