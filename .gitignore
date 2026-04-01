@@ -5,3 +5,4 @@ __pycache__
 deploy/.terraform*
 *.egg-info
 build
+.coverage
