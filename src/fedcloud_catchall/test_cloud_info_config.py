@@ -66,7 +66,7 @@ class TestCloudConfig(testtools.TestCase):
             ],
         }
         m_hvac.assert_called_once()
-        m_client.auth.jwt.jwt_login.assert_called_with(role='', jwt='the_access_token')
+        m_client.auth.jwt.jwt_login.assert_called_with(role="", jwt="the_access_token")
         m_client.secrets.kv.v1.read_secret.assert_called_with(
             path="users/user@egi.eu/cloudmon/example.com/ops",
             mount_point="/secrets/",
