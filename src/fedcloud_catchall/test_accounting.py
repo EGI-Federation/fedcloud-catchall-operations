@@ -4,13 +4,14 @@ import datetime
 import json
 from unittest.mock import call, mock_open, patch
 
-import fedcloud_catchall.accounting as acc
 import testtools
 from oslo_config import fixture
 
+from . import accounting as acc
+
 sample_config = """
 [DEFAULT]
-extractor = nova, cinder, neutron
+extractor = nova
 site_name = CENI
 service_name = openstack.ceni.org.cn
 projects = foo

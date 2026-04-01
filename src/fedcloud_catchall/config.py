@@ -19,7 +19,8 @@ CONF.register_opts(
         cfg.StrOpt("client_id"),
         cfg.StrOpt("client_secret"),
         cfg.StrOpt(
-            "scopes", default="openid profile eduperson_entitlement entitlements email"
+            "scopes",
+            default="openid profile eduperson_entitlement entitlements email voperson_id",
         ),
         cfg.StrOpt(
             "discovery_endpoint",

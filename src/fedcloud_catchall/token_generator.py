@@ -17,8 +17,9 @@ from datetime import datetime, timezone
 
 import httpx
 import jwt
-from fedcloud_catchall.config import CONF
 from oslo_config import cfg
+
+from .config import CONF
 
 
 def valid_token(token, oidc_config, min_time):
