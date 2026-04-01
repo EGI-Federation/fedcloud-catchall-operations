@@ -54,6 +54,14 @@ dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
 ]
+ssm = [
+    "argo-ams-library>=0.5.5",
+    "cryptography>=46.0.6",
+    "dirq>=1.8",
+    "pyopenssl>=26.0.0",
+    "stomp-py>=8.2.0",
+    "setuptools<82.0.0",
+]
 validate = [
     "pyyaml>=6.0.3",
     "yq>=3.4.3",
