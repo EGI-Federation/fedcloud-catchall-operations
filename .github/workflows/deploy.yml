@@ -178,7 +178,7 @@ jobs:
           touch ~/.config/openstack/secure.yaml
       - name: Get the status file from swift
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 10
           max_attempts: 30
