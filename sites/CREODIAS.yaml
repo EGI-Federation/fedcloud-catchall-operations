@@ -11,6 +11,6 @@ vos:
   - name: ops
     auth:
       region: "WAW4-1"
-  - name: vo.eosc-data-commons.eu 
+  - name: vo.eosc-data-commons.eu
     auth:
       region: "WAW4-1"
