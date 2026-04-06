@@ -60,7 +60,11 @@ RUN apt-get update \
 RUN mkdir /fedcloud_catchall \
     && groupadd -g 1999 python \
     && useradd -m -r -u 1999 -g python python \
-    && chown -R python:python /fedcloud_catchall
+    && chown -R python:python /fedcloud_catchall \
+    && mkdir /var/log/apel/ \
+    && chown -R python:python /var/log/apel \
+    && mkdir /atrope-state \
+    && chown -R python:python /atrope-state
 
 WORKDIR /fedcloud_catchall
 
