@@ -57,3 +57,7 @@ record_cleaner_cron:
   hour: "2"
   weekday: "5"
   timeout: "9000" # 2.5 hours
+
+hostcert.pem: ""
+
+hostkey.pem: ""

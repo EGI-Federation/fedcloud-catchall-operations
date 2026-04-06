@@ -7,6 +7,18 @@
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
 
+- name: Create certificate file
+  ansible.builtin.copy:
+    dest: "/etc/grid-security/hostcert.pem"
+    content: "{{ hostcert.pem }}"
+    mode: "660"
+
+- name: Create key file
+  ansible.builtin.copy:
+    dest: "/etc/grid-security/hostkey.pem"
+    content: "{{ hostkey.pem }}"
+    mode: "660"
+
 - name: caso cron
   ansible.builtin.cron:
     name: caso
@@ -19,9 +31,12 @@
       docker run --rm -v /etc/egi:/etc/egi:ro
       -v {{ site_config_dir }}:{{ site_config_mountpoint }}:ro
       -v /var/spool/egi:/var/spool/egi
+      -v /etc/grid-security/cert/hostkey.pem:/etc/grid-security/hostkey.pem
+      -v /etc/grid-security/hostcert.pem:/etc/grid-security/hostcert.pem
       {{ accounting_image }} accounting
       --config-dir /etc/egi >> /var/log/accounting.log 2>&1
     cron_file: "egi-accounting"
+
 
 - name: record cleaner cron
   ansible.builtin.cron:
