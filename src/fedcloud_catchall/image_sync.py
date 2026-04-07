@@ -29,11 +29,9 @@ scope = {scopes}
 discovery_endpoint = {discovery_endpoint}
 project_id = {project_id}
 access_token_type = access_token
-valid_interfaces = public
 """
 
 APPCRED_AUTH_TEMPLATE = """
-valid_interfaces = public
 auth_type = {auth_type}
 auth_url = {auth_url}"""
 
@@ -121,6 +119,8 @@ def dump_atrope_config(site, ops_project_id, sources_file, vo_map_file):
     for vo_info in site["shares"].values():
         projects_config.append(auth_config(site, vo_info))
 
+    ops_project_config = auth_config(site, site["shares"]["ops"])
+
     config_template = """
 [DEFAULT]
 state_path = /atrope-state/
@@ -130,7 +130,7 @@ project_id = {project_id}
 formats = {formats}
 vo_map = {vo_map_file}
 tag = atrope-catchall
-valid_interfaces = public
+{ops_project_config}
 
 {projects_config}
 
@@ -154,6 +154,7 @@ image_sources = {sources_file}
         formats=",".join(formats),
         sources_file=sources_file,
         vo_map_file=vo_map_file,
+        ops_project_config=ops_project_config,
         projects_config="\n".join(projects_config),
     )
 
@@ -167,7 +168,7 @@ def dump_sources_config(site_vo_list, harbor_projects):
             "auth_user": CONF.sync.registry_user,
             "auth_password": CONF.sync.registry_password,
             "registry_host": CONF.sync.registry_host,
-            "tag_pattern": "^9[^-]*$",
+            "tag_pattern": "^[^-]*$",
         },
         # All vos uses the default registry project
         CONF.sync.registry_project: {
