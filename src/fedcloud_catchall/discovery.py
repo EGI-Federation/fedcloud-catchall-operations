@@ -28,23 +28,7 @@ def fetch_site_info():
         headers={"Accept": "application/json"},
     )
     r.raise_for_status()
-    sites = [
-        {
-            "id": "14521G0",
-            "name": "CREODIAS",
-            "url": "https://keystone.cloudferro.com:5000/v3",
-            "state": "",
-            "hostname": "keystone.cloudferrro.com",
-            "projects": [
-                {"id": "5dd091af3c8b41938c1328c8672bb269", "name": "ops"},
-                {
-                    "id": "2089ad51c34d4915a163b99511a2fa79",
-                    "name": "vo.eosc-data-commons.eu",
-                },
-            ],
-        },
-    ]
-    # sites = r.json()
+    sites = r.json()
     # 2 - Go one by one getting the shares
     for site in sites:
         # turn this into a more friendly structure for the rest of the code
