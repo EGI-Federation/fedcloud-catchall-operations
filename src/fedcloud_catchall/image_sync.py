@@ -15,7 +15,27 @@ import httpx
 import yaml
 
 from .config import CONF
-from .discovery import fetch_site_info, load_sites
+from .discovery import fetch_site_info, get_vo_secrets, load_sites
+from .token_generator import generate_token, get_oidc_config
+
+OIDC_AUTH_TEMPLATE = """
+auth_type = v3oidcclientcredentials
+auth_url = {auth_url}
+protocol = openid
+identity_provider = egi.eu
+client_id = {client_id}
+client_secret = {client_secret}
+scope = {scopes}
+discovery_endpoint = {discovery_endpoint}
+project_id = {project_id}
+access_token_type = access_token
+"""
+
+APPCRED_AUTH_TEMPLATE = """
+auth_type = {auth_type}
+auth_url = {auth_url}"""
+
+_access_token = None
 
 
 # Harbor interaction
@@ -57,25 +77,61 @@ def fetch_harbor_projects():
     return project_names
 
 
+def auth_config(site, vo):
+    print(site)
+    print(site.get("auth"))
+    print("*")
+    print("*")
+    print("*")
+    print("*")
+    print("*")
+    cfg = [f"[glance_{vo['id']}]"]
+    if site.get("auth", None) != "v3applicationcredential":
+        cfg.append(
+            OIDC_AUTH_TEMPLATE.format(
+                auth_url=site["url"],
+                client_id=CONF.checkin.client_id,
+                client_secret=CONF.checkin.client_secret,
+                scopes=CONF.checkin.scopes,
+                discovery_endpoint=CONF.checkin.discovery_endpoint,
+                project_id=vo["id"],
+            )
+        )
+    else:
+        global _access_token
+        if not _access_token:
+            _access_token = generate_token(get_oidc_config())
+        cfg.append(
+            APPCRED_AUTH_TEMPLATE.format(
+                auth_url=site["url"],
+                auth_type=site["auth"],
+            )
+        )
+        cfg.extend(
+            f"{k} = {v}"
+            for k, v in get_vo_secrets(site["url"], vo["name"], _access_token).items()
+        )
+        cfg.append("")
+    print(cfg)
+    return "\n".join(cfg)
+
+
 def dump_atrope_config(site, ops_project_id, sources_file, vo_map_file):
+    projects_config = []
+    for vo_info in site["shares"].values():
+        projects_config.append(auth_config(site, vo_info))
+
     config_template = """
 [DEFAULT]
 state_path = /atrope-state/
 
 [glance]
-auth_type = v3oidcclientcredentials
-auth_url = {auth_url}
-protocol = openid
-identity_provider = egi.eu
-client_id = {client_id}
-client_secret = {client_secret}
-scope = {scopes}
-discovery_endpoint = {discovery_endpoint}
 project_id = {project_id}
-access_token_type = access_token
 formats = {formats}
 vo_map = {vo_map_file}
 tag = atrope-catchall
+
+{projects_config}
 
 [dispatchers]
 dispatcher = glance
@@ -97,6 +153,7 @@ image_sources = {sources_file}
         formats=",".join(formats),
         sources_file=sources_file,
         vo_map_file=vo_map_file,
+        projects_config="\n".join(projects_config),
     )
 
 
@@ -109,7 +166,7 @@ def dump_sources_config(site_vo_list, harbor_projects):
             "auth_user": CONF.sync.registry_user,
             "auth_password": CONF.sync.registry_password,
             "registry_host": CONF.sync.registry_host,
-            "tag_pattern": "^[^-]*$",
+            "tag_pattern": "^9[^-]*$",
         },
         # All vos uses the default registry project
         CONF.sync.registry_project: {
@@ -150,8 +207,10 @@ def do_sync(sites_config, harbor_projects):
             logging.debug(f"Discarding site {site_name}, no sync set.")
             continue
         site.update(site_image_config)
-        logging.info(f"Configuring site {site_name}")
+        if "auth" in sites_config[site_name]:
+            site.update({"auth": sites_config[site_name]["auth"]})
         with tempfile.TemporaryDirectory() as tmpdirname:
+            logging.info(f"Configuring site {site_name} at {tmpdirname}")
             sources_file = os.path.join(tmpdirname, "sources.yaml")
             vo_map_file = os.path.join(tmpdirname, "vo-map.yaml")
             site_vo_list = list(site["shares"].keys())

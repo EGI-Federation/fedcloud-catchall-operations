@@ -46,7 +46,7 @@ requires = ["uv_build>=0.9.14,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
-atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }
+atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "project_conf" }
 caso = { git = "https://github.com/IFCA-Advanced-Computing/caso", rev = "1584f0b3823cc1ee31d1338944e44a36b114a5ee" }
 
 [dependency-groups]

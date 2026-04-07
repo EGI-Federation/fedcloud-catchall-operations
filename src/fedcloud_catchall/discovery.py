@@ -5,11 +5,18 @@ Configuration discovery for the different sites
 import glob
 import logging
 import os.path
+from urllib.parse import urlparse
 
 import httpx
+import hvac
+import jwt
 import yaml
+from hvac.exceptions import VaultError
 
 from .config import CONF
+
+_hvac_client = None
+VAULT_URL = "https://vault.services.fedcloud.eu:8200"
 
 
 def fetch_site_info():
@@ -21,12 +28,49 @@ def fetch_site_info():
         headers={"Accept": "application/json"},
     )
     r.raise_for_status()
-    sites = r.json()
+    sites = [
+        {
+            "id": "14521G0",
+            "name": "CREODIAS",
+            "url": "https://keystone.cloudferro.com:5000/v3",
+            "state": "",
+            "hostname": "keystone.cloudferrro.com",
+            "projects": [
+                {"id": "5dd091af3c8b41938c1328c8672bb269", "name": "ops"},
+                {
+                    "id": "2089ad51c34d4915a163b99511a2fa79",
+                    "name": "vo.eosc-data-commons.eu",
+                },
+            ],
+        },
+    ]
+    # sites = r.json()
     # 2 - Go one by one getting the shares
     for site in sites:
         # turn this into a more friendly structure for the rest of the code
         site["shares"] = {p["name"]: p for p in site["projects"]}
     return sites
+
+
+def get_vo_secrets(endpoint: str, vo_name: str, access_token: str):
+    payload = jwt.decode(access_token, options={"verify_signature": False})
+
+    global _hvac_client
+    if not _hvac_client:
+        _hvac_client = hvac.Client(url=VAULT_URL)
+        _hvac_client.auth.jwt.jwt_login(role="", jwt=access_token)
+    keystone_host = urlparse(endpoint).netloc.split(":", 1)[0]
+    secret_path = os.path.join(
+        "users", payload.get("sub", ""), "cloudmon", keystone_host, vo_name
+    )
+    try:
+        return _hvac_client.secrets.kv.v1.read_secret(
+            path=secret_path,
+            mount_point="/secrets/",
+        ).get("data", {})
+    except VaultError as e:
+        logging.debug(f"Ouch {e}")
+        return {}
 
 
 def load_sites():

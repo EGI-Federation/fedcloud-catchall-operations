@@ -18,7 +18,7 @@ from dateutil import tz
 from .config import CONF
 from .discovery import fetch_site_info, load_sites
 
-config_template = """
+caso_config_template = """
 [DEFAULT]
 extractor = {extractor}
 site_name = {site_name}
@@ -43,9 +43,39 @@ access_token_type = access_token
 [ssm]
 output_path = {ssmdir}"""
 
+ssm_config_template = """
+[sender]
+protocol: AMS
+
+[broker]
+# msg.argo.grnet.gr is for production data
+host: msg.argo.grnet.gr
+
+[certificates]
+certificate: /etc/grid-security/hostcert.pem
+key: /etc/grid-security/hostkey.pem
+capath: /etc/grid-security/certificates
+
+[messaging]
+# If using AMS this is the project that SSM will connect to. Ignored for STOMP.
+ams_project: accounting
+destination: eu-egi-cloud-accounting
+
+# Outgoing messages will be read and removed from this directory.
+path: {ssmdir}
+path_type: dirq
+
+[logging]
+logfile: /var/log/apel/ssmsend.log
+# Available logging levels:
+# DEBUG, INFO, WARN, ERROR, CRITICAL
+level: INFO
+console: true
+"""
+
 
 def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO", extractor="nova"):
-    return config_template.format(
+    return caso_config_template.format(
         site_name=site["name"],
         service_name=site["hostname"],
         auth_url=site["url"],
@@ -61,6 +91,12 @@ def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO", extractor="
     )
 
 
+def ssm_config(site, site_dir):
+    return ssm_config_template.format(
+        ssmdir=os.path.join(site_dir, "outgoing"),
+    )
+
+
 def vo_map(site):
     vos = {}
     for project in site["projects"]:
@@ -68,10 +104,56 @@ def vo_map(site):
     return json.dumps(vos)
 
 
-def run_caso(sites_config):
+def site_caso(site, site_dir):
+    # running caso for each project independently so we can control the "lastrun"
+    good_run = False
+    for project in site["projects"]:
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            vo_map_file = os.path.join(tmpdirname, "mapping.json")
+            with open(vo_map_file, "w+") as f:
+                f.write(vo_map(site))
+            with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
+                f.write(caso_config(site, project["id"], site_dir))
+            cmd = [
+                "caso-extract",
+                "--config-dir",
+                tmpdirname,
+                "--mapping_file",
+                vo_map_file,
+            ]
+            if not os.path.exists(os.path.join(site_dir, f"lastrun.{project['id']}")):
+                yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
+                    days=1
+                )
+                cmd.extend(["--extract-from", yesterday.isoformat()])
+            logging.debug(f"Running {' '.join(cmd)}")
+            return_code = subprocess.call(cmd)
+            logging.debug(f"Return code {return_code}")
+            good_run = True
+    return good_run
+
+
+def site_ssm(site, site_dir):
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        ssm_config_file = os.path.join(tmpdirname, "ssm.conf")
+        with open(ssm_config_file, "w+") as f:
+            f.write(ssm_config(site, site_dir))
+        cmd = [
+            "ssmsend",
+            "-c",
+            ssm_config_file,
+        ]
+        logging.debug(f"Running {' '.join(cmd)}")
+        return_code = subprocess.call(cmd)
+        return return_code == 0
+    return False
+
+
+def run(sites_config):
     sites_info = fetch_site_info()
     for site in sites_info:
         site_name = site["name"]
+        logging.info(f"Configuring site {site_name}")
         # filter out those sites that are not part of the centralised ops
         if site_name not in sites_config:
             logging.debug(f"Discarding site {site_name}, not in config.")
@@ -84,39 +166,16 @@ def run_caso(sites_config):
                 logging.debug(f"Discarding site {site_name}, accounting not enabled.")
                 continue
         site.update(accounting_config)
-        site_dir = os.path.join(CONF.accounting.spool_dir, site_name)
+        site_dir = os.path.join(CONF.accounting.spool_dir, site["name"])
         os.makedirs(site_dir, exist_ok=True)
-        logging.info(f"Configuring site {site_name}")
-        # running caso for each project independently so we can control the "lastrun"
-        for project in site["projects"]:
-            with tempfile.TemporaryDirectory() as tmpdirname:
-                vo_map_file = os.path.join(tmpdirname, "mapping.json")
-                with open(vo_map_file, "w+") as f:
-                    f.write(vo_map(site))
-                with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
-                    f.write(caso_config(site, project["id"], site_dir))
-                cmd = [
-                    "caso-extract",
-                    "--config-dir",
-                    tmpdirname,
-                    "--mapping_file",
-                    vo_map_file,
-                ]
-                if not os.path.exists(
-                    os.path.join(site_dir, f"lastrun.{project['id']}")
-                ):
-                    yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
-                        days=1
-                    )
-                    cmd.extend(["--extract-from", yesterday.isoformat()])
-                logging.debug(f"Running {' '.join(cmd)}")
-                subprocess.call(cmd)
+        if site_caso(site, site_dir):
+            site_ssm(site, site_dir)
 
 
 def main():
     CONF(sys.argv[1:])
     logging.basicConfig(level=logging.DEBUG)
-    run_caso(load_sites())
+    run(load_sites())
 
 
 if __name__ == "__main__":
