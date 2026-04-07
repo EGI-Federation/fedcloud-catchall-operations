@@ -78,15 +78,8 @@ def fetch_harbor_projects():
 
 
 def auth_config(site, vo):
-    print(site)
-    print(site.get("auth"))
-    print("*")
-    print("*")
-    print("*")
-    print("*")
-    print("*")
     cfg = [f"[glance_{vo['id']}]"]
-    if site.get("auth", None) != "v3applicationcredential":
+    if site["static"].get("auth", None) != "v3applicationcredential":
         cfg.append(
             OIDC_AUTH_TEMPLATE.format(
                 auth_url=site["url"],
@@ -104,15 +97,20 @@ def auth_config(site, vo):
         cfg.append(
             APPCRED_AUTH_TEMPLATE.format(
                 auth_url=site["url"],
-                auth_type=site["auth"],
+                auth_type=site["static"]["auth"],
             )
         )
+        # secrets
         cfg.extend(
             f"{k} = {v}"
             for k, v in get_vo_secrets(site["url"], vo["name"], _access_token).items()
         )
+        # other params
+        cfg.extend(
+            f"{k} = {v}"
+            for k, v in vo.get("auth", {}).items()
+        )
         cfg.append("")
-    print(cfg)
     return "\n".join(cfg)
 
 
@@ -142,7 +140,7 @@ formats = {formats}
 [sources]
 image_sources = {sources_file}
     """
-    formats = site.get("formats", CONF.sync.formats)
+    formats = site["static"]["images"].get("formats", CONF.sync.formats)
     return config_template.format(
         auth_url=site["url"],
         client_id=CONF.checkin.client_id,
@@ -194,21 +192,14 @@ def dump_vo_map(site):
     return yaml.dump(shares)
 
 
-def do_sync(sites_config, harbor_projects):
-    sites_info = fetch_site_info()
-    for site in sites_info:
+def do_sync(sites, harbor_projects):
+    for _, site in sites.items():
         site_name = site["name"]
-        # filter out those sites that are not part of the centralised ops
-        if site_name not in sites_config:
-            logging.debug(f"Discarding site {site_name}, not in config.")
-            continue
-        site_image_config = sites_config[site_name].get("images", {})
-        if not site_image_config.get("sync", False):
+
+        image_config = site["static"].get("images", {})
+        if not image_config.get("sync", False):
             logging.debug(f"Discarding site {site_name}, no sync set.")
             continue
-        site.update(site_image_config)
-        if "auth" in sites_config[site_name]:
-            site.update({"auth": sites_config[site_name]["auth"]})
         with tempfile.TemporaryDirectory() as tmpdirname:
             logging.info(f"Configuring site {site_name} at {tmpdirname}")
             sources_file = os.path.join(tmpdirname, "sources.yaml")
