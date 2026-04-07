@@ -29,9 +29,11 @@ scope = {scopes}
 discovery_endpoint = {discovery_endpoint}
 project_id = {project_id}
 access_token_type = access_token
+valid_interfaces = public
 """
 
 APPCRED_AUTH_TEMPLATE = """
+valid_interfaces = public
 auth_type = {auth_type}
 auth_url = {auth_url}"""
 
@@ -128,6 +130,7 @@ project_id = {project_id}
 formats = {formats}
 vo_map = {vo_map_file}
 tag = atrope-catchall
+valid_interfaces = public
 
 {projects_config}
 
