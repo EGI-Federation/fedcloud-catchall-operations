@@ -35,7 +35,7 @@ RUN uv pip compile pyproject.toml -o requirements.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
 
 # I want to use cd here
-# hadloint ignore=DL3003  
+# hadolint ignore=DL3003  
 RUN git clone https://github.com/apel/ssm.git /tmp/ssm \
     && cd /tmp/ssm \
     && git checkout 4.0.0-1 \
