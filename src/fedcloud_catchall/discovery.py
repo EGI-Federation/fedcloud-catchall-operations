@@ -68,12 +68,12 @@ def load_sites():
     for site in api_sites:
         site_name = site["name"]
         static_site = static_sites.get(site_name, None)
-        if not static_sites:
+        if not static_site:
             logging.debug(f"Discarding site {site_name}, not in config.")
             continue
         for vo in static_site["vos"]:
             if vo["name"] in site["shares"]:
-                site["shares"][vo["name"]]["auth"] = vo["auth"]
+                site["shares"][vo["name"]]["auth"] = vo.get("auth", {})
         site["static"] = static_site
-        sites[site["id"]] =  site
+        sites[site["id"]] = site
     return sites

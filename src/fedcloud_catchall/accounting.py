@@ -16,7 +16,7 @@ import tempfile
 from dateutil import tz
 
 from .config import CONF
-from .discovery import fetch_site_info, load_sites
+from .discovery import load_sites
 
 caso_config_template = """
 [DEFAULT]
@@ -149,23 +149,17 @@ def site_ssm(site, site_dir):
     return False
 
 
-def run(sites_config):
-    sites_info = fetch_site_info()
-    for site in sites_info:
+def run(sites):
+    for _, site in sites.items():
         site_name = site["name"]
         logging.info(f"Configuring site {site_name}")
-        # filter out those sites that are not part of the centralised ops
-        if site_name not in sites_config:
-            logging.debug(f"Discarding site {site_name}, not in config.")
-            continue
-        accounting_config = sites_config[site_name].get("accounting", {})
+        accounting_config = site["static"].get("accounting", {})
         if not accounting_config.get("enabled", False):
             if CONF.accounting.force_run:
                 logging.info(f"Force run the extraction of records for {site_name}.")
             else:
                 logging.debug(f"Discarding site {site_name}, accounting not enabled.")
                 continue
-        site.update(accounting_config)
         site_dir = os.path.join(CONF.accounting.spool_dir, site["name"])
         os.makedirs(site_dir, exist_ok=True)
         if site_caso(site, site_dir):

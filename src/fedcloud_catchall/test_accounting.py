@@ -1,8 +1,9 @@
 """Tests for the accounting"""
 
+import copy
 import datetime
 import json
-from unittest.mock import call, mock_open, patch
+from unittest.mock import mock_open, patch
 
 import testtools
 from oslo_config import fixture
@@ -44,10 +45,11 @@ sample_site = {
         {"id": "90c0ce1b2f1545c0b9a05d9a8fd45102", "name": "ops"},
         {"id": "b106744c783543518f505dda45632697", "name": "vo.access.egi.eu"},
     ],
+    "static": {"accounting": {"enabled": True}},
 }
 
 
-class TestDiscovery(testtools.TestCase):
+class TestAccounting(testtools.TestCase):
 
     def setUp(self):
         super().setUp()
@@ -66,74 +68,90 @@ class TestDiscovery(testtools.TestCase):
         self.conf.set_override("client_secret", "secret", group="checkin")
         assert acc.caso_config(sample_site, "foo", "/var", "egi.eu:VO") == sample_config
 
-    @patch("fedcloud_catchall.accounting.fetch_site_info")
-    @patch("os.makedirs")
-    def test_run_caso_no_sites(self, m_mkdirs, m_fetch):
-        m_fetch.return_value = [sample_site]
-        acc.run_caso({})
-        m_mkdirs.assert_not_called()
-
-    @patch("fedcloud_catchall.accounting.fetch_site_info")
-    @patch("os.makedirs")
-    def test_run_caso_no_sites_enables(self, m_mkdirs, m_fetch):
-        m_fetch.return_value = [sample_site]
-        acc.run_caso({"CENI": {"accounting": {"enabled": False}}})
-        m_mkdirs.assert_not_called()
-
-    @patch("fedcloud_catchall.accounting.fetch_site_info")
-    @patch("os.makedirs")
     @patch("tempfile.TemporaryDirectory")
-    @patch("os.path.exists")
     @patch("subprocess.call")
-    def test_run_caso_one_site(self, m_subp, m_exists, m_temp, m_mkdirs, m_fetch):
-        self.conf.set_override("spool_dir", "/foo", group="accounting")
-        m_fetch.return_value = [sample_site]
+    @patch("os.path.exists")
+    def test_site_caso_with_lastrun(self, m_exists, m_subp, m_temp):
         m_temp.return_value.__enter__.return_value = "/bar"
         m_exists.return_value = True
         with patch("builtins.open", mock_open()) as m_open:
-            acc.run_caso({"CENI": {"accounting": {"enabled": True}}})
+            acc.site_caso(sample_site, "dir")
             m_open.assert_any_call("/bar/mapping.json", "w+")
             m_open.assert_any_call("/bar/caso.conf", "w+")
-        m_mkdirs.assert_called_once_with("/foo/CENI", exist_ok=True)
-        caso_cmd_call = call(
-            [
-                "caso-extract",
-                "--config-dir",
-                "/bar",
-                "--mapping_file",
-                "/bar/mapping.json",
-            ]
-        )
-        m_subp.assert_has_calls([caso_cmd_call, caso_cmd_call])
+        caso_cmd_call = [
+            "caso-extract",
+            "--config-dir",
+            "/bar",
+            "--mapping_file",
+            "/bar/mapping.json",
+        ]
+        m_subp.return_value = 0
+        m_subp.assert_called_with(caso_cmd_call)
 
-    @patch("fedcloud_catchall.accounting.fetch_site_info")
-    @patch("os.makedirs")
     @patch("tempfile.TemporaryDirectory")
-    @patch("os.path.exists")
     @patch("subprocess.call")
+    @patch("os.path.exists")
     @patch(f"{acc.__name__}.datetime", wraps=datetime)
-    def test_run_caso_one_site_date(
-        self, m_date, m_subp, m_exists, m_temp, m_mkdirs, m_fetch
-    ):
-        self.conf.set_override("spool_dir", "/foo", group="accounting")
-        m_fetch.return_value = [sample_site]
-        m_temp.return_value.__enter__.return_value = "/baz"
+    def test_site_caso_no_lastrun(self, m_date, m_exists, m_subp, m_temp):
+        m_temp.return_value.__enter__.return_value = "/bar"
         m_exists.return_value = False
         m_date.datetime.now.return_value = datetime.datetime(2026, 1, 1)
         with patch("builtins.open", mock_open()) as m_open:
-            acc.run_caso({"CENI": {"accounting": {"enabled": True}}})
-            m_open.assert_any_call("/baz/mapping.json", "w+")
-            m_open.assert_any_call("/baz/caso.conf", "w+")
-        m_mkdirs.assert_called_once_with("/foo/CENI", exist_ok=True)
-        caso_cmd_call = call(
-            [
-                "caso-extract",
-                "--config-dir",
-                "/baz",
-                "--mapping_file",
-                "/baz/mapping.json",
-                "--extract-from",
-                "2025-12-31T00:00:00",
-            ]
-        )
-        m_subp.assert_has_calls([caso_cmd_call, caso_cmd_call])
+            acc.site_caso(sample_site, "dir")
+            m_open.assert_any_call("/bar/mapping.json", "w+")
+            m_open.assert_any_call("/bar/caso.conf", "w+")
+        caso_cmd_call = [
+            "caso-extract",
+            "--config-dir",
+            "/bar",
+            "--mapping_file",
+            "/bar/mapping.json",
+            "--extract-from",
+            "2025-12-31T00:00:00",
+        ]
+        m_subp.return_value = 0
+        m_subp.assert_called_with(caso_cmd_call)
+
+    @patch("tempfile.TemporaryDirectory")
+    @patch("subprocess.call")
+    def test_site_ssm(self, m_subp, m_temp):
+        m_temp.return_value.__enter__.return_value = "/bar"
+        with patch("builtins.open", mock_open()) as m_open:
+            acc.site_ssm(sample_site, "dir")
+            m_open.assert_any_call("/bar/ssm.conf", "w+")
+        m_subp.assert_called_with(["ssmsend", "-c", "/bar/ssm.conf"])
+
+    @patch("fedcloud_catchall.accounting.site_caso")
+    @patch("fedcloud_catchall.accounting.site_ssm")
+    @patch("os.makedirs")
+    def test_run_caso(self, m_mkdirs, m_ssm, m_caso):
+        self.conf.set_override("spool_dir", "/foo", group="accounting")
+        acc.run({1: sample_site})
+        m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
+        m_ssm.assert_called_with(sample_site, "/foo/CENI")
+        m_caso.assert_called_with(sample_site, "/foo/CENI")
+
+    @patch("fedcloud_catchall.accounting.site_caso")
+    @patch("fedcloud_catchall.accounting.site_ssm")
+    @patch("os.makedirs")
+    def test_run_site_disabled(self, m_mkdirs, m_ssm, m_caso):
+        self.conf.set_override("spool_dir", "/foo", group="accounting")
+        disabled_site = copy.deepcopy(sample_site)
+        disabled_site["static"]["accounting"]["enabled"] = False
+        acc.run({1: disabled_site})
+        m_mkdirs.assert_not_called()
+        m_ssm.assert_not_called()
+        m_caso.assert_not_called()
+
+    @patch("fedcloud_catchall.accounting.site_caso")
+    @patch("fedcloud_catchall.accounting.site_ssm")
+    @patch("os.makedirs")
+    def test_run_disabled_site_forced(self, m_mkdirs, m_ssm, m_caso):
+        self.conf.set_override("spool_dir", "/foo", group="accounting")
+        self.conf.set_override("force_run", True, group="accounting")
+        disabled_site = copy.deepcopy(sample_site)
+        disabled_site["static"]["accounting"]["enabled"] = False
+        acc.run({1: disabled_site})
+        m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
+        m_ssm.assert_called_with(disabled_site, "/foo/CENI")
+        m_caso.assert_called_with(disabled_site, "/foo/CENI")
