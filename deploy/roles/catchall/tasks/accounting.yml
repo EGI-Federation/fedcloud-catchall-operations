@@ -7,6 +7,14 @@
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
 
+- name: Certs dir
+  ansible.builtin.file:
+    path: "/etc/grid-security/"
+    state: directory
+    mode: "755"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
+
 - name: Create certificate file
   ansible.builtin.copy:
     dest: "/etc/grid-security/hostcert.pem"
