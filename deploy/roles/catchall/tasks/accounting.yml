@@ -10,13 +10,13 @@
 - name: Create certificate file
   ansible.builtin.copy:
     dest: "/etc/grid-security/hostcert.pem"
-    content: "{{ hostcert.pem }}"
+    content: "{{ hostcert }}"
     mode: "660"
 
 - name: Create key file
   ansible.builtin.copy:
     dest: "/etc/grid-security/hostkey.pem"
-    content: "{{ hostkey.pem }}"
+    content: "{{ hostkey }}"
     mode: "660"
 
 - name: caso cron
