@@ -35,10 +35,10 @@ RUN uv pip compile pyproject.toml -o requirements.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
 
 RUN git clone https://github.com/apel/ssm.git /tmp/ssm
-
 WORKDIR /tmp/ssm
 RUN git checkout 4.0.0-1 && /fedcloud_catchall/venv/bin/python setup.py install
 
+WORKDIR /fedcloud_catchall
 COPY src/ /fedcloud_catchall/src
 RUN /fedcloud_catchall/venv/bin/pip install --no-cache-dir .
 
