@@ -37,7 +37,6 @@
       --config-dir /etc/egi >> /var/log/accounting.log 2>&1
     cron_file: "egi-accounting"
 
-
 - name: record cleaner cron
   ansible.builtin.cron:
     name: caso
