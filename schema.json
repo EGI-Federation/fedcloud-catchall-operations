@@ -5,6 +5,21 @@
   "title": "site specs",
   "description": "site configuration schema",
   "definitions": {
+    "accountingdata": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Do perform accounting",
+          "default": false
+        },
+        "site_name": {
+          "type": "string",
+          "description": "Site to use instead of the actual site name."
+        }
+      },
+      "additionalProperties": false
+    },
     "imagesdata": {
       "type": "object",
       "properties": {
@@ -97,6 +112,13 @@
       "description": "Image configuration",
       "type": "object",
       "$ref": "#/definitions/imagesdata"
+    }
+    "accounting": {
+      "$id": "#/properties/accounting",
+      "title": "Accounting configuration",
+      "description": "Accounting configuration",
+      "type": "object",
+      "$ref": "#/definitions/accountingdata"
     }
   },
   "additionalProperties": false
