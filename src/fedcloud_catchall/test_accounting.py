@@ -68,6 +68,15 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("client_secret", "secret", group="checkin")
         assert acc.caso_config(sample_site, "foo", "/var", "egi.eu:VO") == sample_config
 
+    def test_caso_config_site_override(self):
+        self.conf.set_override("scopes", "a b c", group="checkin")
+        self.conf.set_override("client_id", "id", group="checkin")
+        self.conf.set_override("client_secret", "secret", group="checkin")
+        override_site = copy.deepcopy(sample_site)
+        sample_site["static"]["accounting"]["site_name"] = "FAKE"
+        cfg = acc.caso_config(override_site, "foo", "/var", "egi.eu:VO")
+        assert "site_name = FAKE" in (s.strip() for s in cfg.split("\n"))
+
     @patch("tempfile.TemporaryDirectory")
     @patch("subprocess.call")
     @patch("os.path.exists")

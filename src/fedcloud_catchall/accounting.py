@@ -75,8 +75,9 @@ console: true
 
 
 def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO", extractor="nova"):
+    site_name = site["static"].get("accounting").get("site_name", site["name"])
     return caso_config_template.format(
-        site_name=site["name"],
+        site_name=site_name,
         service_name=site["hostname"],
         auth_url=site["url"],
         client_id=CONF.checkin.client_id,
