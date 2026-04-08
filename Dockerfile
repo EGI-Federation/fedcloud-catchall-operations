@@ -34,12 +34,10 @@ RUN uv pip compile pyproject.toml -o requirements.txt \
     && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements-ssm.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
 
-# I want to use cd here
-# hadolint ignore=DL3003  
-RUN git clone https://github.com/apel/ssm.git /tmp/ssm \
-    && cd /tmp/ssm \
-    && git checkout 4.0.0-1 \
-    && /fedcloud_catchall/venv/bin/python setup.py install
+RUN git clone https://github.com/apel/ssm.git /tmp/ssm
+
+WORKDIR /tmp/ssm
+RUN git checkout 4.0.0-1 && /fedcloud_catchall/venv/bin/python setup.py install
 
 COPY src/ /fedcloud_catchall/src
 RUN /fedcloud_catchall/venv/bin/pip install --no-cache-dir .
