@@ -15,27 +15,7 @@ import httpx
 import yaml
 
 from .config import CONF
-from .discovery import get_vo_secrets, load_sites
-from .token_generator import generate_token, get_oidc_config
-
-OIDC_AUTH_TEMPLATE = """
-auth_type = v3oidcclientcredentials
-auth_url = {auth_url}
-protocol = openid
-identity_provider = egi.eu
-client_id = {client_id}
-client_secret = {client_secret}
-scope = {scopes}
-discovery_endpoint = {discovery_endpoint}
-project_id = {project_id}
-access_token_type = access_token
-"""
-
-APPCRED_AUTH_TEMPLATE = """
-auth_type = {auth_type}
-auth_url = {auth_url}"""
-
-_access_token = None
+from .discovery import auth_config, load_sites
 
 
 # Harbor interaction
@@ -77,44 +57,10 @@ def fetch_harbor_projects():
     return project_names
 
 
-def auth_config(site, vo):
-    cfg = [f"[glance_{vo['id']}]"]
-    if site["static"].get("auth", None) != "v3applicationcredential":
-        cfg.append(
-            OIDC_AUTH_TEMPLATE.format(
-                auth_url=site["url"],
-                client_id=CONF.checkin.client_id,
-                client_secret=CONF.checkin.client_secret,
-                scopes=CONF.checkin.scopes,
-                discovery_endpoint=CONF.checkin.discovery_endpoint,
-                project_id=vo["id"],
-            )
-        )
-    else:
-        global _access_token
-        if not _access_token:
-            _access_token = generate_token(get_oidc_config())
-        cfg.append(
-            APPCRED_AUTH_TEMPLATE.format(
-                auth_url=site["url"],
-                auth_type=site["static"]["auth"],
-            )
-        )
-        # secrets
-        cfg.extend(
-            f"{k} = {v}"
-            for k, v in get_vo_secrets(site["url"], vo["name"], _access_token).items()
-        )
-        # other params
-        cfg.extend(f"{k} = {v}" for k, v in vo.get("auth", {}).items())
-        cfg.append("")
-    return "\n".join(cfg)
-
-
 def dump_atrope_config(site, ops_project_id, sources_file, vo_map_file):
     projects_config = []
     for vo_info in site["shares"].values():
-        projects_config.append(auth_config(site, vo_info))
+        projects_config.append(auth_config(site, vo_info, f"glance_{vo_info['id']}"))
 
     config_template = """
 [DEFAULT]

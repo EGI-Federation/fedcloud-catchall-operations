@@ -24,6 +24,10 @@ TMP_SECRETS="$(mktemp)"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
 	deploy data >"$TMP_SECRETS" && mv "$TMP_SECRETS" secrets.yaml
 
+# trick the config
+git clone https://github.com/EGI-Federation/fedcloud-catchall-operations -b accounting-sites
+mv fedcloud-catchall-operations/sites/* ../sites
+
 cat >>extra-vars.yaml <<EOF
 cloud_info_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
 image_sync_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"

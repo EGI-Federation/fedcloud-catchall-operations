@@ -14,9 +14,29 @@ import yaml
 from hvac.exceptions import VaultError
 
 from .config import CONF
+from .token_generator import generate_token, get_oidc_config
 
 _hvac_client = None
 VAULT_URL = "https://vault.services.fedcloud.eu:8200"
+
+OIDC_AUTH_TEMPLATE = """
+auth_type = v3oidcclientcredentials
+auth_url = {auth_url}
+protocol = openid
+identity_provider = egi.eu
+client_id = {client_id}
+client_secret = {client_secret}
+scope = {scopes}
+discovery_endpoint = {discovery_endpoint}
+project_id = {project_id}
+access_token_type = access_token
+"""
+
+APPCRED_AUTH_TEMPLATE = """
+auth_type = {auth_type}
+auth_url = {auth_url}"""
+
+_access_token = None
 
 
 def fetch_site_info():
@@ -77,3 +97,36 @@ def load_sites():
         site["static"] = static_site
         sites[site["id"]] = site
     return sites
+
+
+def auth_config(site, vo, section_name):
+    cfg = [f"[{section_name}]"]
+    if site["static"].get("auth", None) != "v3applicationcredential":
+        cfg.append(
+            OIDC_AUTH_TEMPLATE.format(
+                auth_url=site["url"],
+                client_id=CONF.checkin.client_id,
+                client_secret=CONF.checkin.client_secret,
+                scopes=CONF.checkin.scopes,
+                discovery_endpoint=CONF.checkin.discovery_endpoint,
+                project_id=vo["id"],
+            ).strip()
+        )
+    else:
+        global _access_token
+        if not _access_token:
+            _access_token = generate_token(get_oidc_config())
+        cfg.append(
+            APPCRED_AUTH_TEMPLATE.format(
+                auth_url=site["url"],
+                auth_type=site["static"]["auth"],
+            ).strip()
+        )
+        # secrets
+        cfg.extend(
+            f"{k} = {v}"
+            for k, v in get_vo_secrets(site["url"], vo["name"], _access_token).items()
+        )
+        # other params
+        cfg.extend(f"{k} = {v}" for k, v in vo.get("auth", {}).items())
+    return "\n".join(cfg)

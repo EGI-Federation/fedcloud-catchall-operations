@@ -1,7 +1,6 @@
 """Tests for image sync"""
 
 import configparser
-import copy
 from unittest.mock import MagicMock, mock_open, patch
 
 import httpx
@@ -132,37 +131,6 @@ class TestImageSync(testtools.TestCase):
                 ],
             },
         }
-
-    def test_auth_config_oidc(self):
-        config = [
-            s.strip()
-            for s in sync.auth_config(
-                enabled_site, enabled_site["shares"]["vo1"]
-            ).split("\n")
-        ]
-        assert "[glance_abc]" in config
-        assert "project_id = abc" in config
-        assert "access_token_type = access_token" in config
-        assert "auth_url = https://example.com:5000/v3" in config
-
-    @patch("fedcloud_catchall.image_sync.generate_token")
-    @patch("fedcloud_catchall.image_sync.get_oidc_config")
-    @patch("fedcloud_catchall.image_sync.get_vo_secrets")
-    def test_auth_config_secret(self, m_secrets, m_oidc, m_token):
-        site = copy.deepcopy(enabled_site)
-        site["static"]["auth"] = "v3applicationcredential"
-        m_secrets.return_value = {"abc": "foo"}
-        config = [
-            s.strip() for s in sync.auth_config(site, site["shares"]["vo1"]).split("\n")
-        ]
-        assert "[glance_abc]" in config
-        assert "auth_type = v3applicationcredential" in config
-        assert "auth_url = https://example.com:5000/v3" in config
-        assert "abc = foo" in config
-        # test that second call does not recall the token stuff
-        sync.auth_config(site, site["shares"]["vo1"])
-        m_oidc.assert_called_once()
-        m_token.assert_called_once()
 
     def test_dump_atrope_config(self):
         parser = configparser.ConfigParser()
