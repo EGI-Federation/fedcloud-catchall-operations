@@ -5,6 +5,9 @@ images:
   sync: true
   formats:
     - qcow2
+accounting:
+  enabled: true
+  site_name: EGI-NOTEBOOKS
 vos:
   - name: dteam
     auth:

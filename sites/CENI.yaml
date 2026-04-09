@@ -1,6 +1,8 @@
 ---
 gocdb: CENI
 endpoint: https://openstack.ceni.org.cn:5000/v3
+accounting:
+  enabled: true
 images:
   sync: true
   formats:
