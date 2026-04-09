@@ -15,7 +15,7 @@ sample_config = """
 extractor = nova
 site_name = CENI
 service_name = openstack.ceni.org.cn
-projects = foo
+projects = 90c0ce1b2f1545c0b9a05d9a8fd45102
 messengers = ssm
 vo_property = egi.eu:VO
 spooldir = /var
@@ -29,7 +29,7 @@ client_id = id
 client_secret = secret
 scope = a b c
 discovery_endpoint = https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration
-project_id = foo
+project_id = 90c0ce1b2f1545c0b9a05d9a8fd45102
 access_token_type = access_token
 
 [ssm]
@@ -66,7 +66,12 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("scopes", "a b c", group="checkin")
         self.conf.set_override("client_id", "id", group="checkin")
         self.conf.set_override("client_secret", "secret", group="checkin")
-        assert acc.caso_config(sample_site, "foo", "/var", "egi.eu:VO") == sample_config
+        assert (
+            acc.caso_config(
+                sample_site, sample_site["projects"][0], "/var", "egi.eu:VO"
+            )
+            == sample_config
+        )
 
     def test_caso_config_site_override(self):
         self.conf.set_override("scopes", "a b c", group="checkin")
@@ -74,7 +79,9 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("client_secret", "secret", group="checkin")
         override_site = copy.deepcopy(sample_site)
         override_site["static"]["accounting"]["site_name"] = "FAKE"
-        cfg = acc.caso_config(override_site, "foo", "/var", "egi.eu:VO")
+        cfg = acc.caso_config(
+            override_site, sample_site["projects"][0], "/var", "egi.eu:VO"
+        )
         assert "site_name = FAKE" in (s.strip() for s in cfg.split("\n"))
 
     @patch("tempfile.TemporaryDirectory")

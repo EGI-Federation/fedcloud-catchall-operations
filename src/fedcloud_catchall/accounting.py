@@ -16,7 +16,7 @@ import tempfile
 from dateutil import tz
 
 from .config import CONF
-from .discovery import load_sites
+from .discovery import auth_config, load_sites
 
 caso_config_template = """
 [DEFAULT]
@@ -28,17 +28,7 @@ messengers = ssm
 vo_property = {vo_property}
 spooldir = {spooldir}
 
-[keystone_auth]
-auth_type = v3oidcclientcredentials
-auth_url = {auth_url}
-protocol = openid
-identity_provider = egi.eu
-client_id = {client_id}
-client_secret = {client_secret}
-scope = {scopes}
-discovery_endpoint = {discovery_endpoint}
-project_id = {project_id}
-access_token_type = access_token
+{auth_section}
 
 [ssm]
 output_path = {ssmdir}"""
@@ -74,17 +64,14 @@ console: true
 """
 
 
-def caso_config(site, project_id, site_dir, vo_property="egi.eu:VO", extractor="nova"):
+def caso_config(site, vo, site_dir, vo_property="egi.eu:VO", extractor="nova"):
     site_name = site["static"].get("accounting").get("site_name", site["name"])
+    auth_section = auth_config(site, vo, "keystone_auth")
     return caso_config_template.format(
         site_name=site_name,
+        auth_section=auth_section,
         service_name=site["hostname"],
-        auth_url=site["url"],
-        client_id=CONF.checkin.client_id,
-        client_secret=CONF.checkin.client_secret,
-        scopes=CONF.checkin.scopes,
-        discovery_endpoint=CONF.checkin.discovery_endpoint,
-        project_id=project_id,
+        project_id=vo["id"],
         vo_property=vo_property,
         spooldir=site_dir,
         extractor=extractor,
@@ -114,7 +101,7 @@ def site_caso(site, site_dir):
             with open(vo_map_file, "w+") as f:
                 f.write(vo_map(site))
             with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
-                f.write(caso_config(site, project["id"], site_dir))
+                f.write(caso_config(site, project, site_dir))
             cmd = [
                 "caso-extract",
                 "--config-dir",
