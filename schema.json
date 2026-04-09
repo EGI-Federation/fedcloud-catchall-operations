@@ -112,7 +112,7 @@
       "description": "Image configuration",
       "type": "object",
       "$ref": "#/definitions/imagesdata"
-    }
+    },
     "accounting": {
       "$id": "#/properties/accounting",
       "title": "Accounting configuration",
