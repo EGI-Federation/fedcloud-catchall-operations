@@ -27,12 +27,18 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY README.md pyproject.toml uv.lock /fedcloud_catchall/
 
-RUN uv pip compile pyproject.toml -o requirements.txt
-
-RUN python -m venv /fedcloud_catchall/venv  \
+RUN uv pip compile pyproject.toml -o requirements.txt \
+    && uv pip compile pyproject.toml --group ssm -o requirements-ssm.txt \
+    && python -m venv /fedcloud_catchall/venv  \
     && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements.txt \
+    && /fedcloud_catchall/venv/bin/pip install --no-cache-dir -r requirements-ssm.txt \
     && cat /etc/grid-security/certificates/*.pem >> "$(/fedcloud_catchall/venv/bin/python -m requests.certs)"
 
+RUN git clone https://github.com/apel/ssm.git /tmp/ssm
+WORKDIR /tmp/ssm
+RUN git checkout 4.0.0-1 && /fedcloud_catchall/venv/bin/python setup.py install
+
+WORKDIR /fedcloud_catchall
 COPY src/ /fedcloud_catchall/src
 RUN /fedcloud_catchall/venv/bin/pip install --no-cache-dir .
 
@@ -54,7 +60,11 @@ RUN apt-get update \
 RUN mkdir /fedcloud_catchall \
     && groupadd -g 1999 python \
     && useradd -m -r -u 1999 -g python python \
-    && chown -R python:python /fedcloud_catchall
+    && chown -R python:python /fedcloud_catchall \
+    && mkdir /var/log/apel/ \
+    && chown -R python:python /var/log/apel \
+    && mkdir /atrope-state \
+    && chown -R python:python /atrope-state
 
 WORKDIR /fedcloud_catchall
 

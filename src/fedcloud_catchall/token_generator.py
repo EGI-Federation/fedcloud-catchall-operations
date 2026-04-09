@@ -21,6 +21,8 @@ from oslo_config import cfg
 
 from .config import CONF
 
+_oidc_config = None
+
 
 def valid_token(token, oidc_config, min_time):
     if not token:
@@ -67,12 +69,19 @@ def check_token(token_file, oidc_config, ttl):
     return False
 
 
+def get_oidc_config():
+    global _oidc_config
+    if not _oidc_config:
+        _oidc_config = httpx.get(CONF.checkin.discovery_endpoint).json()
+    return _oidc_config
+
+
 def main():
     logging.basicConfig()
     CONF.register_cli_opt(cfg.StrOpt("access_token_file", positional=True))
     CONF(sys.argv[1:])
 
-    oidc_config = httpx.get(CONF.checkin.discovery_endpoint).json()
+    oidc_config = get_oidc_config()
 
     if not check_token(
         CONF.access_token_file, oidc_config, CONF.checkin.access_token_ttl

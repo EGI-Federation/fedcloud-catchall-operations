@@ -15,7 +15,27 @@ import httpx
 import yaml
 
 from .config import CONF
-from .discovery import fetch_site_info, load_sites
+from .discovery import get_vo_secrets, load_sites
+from .token_generator import generate_token, get_oidc_config
+
+OIDC_AUTH_TEMPLATE = """
+auth_type = v3oidcclientcredentials
+auth_url = {auth_url}
+protocol = openid
+identity_provider = egi.eu
+client_id = {client_id}
+client_secret = {client_secret}
+scope = {scopes}
+discovery_endpoint = {discovery_endpoint}
+project_id = {project_id}
+access_token_type = access_token
+"""
+
+APPCRED_AUTH_TEMPLATE = """
+auth_type = {auth_type}
+auth_url = {auth_url}"""
+
+_access_token = None
 
 
 # Harbor interaction
@@ -57,25 +77,56 @@ def fetch_harbor_projects():
     return project_names
 
 
+def auth_config(site, vo):
+    cfg = [f"[glance_{vo['id']}]"]
+    if site["static"].get("auth", None) != "v3applicationcredential":
+        cfg.append(
+            OIDC_AUTH_TEMPLATE.format(
+                auth_url=site["url"],
+                client_id=CONF.checkin.client_id,
+                client_secret=CONF.checkin.client_secret,
+                scopes=CONF.checkin.scopes,
+                discovery_endpoint=CONF.checkin.discovery_endpoint,
+                project_id=vo["id"],
+            )
+        )
+    else:
+        global _access_token
+        if not _access_token:
+            _access_token = generate_token(get_oidc_config())
+        cfg.append(
+            APPCRED_AUTH_TEMPLATE.format(
+                auth_url=site["url"],
+                auth_type=site["static"]["auth"],
+            )
+        )
+        # secrets
+        cfg.extend(
+            f"{k} = {v}"
+            for k, v in get_vo_secrets(site["url"], vo["name"], _access_token).items()
+        )
+        # other params
+        cfg.extend(f"{k} = {v}" for k, v in vo.get("auth", {}).items())
+        cfg.append("")
+    return "\n".join(cfg)
+
+
 def dump_atrope_config(site, ops_project_id, sources_file, vo_map_file):
+    projects_config = []
+    for vo_info in site["shares"].values():
+        projects_config.append(auth_config(site, vo_info))
+
     config_template = """
 [DEFAULT]
 state_path = /atrope-state/
 
 [glance]
-auth_type = v3oidcclientcredentials
-auth_url = {auth_url}
-protocol = openid
-identity_provider = egi.eu
-client_id = {client_id}
-client_secret = {client_secret}
-scope = {scopes}
-discovery_endpoint = {discovery_endpoint}
 project_id = {project_id}
-access_token_type = access_token
 formats = {formats}
 vo_map = {vo_map_file}
 tag = atrope-catchall
+
+{projects_config}
 
 [dispatchers]
 dispatcher = glance
@@ -86,7 +137,7 @@ formats = {formats}
 [sources]
 image_sources = {sources_file}
     """
-    formats = site.get("formats", CONF.sync.formats)
+    formats = site["static"]["images"].get("formats", CONF.sync.formats)
     return config_template.format(
         auth_url=site["url"],
         client_id=CONF.checkin.client_id,
@@ -97,6 +148,7 @@ image_sources = {sources_file}
         formats=",".join(formats),
         sources_file=sources_file,
         vo_map_file=vo_map_file,
+        projects_config="\n".join(projects_config),
     )
 
 
@@ -137,41 +189,41 @@ def dump_vo_map(site):
     return yaml.dump(shares)
 
 
-def do_sync(sites_config, harbor_projects):
-    sites_info = fetch_site_info()
-    for site in sites_info:
+def run_atrope(site, harbor_projects):
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        logging.info(f"Configuring site {site['name']} at {tmpdirname}")
+        sources_file = os.path.join(tmpdirname, "sources.yaml")
+        vo_map_file = os.path.join(tmpdirname, "vo-map.yaml")
+        site_vo_list = list(site["shares"].keys())
+        if "ops" in site["shares"]:
+            ops_project_id = site["shares"]["ops"]["id"]
+        else:
+            ops_project_id = next(iter(site["shares"].values()))["id"]
+        with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
+            f.write(dump_atrope_config(site, ops_project_id, sources_file, vo_map_file))
+        with open(sources_file, "w+") as f:
+            f.write(dump_sources_config(site_vo_list, harbor_projects))
+        with open(vo_map_file, "w+") as f:
+            f.write(dump_vo_map(site))
+        cmd = [
+            "atrope",
+            "--config-dir",
+            tmpdirname,
+            "sync",
+        ]
+        logging.debug(f"Running {' '.join(cmd)}")
+        subprocess.call(cmd)
+
+
+def do_sync(sites, harbor_projects):
+    for _, site in sites.items():
         site_name = site["name"]
-        # filter out those sites that are not part of the centralised ops
-        if site_name not in sites_config:
-            logging.debug(f"Discarding site {site_name}, not in config.")
-            continue
-        site_image_config = sites_config[site_name].get("images", {})
-        if not site_image_config.get("sync", False):
+
+        image_config = site["static"].get("images", {})
+        if not image_config.get("sync", False):
             logging.debug(f"Discarding site {site_name}, no sync set.")
             continue
-        site.update(site_image_config)
-        logging.info(f"Configuring site {site_name}")
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            sources_file = os.path.join(tmpdirname, "sources.yaml")
-            vo_map_file = os.path.join(tmpdirname, "vo-map.yaml")
-            site_vo_list = list(site["shares"].keys())
-            ops_project_id = site["shares"]["ops"]["id"]
-            with open(os.path.join(tmpdirname, "atrope.conf"), "w+") as f:
-                f.write(
-                    dump_atrope_config(site, ops_project_id, sources_file, vo_map_file)
-                )
-            with open(sources_file, "w+") as f:
-                f.write(dump_sources_config(site_vo_list, harbor_projects))
-            with open(vo_map_file, "w+") as f:
-                f.write(dump_vo_map(site))
-            cmd = [
-                "atrope",
-                "--config-dir",
-                tmpdirname,
-                "sync",
-            ]
-            logging.debug(f"Running {' '.join(cmd)}")
-            subprocess.call(cmd)
+        run_atrope(site, harbor_projects)
 
 
 def main():

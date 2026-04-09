@@ -5,17 +5,12 @@ Re-configures the site to use app credentials
 import logging
 import os.path
 import sys
-from urllib.parse import urlparse
 
-import hvac
-import jwt
 import yaml
-from hvac.exceptions import VaultError
 from oslo_config import cfg
 
 from .config import CONF
-
-VAULT_URL = "https://vault.services.fedcloud.eu:8200"
+from .discovery import get_vo_secrets
 
 
 def secretize(site_config_file: str, access_token: str):
@@ -25,31 +20,13 @@ def secretize(site_config_file: str, access_token: str):
     if site_config.get("auth", None) != "v3applicationcredential":
         return site_config
 
-    # we don't need to verify the access token here - just need the sub
-    payload = jwt.decode(access_token, options={"verify_signature": False})
-
-    client = hvac.Client(url=VAULT_URL)
-    client.auth.jwt.jwt_login(role="", jwt=access_token)
     for vo in site_config.get("vos", {}):
-        keystone_host = urlparse(site_config.get("endpoint", "")).netloc.split(":", 1)[
-            0
-        ]
-        secret_path = os.path.join(
-            "users",
-            payload.get("sub", ""),
-            "cloudmon",
-            keystone_host,
-            vo.get("name", ""),
+        auth = vo.get("auth", {})
+        auth.update(
+            get_vo_secrets(
+                site_config.get("endpoint", ""), vo.get("name", ""), access_token
+            )
         )
-        try:
-            appcred_args = client.secrets.kv.v1.read_secret(
-                path=secret_path,
-                mount_point="/secrets/",
-            ).get("data", {})
-            auth = vo.get("auth", {})
-            auth.update(appcred_args)
-        except VaultError as e:
-            logging.debug(f"Ouch {e}")
     return site_config
 
 

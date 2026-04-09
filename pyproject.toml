@@ -46,13 +46,21 @@ requires = ["uv_build>=0.9.14,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
-atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }
+atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.1.0" }
 caso = { git = "https://github.com/IFCA-Advanced-Computing/caso", rev = "1584f0b3823cc1ee31d1338944e44a36b114a5ee" }
 
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
+]
+ssm = [
+    "argo-ams-library>=0.5.5",
+    "cryptography>=46.0.6",
+    "dirq>=1.8",
+    "pyopenssl>=26.0.0",
+    "stomp-py>=8.2.0",
+    "setuptools<82.0.0",
 ]
 validate = [
     "pyyaml>=6.0.3",

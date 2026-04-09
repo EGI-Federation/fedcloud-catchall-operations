@@ -6,6 +6,8 @@ images:
   formats:
     - qcow2
     - raw
+accounting:
+  enabled: true
 vos:
   - name: ops
     auth:
