@@ -75,7 +75,6 @@ fi
 # make sure the container user (1999) can access the files
 chown -R 1999:1999 /etc/egi/
 
-
 GITHUB_COMMIT_URL="https://api.github.com/repos/EGI-Federation/fedcloud-catchall-operations/commits/$COMMIT_SHA/pulls"
 
 # Find out PR we need to update
