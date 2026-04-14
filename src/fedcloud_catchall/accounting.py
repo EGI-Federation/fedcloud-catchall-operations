@@ -18,6 +18,13 @@ from dateutil import tz
 from .config import CONF
 from .discovery import auth_config, load_sites
 
+# these are the possible caso configurations
+# the ones to be used are configured in the config file
+caso_run_configs = {
+    "block": {"extractor": "cinder", "destination": "eu-egi-storage-accounting"},
+    "compute": {"extractor": "nova", "destination": "eu-egi-cloud-accounting"},
+}
+
 caso_config_template = """
 [DEFAULT]
 extractor = {extractor}
@@ -49,7 +56,7 @@ capath: /etc/grid-security/certificates
 [messaging]
 # If using AMS this is the project that SSM will connect to. Ignored for STOMP.
 ams_project: accounting
-destination: eu-egi-cloud-accounting
+destination: {destination}
 
 # Outgoing messages will be read and removed from this directory.
 path: {ssmdir}
@@ -79,8 +86,9 @@ def caso_config(site, vo, site_dir, vo_property="egi.eu:VO", extractor="nova"):
     )
 
 
-def ssm_config(site, site_dir):
+def ssm_config(site, site_dir, destination="eu-egi-cloud-accounting"):
     return ssm_config_template.format(
+        destination=destination,
         ssmdir=os.path.join(site_dir, "outgoing"),
     )
 
@@ -95,46 +103,63 @@ def vo_map(site):
 def site_caso(site, site_dir):
     # running caso for each project independently so we can control the "lastrun"
     good_run = False
+    # these are the extractors that will run
     for project in site["projects"]:
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            vo_map_file = os.path.join(tmpdirname, "mapping.json")
-            with open(vo_map_file, "w+") as f:
-                f.write(vo_map(site))
-            with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
-                f.write(caso_config(site, project, site_dir))
-            cmd = [
-                "caso-extract",
-                "--config-dir",
-                tmpdirname,
-                "--mapping_file",
-                vo_map_file,
-            ]
-            if not os.path.exists(os.path.join(site_dir, f"lastrun.{project['id']}")):
-                yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
-                    days=1
-                )
-                cmd.extend(["--extract-from", yesterday.isoformat()])
-            logging.debug(f"Running {' '.join(cmd)}")
-            return_code = subprocess.call(cmd)
-            logging.debug(f"Return code {return_code}")
-            good_run = True
+        for run_type, run_config in caso_run_configs.items():
+            if run_type not in CONF.accounting.caso_runs:
+                continue
+            caso_run_dir = os.path.join(site_dir, run_type)
+            os.makedirs(caso_run_dir, exist_ok=True)
+            with tempfile.TemporaryDirectory() as tmpdirname:
+                vo_map_file = os.path.join(tmpdirname, "mapping.json")
+                with open(vo_map_file, "w+") as f:
+                    f.write(vo_map(site))
+                with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
+                    f.write(
+                        caso_config(
+                            site, project, caso_run_dir, run_config["extractor"]
+                        )
+                    )
+                cmd = [
+                    "caso-extract",
+                    "--config-dir",
+                    tmpdirname,
+                    "--mapping_file",
+                    vo_map_file,
+                ]
+                if not os.path.exists(
+                    os.path.join(caso_run_dir, f"lastrun.{project['id']}")
+                ):
+                    yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
+                        days=1
+                    )
+                    cmd.extend(["--extract-from", yesterday.isoformat()])
+                logging.debug(f"Running {' '.join(cmd)}")
+                return_code = subprocess.call(cmd)
+                logging.debug(f"Return code {return_code}")
+                good_run = True
     return good_run
 
 
 def site_ssm(site, site_dir):
-    with tempfile.TemporaryDirectory() as tmpdirname:
-        ssm_config_file = os.path.join(tmpdirname, "ssm.conf")
-        with open(ssm_config_file, "w+") as f:
-            f.write(ssm_config(site, site_dir))
-        cmd = [
-            "ssmsend",
-            "-c",
-            ssm_config_file,
-        ]
-        logging.debug(f"Running {' '.join(cmd)}")
-        return_code = subprocess.call(cmd)
-        return return_code == 0
-    return False
+    good_run = True
+    for run_type, run_config in caso_run_configs.items():
+        if run_type not in CONF.accounting.caso_runs:
+            continue
+        caso_run_dir = os.path.join(site_dir, run_type)
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            ssm_config_file = os.path.join(tmpdirname, "ssm.conf")
+            with open(ssm_config_file, "w+") as f:
+                f.write(ssm_config(site, caso_run_dir, run_config["destination"]))
+            cmd = [
+                "ssmsend",
+                "-c",
+                ssm_config_file,
+            ]
+            logging.debug(f"Running {' '.join(cmd)}")
+            return_code = subprocess.call(cmd)
+            good_run = return_code == 0 and good_run
+    return good_run
 
 
 def run(sites):
