@@ -29,7 +29,7 @@ dependencies = [
     "python-novaclient>=18.11.0",
     "python-openstackclient>=8.3.0",
     "pyyaml>=6.0.3",
-    "respx>=0.22.0",
+    "respx>=0.23.1",
     "testtools>=2.8.2",
     "yq>=3.4.3",
 ]
