@@ -104,10 +104,10 @@ class TestAccounting(testtools.TestCase):
             "/bar/mapping.json",
         ]
         m_caso_config.assert_any_call(
-            sample_site, sample_site["projects"][0], "dir/block", "cinder"
+            sample_site, sample_site["projects"][0], "dir/block", extractor="cinder"
         )
         m_caso_config.assert_any_call(
-            sample_site, sample_site["projects"][0], "dir/compute", "nova"
+            sample_site, sample_site["projects"][0], "dir/compute", extractor="nova"
         )
         m_subp.assert_called_with(caso_cmd_call)
 
@@ -136,10 +136,10 @@ class TestAccounting(testtools.TestCase):
             "2025-12-31T00:00:00",
         ]
         m_caso_config.assert_any_call(
-            sample_site, sample_site["projects"][0], "dir/block", "cinder"
+            sample_site, sample_site["projects"][0], "dir/block", extractor="cinder"
         )
         m_caso_config.assert_any_call(
-            sample_site, sample_site["projects"][0], "dir/compute", "nova"
+            sample_site, sample_site["projects"][0], "dir/compute", extractor="nova"
         )
         m_subp.return_value = 0
         m_subp.assert_called_with(caso_cmd_call)

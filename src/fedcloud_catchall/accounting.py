@@ -108,6 +108,7 @@ def site_caso(site, site_dir):
         for run_type, run_config in caso_run_configs.items():
             if run_type not in CONF.accounting.caso_runs:
                 continue
+            logging.debug(f"Running caso for {run_type}")
             caso_run_dir = os.path.join(site_dir, run_type)
             os.makedirs(caso_run_dir, exist_ok=True)
             with tempfile.TemporaryDirectory() as tmpdirname:
@@ -117,7 +118,10 @@ def site_caso(site, site_dir):
                 with open(os.path.join(tmpdirname, "caso.conf"), "w+") as f:
                     f.write(
                         caso_config(
-                            site, project, caso_run_dir, run_config["extractor"]
+                            site,
+                            project,
+                            caso_run_dir,
+                            extractor=run_config["extractor"],
                         )
                     )
                 cmd = [
@@ -146,6 +150,7 @@ def site_ssm(site, site_dir):
     for run_type, run_config in caso_run_configs.items():
         if run_type not in CONF.accounting.caso_runs:
             continue
+        logging.debug(f"Running SSM for {run_type}")
         caso_run_dir = os.path.join(site_dir, run_type)
         with tempfile.TemporaryDirectory() as tmpdirname:
             ssm_config_file = os.path.join(tmpdirname, "ssm.conf")
