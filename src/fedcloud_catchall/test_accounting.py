@@ -87,9 +87,11 @@ class TestAccounting(testtools.TestCase):
     @patch("tempfile.TemporaryDirectory")
     @patch("subprocess.call")
     @patch("os.path.exists")
-    def test_site_caso_with_lastrun(self, m_exists, m_subp, m_temp):
+    @patch("fedcloud_catchall.accounting.caso_config")
+    def test_site_caso_with_lastrun(self, m_caso_config, m_exists, m_subp, m_temp):
         m_temp.return_value.__enter__.return_value = "/bar"
         m_exists.return_value = True
+        m_subp.return_value = 0
         with patch("builtins.open", mock_open()) as m_open:
             acc.site_caso(sample_site, "dir")
             m_open.assert_any_call("/bar/mapping.json", "w+")
@@ -101,14 +103,22 @@ class TestAccounting(testtools.TestCase):
             "--mapping_file",
             "/bar/mapping.json",
         ]
-        m_subp.return_value = 0
+        m_caso_config.assert_any_call(
+            sample_site, sample_site["projects"][0], "dir/block", "cinder"
+        )
+        m_caso_config.assert_any_call(
+            sample_site, sample_site["projects"][0], "dir/compute", "nova"
+        )
         m_subp.assert_called_with(caso_cmd_call)
 
     @patch("tempfile.TemporaryDirectory")
     @patch("subprocess.call")
     @patch("os.path.exists")
+    @patch("fedcloud_catchall.accounting.caso_config")
     @patch(f"{acc.__name__}.datetime", wraps=datetime)
-    def test_site_caso_no_lastrun(self, m_date, m_exists, m_subp, m_temp):
+    def test_site_caso_no_lastrun(
+        self, m_date, m_caso_config, m_exists, m_subp, m_temp
+    ):
         m_temp.return_value.__enter__.return_value = "/bar"
         m_exists.return_value = False
         m_date.datetime.now.return_value = datetime.datetime(2026, 1, 1)
@@ -125,16 +135,25 @@ class TestAccounting(testtools.TestCase):
             "--extract-from",
             "2025-12-31T00:00:00",
         ]
+        m_caso_config.assert_any_call(
+            sample_site, sample_site["projects"][0], "dir/block", "cinder"
+        )
+        m_caso_config.assert_any_call(
+            sample_site, sample_site["projects"][0], "dir/compute", "nova"
+        )
         m_subp.return_value = 0
         m_subp.assert_called_with(caso_cmd_call)
 
     @patch("tempfile.TemporaryDirectory")
     @patch("subprocess.call")
-    def test_site_ssm(self, m_subp, m_temp):
+    @patch("fedcloud_catchall.accounting.ssm_config")
+    def test_site_ssm(self, m_config, m_subp, m_temp):
         m_temp.return_value.__enter__.return_value = "/bar"
         with patch("builtins.open", mock_open()) as m_open:
             acc.site_ssm(sample_site, "dir")
             m_open.assert_any_call("/bar/ssm.conf", "w+")
+        m_config.assert_any_call(sample_site, "dir/compute", "eu-egi-cloud-accounting")
+        m_config.assert_any_call(sample_site, "dir/block", "eu-egi-storage-accounting")
         m_subp.assert_called_with(["ssmsend", "-c", "/bar/ssm.conf"])
 
     @patch("fedcloud_catchall.accounting.site_caso")
