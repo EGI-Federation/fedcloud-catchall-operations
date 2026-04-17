@@ -24,9 +24,6 @@ vos:
   - name: focal.egi.eu
     auth:
       project_id: b228d0f786bc46c08cf77ba7de43af14
-  - name: icecube
-    auth:
-      project_id: 35cbf36c486d43c99ddccf722345cccf
   - name: training.egi.eu
     auth:
       project_id: 10875a29940b4d1bb5c0542a1dce294f
