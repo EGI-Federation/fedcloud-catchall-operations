@@ -1,6 +1,6 @@
 ---
 gocdb: CREODIAS
-endpoint: https://keystone.cloudferro.com:5000/url/v3
+endpoint: https://keystone.cloudferro.com:5000/v3
 auth: v3applicationcredential
 images:
   sync: true
