@@ -162,6 +162,7 @@ def site_ssm(site, site_dir):
                 ssm_config_file,
             ]
             logging.debug(f"Running {' '.join(cmd)}")
+            cmd = ["sleep 30"]
             return_code = subprocess.call(cmd)
             good_run = return_code == 0 and good_run
     return good_run
