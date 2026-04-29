@@ -30,7 +30,7 @@ dependencies = [
     "python-openstackclient>=8.3.0",
     "pyyaml>=6.0.3",
     "respx>=0.23.1",
-    "testtools>=2.8.2",
+    "testtools>=2.9.1",
     "yq>=3.4.3",
 ]
 

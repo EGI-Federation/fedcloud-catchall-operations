@@ -547,7 +547,7 @@ requires-dist = [
     { name = "python-openstackclient", specifier = ">=8.3.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.23.1" },
-    { name = "testtools", specifier = ">=2.8.2" },
+    { name = "testtools", specifier = ">=2.9.1" },
     { name = "yq", specifier = ">=3.4.3" },
 ]
 
@@ -1842,11 +1842,11 @@ wheels = [
 
 [[package]]
 name = "testtools"
-version = "2.9.0"
+version = "2.9.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/97/7b/fdbe3ffdcac11e2afc1d3d3ff190e9d00d50e1be1b7fdd9fdd9780f74ca0/testtools-2.9.0.tar.gz", hash = "sha256:eb562d1a2157c6d443c8c118861eb452b3655d1842f9b61b8567ad01b32826e3", size = 220801, upload-time = "2026-04-06T11:41:05.178Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8b/80/af955640b4e8348aaa8026f9f48304811ec3342d9928ddb611d38a190ea0/testtools-2.9.1.tar.gz", hash = "sha256:39ad9eb9e1b935d6838f4b3aee4d6e72db65df5602f6feda998dbb4fe8de0b19", size = 221377, upload-time = "2026-04-24T09:42:51.706Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2f/26/45b958d9d40742594eb564bab1519b55e06493099e5b9e1c3d6d02deadd7/testtools-2.9.0-py3-none-any.whl", hash = "sha256:32e2f96be68e2a0ed8a3ad14d9923848b8a53cbd2eaf6c3b2a2061753f8ab7c3", size = 110196, upload-time = "2026-04-06T11:41:03.654Z" },
+    { url = "https://files.pythonhosted.org/packages/f4/5f/80ea589bc04651ea10c0f53da06cb0ac33b616b0ec78bf7dc8d8fd642f5d/testtools-2.9.1-py3-none-any.whl", hash = "sha256:faf2d689b3614d87459f7f715fc8349a3f77a252486b104d0cfe635b44326895", size = 110306, upload-time = "2026-04-24T09:42:50.102Z" },
 ]
 
 [[package]]
