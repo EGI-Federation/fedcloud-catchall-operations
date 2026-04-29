@@ -30,7 +30,7 @@ dependencies = [
     "python-openstackclient>=8.3.0",
     "pyyaml>=6.0.3",
     "respx>=0.23.1",
-    "testtools>=2.8.2",
+    "testtools>=2.9.1",
     "yq>=3.4.3",
 ]
 
@@ -42,7 +42,7 @@ record-cleaner = "fedcloud_catchall.record_cleaner:main"
 cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
-requires = ["uv_build>=0.11.7,<0.12.0"]
+requires = ["uv_build>=0.11.8,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
@@ -56,9 +56,9 @@ dev = [
 ]
 ssm = [
     "argo-ams-library>=0.5.5",
-    "cryptography>=46.0.6",
+    "cryptography>=47.0.0",
     "dirq>=1.8",
-    "pyopenssl>=26.0.0",
+    "pyopenssl>=26.1.0",
     "stomp-py>=8.2.0",
     "setuptools<82.0.0",
 ]
