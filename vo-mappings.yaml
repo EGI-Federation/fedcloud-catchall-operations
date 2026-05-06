@@ -33,7 +33,6 @@ vos:
   vo.aneris.eu: "urn:mace:egi.eu:group:vo.aneris.eu:role=vm_operator#aai.egi.eu"
   vo.beamide.com: "urn:mace:egi.eu:group:vo.beamide.com:role=vm_operator#aai.egi.eu"
   vo.binare-oy.eu: "urn:mace:egi.eu:group:vo.binare-oy.eu:role=vm_operator#aai.egi.eu"
-  vo.cite.gr: "urn:mace:egi.eu:group:vo.cite.gr:role=vm_operator#aai.egi.eu"
   vo.complex-systems.eu: "urn:mace:egi.eu:group:vo.complex-systems.eu:role=vm_operator#aai.egi.eu"
   vo.decido-project.eu: "urn:mace:egi.eu:group:vo.decido-project.eu:role=vm_operator#aai.egi.eu"
   vo.deltares.nl: "urn:mace:egi.eu:group:vo.deltares.nl:role=vm_operator#aai.egi.eu"
