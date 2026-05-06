@@ -560,7 +560,7 @@ ssm = [
     { name = "argo-ams-library", specifier = ">=0.5.5" },
     { name = "cryptography", specifier = ">=48.0.0" },
     { name = "dirq", specifier = ">=1.8" },
-    { name = "pyopenssl", specifier = ">=26.1.0" },
+    { name = "pyopenssl", specifier = ">=26.2.0" },
     { name = "setuptools", specifier = "<82.0.0" },
     { name = "stomp-py", specifier = ">=8.2.0" },
 ]
