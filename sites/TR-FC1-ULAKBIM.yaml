@@ -6,8 +6,10 @@ images:
   formats:
     - qcow2
 accounting:
-  enabled: false 
+  enabled: true 
   site_name: EGI-NOTEBOOKS
+  ams_host: api.devel.msg.argo.grnet.gr
+  destination: egi-central-cloud-acc-test
 vos:
   - name: dteam
     auth:
