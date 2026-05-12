@@ -190,3 +190,20 @@ class TestAccounting(testtools.TestCase):
         m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
         m_ssm.assert_called_with(disabled_site, "/foo/CENI")
         m_caso.assert_called_with(disabled_site, "/foo/CENI")
+
+    @patch("fedcloud_catchall.accounting.ssm_config_template")
+    def test_ssm_config(self, m_tpl):
+        acc.ssm_config(sample_site, "/foo", "bar")
+        m_tpl.format.assert_called_with(
+            destination="bar", ams_host="msg.argo.grnet.gr", ssmdir="/foo/outgoing"
+        )
+
+    @patch("fedcloud_catchall.accounting.ssm_config_template")
+    def test_ssm_config_override(self, m_tpl):
+        override_site = copy.deepcopy(sample_site)
+        override_site["static"]["accounting"]["ams_host"] = "example.com"
+        override_site["static"]["accounting"]["destination"] = "test-dest"
+        acc.ssm_config(override_site, "/foo", "bar")
+        m_tpl.format.assert_called_with(
+            destination="test-dest", ams_host="example.com", ssmdir="/foo/outgoing"
+        )
