@@ -35,7 +35,8 @@ jobs:
         run: |
           curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
           chmod +x jq
-          pip install simplejson yq fedcloudclient
+          # Forcing the use of fedcloudclient integrated with cloud-info-api
+          pip install simplejson yq git+https://github.com/enolfc/fedcloudclient.git@cloud-info
       - name: Configure providers access
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
