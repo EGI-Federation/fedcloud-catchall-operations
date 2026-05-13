@@ -7,7 +7,7 @@
 # stored (deploy/cloud-info or deploy/image-sync)
 
 WORKDIR="$1"
-pushd "$WORKDIR"
+pushd "$WORKDIR" || exit 1
 
 # We fake here the github env
 GITHUB_ENV="${GITHUB_ENV:-/dev/null}"
