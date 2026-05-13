@@ -59,7 +59,7 @@ ssm = [
     "cryptography>=48.0.0",
     "dirq>=1.8",
     "pyopenssl>=26.2.0",
-    "stomp-py>=8.2.0",
+    "stomp-py>=9.0.0",
     "setuptools<82.0.0",
 ]
 validate = [
