@@ -46,7 +46,7 @@ protocol: AMS
 
 [broker]
 # msg.argo.grnet.gr is for production data
-host: msg.argo.grnet.gr
+host: {ams_host}
 
 [certificates]
 certificate: /etc/grid-security/hostcert.pem
@@ -87,8 +87,12 @@ def caso_config(site, vo, site_dir, vo_property="egi.eu:VO", extractor="nova"):
 
 
 def ssm_config(site, site_dir, destination="eu-egi-cloud-accounting"):
+    # override configuration if provided
+    ams_host = site["static"].get("accounting").get("ams_host", "msg.argo.grnet.gr")
+    destination = site["static"].get("accounting").get("destination", destination)
     return ssm_config_template.format(
         destination=destination,
+        ams_host=ams_host,
         ssmdir=os.path.join(site_dir, "outgoing"),
     )
 
