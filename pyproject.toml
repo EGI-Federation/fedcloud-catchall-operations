@@ -42,7 +42,7 @@ record-cleaner = "fedcloud_catchall.record_cleaner:main"
 cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
-requires = ["uv_build>=0.11.10,<0.12.0"]
+requires = ["uv_build>=0.11.14,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
@@ -59,7 +59,7 @@ ssm = [
     "cryptography>=48.0.0",
     "dirq>=1.8",
     "pyopenssl>=26.2.0",
-    "stomp-py>=8.2.0",
+    "stomp-py>=9.0.0",
     "setuptools<82.0.0",
 ]
 validate = [
