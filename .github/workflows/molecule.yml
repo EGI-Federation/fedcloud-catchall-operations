@@ -14,14 +14,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: ">=3.9"
+          python-version: '<3.14.0-0'
       - name: Install dependencies
         run: |
           pip install molecule molecule-plugins[docker] pytest pytest-testinfra
       - name: Test Ansible Bootstrap
         run: |
           cd deploy/roles/catchall
-          molecule --debug test
+          molecule test
         env:
           PY_COLORS: 1
           ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:${GITHUB_WORKSPACE}/deploy/roles
