@@ -630,7 +630,7 @@ requires-dist = [
     { name = "python-glanceclient", specifier = ">=4.12.0" },
     { name = "python-keystoneclient", specifier = ">=5.7.0" },
     { name = "python-novaclient", specifier = ">=18.11.0" },
-    { name = "python-openstackclient", specifier = ">=8.3.0" },
+    { name = "python-openstackclient", specifier = ">=10.0.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.23.1" },
     { name = "testtools", specifier = ">=2.9.1" },
@@ -1155,7 +1155,7 @@ wheels = [
 
 [[package]]
 name = "openstacksdk"
-version = "4.10.0"
+version = "4.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
@@ -1170,12 +1170,11 @@ dependencies = [
     { name = "platformdirs" },
     { name = "psutil" },
     { name = "pyyaml" },
-    { name = "requestsexceptions" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/97/32/5f614212ccc23323755dd83fc0c23600666161a4d3e81dce9bdcf8048aab/openstacksdk-4.10.0.tar.gz", hash = "sha256:5dde9ae3f1e2411a87ff57b2d78da53fac8eae9e5bac8e5870927cb62ddfc033", size = 1319494, upload-time = "2026-02-17T14:51:51.669Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/eb/ee/12590365cec760c4e559eef4e77ba82b8cd024d98b5ede37750201068b6e/openstacksdk-4.13.0.tar.gz", hash = "sha256:ab5b0d7e3a42de3dbc78497b31b5be53abf77a962986b3a621821e07e38c69a2", size = 1341338, upload-time = "2026-05-18T09:36:52.922Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/e4/8cb9f24ed26169249de8552184de7524a4788cce5616475ab38734bcb6d4/openstacksdk-4.10.0-py3-none-any.whl", hash = "sha256:c75927fb29a9c82d8dd116f16c72093a623d507f9a4aca63f3c26ad8ddf99855", size = 1859111, upload-time = "2026-02-17T14:51:49.704Z" },
+    { url = "https://files.pythonhosted.org/packages/57/90/d07b37783885891d34300610542f60d386c8110fb6b11eb2c2e5220d22b5/openstacksdk-4.13.0-py3-none-any.whl", hash = "sha256:3588662fdfba753ec32336dca836562622017ab8ed7b5bc910dd128681ebac8a", size = 1895999, upload-time = "2026-05-18T09:36:51.121Z" },
 ]
 
 [[package]]
@@ -1206,7 +1205,7 @@ wheels = [
 
 [[package]]
 name = "osc-lib"
-version = "4.4.0"
+version = "4.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cliff" },
@@ -1218,9 +1217,9 @@ dependencies = [
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/20/08/a59bd83e6850d5a27606de1a9fc0b80a2e9b7452ca90ed0ecdaa581a91e6/osc_lib-4.4.0.tar.gz", hash = "sha256:6a615d744f03fba513d92eb4760a9cd5baa96e3d8530611fe53b217062bf317e", size = 105435, upload-time = "2026-02-17T14:52:18.053Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/16/f9/e9815fb7ea7c559b033c1c458da8f05e704571bd625526d60f90c9f02f20/osc_lib-4.6.0.tar.gz", hash = "sha256:b2588feb50c4192ebacf51f95c51278eb709c8217b36cb72c667958bbfeece3e", size = 105274, upload-time = "2026-05-05T11:37:28.352Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/11/a9/47ca295bfdac805708615b0239a22750fd59b10ba5930240f2f0208983c2/osc_lib-4.4.0-py3-none-any.whl", hash = "sha256:f9a15389d93ac8e9f2bb22bc2bf974a971ea67376470058b48a1403224ecd39b", size = 96928, upload-time = "2026-02-17T14:52:16.703Z" },
+    { url = "https://files.pythonhosted.org/packages/5d/1d/f5f325100f77b62e983a2b0d21ed860093574ba1a7bc66fb845f1ee1e38a/osc_lib-4.6.0-py3-none-any.whl", hash = "sha256:b896217bcb175e29f41f84d05b5b4b7163269cd6a7f873cc71b17a991b5b0055", size = 96980, upload-time = "2026-05-05T11:37:26.864Z" },
 ]
 
 [[package]]
@@ -1763,7 +1762,7 @@ wheels = [
 
 [[package]]
 name = "python-openstackclient"
-version = "9.0.0"
+version = "10.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cliff" },
@@ -1772,15 +1771,14 @@ dependencies = [
     { name = "openstacksdk" },
     { name = "osc-lib" },
     { name = "oslo-i18n" },
-    { name = "pbr" },
     { name = "python-cinderclient" },
     { name = "python-keystoneclient" },
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/6e/7c48e37608b4af54a5e8471ccf33ae93cee10360c2e37601c860d0f6e5ee/python_openstackclient-9.0.0.tar.gz", hash = "sha256:8cdca0a274ef5e423f31a07c7117432e4ce5b72d95e3eba5b06e1c831eb3018e", size = 944832, upload-time = "2026-02-17T14:50:19.069Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b3/f9/6e17721c9e531c61a7a6eaebb89865b95517786a27422b5e3ee586b3551b/python_openstackclient-10.0.0.tar.gz", hash = "sha256:3de316bf303b3c8b5e8793c85fe1b8e40534649bc43175246a8ff8c8246b099d", size = 971236, upload-time = "2026-05-18T09:21:59.806Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/04/b5/ff19564aed5dcf772a791d3eca641f2bc09d66afb50d2e3dc82709189605/python_openstackclient-9.0.0-py3-none-any.whl", hash = "sha256:a22e27fcd8e375accb00ce3627183465f4ac171a721ea8a822ee0954978a3c7f", size = 1102900, upload-time = "2026-02-17T14:50:17.685Z" },
+    { url = "https://files.pythonhosted.org/packages/49/f7/cb5c95818f15f3ce33affb2500a3f4980a2b3c37e7f2f9b5066b4a609686/python_openstackclient-10.0.0-py3-none-any.whl", hash = "sha256:c2baddc15eb9c38d07fb37385edb1e6ab0eed44b2d43ee644c249cb60c5dfc0b", size = 1156900, upload-time = "2026-05-18T09:21:58.014Z" },
 ]
 
 [[package]]
@@ -1894,15 +1892,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/5f/a4/98b9c7c6428a668bf7e42ebb7c79d576a1c3c1e3ae2d47e674b468388871/requests-2.33.1.tar.gz", hash = "sha256:18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517", size = 134120, upload-time = "2026-03-30T16:09:15.531Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d7/8e/7540e8a2036f79a125c1d2ebadf69ed7901608859186c856fa0388ef4197/requests-2.33.1-py3-none-any.whl", hash = "sha256:4e6d1ef462f3626a1f0a0a9c42dd93c63bad33f9f1c1937509b8c5c8718ab56a", size = 64947, upload-time = "2026-03-30T16:09:13.83Z" },
-]
-
-[[package]]
-name = "requestsexceptions"
-version = "1.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/82/ed/61b9652d3256503c99b0b8f145d9c8aa24c514caff6efc229989505937c1/requestsexceptions-1.4.0.tar.gz", hash = "sha256:b095cbc77618f066d459a02b137b020c37da9f46d9b057704019c9f77dba3065", size = 6880, upload-time = "2018-02-01T17:04:45.294Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/01/8c/49ca60ea8c907260da4662582c434bec98716177674e88df3fd340acf06d/requestsexceptions-1.4.0-py2.py3-none-any.whl", hash = "sha256:3083d872b6e07dc5c323563ef37671d992214ad9a32b0ca4a3d7f5500bf38ce3", size = 3802, upload-time = "2018-02-01T17:04:39.07Z" },
 ]
 
 [[package]]
