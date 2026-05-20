@@ -20,14 +20,14 @@ dependencies = [
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
     "hvac>=2.4.0",
-    "keystoneauth1>=5.12.0",
+    "keystoneauth1>=5.14.0",
     "oslo-config>=9.8.0",
     "pyjwt>=2.10.1",
     "python-dateutil>=2.9.0.post0",
-    "python-glanceclient>=4.10.0",
+    "python-glanceclient>=4.12.0",
     "python-keystoneclient>=5.7.0",
     "python-novaclient>=18.11.0",
-    "python-openstackclient>=8.3.0",
+    "python-openstackclient>=10.0.0",
     "pyyaml>=6.0.3",
     "respx>=0.23.1",
     "testtools>=2.9.1",
@@ -42,7 +42,7 @@ record-cleaner = "fedcloud_catchall.record_cleaner:main"
 cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
-requires = ["uv_build>=0.11.14,<0.12.0"]
+requires = ["uv_build>=0.11.15,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
@@ -53,6 +53,13 @@ caso = { git = "https://github.com/IFCA-Advanced-Computing/caso", rev = "1584f0b
 dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
+]
+molecule = [
+    "ansible-core>=2.20.0,<2.21.0",
+    "molecule>=26.4.0",
+    "molecule-plugins[docker]>=25.8.12",
+    "pytest>=9.0.3",
+    "pytest-testinfra>=10.2.2",
 ]
 ssm = [
     "argo-ams-library>=0.5.5",
