@@ -17,11 +17,11 @@ jobs:
           python-version: ">=3.9"
       - name: Install dependencies
         run: |
-          pip install molecule docker molecule-plugins[docker] pytest pytest-testinfra
+          pip install molecule molecule-plugins[docker] pytest pytest-testinfra
       - name: Test Ansible Bootstrap
         run: |
           cd deploy/roles/catchall
-          molecule test
+          molecule --debug test
         env:
           PY_COLORS: 1
           ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:${GITHUB_WORKSPACE}/deploy/roles
