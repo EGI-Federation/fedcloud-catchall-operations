@@ -623,7 +623,7 @@ requires-dist = [
     { name = "fixtures", specifier = ">=4.2.8" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "hvac", specifier = ">=2.4.0" },
-    { name = "keystoneauth1", specifier = ">=5.12.0" },
+    { name = "keystoneauth1", specifier = ">=5.14.0" },
     { name = "oslo-config", specifier = ">=9.8.0" },
     { name = "pyjwt", specifier = ">=2.10.1" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
@@ -867,7 +867,7 @@ wheels = [
 
 [[package]]
 name = "keystoneauth1"
-version = "5.13.1"
+version = "5.14.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
@@ -877,9 +877,9 @@ dependencies = [
     { name = "stevedore" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f3/bc/d99872ca0bc8bf5f248b50e3d7386dedec5278f8dd989a2a981d329a8069/keystoneauth1-5.13.1.tar.gz", hash = "sha256:e011e47ac3f3c671ffae33505c095548650cc19dab7f6af3b2ea5bd18c98f0c9", size = 288548, upload-time = "2026-02-20T15:16:47.478Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/02/d9/a01a3898657626cbcca9fa0e8fa58facb4632e172bdac622d47950f7e12a/keystoneauth1-5.14.0.tar.gz", hash = "sha256:7b942084d3db27dd285c13253cdfee10b05be0436db1c01e15dc744902197a7f", size = 288739, upload-time = "2026-05-13T09:09:26.125Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/96/68/ff03933cff7568277e2d55cb33aeb60a5c2d77bd88b0ea139244079df638/keystoneauth1-5.13.1-py3-none-any.whl", hash = "sha256:6e6d0296bc341e5f9a08e985f7083206c93a4ffd999933c2d1b7e1c833c2e501", size = 343539, upload-time = "2026-02-20T15:16:45.873Z" },
+    { url = "https://files.pythonhosted.org/packages/72/eb/698dc17e4beb315f83a47d47be128b8a63303dc8b7e7c31110410e10a68b/keystoneauth1-5.14.0-py3-none-any.whl", hash = "sha256:f8c503a95fdd83b5b72736657e4ffbb53d4b28b01763f23013f0294ed8a0e4b9", size = 343268, upload-time = "2026-05-13T09:09:24.573Z" },
 ]
 
 [[package]]
