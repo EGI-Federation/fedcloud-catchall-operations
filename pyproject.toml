@@ -54,6 +54,13 @@ dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
 ]
+molecule = [
+    "ansible-core>=2.21.0",
+    "molecule>=26.4.0",
+    "molecule-plugins[docker]>=25.8.12",
+    "pytest>=9.0.3",
+    "pytest-testinfra>=10.2.2",
+]
 ssm = [
     "argo-ams-library>=0.5.5",
     "cryptography>=48.0.0",
