@@ -17,11 +17,12 @@ jobs:
           python-version: "<3.14.0-0"
       - name: Install dependencies
         run: |
-          pip install ansible-core molecule molecule-plugins[docker] pytest pytest-testinfra
-
+          pip install ansible-core molecule molecule-plugins[docker] pytest pytest-testinfra docker requests
       - name: Install Ansible Docker Collection
         run: |
           ansible-galaxy collection install community.docker
+      - name: Verify Docker is running
+        run: docker info
       - name: Test Ansible Bootstrap
         run: |
           cd deploy/roles/catchall
