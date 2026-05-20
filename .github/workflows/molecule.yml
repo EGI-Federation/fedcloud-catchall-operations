@@ -14,10 +14,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: "<3.14.0-0"
+          python-version: ">=3.9"
       - name: Install dependencies
         run: |
-          pip install ansible-core molecule molecule-plugins[docker] pytest pytest-testinfra docker requests
+          pip install "ansible-core>=2.20.0,<2.21.0" \
+                      "molecule==26.4.0" \
+                      "molecule-plugins[docker]==25.8.12" \
+                      pytest pytest-testinfra
       - name: Install Ansible Docker Collection
         run: |
           ansible-galaxy collection install community.docker
