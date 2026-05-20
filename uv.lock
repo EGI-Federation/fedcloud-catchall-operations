@@ -544,7 +544,7 @@ requires-dist = [
     { name = "oslo-config", specifier = ">=9.8.0" },
     { name = "pyjwt", specifier = ">=2.10.1" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
-    { name = "python-glanceclient", specifier = ">=4.10.0" },
+    { name = "python-glanceclient", specifier = ">=4.12.0" },
     { name = "python-keystoneclient", specifier = ">=5.7.0" },
     { name = "python-novaclient", specifier = ">=18.11.0" },
     { name = "python-openstackclient", specifier = ">=8.3.0" },
@@ -1494,7 +1494,7 @@ wheels = [
 
 [[package]]
 name = "python-glanceclient"
-version = "4.11.0"
+version = "4.12.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "keystoneauth1" },
@@ -1507,9 +1507,9 @@ dependencies = [
     { name = "warlock" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ac/5d/71731cf4f9225594442bc08ee438e7534d2e50344ecca4972385a9ea9e39/python_glanceclient-4.11.0.tar.gz", hash = "sha256:5ce2118bfe7462934805916617e537bc5b00fd4cab3fb7bb88a4f9253970562d", size = 210930, upload-time = "2026-02-27T15:45:06.891Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ed/32/35d09ba5bfa88180627a6c835caaa883653056f31e7e5da015804af50d1e/python_glanceclient-4.12.0.tar.gz", hash = "sha256:390556573c8736409adaa3c8ba800e0d9fc1b12e2fb6d6939b8dfe999468f50f", size = 205137, upload-time = "2026-05-19T09:27:20.967Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/37/a3/683cb59ed2ec1bd35255fd76dffc12be0529b24e6f3723ff017dafefe3ad/python_glanceclient-4.11.0-py3-none-any.whl", hash = "sha256:43b49eb6f501fe1e91afeba6fad908444712a5e8ccf6bce333b754a0d7950e31", size = 208816, upload-time = "2026-02-27T15:45:05.769Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/b0/f31a7601ededdfae51db135a17a234d680d094885bec56705eeb4f433af6/python_glanceclient-4.12.0-py3-none-any.whl", hash = "sha256:37741ff42edc0b9f083c3b87392416963d2ad0797b8149dc06ab671a522dbd67", size = 202240, upload-time = "2026-05-19T09:27:19.393Z" },
 ]
 
 [[package]]
