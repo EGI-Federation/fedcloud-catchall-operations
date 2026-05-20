@@ -28,4 +28,4 @@ jobs:
           molecule --debug test
         env:
           PY_COLORS: 1
-          ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:${GITHUB_WORKSPACE}/deploy/roles
+          ANSIBLE_ROLES_PATH: ${{ github.workspace }}/deploy/roles
