@@ -17,7 +17,11 @@ jobs:
           python-version: "<3.14.0-0"
       - name: Install dependencies
         run: |
-          pip install molecule molecule-plugins[docker] pytest pytest-testinfra
+          pip install ansible-core molecule molecule-plugins[docker] pytest pytest-testinfra
+
+      - name: Install Ansible Docker Collection
+        run: |
+          ansible-galaxy collection install community.docker
       - name: Test Ansible Bootstrap
         run: |
           cd deploy/roles/catchall
@@ -25,4 +29,3 @@ jobs:
         env:
           PY_COLORS: 1
           ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:${GITHUB_WORKSPACE}/deploy/roles
-          ANSIBLE_STDOUT_CALLBACK: default
