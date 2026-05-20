@@ -55,7 +55,7 @@ dev = [
     "pytest-cov>=7.0.0",
 ]
 molecule = [
-    "ansible-core>=2.21.0",
+    "ansible-core>=2.20.0,<2.21.0",
     "molecule>=26.4.0",
     "molecule-plugins[docker]>=25.8.12",
     "pytest>=9.0.3",
