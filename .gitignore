@@ -6,3 +6,5 @@ deploy/.terraform*
 *.egg-info
 build
 .coverage
+# my local tests 
+cfg_test
