@@ -13,12 +13,6 @@
   loop_control:
     loop_var: dir
 
-- name: Cloud-info config directory
-  ansible.builtin.template:
-    src: site-info.yaml.j2
-    dest: /etc/egi/cloud-info/{{ filename }}.yaml
-    mode: "600"
-
 - name: Site config file
   ansible.builtin.template:
     src: site-config.yaml.j2
