@@ -11,7 +11,7 @@
     file: docker.yml
     apply:
       tags: "docker"
-  # this is only executed if explicity requested
+  # this is only executed if explicitly requested
   tags: ["never", "docker"]
 
 - name: Load site configuration
@@ -31,7 +31,7 @@
 - name: EGI configuration directories
   tags: ["cloud-info", "image-sync", "accounting"]
   ansible.builtin.file:
-    path:  "{{ dir }}"
+    path: "{{ dir }}"
     state: directory
     mode: "755"
     owner: "{{ egi_user }}"
@@ -39,6 +39,8 @@
   loop:
     - /etc/egi
     - /etc/egi/sites
+  loop_control:
+    loop_var: dir
 
 - name: Build global configuration file
   tags: ["cloud-info", "image-sync", "accounting"]
@@ -57,6 +59,11 @@
     mode: "600"
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
+  vars:
+    filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
+  with_items:
+    - "{{ sites }}"
+  when: sites is iterable
 
 - name: Cloud info config
   tags: ["cloud-info"]

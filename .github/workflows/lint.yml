@@ -1,5 +1,5 @@
 ---
-name: Super-Linter
+name: Lint
 
 on: pull_request
 
@@ -10,7 +10,7 @@ jobs:
   # when a job name is not provided
   super-lint:
     # Name the Job
-    name: Lint code base
+    name: Lint files
     # Set the type of machine to run on
     runs-on: ubuntu-latest
 
@@ -37,7 +37,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Fail on errors
           DISABLE_ERRORS: false
-          # pylint is too much at the moment, to be removed in the future
-          # VALIDATE_PYTHON_PYLINT: false
+          # biome conflicts with prettier
+          VALIDATE_BIOME_FORMAT: false
+          # pylint is too much at the moment, potentially removed in the future
+          VALIDATE_PYTHON_PYLINT: false
+          # conflicts with black
+          VALIDATE_PYTHON_RUFF_FORMAT: false
           # Disabling this file as it gets confused
-          # FILTER_REGEX_EXCLUDE: ".*.env.j2"
+          FILTER_REGEX_EXCLUDE: ".*.env.j2"

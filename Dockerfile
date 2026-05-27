@@ -1,6 +1,9 @@
 ##################################################
 # Stage 1 - Build python venv
 ##################################################
+# disable no healthcheck linting errors
+# checkov:skip=CKV_DOCKER_2: No healtcheck available
+#trivy:ignore:AVD-DS-0026
 FROM python:3 AS build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

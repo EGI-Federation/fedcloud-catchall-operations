@@ -13,6 +13,19 @@ on:
       env:
         required: true
         type: string
+    secrets:
+      CLIENT_ID:
+        required: true
+      CLIENT_SECRET:
+        required: true
+      ANSIBLE_SECRETS:
+        required: true
+      SLACK_WEBHOOK_URL:
+        required: true
+      DEPLOY_GITHUB_TOKEN:
+        required: true
+
+permissions: read-all
 
 jobs:
   terraform:
@@ -26,9 +39,11 @@ jobs:
       TF_VAR_net_id: ${{ vars.TF_VAR_NET_ID }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Setup python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
         with:
           python-version: 3.x
       - name: Install environment
@@ -42,30 +57,37 @@ jobs:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
+          INPUTS_DIR: ${{ inputs.dir }}
         run: |
-          ./deploy/site-config.sh "${{ inputs.dir }}"
+          ./deploy/site-config.sh "${INPUTS_DIR}"
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v4
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e
         with:
           terraform_version: 1.2.9
       - name: Terraform Format
         id: fmt
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           terraform fmt -check
+        env:
+          INPUTS_DIR: ${{ inputs.dir }}
       - name: Terraform init
         id: init
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           terraform init
+        env:
+          INPUTS_DIR: ${{ inputs.dir }}
       - name: Adjust cloud-init file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          INPUTS_DIR: ${{ inputs.dir }}
+          INPUTS_TAGS: ${{ inputs.tags }}
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           cat ../cloud-init.yaml extra-cloud-init.yaml > cloud-init.yaml
-          sed -i -e "s/%TOKEN%/${{ secrets.GITHUB_TOKEN }}/" cloud-init.yaml
-          sed -i -e "s/%TAGS%/${{ inputs.tags }}/" cloud-init.yaml
+          sed -i -e "s/%TOKEN%/${{ secrets.DEPLOY_GITHUB_TOKEN }}/" cloud-init.yaml
+          sed -i -e "s/%TAGS%/${INPUTS_TAGS}/" cloud-init.yaml
           sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
           sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
           sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
@@ -75,20 +97,27 @@ jobs:
         id: plan
         if: github.event_name == 'pull_request'
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           terraform plan -no-color
         continue-on-error: true
+        env:
+          INPUTS_DIR: ${{ inputs.dir }}
       - name: Update Pull Request
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         if: github.event_name == 'pull_request'
         env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+          PLAN: "${{ steps.plan.outputs.stdout }}"
+          ACTOR: "${{ github.actor }}"
+          EVENT_NAME: "${{ github.event_name }}"
+          FMT_OUTCOME: "${{ steps.fmt.outcome }}"
+          PLAN_OUTCOME: "${{ steps.plan.outcome }}"
+          INIT_OUTCOME: "${{ steps.init.outcome }}"
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
           script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            const output = `#### Terraform Format and Style 🖌\`${process.env.FMT_OUTCOME}\`
+            #### Terraform Initialization ⚙️\`${process.env.INIT_OUTCOME}\`
+            #### Terraform Plan 📖\`${process.env.PLAN_OUTCOME}\`
             <details><summary>Show Plan</summary>
 
             \`\`\`
@@ -97,7 +126,7 @@ jobs:
 
             </details>
 
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+            *Pusher: @${process.env.ACTOR}, Action: \`${process.env.EVENT_NAME}\`*`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -111,18 +140,23 @@ jobs:
         id: terraform-apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           terraform apply -auto-approve
+        env:
+          INPUTS_DIR: ${{ inputs.dir }}
       - name: Get VM ID
         id: terraform-vm-id
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           terraform output -raw instance-id
+        env:
+          INPUTS_DIR: ${{ inputs.dir }}
       - name: Re-configure providers access
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          INPUTS_DIR: ${{ inputs.dir }}
         run: |
           # using parametric scopes to only have access to cloud.egi.eu VO
           SCOPE="openid%20email%20profile%20voperson_id"
@@ -134,7 +168,7 @@ jobs:
                             -d "grant_type=client_credentials&client_id=$CLIENT_ID&scope=$SCOPE&client_secret=$CLIENT_SECRET" \
                           | jq -r ".access_token")
           echo "::add-mask::$OIDC_TOKEN"
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           cp ../clouds.yaml .
           BACKEND_SITE="$(yq -r .clouds.backend.site clouds.yaml)"
           BACKEND_VO="$(yq -r .clouds.backend.vo clouds.yaml)"
@@ -147,7 +181,7 @@ jobs:
           touch ~/.config/openstack/secure.yaml
       - name: Get the status file from swift
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: nick-fields/retry@v4
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60
         with:
           timeout_minutes: 10
           max_attempts: 30
@@ -163,7 +197,10 @@ jobs:
       - name: Look for errors
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          cd "${{ inputs.dir }}"
+          cd "${INPUTS_DIR}"
           # show the status in the build log
-          cat "${{ steps.terraform-vm-id.outputs.stdout }}"
-          grep -v "error" "${{ steps.terraform-vm-id.outputs.stdout }}"
+          cat "${STEPS_TERRAFORM_VM_ID_OUTPUTS_STDOUT}"
+          grep -v "error" "${STEPS_TERRAFORM_VM_ID_OUTPUTS_STDOUT}"
+        env:
+          INPUTS_DIR: ${{ inputs.dir }}
+          STEPS_TERRAFORM_VM_ID_OUTPUTS_STDOUT: ${{ steps.terraform-vm-id.outputs.stdout }}

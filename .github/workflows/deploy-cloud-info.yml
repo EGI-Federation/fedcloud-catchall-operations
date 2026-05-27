@@ -9,6 +9,8 @@ on:
     paths:
       - "deploy/**"
 
+permissions: read-all
+
 jobs:
   deploy:
     uses: ./.github/workflows/deploy.yml
@@ -16,4 +18,9 @@ jobs:
       dir: "deploy/cloud-info"
       tags: "cloud-info,docker"
       env: "cloud-info"
-    secrets: inherit
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      DEPLOY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
