@@ -629,7 +629,7 @@ requires-dist = [
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
     { name = "python-glanceclient", specifier = ">=4.12.0" },
     { name = "python-keystoneclient", specifier = ">=5.7.0" },
-    { name = "python-novaclient", specifier = ">=18.11.0" },
+    { name = "python-novaclient", specifier = ">=18.13.0" },
     { name = "python-openstackclient", specifier = ">=10.0.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.23.1" },
@@ -1743,7 +1743,7 @@ wheels = [
 
 [[package]]
 name = "python-novaclient"
-version = "18.12.0"
+version = "18.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
@@ -1755,9 +1755,9 @@ dependencies = [
     { name = "prettytable" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bb/e0/69ae17e322d3f03ae05633e7155388286ddfde528b6bf6d73df18162256a/python_novaclient-18.12.0.tar.gz", hash = "sha256:ead3db2a3dd43a89bb5a56f62f87362a76e7ef9c01938699ff6c1a060f0e9eab", size = 340638, upload-time = "2026-02-24T14:35:33.499Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/23/86/6c6d5230eade1cdd10456d08108f783b00394edace0f1f20e5177169ba98/python_novaclient-18.13.0.tar.gz", hash = "sha256:812272fa36fae042c5c195aaeeaf0e5df2ca77edcb9c9e1fd66943f39d32bc4b", size = 340695, upload-time = "2026-05-13T09:20:40.796Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d6/ca/01037283efdf27d521b39cab1debb4857bf0a78e80f3ff40f9c91985d8e2/python_novaclient-18.12.0-py3-none-any.whl", hash = "sha256:ca70deb5f6b89c36a44df5abf62c67f41b2d35a1f906d3feba1716c1f056d26f", size = 336041, upload-time = "2026-02-24T14:35:31.976Z" },
+    { url = "https://files.pythonhosted.org/packages/96/36/f070b4e8ce76888855a9b405bfd7f07a97c43db155d01524f0802bba2ff1/python_novaclient-18.13.0-py3-none-any.whl", hash = "sha256:e46abb6d2a77c8f547691a9f49e66216dc03847bc2b0d1884cefba58a0bca750", size = 336073, upload-time = "2026-05-13T09:20:39.308Z" },
 ]
 
 [[package]]
