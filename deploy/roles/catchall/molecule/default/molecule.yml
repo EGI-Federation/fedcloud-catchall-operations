@@ -1,13 +1,25 @@
 ---
+ansible:
+  cfg:
+    defaults:
+      deprecation_warnings: false
+  executor:
+    args:
+      ansible_playbook:
+        - --inventory=inventory/
+
 dependency:
   name: galaxy
-driver:
-  name: docker
-platforms:
-  - name: instance
-    image: ubuntu:latest
-lint: ansible-lint --exclude .github/
-provisioner:
-  name: ansible
-verifier:
-  name: testinfra
+  options:
+    requirements-file: ${MOLECULE_SCENARIO_DIRECTORY}/requirements.yml
+
+scenario:
+  name: default
+  test_sequence:
+    - dependency
+    - destroy
+    - create
+    - converge
+    - idempotence
+    - verify
+    - destroy

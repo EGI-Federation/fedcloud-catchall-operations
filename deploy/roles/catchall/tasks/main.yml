@@ -60,6 +60,7 @@
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
   vars:
+    site: "{{ item }}"
     filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
   with_items:
     - "{{ sites }}"
