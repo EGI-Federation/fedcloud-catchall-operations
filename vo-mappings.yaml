@@ -47,7 +47,6 @@ vos:
   vo.eurosea.marine.ie: "urn:mace:egi.eu:group:vo.eurosea.marine.ie:role=member#aai.egi.eu"
   vo.geoss.eu: "urn:mace:egi.eu:group:vo.geoss.eu:role=vm_operator#aai.egi.eu"
   vo.imagine-ai.eu: "urn:mace:egi.eu: group:vo.imagine-ai.eu:role=vm_operator#aai.egi.eu"
-  vo.lethe-project.eu: "urn:mace:egi.eu:group:vo.lethe-project.eu:role=vm_operator#aai.egi.eu"
   vo.lifewatch.eu: "urn:mace:egi.eu:group:vo.lifewatch.eu:role=vm_operator#aai.egi.eu"
   /vo.lifewatch.eu/openbiomap: "urn:mace:egi.eu:group:vo.lifewatch.eu:role=vm_operator#aai.egi.eu"
   vo.mightee.idia.za: "urn:mace:egi.eu:group:vo.mightee.idia.za:role=vm_operator#aai.egi.eu"

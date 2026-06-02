@@ -37,9 +37,6 @@ vos:
   - name: vo.instruct.eu
     auth:
       project_id: e459576d88a141e9b5ffd52b2f4abcf4
-  - name: vo.lethe-project.eu
-    auth:
-      project_id: f064d2b5f42a4704958f3bfbff7404bd
   - name: vo.europlanet-vespa.eu
     auth:
       project_id: c8005e7c85ca4929bde70882ae1ec137

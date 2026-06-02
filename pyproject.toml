@@ -22,11 +22,11 @@ dependencies = [
     "hvac>=2.4.0",
     "keystoneauth1>=5.14.0",
     "oslo-config>=9.8.0",
-    "pyjwt>=2.10.1",
+    "pyjwt>=2.13.0",
     "python-dateutil>=2.9.0.post0",
     "python-glanceclient>=4.12.0",
     "python-keystoneclient>=5.7.0",
-    "python-novaclient>=18.11.0",
+    "python-novaclient>=18.13.0",
     "python-openstackclient>=10.0.0",
     "pyyaml>=6.0.3",
     "respx>=0.23.1",
@@ -42,7 +42,7 @@ record-cleaner = "fedcloud_catchall.record_cleaner:main"
 cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
-requires = ["uv_build>=0.11.15,<0.12.0"]
+requires = ["uv_build>=0.11.16,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
