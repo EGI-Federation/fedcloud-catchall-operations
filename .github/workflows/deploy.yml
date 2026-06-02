@@ -86,7 +86,7 @@ jobs:
         run: |
           cd "${INPUTS_DIR}"
           cat ../cloud-init.yaml extra-cloud-init.yaml > cloud-init.yaml
-          sed -i -e "s/%TOKEN%/${{ secrets.GITHUB_TOKEN }}/" cloud-init.yaml
+          sed -i -e "s/%TOKEN%/${{ secrets.DEPLOY_GITHUB_TOKEN }}/" cloud-init.yaml
           sed -i -e "s/%TAGS%/${INPUTS_TAGS}/" cloud-init.yaml
           sed -i -e "s/%REF%/${{ github.sha }}/" cloud-init.yaml
           sed -i -e "s/%SHORT_REF%/$(git rev-parse --short HEAD)/" cloud-init.yaml
@@ -113,7 +113,7 @@ jobs:
           PLAN_OUTCOME: "${{ steps.plan.outcome }}"
           INIT_OUTCOME: "${{ steps.init.outcome }}"
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
           script: |
             const output = `#### Terraform Format and Style 🖌\`${process.env.FMT_OUTCOME}\`
             #### Terraform Initialization ⚙️\`${process.env.INIT_OUTCOME}\`

@@ -13,6 +13,8 @@ permissions: read-all
 
 jobs:
   deploy:
+    permissions:
+      issues: write
     uses: ./.github/workflows/deploy.yml
     with:
       dir: "deploy/cloud-info"
@@ -23,4 +25,4 @@ jobs:
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #DEPLOY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DEPLOY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

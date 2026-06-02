@@ -13,6 +13,8 @@ permissions: read-all
 
 jobs:
   deploy:
+    permissions:
+      issues: write
     uses: ./.github/workflows/deploy.yml
     with:
       dir: "deploy/image-sync"
