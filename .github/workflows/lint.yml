@@ -3,28 +3,45 @@ name: Lint
 
 on: pull_request
 
+permissions: read-all
+
 jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
   super-lint:
+    # Name the Job
     name: Lint files
+    # Set the type of machine to run on
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status Checks
+      statuses: write
 
     steps:
       # Checks out a copy of your repository on the ubuntu-latest machine
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           # Full git history needed to get proper list of changed files
           fetch-depth: 0
+          persist-credentials: false
 
       # Runs the Super-Linter action
       - name: Run Super-Linter
-        uses: github/super-linter/slim@v7
+        uses: super-linter/super-linter/slim@61abc07d755095a68f4987d1c2c3d1d64408f1f9 # v8.5.0
         env:
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Disabling these two for the moment, should be enabled later
-          VALIDATE_CHECKOV: false
+          # Fail on errors
+          DISABLE_ERRORS: false
+          # biome conflicts with prettier
+          VALIDATE_BIOME_FORMAT: false
+          # pylint is too much at the moment, potentially removed in the future
           VALIDATE_PYTHON_PYLINT: false
-          # Black is good enough for us
-          VALIDATE_PYTHON_PYINK: false
+          # conflicts with black
+          VALIDATE_PYTHON_RUFF_FORMAT: false
           # Disabling this file as it gets confused
           FILTER_REGEX_EXCLUDE: ".*.env.j2"

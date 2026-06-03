@@ -38,14 +38,14 @@ vos:
 
 ## Docker containers
 
-Components are run as docker containers, which if not available upstream, are
+Components are run as containers, which if not available upstream, are
 generated in this repository.
 
 ## Deployment
 
 Deployment is managed with GitHub Actions, there is a VM for the
 cloud-info-provider and one VM for the image sync. Check the [deploy](./deploy)
-directory for details. Configuration is done with ansible using a
+directory for details. Configuration is done with Ansible using a
 [dedicated role](./deploy/roles/catchall):
 
 ```sh
@@ -54,8 +54,8 @@ ansible-playbook -i inventory.yaml --extra-vars "@secrets.yaml" playbook.yaml
 
 where:
 
-- `inventory.yaml` contains the ansible inventory with the host to configure
+- `inventory.yaml` contains the Ansible inventory with the host to configure
 - `secrets.yaml` contains the credentials for every configured VO and a valid
   token for the AMS
-- `playbook.yaml` is an ansible playbook that just uses the `catchall` role to
+- `playbook.yaml` is an Ansible playbook that just uses the `catchall` role to
   configure the host
