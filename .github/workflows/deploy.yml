@@ -25,7 +25,9 @@ on:
       DEPLOY_GITHUB_TOKEN:
         required: true
 
-permissions: read-all
+permissions:
+  issues: write
+  contents: read
 
 jobs:
   terraform:
