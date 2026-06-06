@@ -13,3 +13,6 @@ vos:
   - name: vo.cessda.eduteams.org
     auth:
       project_id: 525e72bbead74b4d9a203499ae7fa15e
+  - name: vo.cessda-eric.eu
+    auth:
+      project_id: 739845e89e554283bf52e09350d855db
