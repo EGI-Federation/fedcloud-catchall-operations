@@ -16,6 +16,9 @@ vos:
   - name: ops
     auth:
       project_id: c030e7317150482d920717888e82ce5f
+  - name: sage.greendealdata.eu
+    auth:
+      project_id: d42e2ef8b0ea4db5a1aa8d9dfdf002fc
   - name: vo.access.egi.eu
     auth:
       project_id: 7635176e4f9b4cb4b3f4192a5bf901a3
