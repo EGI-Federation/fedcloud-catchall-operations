@@ -14,14 +14,14 @@ classifiers = [
 requires-python = ">=3.14"
 dependencies = [
     "atrope",
-    "caso",
+    "caso==5.2.1",
     "cloud-info-provider==1.1.0",
     "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
     "hvac>=2.4.0",
     "keystoneauth1>=5.14.0",
-    "oslo-config>=10.4.0",
+    "oslo-config>=9.8.0",
     "pyjwt>=2.13.0",
     "python-dateutil>=2.9.0.post0",
     "python-glanceclient>=4.12.0",
