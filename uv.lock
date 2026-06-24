@@ -634,7 +634,7 @@ requires-dist = [
     { name = "python-glanceclient", specifier = ">=4.12.0" },
     { name = "python-keystoneclient", specifier = ">=5.7.0" },
     { name = "python-novaclient", specifier = ">=18.13.0" },
-    { name = "python-openstackclient", specifier = ">=10.0.0" },
+    { name = "python-openstackclient", specifier = ">=10.1.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.23.1" },
     { name = "testtools", specifier = ">=2.9.1" },
@@ -1767,7 +1767,7 @@ wheels = [
 
 [[package]]
 name = "python-openstackclient"
-version = "10.0.0"
+version = "10.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cliff" },
@@ -1781,9 +1781,9 @@ dependencies = [
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b3/f9/6e17721c9e531c61a7a6eaebb89865b95517786a27422b5e3ee586b3551b/python_openstackclient-10.0.0.tar.gz", hash = "sha256:3de316bf303b3c8b5e8793c85fe1b8e40534649bc43175246a8ff8c8246b099d", size = 971236, upload-time = "2026-05-18T09:21:59.806Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/84/bb/597fc8c39fe593e43089b7eb035b40f5df44c73e4afad3fb8a6163d51010/python_openstackclient-10.1.0.tar.gz", hash = "sha256:e5557041c40d2daf5dfe591af2f9375aa057db87b1b5630fc96e1c600763295e", size = 994222, upload-time = "2026-06-10T15:17:23.282Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/49/f7/cb5c95818f15f3ce33affb2500a3f4980a2b3c37e7f2f9b5066b4a609686/python_openstackclient-10.0.0-py3-none-any.whl", hash = "sha256:c2baddc15eb9c38d07fb37385edb1e6ab0eed44b2d43ee644c249cb60c5dfc0b", size = 1156900, upload-time = "2026-05-18T09:21:58.014Z" },
+    { url = "https://files.pythonhosted.org/packages/ce/58/3b770b06901f0c75ede0a0916dc36db248022c6eced9dc8e5dd25dbdb3bf/python_openstackclient-10.1.0-py3-none-any.whl", hash = "sha256:6ae13c64dce6b54407aa94cde782c24b1b55060fae90c98768fd53d6dd3ecc71", size = 1190949, upload-time = "2026-06-10T15:17:21.658Z" },
 ]
 
 [[package]]
