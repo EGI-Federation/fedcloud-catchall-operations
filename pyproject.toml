@@ -51,14 +51,14 @@ atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.1.0" }
 
 [dependency-groups]
 dev = [
-    "pytest>=9.0.2",
+    "pytest>=9.1.1",
     "pytest-cov>=7.0.0",
 ]
 molecule = [
     "ansible-core>=2.21.1,<2.22.0",
     "molecule>=26.4.0",
     "molecule-plugins[docker]>=25.8.12",
-    "pytest>=9.0.3",
+    "pytest>=9.1.1",
     "pytest-testinfra>=10.2.2",
 ]
 ssm = [
