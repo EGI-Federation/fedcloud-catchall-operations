@@ -36,7 +36,7 @@ wheels = [
 
 [[package]]
 name = "ansible-core"
-version = "2.21.0"
+version = "2.21.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
@@ -45,9 +45,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "resolvelib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a3/f6/8da4912a93e1319292bada5e5185e82b1a12cf212da7a7cc4589064f3247/ansible_core-2.21.0.tar.gz", hash = "sha256:28ccd0e2d1849f1c7272cec39a74a8a5c83f3d51314658fa5ca57ea85a87f454", size = 3387206, upload-time = "2026-05-18T20:52:31.677Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/26/6d/38d7eaea1df4a95c3b137e780f6ad2208d7886334a291cadde5d645f08a1/ansible_core-2.21.1.tar.gz", hash = "sha256:a5536ece95be84de15212b3644cdbbe9cbd9efd62e4e8a544cd6b0b27a083039", size = 3384534, upload-time = "2026-06-18T19:35:02.887Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2f/5c/75152a7ec51634bdc90b262a74cd6ca8b81cd6e264e19389c4c471e9f4df/ansible_core-2.21.0-py3-none-any.whl", hash = "sha256:fed7dd076365aad9ccf885c6b8f938e0fd508f5dcdffe5d2ca87cfb5fac47940", size = 2443954, upload-time = "2026-05-18T20:52:29.679Z" },
+    { url = "https://files.pythonhosted.org/packages/90/55/894f2cad10ef650bf33a0e64e242805de2d1a8835f539d04d52053fe08a6/ansible_core-2.21.1-py3-none-any.whl", hash = "sha256:1403ff56bb69484ef90788126d06c65b4e28e8d2dcdcfb7f027d4c1495052d7e", size = 2454057, upload-time = "2026-06-18T19:35:00.741Z" },
 ]
 
 [[package]]
@@ -271,7 +271,7 @@ wheels = [
 
 [[package]]
 name = "cloud-info-provider"
-version = "1.1.0"
+version = "1.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "defusedxml" },
@@ -286,9 +286,9 @@ dependencies = [
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/75/bd/b5ea54f2276411568b88fd4bb3304741f59fb02821eacdea6e9f427988b8/cloud_info_provider-1.1.0.tar.gz", hash = "sha256:439fb260501daba75691bc4c4131a8e7f0f75a3f9df978ef0c136d39e7fecac5", size = 129651, upload-time = "2026-04-01T10:07:01.022Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b7/17/11e5d08c28e9db984d9a44cb5e8bc0c73e1a33d981bd8fc5fa8ddf1f11b0/cloud_info_provider-1.1.1.tar.gz", hash = "sha256:8102f3a2f9537ef5c7623ea6b4f5f78c6746c3dde4bf93f5c77e4b294918997c", size = 130259, upload-time = "2026-06-23T07:39:00.976Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9d/de/26a2657298178f3935fc03c0d3abdfe15365107147275f991b1da7127c9a/cloud_info_provider-1.1.0-py3-none-any.whl", hash = "sha256:aa49a1f707db0972a7b7dca9c4226dabb003705574741d5fcb31730593fe85de", size = 36295, upload-time = "2026-04-01T10:06:59.36Z" },
+    { url = "https://files.pythonhosted.org/packages/2f/30/dc2ec284f0621618dfde3abbe9d90cd009e2bd671b16d0f18f0184dddcda/cloud_info_provider-1.1.1-py3-none-any.whl", hash = "sha256:86cb331bdead9ec868352ac6fc9d820df89fb3a71952a8bf556d38334660be2b", size = 36279, upload-time = "2026-06-23T07:38:59.702Z" },
 ]
 
 [[package]]
@@ -619,7 +619,7 @@ validate = [
 requires-dist = [
     { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.1.0" },
     { name = "caso", specifier = "==5.2.1" },
-    { name = "cloud-info-provider", specifier = "==1.1.0" },
+    { name = "cloud-info-provider", specifier = "==1.1.1" },
     { name = "dirq", specifier = ">=1.8" },
     { name = "fixtures", specifier = ">=4.2.8" },
     { name = "httpx", specifier = ">=0.28.1" },
@@ -640,14 +640,14 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "pytest", specifier = ">=9.0.2" },
+    { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest-cov", specifier = ">=7.0.0" },
 ]
 molecule = [
-    { name = "ansible-core", specifier = ">=2.21.0,<2.22.0" },
+    { name = "ansible-core", specifier = ">=2.21.1,<2.22.0" },
     { name = "molecule", specifier = ">=26.4.0" },
     { name = "molecule-plugins", extras = ["docker"], specifier = ">=25.8.12" },
-    { name = "pytest", specifier = ">=9.0.3" },
+    { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest-testinfra", specifier = ">=10.2.2" },
 ]
 ssm = [
@@ -1612,7 +1612,7 @@ wheels = [
 
 [[package]]
 name = "pytest"
-version = "9.0.3"
+version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
@@ -1621,9 +1621,9 @@ dependencies = [
     { name = "pluggy" },
     { name = "pygments" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7d/0d/549bd94f1a0a402dc8cf64563a117c0f3765662e2e668477624baeec44d5/pytest-9.0.3.tar.gz", hash = "sha256:b86ada508af81d19edeb213c681b1d48246c1a91d304c6c81a427674c17eb91c", size = 1572165, upload-time = "2026-04-07T17:16:18.027Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/47/b9efed96c114afcfa3c9d3fe98a76a1d14c74a9e266d397cf6eb64be5e01/pytest-9.1.1.tar.gz", hash = "sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313", size = 1636369, upload-time = "2026-06-19T10:58:32.857Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d4/24/a372aaf5c9b7208e7112038812994107bc65a84cd00e0354a88c2c77a617/pytest-9.0.3-py3-none-any.whl", hash = "sha256:2c5efc453d45394fdd706ade797c0a81091eccd1d6e4bccfcd476e2b8e0ab5d9", size = 375249, upload-time = "2026-04-07T17:16:16.13Z" },
+    { url = "https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl", hash = "sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c", size = 386536, upload-time = "2026-06-19T10:58:31.347Z" },
 ]
 
 [[package]]
