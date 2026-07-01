@@ -15,7 +15,7 @@ requires-python = ">=3.14"
 dependencies = [
     "atrope",
     "caso==5.2.1",
-    "cloud-info-provider==1.1.0",
+    "cloud-info-provider==1.1.1",
     "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
