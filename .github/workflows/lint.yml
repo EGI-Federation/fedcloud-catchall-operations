@@ -45,3 +45,5 @@ jobs:
           VALIDATE_PYTHON_RUFF_FORMAT: false
           # Disabling this file as it gets confused
           FILTER_REGEX_EXCLUDE: ".*.env.j2"
+          # Fix clone errors found in PR 575
+          LINTER_RULES_PATH: ".github/linters/.jscpd.json"
