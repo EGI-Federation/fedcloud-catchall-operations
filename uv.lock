@@ -635,7 +635,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.23.1" },
     { name = "testtools", specifier = ">=2.9.1" },
-    { name = "yq", specifier = ">=3.4.3" },
+    { name = "yq", specifier = ">=4.1.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -660,7 +660,7 @@ ssm = [
 ]
 validate = [
     { name = "pyyaml", specifier = ">=6.0.3" },
-    { name = "yq", specifier = ">=3.4.3" },
+    { name = "yq", specifier = ">=4.1.1" },
 ]
 
 [[package]]
@@ -2236,7 +2236,7 @@ wheels = [
 
 [[package]]
 name = "yq"
-version = "3.4.3"
+version = "4.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "argcomplete" },
@@ -2244,7 +2244,7 @@ dependencies = [
     { name = "tomlkit" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/38/6a/eb9721ed0929d0f55d167c2222d288b529723afbef0a07ed7aa6cca72380/yq-3.4.3.tar.gz", hash = "sha256:ba586a1a6f30cf705b2f92206712df2281cd320280210e7b7b80adcb8f256e3b", size = 33214, upload-time = "2024-04-27T15:39:43.29Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f1/9c/a0185c81994ff06e2e992f23a1378f0bbb0769496376b59af682b5f6fc8d/yq-4.1.1.tar.gz", hash = "sha256:ab3fc344dc4a39d833d328f080a6e794c1cb7243b05c0076ac1edce3d22caabd", size = 32987, upload-time = "2026-07-03T17:30:59.299Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f2/ba/d1b21f3e57469030bd6536b91bb28fedd2511d4e68b5a575f2bdb3a3dbb6/yq-3.4.3-py3-none-any.whl", hash = "sha256:547e34bc3caacce83665fd3429bf7c85f8e8b6b9aaee3f953db1ad716ff3434d", size = 18812, upload-time = "2024-04-27T15:39:41.652Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/9e/60fd50ab1d5e5baeaad995be9783e7a83d276697bd6a112c2e763a37f2d2/yq-4.1.1-py3-none-any.whl", hash = "sha256:4c08e09a617c33fa3dcbc50fe9dd4d2c66a06f7391f1caa10bd3c6039d9fbef0", size = 22960, upload-time = "2026-07-03T17:30:58.056Z" },
 ]
