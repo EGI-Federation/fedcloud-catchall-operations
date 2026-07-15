@@ -624,7 +624,7 @@ requires-dist = [
     { name = "fixtures", specifier = ">=4.2.8" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "hvac", specifier = ">=2.4.0" },
-    { name = "keystoneauth1", specifier = ">=5.14.0" },
+    { name = "keystoneauth1", specifier = ">=5.15.0" },
     { name = "oslo-config", specifier = ">=9.8.0" },
     { name = "pyjwt", specifier = ">=2.13.0" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
@@ -635,7 +635,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "respx", specifier = ">=0.23.1" },
     { name = "testtools", specifier = ">=2.9.1" },
-    { name = "yq", specifier = ">=3.4.3" },
+    { name = "yq", specifier = ">=4.1.1" },
 ]
 
 [package.metadata.requires-dev]
@@ -655,12 +655,12 @@ ssm = [
     { name = "cryptography", specifier = ">=49.0.0" },
     { name = "dirq", specifier = ">=1.8" },
     { name = "pyopenssl", specifier = ">=26.3.0" },
-    { name = "setuptools", specifier = "<82.0.0" },
+    { name = "setuptools", specifier = "<84.0.0" },
     { name = "stomp-py", specifier = ">=9.0.0" },
 ]
 validate = [
     { name = "pyyaml", specifier = ">=6.0.3" },
-    { name = "yq", specifier = ">=3.4.3" },
+    { name = "yq", specifier = ">=4.1.1" },
 ]
 
 [[package]]
@@ -868,19 +868,18 @@ wheels = [
 
 [[package]]
 name = "keystoneauth1"
-version = "5.14.0"
+version = "5.15.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
     { name = "os-service-types" },
-    { name = "pbr" },
     { name = "requests" },
     { name = "stevedore" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/02/d9/a01a3898657626cbcca9fa0e8fa58facb4632e172bdac622d47950f7e12a/keystoneauth1-5.14.0.tar.gz", hash = "sha256:7b942084d3db27dd285c13253cdfee10b05be0436db1c01e15dc744902197a7f", size = 288739, upload-time = "2026-05-13T09:09:26.125Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/22/f5/627b01cde69d0ece2fd552b8c7c34af06acf13a0a77d1829ff0b46a3b45f/keystoneauth1-5.15.0.tar.gz", hash = "sha256:ce2cacdfd028e65bd23ff403d6572ebfab3b006d6d2dde3aa85c263675a9fbb5", size = 288544, upload-time = "2026-07-03T16:21:31.434Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/72/eb/698dc17e4beb315f83a47d47be128b8a63303dc8b7e7c31110410e10a68b/keystoneauth1-5.14.0-py3-none-any.whl", hash = "sha256:f8c503a95fdd83b5b72736657e4ffbb53d4b28b01763f23013f0294ed8a0e4b9", size = 343268, upload-time = "2026-05-13T09:09:24.573Z" },
+    { url = "https://files.pythonhosted.org/packages/65/f6/6552fed59449604d982ffe9fe202b82f0724d333319812d1f544a95d3a09/keystoneauth1-5.15.0-py3-none-any.whl", hash = "sha256:9e2a4cf45cc2e2164093157091bc073eda1f334f755e8fab9fd25420c6f6acef", size = 342364, upload-time = "2026-07-03T16:21:29.866Z" },
 ]
 
 [[package]]
@@ -2035,11 +2034,11 @@ wheels = [
 
 [[package]]
 name = "setuptools"
-version = "81.0.0"
+version = "83.0.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/0d/1c/73e719955c59b8e424d015ab450f51c0af856ae46ea2da83eba51cc88de1/setuptools-81.0.0.tar.gz", hash = "sha256:487b53915f52501f0a79ccfd0c02c165ffe06631443a886740b91af4b7a5845a", size = 1198299, upload-time = "2026-02-06T21:10:39.601Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/34/26/f5d29e25ffdb535afef2d35cdb55b325298f96debd670da4c325e08d70f4/setuptools-83.0.0.tar.gz", hash = "sha256:025bccbbf0fa05b6192bc64ae1e7b16e001fd6d6d4d5de03c97b1c1ade523bef", size = 1154254, upload-time = "2026-07-04T15:31:22.699Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e1/e3/c164c88b2e5ce7b24d667b9bd83589cf4f3520d97cad01534cd3c4f55fdb/setuptools-81.0.0-py3-none-any.whl", hash = "sha256:fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6", size = 1062021, upload-time = "2026-02-06T21:10:37.175Z" },
+    { url = "https://files.pythonhosted.org/packages/5d/40/e1e72872c6354b306daef1703549e8e83b4d43cfea356311bf722a043752/setuptools-83.0.0-py3-none-any.whl", hash = "sha256:29b23c360f22f414dc7336bb39178cc7bcbf6021ed2733cde173f09dba19abb3", size = 1008090, upload-time = "2026-07-04T15:31:20.885Z" },
 ]
 
 [[package]]
@@ -2236,7 +2235,7 @@ wheels = [
 
 [[package]]
 name = "yq"
-version = "3.4.3"
+version = "4.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "argcomplete" },
@@ -2244,7 +2243,7 @@ dependencies = [
     { name = "tomlkit" },
     { name = "xmltodict" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/38/6a/eb9721ed0929d0f55d167c2222d288b529723afbef0a07ed7aa6cca72380/yq-3.4.3.tar.gz", hash = "sha256:ba586a1a6f30cf705b2f92206712df2281cd320280210e7b7b80adcb8f256e3b", size = 33214, upload-time = "2024-04-27T15:39:43.29Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f1/9c/a0185c81994ff06e2e992f23a1378f0bbb0769496376b59af682b5f6fc8d/yq-4.1.1.tar.gz", hash = "sha256:ab3fc344dc4a39d833d328f080a6e794c1cb7243b05c0076ac1edce3d22caabd", size = 32987, upload-time = "2026-07-03T17:30:59.299Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f2/ba/d1b21f3e57469030bd6536b91bb28fedd2511d4e68b5a575f2bdb3a3dbb6/yq-3.4.3-py3-none-any.whl", hash = "sha256:547e34bc3caacce83665fd3429bf7c85f8e8b6b9aaee3f953db1ad716ff3434d", size = 18812, upload-time = "2024-04-27T15:39:41.652Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/9e/60fd50ab1d5e5baeaad995be9783e7a83d276697bd6a112c2e763a37f2d2/yq-4.1.1-py3-none-any.whl", hash = "sha256:4c08e09a617c33fa3dcbc50fe9dd4d2c66a06f7391f1caa10bd3c6039d9fbef0", size = 22960, upload-time = "2026-07-03T17:30:58.056Z" },
 ]
