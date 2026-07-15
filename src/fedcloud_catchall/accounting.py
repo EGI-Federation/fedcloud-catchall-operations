@@ -144,9 +144,9 @@ def site_caso(site, site_dir):
                     if not os.path.exists(
                         os.path.join(caso_run_dir, f"lastrun.{project['id']}")
                     ):
-                        yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
-                            days=1
-                        )
+                        yesterday = datetime.datetime.now(
+                            tz.tzutc()
+                        ) - datetime.timedelta(days=1)
                         # use yesterday as starting point
                         cmd.extend(["--extract-from", yesterday.isoformat()])
                 if CONF.extract_to:
@@ -179,6 +179,7 @@ def site_ssm(site, site_dir):
             good_run = return_code == 0 and good_run
     return good_run
 
+
 def run(sites):
     for _, site in sites.items():
         site_name = site["name"]
@@ -208,7 +209,7 @@ def main():
             help=(
                 "Extract accounting from specified date, if not specified, "
                 "extract from last caso accounting timestamp or yesterday if "
-                "timestamp is not avaialable"
+                "timestamp is not available"
             ),
         )
     )
@@ -224,6 +225,7 @@ def main():
     CONF(sys.argv[1:])
     logging.basicConfig(level=logging.DEBUG)
     run(load_sites())
+
 
 if __name__ == "__main__":
     main()
