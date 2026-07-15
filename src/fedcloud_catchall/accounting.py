@@ -14,6 +14,7 @@ import sys
 import tempfile
 
 from dateutil import tz
+from oslo_config import cfg
 
 from .config import CONF
 from .discovery import auth_config, load_sites
@@ -135,13 +136,21 @@ def site_caso(site, site_dir):
                     "--mapping_file",
                     vo_map_file,
                 ]
-                if not os.path.exists(
-                    os.path.join(caso_run_dir, f"lastrun.{project['id']}")
-                ):
-                    yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
-                        days=1
-                    )
-                    cmd.extend(["--extract-from", yesterday.isoformat()])
+                # there is a from specified in config, use that
+                if CONF.extract_from:
+                    cmd.extend(["--extract-from", CONF.extract_from])
+                else:
+                    # if there is not a lastrun file for caso
+                    if not os.path.exists(
+                        os.path.join(caso_run_dir, f"lastrun.{project['id']}")
+                    ):
+                        yesterday = datetime.datetime.now(tz.tzutc()) - datetime.timedelta(
+                            days=1
+                        )
+                        # use yesterday as starting point
+                        cmd.extend(["--extract-from", yesterday.isoformat()])
+                if CONF.extract_to:
+                    cmd.extend(["--extract-to", CONF.extract_to])
                 logging.debug(f"Running {' '.join(cmd)}")
                 return_code = subprocess.call(cmd)
                 logging.debug(f"Return code {return_code}")
@@ -170,10 +179,11 @@ def site_ssm(site, site_dir):
             good_run = return_code == 0 and good_run
     return good_run
 
-
 def run(sites):
     for _, site in sites.items():
         site_name = site["name"]
+        if CONF.site and CONF.site != site_name:
+            continue
         logging.info(f"Configuring site {site_name}")
         accounting_config = site["static"].get("accounting", {})
         if not accounting_config.get("enabled", False):
@@ -189,10 +199,31 @@ def run(sites):
 
 
 def main():
+    CONF.register_cli_opt(
+        cfg.StrOpt("site", help="Extract accounting only for specified site")
+    )
+    CONF.register_cli_opt(
+        cfg.StrOpt(
+            "extract-from",
+            help=(
+                "Extract accounting from specified date, if not specified, "
+                "extract from last caso accounting timestamp or yesterday if "
+                "timestamp is not avaialable"
+            ),
+        )
+    )
+    CONF.register_cli_opt(
+        cfg.StrOpt(
+            "extract-to",
+            help=(
+                "Extract accounting to specified date, if not specified, "
+                "extract until yesterday"
+            ),
+        )
+    )
     CONF(sys.argv[1:])
     logging.basicConfig(level=logging.DEBUG)
     run(load_sites())
-
 
 if __name__ == "__main__":
     main()
