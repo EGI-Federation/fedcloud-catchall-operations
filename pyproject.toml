@@ -15,7 +15,7 @@ requires-python = ">=3.14"
 dependencies = [
     "atrope",
     "caso==5.2.1",
-    "cloud-info-provider==1.1.0",
+    "cloud-info-provider==1.1.1",
     "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
@@ -27,7 +27,7 @@ dependencies = [
     "python-glanceclient>=4.12.0",
     "python-keystoneclient>=5.7.0",
     "python-novaclient>=18.13.0",
-    "python-openstackclient>=10.0.0",
+    "python-openstackclient>=10.1.0",
     "pyyaml>=6.0.3",
     "respx>=0.23.1",
     "testtools>=2.9.1",
@@ -42,7 +42,7 @@ record-cleaner = "fedcloud_catchall.record_cleaner:main"
 cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
-requires = ["uv_build>=0.11.19,<0.12.0"]
+requires = ["uv_build>=0.11.26,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
@@ -51,21 +51,21 @@ atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.1.0" }
 
 [dependency-groups]
 dev = [
-    "pytest>=9.0.2",
+    "pytest>=9.1.1",
     "pytest-cov>=7.0.0",
 ]
 molecule = [
-    "ansible-core>=2.21.0,<2.22.0",
-    "molecule>=26.4.0",
+    "ansible-core>=2.21.1,<2.22.0",
+    "molecule>=26.6.0",
     "molecule-plugins[docker]>=25.8.12",
-    "pytest>=9.0.3",
+    "pytest>=9.1.1",
     "pytest-testinfra>=10.2.2",
 ]
 ssm = [
     "argo-ams-library>=0.5.5",
-    "cryptography>=48.0.0",
+    "cryptography>=49.0.0",
     "dirq>=1.8",
-    "pyopenssl>=26.2.0",
+    "pyopenssl>=26.3.0",
     "stomp-py>=9.0.0",
     "setuptools<82.0.0",
 ]
