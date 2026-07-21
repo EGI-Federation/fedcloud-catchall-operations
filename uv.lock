@@ -133,7 +133,7 @@ wheels = [
 
 [[package]]
 name = "caso"
-version = "5.2.1"
+version = "5.2.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dirq" },
@@ -153,9 +153,9 @@ dependencies = [
     { name = "six" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2f/20/d29615396d7f2807bf5f1f3390038d98488ce3082babd4acde592aa24aab/caso-5.2.1.tar.gz", hash = "sha256:9c084ad399e66de88ddb7521085c256227534effd8100f5b3984b8787d0f9922", size = 48699, upload-time = "2026-02-16T21:28:13.242Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/2e/d9/fb1a227b73a764dd42b44c82cc67c76d5fc088df194cb9246324598e6ccb/caso-5.2.2.tar.gz", hash = "sha256:93f46ad3024e60fb37499f4733fcc098795b394ca2620935978076641f2eff0c", size = 48775, upload-time = "2026-07-15T09:57:58.269Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/94/af/b4221034b58d76ff125e305ad872bcdd760cded511588e5fb8c01940af6c/caso-5.2.1-py3-none-any.whl", hash = "sha256:59f6aae146726e1fcf151f994fd26aea3bb1cbf9837d0e9c7b3b24dc3d140343", size = 70230, upload-time = "2026-02-16T21:28:15.334Z" },
+    { url = "https://files.pythonhosted.org/packages/41/a7/94b287924104958169bcce2c9569ae2d3ae0ad442c38e3ae2aef0a37ade5/caso-5.2.2-py3-none-any.whl", hash = "sha256:728ed9f1577d146bd294c6785248c79cb826d0e9faa123e7e86d8344f0a8d7b0", size = 70335, upload-time = "2026-07-15T09:57:59.095Z" },
 ]
 
 [[package]]
@@ -618,7 +618,7 @@ validate = [
 [package.metadata]
 requires-dist = [
     { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.1.0" },
-    { name = "caso", specifier = "==5.2.1" },
+    { name = "caso", specifier = "==5.2.2" },
     { name = "cloud-info-provider", specifier = "==1.1.1" },
     { name = "dirq", specifier = ">=1.8" },
     { name = "fixtures", specifier = ">=4.2.8" },
