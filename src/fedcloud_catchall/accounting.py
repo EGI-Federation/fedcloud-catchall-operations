@@ -19,6 +19,28 @@ from oslo_config import cfg
 from .config import CONF
 from .discovery import auth_config, load_sites
 
+cli_opts = [
+    cfg.StrOpt("site", help="Extract accounting only for specified site"),
+    cfg.StrOpt(
+        "extract-from",
+        help=(
+            "Extract accounting from specified date, if not specified, "
+            "extract from last caso accounting timestamp or yesterday if "
+            "timestamp is not available"
+        ),
+    ),
+    cfg.StrOpt(
+        "extract-to",
+        help=(
+            "Extract accounting to specified date, if not specified, "
+            "extract until yesterday"
+        ),
+    ),
+]
+
+CONF.register_cli_opts(cli_opts)
+
+
 # these are the possible caso configurations
 # the ones to be used are configured in the config file
 caso_run_configs = {
@@ -200,28 +222,6 @@ def run(sites):
 
 
 def main():
-    CONF.register_cli_opt(
-        cfg.StrOpt("site", help="Extract accounting only for specified site")
-    )
-    CONF.register_cli_opt(
-        cfg.StrOpt(
-            "extract-from",
-            help=(
-                "Extract accounting from specified date, if not specified, "
-                "extract from last caso accounting timestamp or yesterday if "
-                "timestamp is not available"
-            ),
-        )
-    )
-    CONF.register_cli_opt(
-        cfg.StrOpt(
-            "extract-to",
-            help=(
-                "Extract accounting to specified date, if not specified, "
-                "extract until yesterday"
-            ),
-        )
-    )
     CONF(sys.argv[1:])
     logging.basicConfig(level=logging.DEBUG)
     run(load_sites())
