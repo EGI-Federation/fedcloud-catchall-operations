@@ -12,7 +12,7 @@ vos:
       project_id: b58d1fc5bde24f68a994fd74a11ce370
   - name: cloud.egi.eu
     auth:
-      project_id: 365699f198d44f86922384f1a77ecea0
+      project_id: aefc39e82e6441a2bdc8bd10f136bb82
   - name: vo.access.egi.eu
     auth:
-      project_id: b10ff14276f5485eb8fa9bc14a635b84
+      project_id: 87585b929a324923b7ecf3c0af50aed5
