@@ -1,0 +1,21 @@
+---
+gocdb: CLOUDIFIN
+endpoint: "https://cloud-ctrl2.nipne.ro/identity/v3"
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
+vos:
+  - name: ops
+    auth:
+      project_id: b58d1fc5bde24f68a994fd74a11ce370
+  - name: egi-staff
+    auth:
+      project_id: 365699f198d44f86922384f1a77ecea0
+  - name: fedcloud-tf
+    auth:
+      project_id: db3bd878c1bf466994ebf988bc99ba70
+  - name: fedcloud-users
+    auth:
+      project_id: b10ff14276f5485eb8fa9bc14a635b84
