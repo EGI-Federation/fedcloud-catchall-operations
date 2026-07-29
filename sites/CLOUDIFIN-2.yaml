@@ -10,7 +10,7 @@ vos:
   - name: ops
     auth:
       project_id: b58d1fc5bde24f68a994fd74a11ce370
-  - name: egi-staff
+  - name: cloud.egi.eu
     auth:
       project_id: 365699f198d44f86922384f1a77ecea0
   - name: fedcloud-tf
