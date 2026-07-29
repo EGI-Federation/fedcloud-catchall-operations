@@ -16,6 +16,6 @@ vos:
   - name: fedcloud-tf
     auth:
       project_id: db3bd878c1bf466994ebf988bc99ba70
-  - name: fedcloud-users
+  - name: vo.access.egi.eu
     auth:
       project_id: b10ff14276f5485eb8fa9bc14a635b84
