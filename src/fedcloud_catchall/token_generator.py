@@ -1,12 +1,4 @@
-"""Refreshes credentials for the cloud-info-provider
-
-Takes its own configuration from env variables:
-CHECKIN_SECRETS_FILE: yaml file with the check-in secrets to get access tokens
-CHECKIN_SCOPES: Scopes to request in the access token
-CHECKIN_OIDC_URL: Discovery URL for Check-in
-ACCESS_TOKEN_SECRETS_FILE: File where to dump the new access tokens if needed
-ACCESS_TOKEN_TTL: Minimum TTL for the access token
-"""
+"""Refreshes credentials for the cloud-info-provider"""
 
 import calendar
 import json
@@ -47,12 +39,14 @@ def valid_token(token, oidc_config, min_time):
         return False
 
 
-def generate_token(oidc_config):
+def generate_token(oidc_config, scopes=None):
+    if not scopes:
+        scopes = CONF.checkin.scopes
     payload = {
         "grant_type": "client_credentials",
         "client_id": CONF.checkin.client_id,
         "client_secret": CONF.checkin.client_secret,
-        "scope": CONF.checkin.scopes,
+        "scope": scopes,
     }
     r = httpx.post(oidc_config["token_endpoint"], data=payload)
     return r.json()["access_token"]
@@ -64,7 +58,7 @@ def check_token(token_file, oidc_config, ttl):
         with open(token_file, "r") as f:
             token = f.read().strip()
         if valid_token(token, oidc_config, ttl):
-            logging.warning("Token is still valid, not refreshing")
+            logging.warning(f"Token at '{token_file}' is still valid, not refreshing")
             return True
     return False
 
@@ -76,20 +70,28 @@ def get_oidc_config():
     return _oidc_config
 
 
+def check_and_create_token(token_file, oidc_config, scopes=None):
+    if not check_token(token_file, oidc_config, CONF.checkin.access_token_ttl):
+        logging.info(f"The token at {token_file} needs refreshing")
+        new_token = generate_token(oidc_config, scopes)
+        with open(token_file, "w+") as f:
+            f.write(new_token)
+
+
 def main():
-    logging.basicConfig()
+    logging.basicConfig(level=logging.DEBUG)
     CONF.register_cli_opt(cfg.StrOpt("access_token_file", positional=True))
+    CONF.register_cli_opt(
+        cfg.StrOpt("auditor_token_file", positional=True, required=False)
+    )
     CONF(sys.argv[1:])
 
     oidc_config = get_oidc_config()
-
-    if not check_token(
-        CONF.access_token_file, oidc_config, CONF.checkin.access_token_ttl
-    ):
-        logging.info("Token needs refreshing")
-        with open(CONF.access_token_file, "w+") as f:
-            new_token = generate_token(oidc_config)
-            f.write(new_token)
+    check_and_create_token(CONF.access_token_file, oidc_config)
+    if CONF.auditor_token_file:
+        check_and_create_token(
+            CONF.auditor_token_file, oidc_config, scopes=CONF.checkin.auditor_scopes
+        )
 
 
 if __name__ == "__main__":
