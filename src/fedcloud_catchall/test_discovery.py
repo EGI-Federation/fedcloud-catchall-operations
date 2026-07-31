@@ -203,7 +203,3 @@ class TestDiscovery(testtools.TestCase):
         disco.auth_config(site, site["shares"]["ops"], "section2")
         m_oidc.assert_called_once()
         m_token.assert_called_once()
-
-
-if __name__ == "__main__":
-    unittest.main()

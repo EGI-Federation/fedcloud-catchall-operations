@@ -120,7 +120,3 @@ class TokenGeneratorTest(testtools.TestCase):
             tg.check_token("foo", self.OIDC_CONFIG, 23)
             m_valid_token.assert_called_with("data", self.OIDC_CONFIG, 23)
             m_exists.assert_called_with("foo")
-
-
-if __name__ == "__main__":
-    unittest.main()
