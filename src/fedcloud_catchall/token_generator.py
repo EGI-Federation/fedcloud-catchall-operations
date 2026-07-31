@@ -1,12 +1,4 @@
-"""Refreshes credentials for the cloud-info-provider
-
-Takes its own configuration from env variables:
-CHECKIN_SECRETS_FILE: yaml file with the check-in secrets to get access tokens
-CHECKIN_SCOPES: Scopes to request in the access token
-CHECKIN_OIDC_URL: Discovery URL for Check-in
-ACCESS_TOKEN_SECRETS_FILE: File where to dump the new access tokens if needed
-ACCESS_TOKEN_TTL: Minimum TTL for the access token
-"""
+"""Refreshes credentials for the cloud-info-provider"""
 
 import calendar
 import json
