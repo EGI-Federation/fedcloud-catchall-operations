@@ -289,11 +289,12 @@ wheels = [
 
 [[package]]
 name = "cloud-info-provider"
-version = "1.1.1"
+version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "defusedxml" },
     { name = "keystoneauth1" },
+    { name = "os-client-config" },
     { name = "pydantic" },
     { name = "pyopenssl" },
     { name = "python-dateutil" },
@@ -304,9 +305,9 @@ dependencies = [
     { name = "requests" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b7/17/11e5d08c28e9db984d9a44cb5e8bc0c73e1a33d981bd8fc5fa8ddf1f11b0/cloud_info_provider-1.1.1.tar.gz", hash = "sha256:8102f3a2f9537ef5c7623ea6b4f5f78c6746c3dde4bf93f5c77e4b294918997c", size = 130259, upload-time = "2026-06-23T07:39:00.976Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/7c/ac400118a5bad97c1bafa509c2fcf2249a3f3036ae6abaf18e890e0d1846/cloud_info_provider-1.2.0.tar.gz", hash = "sha256:0d50bb4b10f10bfc814b4a2e7ef3d5f74e6b8bedcec79f8c8ccc2646e4bb12e2", size = 132328, upload-time = "2026-08-03T09:21:14.917Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2f/30/dc2ec284f0621618dfde3abbe9d90cd009e2bd671b16d0f18f0184dddcda/cloud_info_provider-1.1.1-py3-none-any.whl", hash = "sha256:86cb331bdead9ec868352ac6fc9d820df89fb3a71952a8bf556d38334660be2b", size = 36279, upload-time = "2026-06-23T07:38:59.702Z" },
+    { url = "https://files.pythonhosted.org/packages/7c/83/4d8ff10341db017976acaa207fe3c16708aa88153c1d775d6b59acf695e3/cloud_info_provider-1.2.0-py3-none-any.whl", hash = "sha256:b698415871b11e075a3bc78770600e597d655f282f778ae30f065fd45ca8873e", size = 36218, upload-time = "2026-08-03T09:21:13.604Z" },
 ]
 
 [[package]]
@@ -594,7 +595,7 @@ validate = [
 requires-dist = [
     { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.1.0" },
     { name = "caso", specifier = "==5.2.2" },
-    { name = "cloud-info-provider", specifier = "==1.1.1" },
+    { name = "cloud-info-provider", specifier = "==1.2.0" },
     { name = "dirq", specifier = ">=1.8" },
     { name = "fixtures", specifier = ">=4.2.8" },
     { name = "httpx", specifier = ">=0.28.1" },
@@ -1017,6 +1018,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/8a/f9/e9226863b61d3e83d166e7a70a045fdacbb966dd7e7ecef81fed32cf67af/oras-0.2.42.tar.gz", hash = "sha256:51d17088e5dffdeb585dd930bdccb4329762bef4af3f18600392ebae525a9231", size = 58767, upload-time = "2026-03-09T22:31:23.216Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/03/3c/04dce40fe03276a5aaed0e2b49e59e385147f4e750e6960c477284cf5880/oras-0.2.42-py3-none-any.whl", hash = "sha256:d1e2184d42ce99258bd0ad56d932b0f4fce289bccf1b5094436a29579f385728", size = 71832, upload-time = "2026-03-09T22:31:22.145Z" },
+]
+
+[[package]]
+name = "os-client-config"
+version = "2.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "openstacksdk" },
+    { name = "pbr" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/50/cd/352f6f18d1fb90780b95fdc3a668a279bd41d89905d70ee06076b529077c/os_client_config-2.3.0.tar.gz", hash = "sha256:e16a260f2fd500af14f157b9b7b7d69292ce83b0f8a461ec68ce6a8a42967cbd", size = 49928, upload-time = "2025-07-08T09:00:46.701Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3e/d1/0f6fe5650516fd5113ca64f3efbdd35c91be14ead96065b835207a9cd75a/os_client_config-2.3.0-py3-none-any.whl", hash = "sha256:bac8486bbafc0dd92704c29d5581d65030912804e8e675d13bc43b76ce051c82", size = 30898, upload-time = "2025-07-08T09:00:45.265Z" },
 ]
 
 [[package]]
