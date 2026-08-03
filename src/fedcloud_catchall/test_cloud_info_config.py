@@ -5,7 +5,7 @@ from unittest.mock import mock_open, patch
 import testtools
 from oslo_config import fixture
 
-from .cloud_info_config import *
+from .cloud_info_config import auditor_config, configure, read_site_config, secretize
 
 app_cred_site_yaml = """
 ---
