@@ -63,7 +63,7 @@ molecule = [
 ]
 ssm = [
     "argo-ams-library>=0.5.5",
-    "cryptography>=49.0.0",
+    "cryptography>=50.0.0",
     "dirq>=1.8",
     "pyopenssl>=26.3.0",
     "stomp-py>=9.0.0",
