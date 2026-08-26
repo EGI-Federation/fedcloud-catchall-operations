@@ -1,6 +1,6 @@
 ---
 - name: Ensure cron is available
-  tags: ["cloud-info", "image-sync"]
+  tags: ["cloud-info", "image-sync", "accounting"]
   ansible.builtin.apt:
     name: cron
     state: present
@@ -11,11 +11,11 @@
     file: docker.yml
     apply:
       tags: "docker"
-  # this is only executed if explicity requested
+  # this is only executed if explicitly requested
   tags: ["never", "docker"]
 
 - name: Load site configuration
-  tags: ["cloud-info", "image-sync"]
+  tags: ["cloud-info", "image-sync", "accounting"]
   ansible.builtin.include_vars:
     file: "{{ item }}"
     name: "{{ 'site_incl_vars_' ~ item | basename | splitext | first }}"
@@ -23,22 +23,27 @@
     - "{{ site_config_dir }}/*.yaml"
 
 - name: Set site configuration variable
-  tags: ["cloud-info", "image-sync"]
+  tags: ["cloud-info", "image-sync", "accounting"]
   ansible.builtin.set_fact:
     sites: "{{ sites | default([]) + [lookup('vars', item)] }}"
   loop: "{{ query('varnames', '^site_incl_vars_(.*)$') }}"
 
 - name: EGI configuration directories
-  tags: ["cloud-info", "image-sync"]
+  tags: ["cloud-info", "image-sync", "accounting"]
   ansible.builtin.file:
-    path: "/etc/egi"
+    path: "{{ dir }}"
     state: directory
     mode: "755"
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
+  loop:
+    - /etc/egi
+    - /etc/egi/sites
+  loop_control:
+    loop_var: dir
 
 - name: Build global configuration file
-  tags: ["cloud-info", "image-sync"]
+  tags: ["cloud-info", "image-sync", "accounting"]
   ansible.builtin.template:
     src: catchall.conf.j2
     dest: /etc/egi/catchall.conf
@@ -46,7 +51,22 @@
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
 
-- name: Site specific config
+- name: Site configuration files
+  tags: ["cloud-info", "image-sync", "accounting"]
+  ansible.builtin.template:
+    src: site-config.yaml.j2
+    dest: /etc/egi/sites/site-{{ filename }}.yaml
+    mode: "600"
+    owner: "{{ egi_user }}"
+    group: "{{ egi_group }}"
+  vars:
+    site: "{{ item }}"
+    filename: "{{ item.gocdb | replace('.', '-') }}-{{ item.endpoint | hash('md5') }}"
+  with_items:
+    - "{{ sites }}"
+  when: sites is iterable
+
+- name: Cloud info config
   tags: ["cloud-info"]
   ansible.builtin.include_tasks:
     file: cloud-info.yml
@@ -65,3 +85,10 @@
     file: sync.yml
     apply:
       tags: "image-sync"
+
+- name: Accounting config
+  tags: ["accounting"]
+  ansible.builtin.include_tasks:
+    file: accounting.yml
+    apply:
+      tags: "accounting"

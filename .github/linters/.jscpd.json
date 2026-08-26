@@ -1,0 +1,8 @@
+{
+  "threshold": 0,
+  "reporters": ["console"],
+  "ignore": [
+    "**/.github/workflows/deploy-image-sync.yml",
+    "**/src/fedcloud_catchall/test_image_sync.py"
+  ]
+}

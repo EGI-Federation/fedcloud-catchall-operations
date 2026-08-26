@@ -1,4 +1,4 @@
-# 3. Image synching
+# 3. Image syncing
 
 Date: 2024-07-12
 
@@ -10,9 +10,9 @@ Accepted
 
 EGI provides an image repository (AppDB) for users to share VM images and VOs to
 add them to a list of images to be available at the sites supporting the VO.
-This has been managed with the installation and configuration of specific tools at
-site-level although the uploading of images is for most sites a user-level operation
-that does not need any special privileges.
+This has been managed with the installation and configuration of specific tools
+at site-level although the uploading of images is for most sites a user-level
+operation that does not need any special privileges.
 
 The main software product for this is
 [cloudkeeper](https://github.com/the-cloudkeeper-project/cloudkeeper), which
@@ -28,7 +28,7 @@ Both Cloudkeeper and atrope do not have any recent development.
 
 ## Decision
 
-Operate a central image synching that takes care of making the images available
+Operate a central image syncing that takes care of making the images available
 at the sites for all the EGI VOs. Use atrope as it's easier to develop and
 adjust to our needs.
 

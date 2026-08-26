@@ -1,0 +1,38 @@
+---
+- name: Verify files on host
+  hosts: all
+  gather_facts: false
+  vars:
+    filename_example: "foo-bar-6eabe7d0bcd6378de1539d8b965bfb5d"
+    filename_site: "bar-foo-c707a2041a73367a7cbb6fff77ad27ee"
+
+  tasks:
+    - name: Check files for sites
+      ansible.builtin.stat:
+        path: "{{ item }}"
+      register: file_checks
+      loop:
+        - "/etc/cron.d/cloud-info-{{ filename_example }}"
+        - "/etc/egi/cloud-info/{{ filename_example }}.env"
+        - "/etc/egi/sites/site-{{ filename_example }}.yaml"
+        - "/etc/cron.d/cloud-info-{{ filename_site }}"
+        - "/etc/egi/cloud-info/{{ filename_site }}.env"
+        - "/etc/egi/sites/site-{{ filename_site }}.yaml"
+
+    - name: Assert all files exist
+      ansible.builtin.assert:
+        that:
+          - item.stat.exists
+        fail_msg: "Missing file: {{ item.item }}"
+      loop: "{{ file_checks.results }}"
+
+    - name: Check region is configured for site bar
+      ansible.builtin.lineinfile:
+        name: "/etc/egi/cloud-info/{{ filename_site }}.env"
+        line: "OS_REGION=region1"
+        state: present
+      check_mode: yes
+      register: conf
+      failed_when: (conf is changed) or (conf is failed)
+
+      # TODO: Add more tests...

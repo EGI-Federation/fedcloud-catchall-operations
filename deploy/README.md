@@ -8,11 +8,11 @@ the infrastructure
 Deployment is performed in 2 phases:
 
 1. Terraforming the VM where the cloud-info-provider is run
-1. Configuring the VM with ansible to run the cloud-info-provider
+1. Configuring the VM with Ansible to run the cloud-info-provider
 
 Everything is managed automatically via GitHub Actions, on pull-requests
 the terraform plan is updated and when merging, it's applied and
-ansible is run on the resulting infrastructure.
+Ansible is run on the resulting infrastructure.
 
 ### Secrets
 

@@ -14,34 +14,62 @@ classifiers = [
 requires-python = ">=3.14"
 dependencies = [
     "atrope",
-    "cloud-info-provider==1.0.2",
+    "caso==5.2.2",
+    "cloud-info-provider==1.1.1",
+    "dirq>=1.8",
     "fixtures>=4.2.8",
     "httpx>=0.28.1",
-    "keystoneauth1>=5.12.0",
-    "oslo-config>=10.2.0",
-    "pyjwt>=2.10.1",
-    "python-glanceclient>=4.10.0",
+    "hvac>=2.4.0",
+    "keystoneauth1>=5.15.0",
+    "oslo-config>=9.8.0",
+    "pyjwt>=2.13.0",
+    "python-dateutil>=2.9.0.post0",
+    "python-glanceclient>=4.12.0",
     "python-keystoneclient>=5.7.0",
-    "python-novaclient>=18.11.0",
-    "python-openstackclient>=8.3.0",
+    "python-novaclient>=18.13.0",
+    "python-openstackclient>=10.1.0",
     "pyyaml>=6.0.3",
-    "respx>=0.22.0",
-    "testtools>=2.8.2",
+    "respx>=0.23.1",
+    "testtools>=2.9.1",
+    "yq>=4.1.1",
 ]
 
 [project.scripts]
 token-generator = "fedcloud_catchall.token_generator:main"
 image-sync = "fedcloud_catchall.image_sync:main"
+accounting = "fedcloud_catchall.accounting:main"
+record-cleaner = "fedcloud_catchall.record_cleaner:main"
+cloud-info-config = "fedcloud_catchall.cloud_info_config:main"
 
 [build-system]
-requires = ["uv_build>=0.9.14,<0.10.0"]
+requires = ["uv_build>=0.11.31,<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.sources]
-atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.0.0" }
+atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.1.0" }
+#caso = { git = "https://github.com/IFCA-Advanced-Computing/caso", rev = "1584f0b3823cc1ee31d1338944e44a36b114a5ee" }
 
 [dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.0.0",
+]
+molecule = [
+    "ansible-core>=2.21.1,<2.22.0",
+    "molecule>=26.6.0",
+    "molecule-plugins[docker]>=26.7.15",
+    "pytest>=9.1.1",
+    "pytest-testinfra>=10.2.2",
+]
+ssm = [
+    "argo-ams-library>=0.5.5",
+    "cryptography>=49.0.0",
+    "dirq>=1.8",
+    "pyopenssl>=26.3.0",
+    "stomp-py>=9.0.0",
+    "setuptools<84.0.0",
+]
 validate = [
     "pyyaml>=6.0.3",
-    "yq>=3.4.3",
+    "yq>=4.1.1",
 ]

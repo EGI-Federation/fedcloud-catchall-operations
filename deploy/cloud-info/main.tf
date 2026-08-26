@@ -1,3 +1,4 @@
+#trivy:ignore:AVD-OPNSTK-0003
 resource "openstack_networking_secgroup_v2" "motley" {
   name                 = "motley"
   description          = "Open ports for motley-cue"

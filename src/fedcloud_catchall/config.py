@@ -19,7 +19,8 @@ CONF.register_opts(
         cfg.StrOpt("client_id"),
         cfg.StrOpt("client_secret"),
         cfg.StrOpt(
-            "scopes", default="openid profile eduperson_entitlement entitlements email"
+            "scopes",
+            default="openid profile eduperson_entitlement entitlements email voperson_id",
         ),
         cfg.StrOpt(
             "discovery_endpoint",
@@ -42,4 +43,15 @@ CONF.register_opts(
         cfg.StrOpt("registry_password"),
     ],
     group="sync",
+)
+
+
+# Accounting configuration
+CONF.register_opts(
+    [
+        cfg.StrOpt("spool_dir", default="/var/spool/egi"),
+        cfg.BoolOpt("force_run", default=False),
+        cfg.ListOpt("caso_runs", default=["block", "compute"]),
+    ],
+    group="accounting",
 )

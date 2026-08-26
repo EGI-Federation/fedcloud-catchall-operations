@@ -8,11 +8,23 @@ CLOUD_INFO_MIDDLEWARE=openstack
 
 # use service account for everyone
 ACCESS_TOKEN_FILE="$(mktemp)"
-token-generator --config-dir /etc/egi "$ACCESS_TOKEN_FILE"
+token-generator --config-dir "$EGI_CONFIG_DIR" "$ACCESS_TOKEN_FILE"
 OS_ACCESS_TOKEN="$(cat "$ACCESS_TOKEN_FILE")"
 export OS_ACCESS_TOKEN
-export OS_AUTH_TYPE="v3oidcaccesstoken"
-cloud-info-provider-service \
+
+# Default auth
+SITE_AUTH="v3oidcaccesstoken"
+AUTH=$(yq -r .auth <"$SITE_CONFIG")
+
+# Reconfigure if needed for application credentials
+if test "$AUTH" != "null"; then
+	SITE_AUTH="$AUTH"
+	NEW_SITE_CONFIG=$(mktemp)
+	cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG" >"$NEW_SITE_CONFIG"
+	SITE_CONFIG="$NEW_SITE_CONFIG"
+fi
+
+OS_AUTH_TYPE="$SITE_AUTH" cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
 	--format glue21json "$SITE_CONFIG" >"$SITE_INFO_FILE"
 

@@ -3,6 +3,8 @@ name: Test role
 
 on: [push, pull_request]
 
+permissions: read-all
+
 jobs:
   molecule:
     name: Runs molecule for the ansible role
@@ -10,18 +12,22 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: ">=3.9"
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
       - name: Install dependencies
         run: |
-          pip install molecule molecule-plugins[docker] pytest pytest-testinfra
+          uv sync --locked --group molecule
       - name: Test Ansible Bootstrap
         run: |
           cd deploy/roles/catchall
-          molecule test
+          uv run molecule test --report --command-borders
         env:
           PY_COLORS: 1
           ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:${GITHUB_WORKSPACE}/deploy/roles

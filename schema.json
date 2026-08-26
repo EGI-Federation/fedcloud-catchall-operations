@@ -5,6 +5,21 @@
   "title": "site specs",
   "description": "site configuration schema",
   "definitions": {
+    "accountingdata": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Do perform accounting",
+          "default": false
+        },
+        "site_name": {
+          "type": "string",
+          "description": "Site to use instead of the actual site name."
+        }
+      },
+      "additionalProperties": false
+    },
     "imagesdata": {
       "type": "object",
       "properties": {
@@ -61,6 +76,13 @@
       "description": "The URL of keystone endpoint (should match GOCDB entry).",
       "default": ""
     },
+    "auth": {
+      "$id": "#/properties/auth",
+      "type": "string",
+      "title": "keystone authentication method",
+      "description": "A valid authentication method for keystone (as defined in keystoneauth1).",
+      "default": ""
+    },
     "region": {
       "$id": "#/properties/region",
       "type": "string",
@@ -90,6 +112,13 @@
       "description": "Image configuration",
       "type": "object",
       "$ref": "#/definitions/imagesdata"
+    },
+    "accounting": {
+      "$id": "#/properties/accounting",
+      "title": "Accounting configuration",
+      "description": "Accounting configuration",
+      "type": "object",
+      "$ref": "#/definitions/accountingdata"
     }
   },
   "additionalProperties": false

@@ -3,12 +3,13 @@
 import unittest
 from unittest.mock import mock_open, patch
 
-import fedcloud_catchall.token_generator as tg
 import httpx
 import jwt
 import respx
 import testtools
 from oslo_config import fixture
+
+from . import token_generator as tg
 
 
 class TokenGeneratorTest(testtools.TestCase):
