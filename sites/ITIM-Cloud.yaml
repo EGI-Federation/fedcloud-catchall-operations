@@ -9,7 +9,7 @@ images:
 vos:
   - name: ops
     auth:
-      project_id: 6e9dd0704833429e989a10136edb521b
+      project_id: 54952f9d98fa40e8800ef6049e84e0bb
   - name: vo.access.egi.eu
     auth:
       project_id: 6e9dd0704833429e989a10136edb521b
