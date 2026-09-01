@@ -14,9 +14,6 @@ vos:
   - name: vo.emso-eric.eu
     auth:
       project_id: 18ef543d904b441cbb9c5f2302dbd154
-  - name: vo.decido-project.eu
-    auth:
-      project_id: 9ca3e35cbd1b4b3f8c7676908dc10b78
   - name: vo.usegalaxy.eu
     auth:
       project_id: b82b6407118642d0af8ae32235ba974e
