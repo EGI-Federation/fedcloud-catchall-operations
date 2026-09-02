@@ -39,7 +39,7 @@ RUN uv pip compile pyproject.toml -o requirements.txt \
 
 RUN git clone https://github.com/apel/ssm.git /tmp/ssm
 WORKDIR /tmp/ssm
-RUN git checkout 4.0.0-1 && /fedcloud_catchall/venv/bin/python setup.py install
+RUN git checkout 4.0.2-1 && /fedcloud_catchall/venv/bin/python setup.py install
 
 WORKDIR /fedcloud_catchall
 COPY src/ /fedcloud_catchall/src
