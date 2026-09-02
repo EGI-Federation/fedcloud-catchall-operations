@@ -8,7 +8,7 @@
     group: "{{ egi_group }}"
   loop:
     - /etc/egi/
-    - /var/cache/image-sync
+    - /var/cache/egi/image-sync
 
 - name: Image sync cron
   ansible.builtin.cron:
@@ -21,7 +21,7 @@
       flock -n -w {{ image_sync_cron.timeout }} /var/lock/sync
       docker run --rm -v /etc/egi:/etc/egi:ro
       -v /etc/egi/sites:{{ site_config_mountpoint }}:ro
-      -v /var/cache/image-sync:/atrope-state
+      -v /var/cache/egi/image-sync:/atrope-state
       {{ image_sync_image }} image-sync
       --config-dir /etc/egi >> /var/log/sync.log 2>&1
     cron_file: "egi-image-sync"
