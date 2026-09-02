@@ -132,7 +132,7 @@ wheels = [
 [[package]]
 name = "caso"
 version = "5.2.2"
-source = { git = "https://github.com/enolfc/caso?rev=2bddb36e81e468aca705a001eca7fc28b6d5d191#2bddb36e81e468aca705a001eca7fc28b6d5d191" }
+source = { git = "https://github.com/enolfc/caso?rev=dcfac160a57562d03115ee94a39ea1787d9083bc#dcfac160a57562d03115ee94a39ea1787d9083bc" }
 dependencies = [
     { name = "dirq" },
     { name = "keystoneauth1" },
@@ -675,7 +675,7 @@ validate = [
 [package.metadata]
 requires-dist = [
     { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.1.0" },
-    { name = "caso", git = "https://github.com/enolfc/caso?rev=2bddb36e81e468aca705a001eca7fc28b6d5d191" },
+    { name = "caso", git = "https://github.com/enolfc/caso?rev=dcfac160a57562d03115ee94a39ea1787d9083bc" },
     { name = "cloud-info-provider", specifier = "==1.1.1" },
     { name = "dirq", specifier = ">=1.8" },
     { name = "fixtures", specifier = ">=4.2.8" },
