@@ -1,6 +1,6 @@
 ---
 gocdb: CLOUDIFIN
-endpoint: "https://cloud-ctrl2.nipne.ro/identity/v3"
+endpoint: "https://cloud-ctrl2.nipne.ro/identity/v3/"
 images:
   sync: true
   formats:
