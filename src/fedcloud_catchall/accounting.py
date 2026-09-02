@@ -93,7 +93,6 @@ level: INFO
 console: true
 """
 
-
 def caso_config(site, vo, site_dir, vo_property="egi.eu:VO", extractor="nova"):
     site_name = site["static"].get("accounting").get("site_name", site["name"])
     auth_section = auth_config(site, vo, "keystone_auth")
@@ -210,7 +209,7 @@ def run(sites):
         logging.info(f"Configuring site {site_name}")
         accounting_config = site["static"].get("accounting", {})
         if not accounting_config.get("enabled", False):
-            if CONF.accounting.force_run:
+            if CONF.accounting.force_run or site in CONF.accounting.sites:
                 logging.info(f"Force run the extraction of records for {site_name}.")
             else:
                 logging.debug(f"Discarding site {site_name}, accounting not enabled.")

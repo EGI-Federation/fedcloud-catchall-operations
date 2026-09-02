@@ -181,6 +181,19 @@ class TestAccounting(testtools.TestCase):
     @patch("fedcloud_catchall.accounting.site_caso")
     @patch("fedcloud_catchall.accounting.site_ssm")
     @patch("os.makedirs")
+    def test_run_site_listed_in_conf(self, m_mkdirs, m_ssm, m_caso):
+        self.conf.set_override("spool_dir", "/foo", group="accounting")
+        self.conf.set_override("sites", ["CENI"], group="accounting")
+        disabled_site = copy.deepcopy(sample_site)
+        disabled_site["static"]["accounting"]["enabled"] = False
+        acc.run({1: disabled_site})
+        m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
+        m_ssm.assert_called_with(disabled_site, "/foo/CENI")
+        m_caso.assert_called_with(disabled_site, "/foo/CENI")
+
+    @patch("fedcloud_catchall.accounting.site_caso")
+    @patch("fedcloud_catchall.accounting.site_ssm")
+    @patch("os.makedirs")
     def test_run_disabled_site_forced(self, m_mkdirs, m_ssm, m_caso):
         self.conf.set_override("spool_dir", "/foo", group="accounting")
         self.conf.set_override("force_run", True, group="accounting")
