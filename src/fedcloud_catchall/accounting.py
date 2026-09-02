@@ -57,7 +57,7 @@ projects = {project_id}
 messengers = ssm
 vo_property = {vo_property}
 spooldir = {spooldir}
-system_scope = 
+system_scope =
 
 {auth_section}
 
