@@ -1,7 +1,6 @@
 """Tests for the discovery"""
 
 import copy
-import unittest
 from unittest.mock import MagicMock, mock_open, patch
 
 import httpx

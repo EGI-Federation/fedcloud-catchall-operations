@@ -1,6 +1,5 @@
 """Tests for the config generator"""
 
-import unittest
 from unittest.mock import mock_open, patch
 
 import httpx
