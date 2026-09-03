@@ -94,8 +94,9 @@ level: INFO
 console: true
 """
 
+
 def caso_config(site, vo, site_dir, vo_property="egi.eu:VO", extractor="nova"):
-    site_name = site["static"].get("accounting").get("site_name", site["name"])
+    site_name = site["static"].get("accounting", {}).get("site_name", site["name"])
     auth_section = auth_config(site, vo, "keystone_auth")
     return caso_config_template.format(
         site_name=site_name,
@@ -111,8 +112,8 @@ def caso_config(site, vo, site_dir, vo_property="egi.eu:VO", extractor="nova"):
 
 def ssm_config(site, site_dir, destination="eu-egi-cloud-accounting"):
     # override configuration if provided
-    ams_host = site["static"].get("accounting").get("ams_host", "msg.argo.grnet.gr")
-    destination = site["static"].get("accounting").get("destination", destination)
+    ams_host = site["static"].get("accounting", {}).get("ams_host", "msg.argo.grnet.gr")
+    destination = site["static"].get("accounting", {}).get("destination", destination)
     return ssm_config_template.format(
         destination=destination,
         ams_host=ams_host,
@@ -210,7 +211,7 @@ def run(sites):
         logging.info(f"Configuring site {site_name}")
         accounting_config = site["static"].get("accounting", {})
         if not accounting_config.get("enabled", False):
-            if CONF.accounting.force_run or site in CONF.accounting.sites:
+            if CONF.accounting.force_run or site_name in CONF.accounting.sites:
                 logging.info(f"Force run the extraction of records for {site_name}.")
             else:
                 logging.debug(f"Discarding site {site_name}, accounting not enabled.")
