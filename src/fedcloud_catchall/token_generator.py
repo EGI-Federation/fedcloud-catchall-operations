@@ -13,7 +13,7 @@ import json
 import logging
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import httpx
 import jwt
@@ -40,7 +40,7 @@ def valid_token(token, oidc_config, min_time):
         payload = jwt.decode(token, key=key, algorithms=[headers["alg"]])
         # this comes from JWT documentation
         # https://pyjwt.readthedocs.io/en/stable/usage.html#expiration-time-claim-exp
-        now = calendar.timegm(datetime.now(tz=timezone.utc).utctimetuple())
+        now = calendar.timegm(datetime.now(tz=UTC).utctimetuple())
         return payload["exp"] - now > min_time
     except (jwt.DecodeError, jwt.ExpiredSignatureError) as e:
         logging.warning(f"Unable to open / expired token: {e}")

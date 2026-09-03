@@ -19,6 +19,7 @@ projects = 90c0ce1b2f1545c0b9a05d9a8fd45102
 messengers = ssm
 vo_property = egi.eu:VO
 spooldir = /var
+system_scope =
 
 [keystone_auth]
 auth_type = v3oidcclientcredentials
@@ -156,15 +157,23 @@ class TestAccounting(testtools.TestCase):
         m_config.assert_any_call(sample_site, "dir/block", "eu-egi-storage-accounting")
         m_subp.assert_called_with(["ssmsend", "-c", "/bar/ssm.conf"])
 
+    def _check_caso_run(self, site, m_mkdirs, m_ssm, m_caso, should_run=True):
+        acc.run({1: site})
+        if should_run:
+            m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
+            m_ssm.assert_called_with(site, "/foo/CENI")
+            m_caso.assert_called_with(site, "/foo/CENI")
+        else:
+            m_mkdirs.assert_not_called()
+            m_ssm.assert_not_called()
+            m_caso.assert_not_called()
+
     @patch("fedcloud_catchall.accounting.site_caso")
     @patch("fedcloud_catchall.accounting.site_ssm")
     @patch("os.makedirs")
     def test_run_caso(self, m_mkdirs, m_ssm, m_caso):
         self.conf.set_override("spool_dir", "/foo", group="accounting")
-        acc.run({1: sample_site})
-        m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
-        m_ssm.assert_called_with(sample_site, "/foo/CENI")
-        m_caso.assert_called_with(sample_site, "/foo/CENI")
+        self._check_caso_run(sample_site, m_mkdirs, m_ssm, m_caso)
 
     @patch("fedcloud_catchall.accounting.site_caso")
     @patch("fedcloud_catchall.accounting.site_ssm")
@@ -173,10 +182,17 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("spool_dir", "/foo", group="accounting")
         disabled_site = copy.deepcopy(sample_site)
         disabled_site["static"]["accounting"]["enabled"] = False
-        acc.run({1: disabled_site})
-        m_mkdirs.assert_not_called()
-        m_ssm.assert_not_called()
-        m_caso.assert_not_called()
+        self._check_caso_run(disabled_site, m_mkdirs, m_ssm, m_caso, False)
+
+    @patch("fedcloud_catchall.accounting.site_caso")
+    @patch("fedcloud_catchall.accounting.site_ssm")
+    @patch("os.makedirs")
+    def test_run_site_listed_in_conf(self, m_mkdirs, m_ssm, m_caso):
+        self.conf.set_override("spool_dir", "/foo", group="accounting")
+        self.conf.set_override("sites", ["CENI"], group="accounting")
+        disabled_site = copy.deepcopy(sample_site)
+        disabled_site["static"]["accounting"]["enabled"] = False
+        self._check_caso_run(disabled_site, m_mkdirs, m_ssm, m_caso)
 
     @patch("fedcloud_catchall.accounting.site_caso")
     @patch("fedcloud_catchall.accounting.site_ssm")
@@ -186,10 +202,7 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("force_run", True, group="accounting")
         disabled_site = copy.deepcopy(sample_site)
         disabled_site["static"]["accounting"]["enabled"] = False
-        acc.run({1: disabled_site})
-        m_mkdirs.assert_called_with("/foo/CENI", exist_ok=True)
-        m_ssm.assert_called_with(disabled_site, "/foo/CENI")
-        m_caso.assert_called_with(disabled_site, "/foo/CENI")
+        self._check_caso_run(disabled_site, m_mkdirs, m_ssm, m_caso)
 
     @patch("fedcloud_catchall.accounting.ssm_config_template")
     def test_ssm_config(self, m_tpl):

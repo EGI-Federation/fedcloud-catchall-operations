@@ -84,10 +84,13 @@ def load_sites():
     for site_file in glob.iglob("*.yaml", root_dir=CONF.discovery.site_config_dir):
         with open(os.path.join(CONF.discovery.site_config_dir, site_file), "r") as f:
             site = yaml.safe_load(f.read())
-            static_sites[site["gocdb"]] = site
+            try:
+                static_sites[site["endpoint"]] = site
+            except KeyError:
+                logging.error(f"Unable to load {site_file}")
     for site in api_sites:
         site_name = site["name"]
-        static_site = static_sites.get(site_name, None)
+        static_site = static_sites.get(site["url"], None)
         if not static_site:
             logging.debug(f"Discarding site {site_name}, not in config.")
             continue
