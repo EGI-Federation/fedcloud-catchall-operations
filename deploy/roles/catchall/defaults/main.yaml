@@ -58,5 +58,7 @@ record_cleaner_cron:
   weekday: "5"
   timeout: "9000" # 2.5 hours
 
+accounting_sites: []
+
 hostcert: ""
 hostkey: ""
