@@ -47,7 +47,7 @@ build-backend = "uv_build"
 
 [tool.uv.sources]
 atrope = { git = "https://github.com/EGI-Federation/atrope", rev = "2.1.0" }
-caso = { git = "https://github.com/enolfc/caso", rev = "c03da04f75585f8993a327b1052c5a337b3b5fa7" }
+caso = { git = "https://github.com/enolfc/caso", rev = "80751912e1d77a302ab2099749a940bf3a5d82b2" }
 
 [dependency-groups]
 dev = [
