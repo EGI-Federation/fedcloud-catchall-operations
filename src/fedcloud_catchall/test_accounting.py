@@ -192,7 +192,7 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("sites", ["CENI"], group="accounting")
         disabled_site = copy.deepcopy(sample_site)
         disabled_site["static"]["accounting"]["enabled"] = False
-        self._check_caso_run(disabled, m_mkdirs, m_ssm, m_caso)
+        self._check_caso_run(disabled_site, m_mkdirs, m_ssm, m_caso)
 
     @patch("fedcloud_catchall.accounting.site_caso")
     @patch("fedcloud_catchall.accounting.site_ssm")
@@ -202,7 +202,7 @@ class TestAccounting(testtools.TestCase):
         self.conf.set_override("force_run", True, group="accounting")
         disabled_site = copy.deepcopy(sample_site)
         disabled_site["static"]["accounting"]["enabled"] = False
-        self._check_caso_run(disabled, m_mkdirs, m_ssm, m_caso)
+        self._check_caso_run(disabled_site, m_mkdirs, m_ssm, m_caso)
 
     @patch("fedcloud_catchall.accounting.ssm_config_template")
     def test_ssm_config(self, m_tpl):
