@@ -10,6 +10,7 @@ users:
     ssh_import_id:
       - gh:enolfc
       - gh:sebastian-luna-valero
+      - gh:CatalinCondurache
 
 packages:
   - git
