@@ -52,6 +52,7 @@ CONF.register_opts(
         cfg.StrOpt("spool_dir", default="/var/spool/egi"),
         cfg.BoolOpt("force_run", default=False),
         cfg.ListOpt("caso_runs", default=["block", "compute"]),
+        cfg.ListOpt("sites", default=[]),
     ],
     group="accounting",
 )

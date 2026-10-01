@@ -1,7 +1,7 @@
 ---
 - name: Spool dir
   ansible.builtin.file:
-    path: "/var/spool/egi/"
+    path: "/var/cache/egi/accounting"
     state: directory
     mode: "755"
     owner: "{{ egi_user }}"
@@ -42,25 +42,9 @@
       flock -n -w {{ accounting_cron.timeout }} /var/lock/sync
       docker run --rm -v /etc/egi:/etc/egi:ro
       -v /etc/egi/sites:{{ site_config_mountpoint }}:ro
-      -v /var/spool/egi:/var/spool/egi
+      -v /var/cache/egi/accounting:/var/spool/egi
       -v /etc/grid-security/hostkey.pem:/etc/grid-security/hostkey.pem
       -v /etc/grid-security/hostcert.pem:/etc/grid-security/hostcert.pem
       {{ accounting_image }} accounting
       --config-dir /etc/egi >> /var/log/accounting.log 2>&1
     cron_file: "egi-accounting"
-
-- name: record cleaner cron
-  ansible.builtin.cron:
-    name: caso
-    weekday: "{{ record_cleaner_cron.weekday }}"
-    minute: "{{ record_cleaner_cron.minute }}"
-    hour: "{{ record_cleaner_cron.hour }}"
-    user: root
-    job: >
-      flock -n -w {{ record_cleaner_cron.timeout }} /var/lock/sync
-      docker run --rm -v /etc/egi:/etc/egi:ro
-      -v /etc/egi/sites:{{ site_config_mountpoint }}:ro
-      -v /var/spool/egi:/var/spool/egi
-      {{ accounting_image }} record-cleaner
-      --config-dir /etc/egi >> /var/log/cleaner.log 2>&1
-    cron_file: "egi-accounting-cleaner"

@@ -1,0 +1,15 @@
+---
+gocdb: ITIM-Cloud
+endpoint: https://cim.itim-cj.ro/v3
+images:
+  sync: true
+  formats:
+    - qcow2
+    - raw
+vos:
+  - name: ops
+    auth:
+      project_id: 54952f9d98fa40e8800ef6049e84e0bb
+  - name: vo.access.egi.eu
+    auth:
+      project_id: 30730b9db6e247fab1ebdddc89089fd5

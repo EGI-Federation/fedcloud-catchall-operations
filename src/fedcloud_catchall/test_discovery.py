@@ -1,7 +1,6 @@
 """Tests for the discovery"""
 
 import copy
-import unittest
 from unittest.mock import MagicMock, mock_open, patch
 
 import httpx
@@ -137,7 +136,7 @@ class TestDiscovery(testtools.TestCase):
     @patch("glob.iglob")
     def test_load_non_static_site(self, m_glob, m_fetch):
         foo_site = copy.deepcopy(SITES_INFO)
-        foo_site[0]["name"] = "foo"
+        foo_site[0]["url"] = "foo"
         m_fetch.return_value = foo_site
         m_glob.return_value = ["file1.yaml"]
         with patch("builtins.open", mock_open(read_data=SAMPLE_SITE)):
@@ -203,7 +202,3 @@ class TestDiscovery(testtools.TestCase):
         disco.auth_config(site, site["shares"]["ops"], "section2")
         m_oidc.assert_called_once()
         m_token.assert_called_once()
-
-
-if __name__ == "__main__":
-    unittest.main()

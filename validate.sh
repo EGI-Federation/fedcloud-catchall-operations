@@ -18,8 +18,8 @@ curl --silent "https://raw.githubusercontent.com/tdviet/fedcloudclient/master/co
 NOVA_ENDPOINT=$(mktemp)
 
 for f in sites/*.yaml; do
-	goc_site=$(grep "^gocdb:" "$f" | cut -f2 -d":" | tr -d "[:space:]")
-	endpoint=$(grep "^endpoint:" "$f" | cut -f2- -d":" | tr -d "[:space:]")
+	goc_site=$(grep "^gocdb:" "$f" | cut -f2 -d":" | tr -d "[:space:]" | sed -e 's/^"//' -e 's/"$//')
+	endpoint=$(grep "^endpoint:" "$f" | cut -f2- -d":" | tr -d "[:space:]" | sed -e 's/^"//' -e 's/"$//')
 	echo "::debug::Searching for endpoint $endpoint in $goc_site site ($f)"
 	curl --silent "$goc_method&sitename=$goc_site&service_type=org.openstack.nova" \
 		>"$NOVA_ENDPOINT"
