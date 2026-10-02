@@ -20,7 +20,7 @@ def read_site_config(site_config_file: str):
 
 
 def secretize(site_config: dict, access_token: str):
-    if site_config.get("auth", None) != "v3applicationcredential":
+    if site_config.get("auth_type", None) != "v3applicationcredential":
         return site_config
 
     for vo in site_config.get("vos", {}):

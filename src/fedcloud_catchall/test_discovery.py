@@ -185,7 +185,7 @@ class TestDiscovery(testtools.TestCase):
     @patch("fedcloud_catchall.discovery.get_vo_secrets")
     def test_auth_config_secret(self, m_secrets, m_oidc, m_token):
         site = copy.deepcopy(LOADED_SITE)
-        site["static"]["auth"] = "v3applicationcredential"
+        site["static"]["auth_type"] = "v3applicationcredential"
         m_secrets.return_value = {"abc": "foo"}
         config = [
             s.strip()
