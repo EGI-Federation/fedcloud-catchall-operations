@@ -11,7 +11,7 @@ app_cred_site_yaml = """
 ---
 gocdb: TEST
 endpoint: https://example.com:5000/v3
-auth: v3applicationcredential
+auth_type: v3applicationcredential
 vos:
   - name: ops
     auth:
@@ -21,7 +21,7 @@ vos:
 app_cred_site = {
     "gocdb": "TEST",
     "endpoint": "https://example.com:5000/v3",
-    "auth": "v3applicationcredential",
+    "auth_type": "v3applicationcredential",
     "vos": [
         {
             "name": "ops",
@@ -66,7 +66,7 @@ class TestCloudConfig(testtools.TestCase):
         assert r == {
             "gocdb": "TEST",
             "endpoint": "https://example.com:5000/v3",
-            "auth": "v3applicationcredential",
+            "auth_type": "v3applicationcredential",
             "vos": [
                 {
                     "auth": {
