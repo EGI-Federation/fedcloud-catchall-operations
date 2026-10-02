@@ -13,19 +13,21 @@ OS_ACCESS_TOKEN="$(cat "$ACCESS_TOKEN_FILE")"
 export OS_ACCESS_TOKEN
 
 # Default auth
-SITE_AUTH="v3oidcaccesstoken"
-AUTH=$(yq -r .auth <"$SITE_CONFIG")
+SITE_AUTH_TYPE="v3oidcaccesstoken"
+AUTH_TYPE=$(yq -r .auth_type <"$SITE_CONFIG")
 
 # Reconfigure if needed for application credentials
-if test "$AUTH" != "null"; then
-	SITE_AUTH="$AUTH"
-	NEW_SITE_CONFIG=$(mktemp)
-	cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG" >"$NEW_SITE_CONFIG"
-	SITE_CONFIG="$NEW_SITE_CONFIG"
+if test "$AUTH_TYPE" != "null"; then
+	SITE_AUTH_TYPE="$AUTH_TYPE"
 fi
 
-OS_AUTH_TYPE="$SITE_AUTH" cloud-info-provider-service \
+NEW_SITE_CONFIG=$(mktemp)
+cloud-info-config --config-dir "$EGI_CONFIG_DIR" "$SITE_CONFIG" >"$NEW_SITE_CONFIG"
+SITE_CONFIG="$NEW_SITE_CONFIG"
+
+OS_AUTH_TYPE="$SITE_AUTH_TYPE" cloud-info-provider-service \
 	--middleware "$CLOUD_INFO_MIDDLEWARE" \
+	--auditor-role-cloud auditor \
 	--format glue21json "$SITE_CONFIG" >"$SITE_INFO_FILE"
 
 # Publish to object
