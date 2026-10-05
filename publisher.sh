@@ -45,7 +45,9 @@ if test -s "$SITE_INFO_FILE"; then
 		export RCLONE_CONFIG_REMOTE_TYPE="swift"
 		export RCLONE_CONFIG_REMOTE_ENV_AUTH="false"
 		export RCLONE_CONFIG_REMOTE_STORAGE_URL="$SWIFT_URL"
-		eval "$(/fedcloud/bin/fedcloud site env --site "$SWIFT_SITE_NAME")"
+		eval "$(/fedcloud/bin/fedcloud site env \
+			--oidc-access-token "$OIDC_ACCESS_TOKEN" \
+			--site "$SWIFT_SITE_NAME")"
 		export RCLONE_CONFIG_REMOTE_AUTH_URL="$OS_AUTH_URL"
 		OS_AUTH_TOKEN=$(/fedcloud/bin/fedcloud openstack \
 			--oidc-access-token "$OIDC_ACCESS_TOKEN" \
