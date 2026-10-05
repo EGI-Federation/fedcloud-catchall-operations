@@ -49,3 +49,14 @@ jobs:
           labels: ${{ steps.docker_meta.outputs.labels }}
           context: .
           file: Dockerfile
+      - name: Run tests
+        run:
+          set -e
+          docker run ${{ steps.docker_meta.outputs.tags }} ssmsend --version
+          docker run ${{ steps.docker_meta.outputs.tags }} caso-extract --version
+          docker run ${{ steps.docker_meta.outputs.tags }} atrope version
+          docker run ${{ steps.docker_meta.outputs.tags }} cloud-info-provider-service --version
+          docker run ${{ steps.docker_meta.outputs.tags }} accounting -h
+          docker run ${{ steps.docker_meta.outputs.tags }} token-generator -h
+          docker run ${{ steps.docker_meta.outputs.tags }} image-sync -h
+          docker run ${{ steps.docker_meta.outputs.tags }} cloud-info-config -h
