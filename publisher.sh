@@ -39,6 +39,7 @@ if test -s "$SITE_INFO_FILE"; then
 		export EGI_VO="$SWIFT_VO_NAME"
 		SWIFT_URL=$(/fedcloud/bin/fedcloud openstack \
 			--site "$SWIFT_SITE_NAME" \
+			--oidc-access-token "$OIDC_ACCESS_TOKEN" \
 			catalog show swift -f json |
 			jq -r '(.endpoints[] | select(.interface=="public")).url')
 		export RCLONE_CONFIG_REMOTE_TYPE="swift"
@@ -47,6 +48,7 @@ if test -s "$SITE_INFO_FILE"; then
 		eval "$(/fedcloud/bin/fedcloud site env --site "$SWIFT_SITE_NAME")"
 		export RCLONE_CONFIG_REMOTE_AUTH_URL="$OS_AUTH_URL"
 		OS_AUTH_TOKEN=$(/fedcloud/bin/fedcloud openstack \
+			--oidc-access-token "$OIDC_ACCESS_TOKEN" \
 			--site "$SWIFT_SITE_NAME" token issue -c id -f value)
 		export RCLONE_CONFIG_REMOTE_AUTH_TOKEN="$OS_AUTH_TOKEN"
 		rclone mkdir "remote:$SWIFT_CONTAINER_NAME"
