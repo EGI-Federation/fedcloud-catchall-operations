@@ -76,8 +76,8 @@
       "description": "The URL of keystone endpoint (should match GOCDB entry).",
       "default": ""
     },
-    "auth": {
-      "$id": "#/properties/auth",
+    "auth_type": {
+      "$id": "#/properties/auth_type",
       "type": "string",
       "title": "keystone authentication method",
       "description": "A valid authentication method for keystone (as defined in keystoneauth1).",

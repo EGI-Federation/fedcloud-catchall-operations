@@ -104,7 +104,7 @@ def load_sites():
 
 def auth_config(site, vo, section_name):
     cfg = [f"[{section_name}]"]
-    if site["static"].get("auth", None) != "v3applicationcredential":
+    if site["static"].get("auth_type", None) != "v3applicationcredential":
         cfg.append(
             OIDC_AUTH_TEMPLATE.format(
                 auth_url=site["url"],
@@ -122,7 +122,7 @@ def auth_config(site, vo, section_name):
         cfg.append(
             APPCRED_AUTH_TEMPLATE.format(
                 auth_url=site["url"],
-                auth_type=site["static"]["auth"],
+                auth_type=site["static"]["auth_type"],
             ).strip()
         )
         # secrets

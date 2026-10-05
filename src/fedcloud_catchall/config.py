@@ -23,6 +23,19 @@ CONF.register_opts(
             default="openid profile eduperson_entitlement entitlements email voperson_id",
         ),
         cfg.StrOpt(
+            "auditor_scopes",
+            default=" ".join(
+                [
+                    "openid",
+                    "profile",
+                    "eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu",
+                    "entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu",
+                    "email",
+                    "voperson_id",
+                ]
+            ),
+        ),
+        cfg.StrOpt(
             "discovery_endpoint",
             default="https://aai.egi.eu/auth/realms/egi/.well-known/openid-configuration",
         ),
