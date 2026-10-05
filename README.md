@@ -54,7 +54,7 @@ valid access token will be obtained for every execution of the components.
 If the site does not support direct usage of those tokens, set `auth_type` to
 `v3applicationcredentials`. The code will then try to find a set of valid
 `application credentials` in EGI's secret store at
-`/secrets/users/<sub of the fedcloud service account>/cloudmon/<site keystone host name>/<vo name>`.
+`/secrets/users/<service account id>/cloudmon/<keystone host name>/<vo name>`.
 The secret store is accessed using a valid Check-n access token.
 
 ## Docker containers
