@@ -50,7 +50,7 @@ jobs:
           context: .
           file: Dockerfile
       - name: Run tests
-        run:
+        run: |
           set -e
           docker run ${{ steps.docker_meta.outputs.tags }} ssmsend --version
           docker run ${{ steps.docker_meta.outputs.tags }} caso-extract --version
