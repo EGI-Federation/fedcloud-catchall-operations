@@ -52,11 +52,13 @@ jobs:
       - name: Run tests
         run: |
           set -e
-          docker run ${{ steps.docker_meta.outputs.tags }} ssmsend --version
-          docker run ${{ steps.docker_meta.outputs.tags }} caso-extract --version
-          docker run ${{ steps.docker_meta.outputs.tags }} atrope version
-          docker run ${{ steps.docker_meta.outputs.tags }} cloud-info-provider-service --version
-          docker run ${{ steps.docker_meta.outputs.tags }} accounting -h
-          docker run ${{ steps.docker_meta.outputs.tags }} token-generator -h
-          docker run ${{ steps.docker_meta.outputs.tags }} image-sync -h
-          docker run ${{ steps.docker_meta.outputs.tags }} cloud-info-config -h
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" ssmsend --version
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" caso-extract --version
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" atrope version
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" cloud-info-provider-service --version
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" accounting -h
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" token-generator -h
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" image-sync -h
+          docker run "${STEPS_DOCKER_META_OUTPUTS_TAGS}" cloud-info-config -h
+        env:
+          STEPS_DOCKER_META_OUTPUTS_TAGS: ${{ steps.docker_meta.outputs.tags }}
