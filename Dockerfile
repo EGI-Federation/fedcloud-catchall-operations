@@ -22,7 +22,7 @@ RUN apt-get update \
 # Fedcloud client is pinning dependencies strictly so it does not play
 # very well with the rest of the available venv. Installing on its own
 RUN python -m venv /fedcloud && \
-    /fedcloud/bin/pip install --no-cache-dir fedcloudclient
+    /fedcloud/bin/pip install --no-cache-dir fedcloudclient==1.4.7
 
 WORKDIR /fedcloud_catchall
 
