@@ -18,7 +18,7 @@ SLACK_WEBHOOK_URL="$6"
 
 # create a virtual env for fedcloudclient
 python3 -m venv "$PWD/.venv"
-"$PWD/.venv/bin/pip" install fedcloudclient
+"$PWD/.venv/bin/pip" install fedcloudclient==1.4.7
 
 TMP_SECRETS="$(mktemp)"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
