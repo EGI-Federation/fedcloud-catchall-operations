@@ -47,6 +47,7 @@ ACCESS_TOKEN=$(curl --request POST "https://aai.egi.eu/auth/realms/egi/protocol/
 # in a separate venv and set PATH for it
 python3 -m venv "$PWD/.ansible"
 "$PWD/.ansible/bin/python" -m pip install ansible
+export PATH="$PWD/.ansible/bin:$PATH"
 
 # install Ansible dependencies
 ansible-galaxy role install -r galaxy-requirements.yaml
