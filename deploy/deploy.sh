@@ -18,7 +18,7 @@ SLACK_WEBHOOK_URL="$6"
 
 # create a virtual env for fedcloudclient
 python3 -m venv "$PWD/.venv"
-"$PWD/.venv/bin/pip" install fedcloudclient==1.4.7
+"$PWD/.venv/bin/python" -m pip install fedcloudclient==1.4.7
 
 TMP_SECRETS="$(mktemp)"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
@@ -46,8 +46,7 @@ ACCESS_TOKEN=$(curl --request POST "https://aai.egi.eu/auth/realms/egi/protocol/
 # use pip-installed Ansible (apt version is too old)
 # in a separate venv and set PATH for it
 python3 -m venv "$PWD/.ansible"
-"$PWD/.ansible/bin/pip" install ansible
-export PATH="$PWD/.ansible/bin:$PATH"
+"$PWD/.ansible/bin/python" -m pip install ansible
 
 # install Ansible dependencies
 ansible-galaxy role install -r galaxy-requirements.yaml
