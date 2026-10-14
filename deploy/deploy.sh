@@ -20,7 +20,6 @@ SLACK_WEBHOOK_URL="$6"
 python3 -m venv "$PWD/.venv"
 "$PWD/.venv/bin/python" -m pip install fedcloudclient==1.4.7 
 
-
 TMP_SECRETS="$(mktemp)"
 "$PWD/.venv/bin/fedcloud" secret get --locker-token "$FEDCLOUD_SECRET_LOCKER" \
 	deploy data >"$TMP_SECRETS" && mv "$TMP_SECRETS" secrets.yaml
