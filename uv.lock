@@ -877,7 +877,7 @@ wheels = [
 
 [[package]]
 name = "keystoneauth1"
-version = "5.17.0"
+version = "5.18.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "iso8601" },
@@ -886,9 +886,9 @@ dependencies = [
     { name = "stevedore" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/68/84/a76c0819add727693d89b152c11452650036fcd481274756a33172e386e7/keystoneauth1-5.17.0.tar.gz", hash = "sha256:82359acc20c754fcb22818e090e2fea647e4c5c1137a6addb4984e9fba708ab3", size = 316782, upload-time = "2026-08-28T16:16:24.767Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/b1/3e/51e503674716822e1610926135abbb7e1427d86214b3ff6e597f7a94493f/keystoneauth1-5.18.0.tar.gz", hash = "sha256:356d9e5fbfbeb241346a56579d315634bb987329f395a883a0e44af91db9a1e8", size = 318339, upload-time = "2026-10-07T14:15:37.126Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e7/6b/e6eda650bb709c23688e250a7e66ad3ecbd470b70597d35d051f11ae66fa/keystoneauth1-5.17.0-py3-none-any.whl", hash = "sha256:28201a5299d4fabc478dda28e523a0d12777cda47e53b234772d15d3e0771736", size = 366027, upload-time = "2026-08-28T16:16:23.54Z" },
+    { url = "https://files.pythonhosted.org/packages/10/2f/ef162ab1d3547a556ad93691872ab0863871da465dd41ab97cf608e12b39/keystoneauth1-5.18.0-py3-none-any.whl", hash = "sha256:ea0d57dea3bc7ae5d7b23bc86fd96d787f9227c9500965f7c2d30e334ab4bbad", size = 365690, upload-time = "2026-10-07T14:15:35.863Z" },
 ]
 
 [[package]]
