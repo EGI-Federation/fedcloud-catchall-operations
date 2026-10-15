@@ -13,6 +13,8 @@ from oslo_config import cfg
 
 from .config import CONF
 
+logger = logging.getLogger(__name__)
+
 _oidc_config = None
 
 
@@ -35,7 +37,7 @@ def valid_token(token, oidc_config, min_time):
         now = calendar.timegm(datetime.now(tz=UTC).utctimetuple())
         return payload["exp"] - now > min_time
     except (jwt.DecodeError, jwt.ExpiredSignatureError) as e:
-        logging.warning(f"Unable to open / expired token: {e}")
+        logger.warning(f"Unable to open / expired token: {e}")
         return False
 
 
@@ -56,7 +58,7 @@ def check_token(token_file, oidc_config, ttl):
         with open(token_file, "r") as f:
             token = f.read().strip()
         if valid_token(token, oidc_config, ttl):
-            logging.warning("Token is still valid, not refreshing")
+            logger.warning("Token is still valid, not refreshing")
             return True
     return False
 
@@ -78,7 +80,7 @@ def main():
     if not check_token(
         CONF.access_token_file, oidc_config, CONF.checkin.access_token_ttl
     ):
-        logging.info("Token needs refreshing")
+        logger.info("Token needs refreshing")
         with open(CONF.access_token_file, "w+") as f:
             new_token = generate_token(oidc_config)
             f.write(new_token)

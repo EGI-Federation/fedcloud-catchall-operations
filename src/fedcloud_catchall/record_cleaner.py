@@ -14,13 +14,15 @@ from dirq.QueueSimple import QueueSimple
 
 from .config import CONF
 
+logger = logging.getLogger(__name__)
+
 
 def remove_records(site_dir):
     for spool_dir in glob.iglob("*/outgoing/*", root_dir=site_dir):
-        logging.debug(f"Cleaning up {spool_dir}")
+        logger.debug(f"Cleaning up {spool_dir}")
         dirq = QueueSimple(spool_dir)
         for name in dirq:
-            logging.debug(f"Removing element {name}")
+            logger.debug(f"Removing element {name}")
             dirq.lock(name)
             dirq.remove(name)
         dirq.purge()

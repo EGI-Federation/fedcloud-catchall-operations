@@ -16,6 +16,8 @@ from hvac.exceptions import VaultError
 from .config import CONF
 from .token_generator import generate_token, get_oidc_config
 
+logger = logging.getLogger(__name__)
+
 _hvac_client = None
 VAULT_URL = "https://vault.services.fedcloud.eu:8200"
 
@@ -40,7 +42,7 @@ _access_token = None
 
 
 def fetch_site_info():
-    logging.debug("Fetching site info from cloud-info")
+    logger.debug("Fetching site info from cloud-info")
     # 1 - Get all sites listing
     r = httpx.get(
         os.path.join(CONF.discovery.fedcloud_info_system_url, "sites/"),
@@ -73,7 +75,7 @@ def get_vo_secrets(endpoint: str, vo_name: str, access_token: str):
             mount_point="/secrets/",
         ).get("data", {})
     except VaultError as e:
-        logging.debug(f"Ouch {e}")
+        logger.debug(f"Ouch {e}")
         return {}
 
 
@@ -87,12 +89,12 @@ def load_sites():
             try:
                 static_sites[site["endpoint"]] = site
             except KeyError:
-                logging.error(f"Unable to load {site_file}")
+                logger.error(f"Unable to load {site_file}")
     for site in api_sites:
         site_name = site["name"]
         static_site = static_sites.get(site["url"], None)
         if not static_site:
-            logging.debug(f"Discarding site {site_name}, not in config.")
+            logger.debug(f"Discarding site {site_name}, not in config.")
             continue
         for vo in static_site["vos"]:
             if vo["name"] in site["shares"]:

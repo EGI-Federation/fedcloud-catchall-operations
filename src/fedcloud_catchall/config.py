@@ -4,6 +4,15 @@ Configuration for the tools
 
 from oslo_config import cfg
 
+AUDITOR_SCOPES = [
+    "openid",
+    "profile",
+    "eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu",
+    "entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu",
+    "email",
+    "voperson_id",
+]
+
 # Configuration
 CONF = cfg.CONF
 CONF.register_opts(
@@ -24,16 +33,7 @@ CONF.register_opts(
         ),
         cfg.StrOpt(
             "auditor_scopes",
-            default=" ".join(
-                [
-                    "openid",
-                    "profile",
-                    "eduperson_entitlement:urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu",
-                    "entitlements:urn:mace:egi.eu:group:cloud.egi.eu:role=auditor#aai.egi.eu",
-                    "email",
-                    "voperson_id",
-                ]
-            ),
+            default=" ".join(AUDITOR_SCOPES),
         ),
         cfg.StrOpt(
             "discovery_endpoint",

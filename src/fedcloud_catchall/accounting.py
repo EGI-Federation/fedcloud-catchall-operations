@@ -19,6 +19,8 @@ from oslo_config import cfg
 from .config import CONF
 from .discovery import auth_config, load_sites
 
+logger = logging.getLogger(__name__)
+
 cli_opts = [
     cfg.StrOpt("site", help="Extract accounting only for specified site"),
     cfg.StrOpt(
@@ -136,7 +138,7 @@ def site_caso(site, site_dir):
         for run_type, run_config in caso_run_configs.items():
             if run_type not in CONF.accounting.caso_runs:
                 continue
-            logging.debug(f"Running caso for {run_type}")
+            logger.debug(f"Running caso for {run_type}")
             caso_run_dir = os.path.join(site_dir, run_type)
             os.makedirs(caso_run_dir, exist_ok=True)
             with tempfile.TemporaryDirectory() as tmpdirname:
@@ -174,9 +176,9 @@ def site_caso(site, site_dir):
                         cmd.extend(["--extract-from", yesterday.isoformat()])
                 if CONF.extract_to:
                     cmd.extend(["--extract-to", CONF.extract_to])
-                logging.debug(f"Running {' '.join(cmd)}")
+                logger.debug(f"Running {' '.join(cmd)}")
                 return_code = subprocess.call(cmd)
-                logging.debug(f"Return code {return_code}")
+                logger.debug(f"Return code {return_code}")
                 good_run = True
     return good_run
 
@@ -186,7 +188,7 @@ def site_ssm(site, site_dir):
     for run_type, run_config in caso_run_configs.items():
         if run_type not in CONF.accounting.caso_runs:
             continue
-        logging.debug(f"Running SSM for {run_type}")
+        logger.debug(f"Running SSM for {run_type}")
         caso_run_dir = os.path.join(site_dir, run_type)
         with tempfile.TemporaryDirectory() as tmpdirname:
             ssm_config_file = os.path.join(tmpdirname, "ssm.conf")
@@ -197,24 +199,24 @@ def site_ssm(site, site_dir):
                 "-c",
                 ssm_config_file,
             ]
-            logging.debug(f"Running {' '.join(cmd)}")
+            logger.debug(f"Running {' '.join(cmd)}")
             return_code = subprocess.call(cmd)
             good_run = return_code == 0 and good_run
     return good_run
 
 
 def run(sites):
-    for _, site in sites.items():
+    for site in sites.values():
         site_name = site["name"]
         if CONF.site and CONF.site != site_name:
             continue
-        logging.info(f"Configuring site {site_name}")
+        logger.info(f"Configuring site {site_name}")
         accounting_config = site["static"].get("accounting", {})
         if not accounting_config.get("enabled", False):
             if CONF.accounting.force_run or site_name in CONF.accounting.sites:
-                logging.info(f"Force run the extraction of records for {site_name}.")
+                logger.info(f"Force run the extraction of records for {site_name}.")
             else:
-                logging.debug(f"Discarding site {site_name}, accounting not enabled.")
+                logger.debug(f"Discarding site {site_name}, accounting not enabled.")
                 continue
         site_dir = os.path.join(CONF.accounting.spool_dir, site["name"])
         os.makedirs(site_dir, exist_ok=True)
