@@ -18,7 +18,7 @@
     suites: '{{ ansible_distribution_release }}'
     components: stable
     architectures: amd64
-    sgined_by: https://download.docker.com/linux/ubuntu/gpg
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
 
 - name: Install docker
   ansible.builtin.apt:
