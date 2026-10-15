@@ -12,14 +12,14 @@ from . import token_generator as tg
 
 
 class TokenGeneratorTest(testtools.TestCase):
-    OIDC_CONFIG = {
-        "jwks_uri": "https://example.com",
-        "token_endpoint": "https://example.com",
-    }
 
     def setUp(self):
         super().setUp()
         self.conf = self.useFixture(fixture.Config()).conf
+        self.OIDC_CONFIG = {
+            "jwks_uri": "https://example.com",
+            "token_endpoint": "https://example.com",
+        }
 
     @respx.mock
     def test_get_access_token(self):

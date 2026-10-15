@@ -17,6 +17,8 @@ import yaml
 from .config import CONF
 from .discovery import auth_config, load_sites
 
+logger = logging.getLogger(__name__)
+
 
 # Harbor interaction
 def fetch_harbor_projects():
@@ -31,14 +33,14 @@ def fetch_harbor_projects():
     projects = []
     page = 1
     next_url = "/api/v2.0/projects"
-    params = dict(page=page, page_size=10)
+    params = {"page": page, "page_size": 10}
 
     last_url = ""
     while next_url:
         if last_url == next_url:
             break
         url = f"{CONF.sync.registry_base_url}{next_url}"
-        logging.debug(f"Fetching page {page} from {url}")
+        logger.debug(f"Fetching page {page} from {url}")
         r = client.get(url, params=params)
         r.raise_for_status()
         data = r.json()
@@ -53,7 +55,7 @@ def fetch_harbor_projects():
     # FIXME: we may want to include some metadata in harbor instead of just
     #        matching names. For now this should work
     project_names = [p.get("name") for p in projects]
-    logging.debug(f'Obtained {", ".join(project_names)} from Harbor')
+    logger.debug(f'Obtained {", ".join(project_names)} from Harbor')
     return project_names
 
 
@@ -128,7 +130,7 @@ def dump_sources_config(site_vo_list, harbor_projects):
 
 def dump_vo_map(site):
     shares = site.get("shares")
-    for name, vo in shares.items():
+    for vo in shares.values():
         project_id = vo.get("id")
         if project_id:
             vo["project_id"] = project_id
@@ -137,7 +139,7 @@ def dump_vo_map(site):
 
 def run_atrope(site, harbor_projects):
     with tempfile.TemporaryDirectory() as tmpdirname:
-        logging.info(f"Configuring site {site['name']} at {tmpdirname}")
+        logger.info(f"Configuring site {site['name']} at {tmpdirname}")
         sources_file = os.path.join(tmpdirname, "sources.yaml")
         vo_map_file = os.path.join(tmpdirname, "vo-map.yaml")
         site_vo_list = list(site["shares"].keys())
@@ -157,17 +159,17 @@ def run_atrope(site, harbor_projects):
             tmpdirname,
             "sync",
         ]
-        logging.debug(f"Running {' '.join(cmd)}")
+        logger.debug(f"Running {' '.join(cmd)}")
         subprocess.call(cmd)
 
 
 def do_sync(sites, harbor_projects):
-    for _, site in sites.items():
+    for site in sites.values():
         site_name = site["name"]
 
         image_config = site["static"].get("images", {})
         if not image_config.get("sync", False):
-            logging.debug(f"Discarding site {site_name}, no sync set.")
+            logger.debug(f"Discarding site {site_name}, no sync set.")
             continue
         run_atrope(site, harbor_projects)
 
