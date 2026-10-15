@@ -15,7 +15,7 @@
     name: docker
     types: deb
     uris: https://download.docker.com/linux/ubuntu
-    suites: '{{ ansible_distribution_release }}'
+    suites: "{{ ansible_distribution_release }}"
     components: stable
     architectures: amd64
     signed_by: https://download.docker.com/linux/ubuntu/gpg
