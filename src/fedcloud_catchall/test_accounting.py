@@ -136,7 +136,7 @@ class TestAccounting(testtools.TestCase):
             "--mapping_file",
             "/bar/mapping.json",
             "--extract-from",
-            "2025-12-31T00:00:00",
+            "2025-12-31T00:00:00+00:00",
         ]
         m_caso_config.assert_any_call(
             sample_site, sample_site["projects"][0], "dir/block", extractor="cinder"
