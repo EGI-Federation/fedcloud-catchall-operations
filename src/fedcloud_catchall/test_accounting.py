@@ -122,7 +122,9 @@ class TestAccounting(testtools.TestCase):
     ):
         m_temp.return_value.__enter__.return_value = "/bar"
         m_exists.return_value = False
-        m_date.datetime.now.return_value = datetime.datetime(2026, 1, 1)
+        m_date.datetime.now.return_value = datetime.datetime(
+            2026, 1, 1, tzinfo=datetime.UTC
+        )
         with patch("builtins.open", mock_open()) as m_open:
             acc.site_caso(sample_site, "dir")
             m_open.assert_any_call("/bar/mapping.json", "w+")

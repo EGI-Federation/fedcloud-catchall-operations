@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/deploy.yml
+    uses: $/.github/workflows/deploy.yml
     with:
       dir: "deploy/cloud-info"
       tags: "cloud-info,docker"
