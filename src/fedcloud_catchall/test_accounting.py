@@ -122,7 +122,9 @@ class TestAccounting(testtools.TestCase):
     ):
         m_temp.return_value.__enter__.return_value = "/bar"
         m_exists.return_value = False
-        m_date.datetime.now.return_value = datetime.datetime(2026, 1, 1)
+        m_date.datetime.now.return_value = datetime.datetime(
+            2026, 1, 1, tzinfo=datetime.UTC
+        )
         with patch("builtins.open", mock_open()) as m_open:
             acc.site_caso(sample_site, "dir")
             m_open.assert_any_call("/bar/mapping.json", "w+")
@@ -134,7 +136,7 @@ class TestAccounting(testtools.TestCase):
             "--mapping_file",
             "/bar/mapping.json",
             "--extract-from",
-            "2025-12-31T00:00:00",
+            "2025-12-31T00:00:00+00:00",
         ]
         m_caso_config.assert_any_call(
             sample_site, sample_site["projects"][0], "dir/block", extractor="cinder"
