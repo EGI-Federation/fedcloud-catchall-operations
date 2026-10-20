@@ -41,6 +41,7 @@ write_files:
       SHORT_COMMIT_SHA="%SHORT_REF%"
       FEDCLOUD_LOCKER_TOKEN="%FEDCLOUD_LOCKER_TOKEN%"
       TAGS="%TAGS%"
+      NSUPDATE_HOST="%NSUPDATE_HOST%"
 
       # get the repo code and untar at cwd
       curl -L -H "Accept: application/vnd.github.v3+raw" \
@@ -48,7 +49,8 @@ write_files:
               tar xz --strip=1
       cd deploy
       ./deploy.sh "$OAUTH_TOKEN" "$COMMIT_SHA" "$FEDCLOUD_LOCKER_TOKEN" \
-                  "$TAGS" "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL"
+                  "$TAGS" "$SHORT_COMMIT_SHA" "$SLACK_WEBHOOK_URL" \
+                  "$NSUPDATE_HOST"
     path: /var/lib/cloud/scripts/per-boot/deploy.sh
     permissions: "0755"
   - content: |
@@ -59,6 +61,7 @@ write_files:
 
       cloud-init status --wait -l > "/var/tmp/egi/$VM_ID"
       # try 10 times, otherwise just die
+      PATH="/var/tmp/egi/deploy/.venv/bin/:$PATH"
       retry -t 10 -d 90 -- openstack --os-cloud backend object create \
             --name "$VM_ID" fedcloud-catchall "/var/tmp/egi/$VM_ID"
     path: /usr/local/bin/notify.sh
