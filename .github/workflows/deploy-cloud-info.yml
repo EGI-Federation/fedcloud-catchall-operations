@@ -21,6 +21,7 @@ jobs:
       dir: "deploy/cloud-info"
       tags: "cloud-info,docker"
       env: "cloud-info"
+      hostname: "cloud-info.ops.fedcloud.eu"
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

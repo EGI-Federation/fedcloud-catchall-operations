@@ -15,6 +15,7 @@ FEDCLOUD_SECRET_LOCKER="$3"
 TAGS="$4"
 SHORT_SHA="$5"
 SLACK_WEBHOOK_URL="$6"
+NSUPDATE_HOST="$7"
 
 # create a virtual env for fedcloudclient
 python3 -m venv "$PWD/.venv"
@@ -30,6 +31,17 @@ image_sync_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
 accounting_image: "ghcr.io/egi-federation/fedcloud-catchall:sha-$SHORT_SHA"
 site_config_dir: "$(readlink -f ../sites)"
 EOF
+
+# Update our IP at nsupdate.fedcloud.eu
+NET_MAC=$(curl http://169.254.169.254/openstack/latest/network_data.json |
+	jq -r '.links[0].ethernet_mac_address')
+IP=$(ip -j addr | jq -r '.[] \
+	| select(.address=="'"$NET_MAC"'") \
+	| .addr_info[] \
+	| select(.family=="inet") \
+	| .local')
+NSUPDATE_SECRET=$(yq -r '.nsupdate."'"$NSUPDATE_HOST"'"' <secrets.yaml)
+curl "https://$NSUPDATE_HOST:$NSUPDATE_SECRET@nsupdate.fedcloud.eu/nic/update?myip=$IP"
 
 # get access token for motley-cue
 CLIENT_ID=$(yq -r '.checkin.client_id' <secrets.yaml)

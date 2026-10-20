@@ -13,6 +13,9 @@ on:
       env:
         required: true
         type: string
+      hostname:
+        required: true
+        type: string
     secrets:
       CLIENT_ID:
         required: true
@@ -86,6 +89,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           INPUTS_DIR: ${{ inputs.dir }}
           INPUTS_TAGS: ${{ inputs.tags }}
+          NSUPDATE_HOST: ${{ inputs.hostname }}
         run: |
           cd "${INPUTS_DIR}"
           cat ../cloud-init.yaml extra-cloud-init.yaml > cloud-init.yaml
@@ -96,6 +100,7 @@ jobs:
           sed -i -e "s#%SLACK_WEBHOOK_URL%#$SLACK_WEBHOOK_URL#" cloud-init.yaml
           sed -i -e "s/%FEDCLOUD_LOCKER_TOKEN%/$FEDCLOUD_LOCKER_TOKEN/" cloud-init.yaml
           sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)/" cloud-init.yaml
+          sed -i -e "s/%NSUPDATE_HOST%/${NSUPDATE_HOST}/" cloud-init.yaml
       - name: terraform plan
         id: plan
         if: github.event_name == 'pull_request'
