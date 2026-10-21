@@ -11,7 +11,7 @@
     update_cache: true
 
 - name: Add docker repo
-  deb822_repository:
+  ansible.builtin.deb822_repository:
     name: docker
     types: deb
     uris: https://download.docker.com/linux/ubuntu
