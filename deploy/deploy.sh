@@ -35,10 +35,10 @@ EOF
 # Update our IP at nsupdate.fedcloud.eu
 NET_MAC=$(curl http://169.254.169.254/openstack/latest/network_data.json |
 	jq -r '.links[0].ethernet_mac_address')
-IP=$(ip -j addr | jq -r '.[] \
-	| select(.address=="'"$NET_MAC"'") \
-	| .addr_info[] \
-	| select(.family=="inet") \
+IP=$(ip -j addr | jq -r '.[]
+	| select(.address=="'"$NET_MAC"'")
+	| .addr_info[]
+	| select(.family=="inet")
 	| .local')
 NSUPDATE_SECRET=$(yq -r '.nsupdate."'"$NSUPDATE_HOST"'"' <secrets.yaml)
 curl "https://$NSUPDATE_HOST:$NSUPDATE_SECRET@nsupdate.fedcloud.eu/nic/update?myip=$IP"
