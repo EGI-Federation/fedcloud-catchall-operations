@@ -2,6 +2,13 @@
 name: "Deploy image sync"
 
 on:
+  # Trigger on published releases. These are only releases in the "official" channel.
+  # IE semantic releases with version changes.
+  # Release configuration is in `.semrel.yaml`
+  # Release is governed and executed by semrel
+  # release:
+  #   types:
+  #     - released
   push:
     branches:
       - main
@@ -16,6 +23,8 @@ permissions:
 
 jobs:
   deploy:
+    needs:
+      - release
     uses: $/.github/workflows/deploy.yml
     with:
       dir: "deploy/image-sync"

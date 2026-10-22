@@ -1,0 +1,62 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  # We use a few basic hygiene tools to keep files in a consistent state
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/gitleaks/gitleaks
+  # gitleaks isn't the best scanner on the planet, but it's a good default
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  -   repo: https://github.com/koalaman/shellcheck-precommit
+      # There are plenty of shell scripts in this repo - run shellcheck on them.
+      rev: v0.11.0
+      hooks:
+      -   id: shellcheck
+  #       args: ["--severity=warning"]  # Optionally only show errors and warnings
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.17.1
+    hooks:
+      # Run the linter.
+      - id: ruff-check
+      # Run the formatter - introduce this later.
+      # - id: ruff-format
+  # Run ansible lint against playbooks to reduce long-term maintenance load
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v26.10.1
+    hooks:
+      - id: ansible-lint
+
+  # Check that we are not introducing formatting, overhead or insecure configurations
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.109.3
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_tfsec
+  # Optional - if we want to generate README for the terraform modules
+  # - repo: https://github.com/terraform-docs/terraform-docs
+  #   rev: v0.16.0
+  #   hooks:
+  #     - id: terraform-docs-go
+  #       args: ["markdown", "--output-file", "README.md", "."]
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+  # Don't commit non-functional workloads, run basic checks against the github actions schema
+    rev: 0.38.2
+    hooks:
+      - id: check-github-actions
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+  # Enforce Conventional Commits commit message format so that we can do semantic release
+    rev: v9.27.0
+    hooks:
+      - id: commitlint
+        additional_dependencies: ['@commitlint/config-conventional']
