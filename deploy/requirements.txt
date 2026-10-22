@@ -1,0 +1,3 @@
+simplejson
+yq
+git+https://github.com/enolfc/fedcloudclient.git@cloud-info

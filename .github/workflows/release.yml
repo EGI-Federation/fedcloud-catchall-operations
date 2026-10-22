@@ -8,8 +8,9 @@ permissions:
 
 jobs:
   release:
-    runs-on: ubuntu-26.10
+    runs-on: ubuntu-26.04
     env:
+      # MISE_ENV will pick up mise.release.toml
       MISE_ENV: release
     steps:
       - uses: actions/checkout@v7
