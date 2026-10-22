@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://registry.semrel.io/schemas/core/v1.json
+# semrel configuration — https://semrel.io/guide/configuration/
+
+schemaVersion: 1
+
+# Branches that trigger a release.
+branches:
+  - name: main
+  - name: next
+    prerelease: pre-
+
+tagPrefix: "v"
+tag_exists_strategy: update-changelog
+
+# Commit type → SemVer bump. Breaking changes (feat! / BREAKING CHANGE:) always → major.
+rules:
+  - type: feat
+    bump: minor
+  - type: fix
+    bump: patch
+  - type: perf
+    bump: patch
+  - type: revert
+    bump: patch
+
+# Plugins run in order. condition → pre-tag → release (default).
+plugins:
+  # The git provider allows the process to make changes to the commit history
+  # such as the release notes and change log
+  - uses: "@semrel/provider-git"
+
+  # analyzer-conventional invokes the conventional commits analyzer
+  - uses: "@semrel/analyzer-conventional"
+
+  # Enable this if we want to run only in github actions environment.
+  # Can be faked by setting GITHUB_ACTIONS=true in env
+  # - uses: "@semrel/condition-github-actions"
+  #   phase: condition
+
+  # provider-github allows us to publish tags and releases, as well as interact
+  # with the github repo.
+  - uses: "@semrel/provider-github"
+    args:
+      assets: "README.md,CHANGELOG.md"
+      comment_on_prs: true
+
+  # Changelog generator generates a changelog, and commits the change during release
+  - uses: "@semrel/generator-changelog-md"
+    args:
+      file: CHANGELOG.md
+  - uses: "@semrel/generator-release-notes"
+  # - uses: "@semrel/hook-slack"
+
+# Uncomment to enable additional features:
+commit_changelog: true   # commit CHANGELOG.md before tagging

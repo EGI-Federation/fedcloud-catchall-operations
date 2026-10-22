@@ -15,6 +15,13 @@ repos:
     rev: v8.30.1
     hooks:
       - id: gitleaks
+
+  -   repo: https://github.com/koalaman/shellcheck-precommit
+      # There are plenty of shell scripts in this repo - run shellcheck on them.
+      rev: v0.11.0
+      hooks:
+      -   id: shellcheck
+  #       args: ["--severity=warning"]  # Optionally only show errors and warnings
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
     rev: v0.17.1

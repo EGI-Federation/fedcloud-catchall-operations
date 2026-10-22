@@ -9,10 +9,15 @@ python.uv_venv_auto = "create|source"
 # Required to manage pre-commit hooks
 prek = "0.5.7"
 uv = "0.13.3"
+shellcheck = "0.11.0"
 
 [tasks.dev]
 description = "Add all dev tools"
 run = "uv sync --all-groups"
+
+[tasks.test_deps]
+description = "Add test dependencies for molecule"
+run = "uv sync --locked --group molecule"
 
 [tasks.ansible_reqs]
 depends = ["dev"]

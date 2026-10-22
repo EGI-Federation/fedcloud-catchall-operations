@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - main
+      - next
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-26.10
+    env:
+      MISE_ENV: release
+    steps:
+      - uses: actions/checkout@v7
+        # Checking out the repository will provide us with:
+        # - the commit history needed for the release computation
+        # - the mise configuration to provision necessary tooling consistently.
+        with:
+          fetch-depth: 0
+      - name: Add Tooling
+        uses: jdx/mise-action@v5
+        with:
+          install: true
+      - name: Release
+        run: mise tasks run release

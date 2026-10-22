@@ -10,6 +10,7 @@ profile: production # min, basic, moderate,safety, shared, production
 # and not relative to the CWD of execution. CLI arguments passed to the --exclude
 # option are parsed relative to the CWD of execution.
 exclude_paths:
+  - .pre-commit-config.yaml
   - sites
   - deploy/cloud-init.yaml
   - "**/molecule/**"

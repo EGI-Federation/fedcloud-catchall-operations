@@ -13,3 +13,7 @@ cfg_test
 package.json
 package-lock.json
 node_modules/
+
+# semrel
+.semrel-analytics.jsonl
+.semrel/

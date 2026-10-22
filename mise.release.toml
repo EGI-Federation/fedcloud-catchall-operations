@@ -1,0 +1,9 @@
+# Use with MISE_ENV=release
+[tools]
+# Go is not strictly necessary, all plugins are built binaries.
+# go = "1.27"
+"go:github.com/SemRels/semrel/cmd/semrel" = "0.28.2"
+
+[tasks.release]
+description = "Run a semantic release"
+run = "semrel release"
