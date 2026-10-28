@@ -48,7 +48,7 @@ RUN /fedcloud_catchall/venv/bin/python -m pip install --no-cache-dir .
 ##################################################
 # Stage 2 - take venv and install needed packages
 ##################################################
-FROM python:3.2.15-slim
+FROM python:3.15.2-slim
 
 LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
 
