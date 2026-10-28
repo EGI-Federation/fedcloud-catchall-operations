@@ -2,6 +2,13 @@
 name: "Deploy cloud-info"
 
 on:
+  # Trigger on published releases. These are only releases in the "official" channel.
+  # IE semantic releases with version changes.
+  # Release configuration is in `.semrel.yaml`
+  # Release is governed and executed by semrel
+  # release:
+  #   types:
+  #     - released
   push:
     branches:
       - main

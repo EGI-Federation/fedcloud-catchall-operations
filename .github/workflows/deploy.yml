@@ -48,11 +48,14 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
       - name: Setup python
+        # Can be replaced by Mise
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: 3.x
       - name: Install environment
+        # Can be replaced by Mise
         run: |
           curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
           chmod +x jq
@@ -67,10 +70,13 @@ jobs:
         run: |
           ./deploy/site-config.sh "${INPUTS_DIR}"
       - name: Setup Terraform
+        # Can be replaced by Mise
         uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e
         with:
-          terraform_version: 1.2.9
+          terraform_version: 1.2.9 # !? ancient
       - name: Terraform Format
+        # Obsoleted by pre-commit hook
+        # Can be replaced by Mise Task
         id: fmt
         run: |
           cd "${INPUTS_DIR}"
@@ -78,7 +84,9 @@ jobs:
         env:
           INPUTS_DIR: ${{ inputs.dir }}
       - name: Terraform init
+        # Can be replaced by Mise Task
         id: init
+        # Seems like you should be passing a `-backend-config=path` here?
         run: |
           cd "${INPUTS_DIR}"
           terraform init
@@ -102,6 +110,7 @@ jobs:
           sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)/" cloud-init.yaml
           sed -i -e "s/%NSUPDATE_HOST%/${NSUPDATE_HOST}/" cloud-init.yaml
       - name: terraform plan
+        # Can be replaced by Mise Task
         id: plan
         if: github.event_name == 'pull_request'
         run: |
@@ -111,6 +120,8 @@ jobs:
         env:
           INPUTS_DIR: ${{ inputs.dir }}
       - name: Update Pull Request
+        # Seems risky - why do this? Better to report to something specific
+        # Like terraform cloud or atlantis
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         if: github.event_name == 'pull_request'
         env:
