@@ -19,9 +19,6 @@ vos:
   - name: dteam
     auth:
       project_id: 2490c27604904357b9e50c5e77aaeedf
-  - name: lagoproject.net
-    auth:
-      project_id: bae9cee37c434aaa8548994f070521a3
   - name: ops
     auth:
       project_id: 929ff81c495b4cafb02fa1b8eef032c8
