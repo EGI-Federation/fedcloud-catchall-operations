@@ -85,7 +85,7 @@ wheels = [
 [[package]]
 name = "atrope"
 version = "2.2.0"
-source = { git = "https://github.com/EGI-Federation/atrope?rev=2.2.1#fef421db3d5f4f4ae6d6d0546dc4f91679308596" }
+source = { git = "https://github.com/EGI-Federation/atrope?rev=2.2.2#07ed9840ea57aca592d353815316d685ba57f232" }
 dependencies = [
     { name = "docker" },
     { name = "keystoneauth1" },
@@ -696,7 +696,7 @@ validate = [
 
 [package.metadata]
 requires-dist = [
-    { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.2.1" },
+    { name = "atrope", git = "https://github.com/EGI-Federation/atrope?rev=2.2.2" },
     { name = "caso", git = "https://github.com/enolfc/caso?rev=2732ede5eec5262074f11b8e980a3f480aceffaf" },
     { name = "cloud-info-provider", specifier = "==1.2.0" },
     { name = "dirq", specifier = ">=1.8" },
