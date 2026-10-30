@@ -24,7 +24,7 @@ vos:
   - name: vo.access.egi.eu
     auth:
       project_id: 2fa316a05d364de9b5a55ac78a45f8bf
-  - name: vo.brainlife.io
+  - name: vo.brainlife.egi.eu
     auth:
       project_id: 332ca0e35dd442728113cd15e52608fe
   - name: vo.nbis.se
