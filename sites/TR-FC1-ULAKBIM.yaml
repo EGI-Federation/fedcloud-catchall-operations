@@ -9,6 +9,9 @@ vos:
   - name: dteam
     auth:
       project_id: 208e4da6c3c249cdab269cb5b645cceb
+  - name: developers.dep.riscale.eu
+    auth:
+      project_id: eb4bfb351274493db0070700f6a26555
   - name: eiscat.se
     auth:
       project_id: 4b607492b48c4d9c9942ca243ae16a58
@@ -21,6 +24,9 @@ vos:
   - name: vo.access.egi.eu
     auth:
       project_id: 2fa316a05d364de9b5a55ac78a45f8bf
+  - name: vo.brainlife.io
+    auth:
+      project_id: 332ca0e35dd442728113cd15e52608fe
   - name: vo.nbis.se
     auth:
       project_id: b0159e11cb4b470eba90d113593e90c9
