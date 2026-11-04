@@ -12,8 +12,8 @@
       vars:
         site_config_dir: ../sites/
         swift:
-          site: NCG-INGRID-PT
-          vo: cloud.egi.eu
+          site: CESNET-MCCG2
+          vo: ops
           container: cloud-info
         accounting_sites:
           - EODC
