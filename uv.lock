@@ -1289,19 +1289,20 @@ wheels = [
 
 [[package]]
 name = "oslo-config"
-version = "10.7.0"
+version = "10.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "netaddr" },
     { name = "oslo-i18n" },
+    { name = "pbr" },
     { name = "pyyaml" },
     { name = "requests" },
     { name = "rfc3986" },
     { name = "stevedore" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/74/cd/e9e312ca216eaa9e0fa76f8d8fb9aeb14ea56f136136ec6753a11df24237/oslo_config-10.7.0.tar.gz", hash = "sha256:4f0fd4ca7ecfe511fbc0e012d3c63fce57009f360199e9e9cc2329ed55ec911e", size = 177161, upload-time = "2026-08-07T11:14:20.894Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/66/8b89d4205123927a39169d27bd875b103318631b7e752f8247fbd3b5fa15/oslo_config-10.8.0.tar.gz", hash = "sha256:ce243ec7a494e431dc7a6ac5aa06cdf5ad37110ee04876f505e0e2387d543eea", size = 178857, upload-time = "2026-10-28T15:01:18.776Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/55/12/bec8c6f23dc1e0eb1adffe28a4450ac24c3b1b7ae89a09be4e1764492dcc/oslo_config-10.7.0-py3-none-any.whl", hash = "sha256:d4e80b535fb208cb15cf0ce6f6fd976eebd694f21dc37e3f3d68a360cbe7eab5", size = 143839, upload-time = "2026-08-07T11:14:19.729Z" },
+    { url = "https://files.pythonhosted.org/packages/ef/b7/fdbe0edf2b6a01369a6d9d278e9f4f3f220277a122833384546ecf68a87d/oslo_config-10.8.0-py3-none-any.whl", hash = "sha256:81eeddc1144a6fa9643b40cd027d4f967c985317944d5b5f2bac39e5a11289f6", size = 145052, upload-time = "2026-10-28T15:01:17.352Z" },
 ]
 
 [[package]]
