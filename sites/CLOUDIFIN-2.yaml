@@ -16,3 +16,6 @@ vos:
   - name: vo.access.egi.eu
     auth:
       project_id: 87585b929a324923b7ecf3c0af50aed5
+  - name: vo.greendigit.egi.eu
+    auth:
+      project_id: 648cdbc185c241258cd31cb9a6f20064
