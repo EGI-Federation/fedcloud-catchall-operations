@@ -73,7 +73,7 @@ jobs:
         # Can be replaced by Mise
         uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e
         with:
-          terraform_version: 1.2.9 # !? ancient
+          terraform_version: 1.16.6
       - name: Terraform Format
         # Obsoleted by pre-commit hook
         # Can be replaced by Mise Task
