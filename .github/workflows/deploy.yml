@@ -88,6 +88,8 @@ jobs:
           terraform init
         env:
           INPUTS_DIR: ${{ inputs.dir }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY}}
       - name: Adjust cloud-init file
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
