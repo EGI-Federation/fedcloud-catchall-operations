@@ -4,7 +4,7 @@
 # disable no healthcheck linting errors
 # checkov:skip=CKV_DOCKER_2: No healtcheck available
 #trivy:ignore:AVD-DS-0026
-FROM python:3 AS build
+FROM python:3.15.2 AS build
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -48,7 +48,7 @@ RUN /fedcloud_catchall/venv/bin/python -m pip install --no-cache-dir .
 ##################################################
 # Stage 2 - take venv and install needed packages
 ##################################################
-FROM python:3-slim
+FROM python:3.15.2-slim
 
 LABEL org.opencontainers.image.source=https://github.com/EGI-Federation/fedcloud-catchall-operations
 

@@ -16,3 +16,6 @@ vos:
   - name: vo.cessda-eric.eu
     auth:
       project_id: 739845e89e554283bf52e09350d855db
+  - name: vo.greendigit.egi.eu
+    auth:
+      project_id: 1c25975e31314b6387803fcba89a677e
