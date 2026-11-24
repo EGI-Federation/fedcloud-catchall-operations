@@ -72,3 +72,6 @@ vos:
   - name: vo.greendigit.egi.eu
     auth:
       project_id: da9146405f5e493c8f374b98c1224f4c
+  - name: vo.digitalmaterials.eu
+    auth:
+      project_id: 1269fa03b2e94ac9b7a9d769b1322a30
