@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: Deploy to sites
+  hosts: all
   become: true
   roles:
     - role: "grycap.motley_cue"

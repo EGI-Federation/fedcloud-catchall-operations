@@ -19,6 +19,11 @@ from .discovery import auth_config, load_sites
 
 logger = logging.getLogger(__name__)
 
+cli_opts = [
+    cfg.StrOpt("site", help="Extract accounting only for specified site"),
+]
+
+CONF.register_cli_opts(cli_opts)
 
 # Harbor interaction
 def fetch_harbor_projects():
@@ -166,6 +171,8 @@ def run_atrope(site, harbor_projects):
 def do_sync(sites, harbor_projects):
     for site in sites.values():
         site_name = site["name"]
+        if CONF.site and CONF.site != site_name:
+            continue
 
         image_config = site["static"].get("images", {})
         if not image_config.get("sync", False):

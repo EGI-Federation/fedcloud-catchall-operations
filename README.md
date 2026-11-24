@@ -1,5 +1,7 @@
 # fedcloud-catchall-operations
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org) [![semantic-releaser: SemRel](https://img.shields.io/badge/semantic_release-semrel&logoColor=white)](https://www.semrel.io/)
+
 Operation of fedcloud integration components for selected providers.
 
 ## Site Configuration

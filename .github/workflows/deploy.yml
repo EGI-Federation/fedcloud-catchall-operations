@@ -27,6 +27,10 @@ on:
         required: true
       DEPLOY_GITHUB_TOKEN:
         required: true
+      AWS_SECRET_KEY:
+        required: true
+      AWS_ACCESS_KEY:
+        required: true
 
 permissions:
   issues: write
@@ -48,11 +52,14 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+
       - name: Setup python
+        # Can be replaced by Mise
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
           python-version: 3.x
       - name: Install environment
+        # Can be replaced by Mise
         run: |
           curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > jq
           chmod +x jq
@@ -67,10 +74,13 @@ jobs:
         run: |
           ./deploy/site-config.sh "${INPUTS_DIR}"
       - name: Setup Terraform
+        # Can be replaced by Mise
         uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e
         with:
-          terraform_version: 1.2.9
+          terraform_version: 1.16.6
       - name: Terraform Format
+        # Obsoleted by pre-commit hook
+        # Can be replaced by Mise Task
         id: fmt
         run: |
           cd "${INPUTS_DIR}"
@@ -78,7 +88,9 @@ jobs:
         env:
           INPUTS_DIR: ${{ inputs.dir }}
       - name: Terraform init
+        # Can be replaced by Mise Task
         id: init
+        # Seems like you should be passing a `-backend-config=path` here?
         run: |
           cd "${INPUTS_DIR}"
           terraform init
@@ -102,6 +114,7 @@ jobs:
           sed -i -e "s/%CLOUDS_YAML%/$(base64 -w 0 < clouds.yaml)/" cloud-init.yaml
           sed -i -e "s/%NSUPDATE_HOST%/${NSUPDATE_HOST}/" cloud-init.yaml
       - name: terraform plan
+        # Can be replaced by Mise Task
         id: plan
         if: github.event_name == 'pull_request'
         run: |
@@ -110,7 +123,11 @@ jobs:
         continue-on-error: true
         env:
           INPUTS_DIR: ${{ inputs.dir }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY}}
       - name: Update Pull Request
+        # Seems risky - why do this? Better to report to something specific
+        # Like terraform cloud or atlantis
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
         if: github.event_name == 'pull_request'
         env:
@@ -152,6 +169,8 @@ jobs:
           terraform apply -auto-approve
         env:
           INPUTS_DIR: ${{ inputs.dir }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY}}
       - name: Get VM ID
         id: terraform-vm-id
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'

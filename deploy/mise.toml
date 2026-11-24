@@ -1,0 +1,13 @@
+# Deploy environment
+# Use MISE_ENV=deploy
+[env]
+UV_PROJECT_ENVIRONMENT = ".venv-deploy"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
+python.uv_venv_auto = "create|source"
+
+[tools]
+jq = "1.8.2"
+terraform = "1.16.6"
+uv = "0.13.4"

@@ -31,7 +31,7 @@
     owner: "{{ egi_user }}"
     group: "{{ egi_group }}"
 
-- name: caso cron
+- name: Caso cron
   ansible.builtin.cron:
     name: caso
     weekday: "{{ accounting_cron.weekday }}"
