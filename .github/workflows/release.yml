@@ -8,19 +8,20 @@ permissions:
 
 jobs:
   release:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     env:
       # MISE_ENV will pick up mise.release.toml
       MISE_ENV: release
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         # Checking out the repository will provide us with:
         # - the commit history needed for the release computation
         # - the mise configuration to provision necessary tooling consistently.
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: Add Tooling
-        uses: jdx/mise-action@v5
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78
         with:
           install: true
       - name: Release

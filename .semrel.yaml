@@ -52,4 +52,4 @@ plugins:
   # - uses: "@semrel/hook-slack"
 
 # Uncomment to enable additional features:
-commit_changelog: true   # commit CHANGELOG.md before tagging
+commit_changelog: true # commit CHANGELOG.md before tagging

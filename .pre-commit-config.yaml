@@ -11,16 +11,16 @@ repos:
       - id: check-added-large-files
 
   - repo: https://github.com/gitleaks/gitleaks
-  # gitleaks isn't the best scanner on the planet, but it's a good default
+    # gitleaks isn't the best scanner on the planet, but it's a good default
     rev: v8.30.1
     hooks:
       - id: gitleaks
 
-  -   repo: https://github.com/koalaman/shellcheck-precommit
-      # There are plenty of shell scripts in this repo - run shellcheck on them.
-      rev: v0.11.0
-      hooks:
-      -   id: shellcheck
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    # There are plenty of shell scripts in this repo - run shellcheck on them.
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
   #       args: ["--severity=warning"]  # Optionally only show errors and warnings
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
@@ -50,13 +50,13 @@ repos:
   #     - id: terraform-docs-go
   #       args: ["markdown", "--output-file", "README.md", "."]
   - repo: https://github.com/python-jsonschema/check-jsonschema
-  # Don't commit non-functional workloads, run basic checks against the github actions schema
+    # Don't commit non-functional workloads, run basic checks against the github actions schema
     rev: 0.38.2
     hooks:
       - id: check-github-actions
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-  # Enforce Conventional Commits commit message format so that we can do semantic release
+    # Enforce Conventional Commits commit message format so that we can do semantic release
     rev: v9.27.0
     hooks:
       - id: commitlint
-        additional_dependencies: ['@commitlint/config-conventional']
+        additional_dependencies: ["@commitlint/config-conventional"]
