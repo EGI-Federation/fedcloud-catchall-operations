@@ -28,3 +28,5 @@ jobs:
       ANSIBLE_SECRETS: ${{ secrets.ANSIBLE_SECRETS }}
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       DEPLOY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY}}
